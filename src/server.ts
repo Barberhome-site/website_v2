@@ -6,6 +6,7 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { buildSitemapXml } from './server/sitemap';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -13,20 +14,46 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * En-têtes de sécurité de base (brief §17 : CSP et gestion sûre des scripts tiers).
+ * La CSP liste uniquement les domaines réellement utilisés :
+ *  - Google Analytics (chargé seulement après consentement)
+ *  - Trustpilot (widget, chargé seulement après consentement)
+ *  - Stadia Maps (tuiles de la carte)
+ * À compléter quand l'URL de l'API sera connue (connect-src).
  */
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Permissions-Policy', 'geolocation=(self), camera=(), microphone=()');
+  res.setHeader(
+    'Content-Security-Policy',
+    [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://widget.trustpilot.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https://tiles.stadiamaps.com https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net",
+      "font-src 'self'",
+      "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustpilot.com",
+      "frame-src https://widget.trustpilot.com",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join('; '),
+  );
+  next();
+});
 
-/**
- * Serve static files from /browser
- */
+/** Sitemap générée côté serveur : seulement les URL canoniques publiées, avec lastmod réel. */
+app.get('/sitemap.xml', async (_req, res, next) => {
+  try {
+    const xml = await buildSitemapXml();
+    res.type('application/xml').set('Cache-Control', 'public, max-age=3600').send(xml);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/** Fichiers statiques du dossier /browser. */
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -35,34 +62,23 @@ app.use(
   }),
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
+/** Toutes les autres requêtes sont rendues par Angular (SSR). */
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 
-/**
- * Start the server if this module is the main entry point, or it is ran via PM2.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
- */
+// Démarre si ce module est le point d'entrée, ou s'il est lancé par PM2.
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
   const port = process.env['PORT'] || 4000;
   app.listen(port, (error) => {
     if (error) {
       throw error;
     }
-
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`GLAMRO SSR in ascolto su http://localhost:${port}`);
   });
 }
 
-/**
- * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
- */
 export const reqHandler = createNodeRequestHandler(app);

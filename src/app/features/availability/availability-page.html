@@ -1,0 +1,103 @@
+@let t = i18n.d().availability;
+@let lang = i18n.lang();
+<div class="page-head">
+  <div class="container">
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.lead }}</p>
+    <app-availability-search [cities]="cities().value" [services]="services().value" [initial]="initial()" />
+  </div>
+</div>
+
+<section class="container section" aria-labelledby="results-title" aria-live="polite">
+  @switch (state().kind) {
+    @case ('idle') {
+      <h2 id="results-title" class="h3-like">{{ t.idleTitle }}</h2>
+      <ul class="chip-list">
+        @for (city of cities().value; track city.slug) {
+          @if (city.status === 'active') {
+            <li><a [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ citta: city.slug }">{{ city.name }}</a></li>
+          }
+        }
+      </ul>
+    }
+
+    @case ('loading') {
+      <h2 id="results-title" class="visually-hidden">{{ t.results }}</h2>
+      <p role="status" style="display: flex; gap: 0.75rem; align-items: center">
+        <span class="spinner"></span> {{ t.searching }}
+      </p>
+    }
+
+    @case ('error') {
+      <h2 id="results-title" class="visually-hidden">{{ t.results }}</h2>
+      <div class="alert alert--error" role="alert">
+        <app-icon name="alert" />
+        <div>
+          <p><strong>{{ t.errorTitle }}</strong> {{ t.errorText }}</p>
+          <button type="button" class="btn btn--outline" (click)="reload()">{{ i18n.d().common.retry }}</button>
+        </div>
+      </div>
+    }
+
+    @case ('result') {
+      @if (result(); as res) {
+        @if (res.status === 'not_covered') {
+          <!-- Zone non couverte : transparent, sans promesse de date -->
+          <h2 id="results-title" class="h3-like">{{ t.notCoveredTitle }}</h2>
+          <div class="alert alert--info">
+            <app-icon name="info" />
+            <div>
+              <p>{{ t.notCoveredText }}</p>
+              <p>{{ t.tryCities }}</p>
+              <ul class="chip-list">
+                @for (city of res.nearestCities; track city.slug) {
+                  <li><a [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ citta: city.slug }">{{ city.name }}</a></li>
+                }
+              </ul>
+            </div>
+          </div>
+        } @else {
+          <div class="section-head">
+            <div>
+              <h2 id="results-title" class="h3-like">
+                {{ (res.professionals.length === 1 ? t.countOne : t.countOther) | fmt: { count: res.professionals.length, city: res.city.name } }}
+              </h2>
+              <p class="muted small">
+                @if (serviceName(); as sn) {
+                  {{ t.serviceLabel | fmt: { name: sn } }} ·
+                }
+                @if (dateLabel(); as dl) {
+                  {{ t.fromDate | fmt: { date: dl } }} ·
+                }
+                {{ t.ranking }}
+                <a [routerLink]="'/fiducia' | lp: lang" fragment="ordinamento">{{ t.rankingLink }}</a>
+              </p>
+            </div>
+            <a class="link-arrow" [routerLink]="['/dove-siamo', res.city.slug] | lp: lang">
+              {{ t.cityLink | fmt: { city: res.city.name } }} <app-icon name="arrow-right" />
+            </a>
+          </div>
+
+          @if (res.professionals.length) {
+            <ul role="list" class="grid" style="--grid-min: 240px">
+              @for (pro of res.professionals; track pro.professionalId) {
+                <li><app-professional-card [pro]="pro" /></li>
+              }
+            </ul>
+          } @else {
+            <div class="alert alert--info">
+              <app-icon name="info" />
+              <div>
+                <p><strong>{{ t.noResultsTitle }}</strong></p>
+                <p>{{ t.noResultsText | fmt: { city: res.city.name } }}</p>
+                <a class="btn btn--outline" [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ citta: res.city.slug }">
+                  {{ t.allServicesIn | fmt: { city: res.city.name } }}
+                </a>
+              </div>
+            </div>
+          }
+        }
+      }
+    }
+  }
+</section>

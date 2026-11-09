@@ -1,0 +1,156 @@
+@let t = i18n.d().apply;
+@let lang = i18n.lang();
+<div class="page-head">
+  <div class="container">
+    <app-breadcrumbs [items]="crumbs" />
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.lead }}</p>
+  </div>
+</div>
+
+<div class="container section">
+  @if (result() === 'success') {
+    <div id="app-result" class="alert alert--success" role="status" tabindex="-1">
+      <app-icon name="check-circle" />
+      <div>
+        <p><strong>{{ t.success }}</strong></p>
+        <a class="btn btn--outline" [routerLink]="'/per-professionisti' | lp: lang">{{ t.back }}</a>
+      </div>
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()" (input)="onFirstInput()" (change)="onFirstInput()" novalidate class="form-grid" style="max-width: 860px">
+      @if (result() === 'error') {
+        <div class="alert alert--error form-grid__full" role="alert">
+          <app-icon name="alert" />
+          <p>{{ t.error }}</p>
+        </div>
+      }
+
+      <div class="field">
+        <label class="field__label" for="ap-first">{{ t.firstName }}</label>
+        <input id="ap-first" class="field__control" formControlName="firstName" autocomplete="given-name"
+               [attr.aria-invalid]="showError('firstName') ? 'true' : null"
+               [attr.aria-describedby]="showError('firstName') ? 'ap-first-err' : null" />
+        @if (showError('firstName')) {
+          <p id="ap-first-err" class="field__error">{{ t.firstNameError }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ap-last">{{ t.lastName }}</label>
+        <input id="ap-last" class="field__control" formControlName="lastName" autocomplete="family-name"
+               [attr.aria-invalid]="showError('lastName') ? 'true' : null"
+               [attr.aria-describedby]="showError('lastName') ? 'ap-last-err' : null" />
+        @if (showError('lastName')) {
+          <p id="ap-last-err" class="field__error">{{ t.lastNameError }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ap-email">{{ t.email }}</label>
+        <input id="ap-email" type="email" class="field__control" formControlName="email" autocomplete="email"
+               [attr.aria-invalid]="showError('email') ? 'true' : null"
+               [attr.aria-describedby]="showError('email') ? 'ap-email-err' : null" />
+        @if (showError('email')) {
+          <p id="ap-email-err" class="field__error">{{ t.emailError }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ap-phone">{{ t.phone }}</label>
+        <input id="ap-phone" type="tel" class="field__control" formControlName="phone" autocomplete="tel" inputmode="tel"
+               [attr.aria-invalid]="showError('phone') ? 'true' : null"
+               [attr.aria-describedby]="showError('phone') ? 'ap-phone-err' : 'ap-phone-hint'" />
+        <span id="ap-phone-hint" class="field__hint">{{ t.phoneHint }}</span>
+        @if (showError('phone')) {
+          <p id="ap-phone-err" class="field__error">{{ t.phoneError }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ap-city">{{ t.city }}</label>
+        <select id="ap-city" class="field__control" formControlName="citySlug"
+                [attr.aria-invalid]="showError('citySlug') ? 'true' : null"
+                [attr.aria-describedby]="showError('citySlug') ? 'ap-city-err' : null">
+          <option value="" disabled>{{ t.cityPlaceholder }}</option>
+          @for (c of activeCities(); track c.slug) {
+            <option [value]="c.slug">{{ c.name }}</option>
+          }
+          <option value="altra">{{ t.otherCity }}</option>
+        </select>
+        @if (showError('citySlug')) {
+          <p id="ap-city-err" class="field__error">{{ t.cityError }}</p>
+        }
+      </div>
+
+      @if (form.controls.citySlug.value === 'altra') {
+        <div class="field">
+          <label class="field__label" for="ap-other">{{ t.otherCityQuestion }}</label>
+          <input id="ap-other" class="field__control" formControlName="otherCity" autocomplete="address-level2" />
+        </div>
+      }
+
+      <fieldset class="form-grid__full" [attr.aria-describedby]="showError('specialties') ? 'ap-spec-err' : null">
+        <legend>{{ t.specialties }}</legend>
+        <div class="grid" style="--grid-min: 180px; gap: 0 1rem">
+          @for (s of services().value; track s.slug) {
+            <label class="choice">
+              <input type="checkbox" [checked]="isSpecialtyChecked(s.slug)" (change)="toggleSpecialty(s.slug, $any($event.target).checked)" />
+              {{ s.name }}
+            </label>
+          }
+        </div>
+        @if (showError('specialties')) {
+          <p id="ap-spec-err" class="field__error">{{ t.specialtiesError }}</p>
+        }
+      </fieldset>
+
+      <div class="field">
+        <label class="field__label" for="ap-exp">{{ t.experience }}</label>
+        <select id="ap-exp" class="field__control" formControlName="experience"
+                [attr.aria-invalid]="showError('experience') ? 'true' : null"
+                [attr.aria-describedby]="showError('experience') ? 'ap-exp-err' : null">
+          <option value="" disabled>{{ t.experiencePlaceholder }}</option>
+          @for (o of t.experienceOptions; track $index) {
+            <option [value]="o">{{ o }}</option>
+          }
+        </select>
+        @if (showError('experience')) {
+          <p id="ap-exp-err" class="field__error">{{ t.experienceError }}</p>
+        }
+      </div>
+
+      <fieldset [attr.aria-describedby]="showError('hasVatNumber') ? 'ap-vat-err' : null">
+        <legend>{{ t.vat }}</legend>
+        <label class="choice"><input type="radio" formControlName="hasVatNumber" [value]="true" /> {{ i18n.d().common.yes }}</label>
+        <label class="choice"><input type="radio" formControlName="hasVatNumber" [value]="false" /> {{ i18n.d().common.no }}</label>
+        @if (showError('hasVatNumber')) {
+          <p id="ap-vat-err" class="field__error">{{ t.vatError }}</p>
+        }
+      </fieldset>
+
+      <div class="field form-grid__full">
+        <label class="field__label" for="ap-msg">{{ t.notes }} <span class="muted">{{ i18n.d().common.optional }}</span></label>
+        <textarea id="ap-msg" class="field__control" formControlName="message"></textarea>
+      </div>
+
+      <div class="form-grid__full">
+        <label class="choice">
+          <input type="checkbox" formControlName="privacyAck"
+                 [attr.aria-invalid]="showError('privacyAck') ? 'true' : null"
+                 [attr.aria-describedby]="showError('privacyAck') ? 'ap-priv-err' : null" />
+          <span>{{ t.privacyBefore }}<a [routerLink]="'/legale/privacy' | lp: lang" target="_blank">{{ t.privacyLink }}</a>{{ t.privacyAfter }}</span>
+        </label>
+        @if (showError('privacyAck')) {
+          <p id="ap-priv-err" class="field__error">{{ t.privacyError }}</p>
+        }
+      </div>
+
+      <div class="form-grid__full">
+        <button type="submit" class="btn btn--primary" [disabled]="sending()">
+          {{ sending() ? i18n.d().common.sending : t.submit }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

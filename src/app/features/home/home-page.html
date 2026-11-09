@@ -1,0 +1,188 @@
+@let t = i18n.d();
+@let lang = i18n.lang();
+
+<!-- 2. HERO : promesse, positionnement, delivery, couverture vérifiable, CTA primaire -->
+<section class="hero" aria-labelledby="hero-title">
+  <app-media class="hero__bg" [src]="site.images.hero" [priority]="true" icon="bike" [placeholderLabel]="t.placeholders.hero" />
+  <div class="hero__shade" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1 id="hero-title" class="hero__title">{{ t.brand.promise }}</h1>
+      <span class="accent-rule" aria-hidden="true"></span>
+      <p class="hero__positioning">{{ t.brand.positioning }}</p>
+      <p class="hero__lead">{{ t.brand.explanation }}</p>
+    </div>
+
+    <div id="verifica" class="hero__search">
+      <app-availability-search variant="hero" [cities]="cities().value" [services]="services().value" />
+    </div>
+
+    <div class="hero__foot">
+      @if (activeCities().length) {
+        <p class="hero__coverage">
+          <app-icon name="pin" />
+          <span>
+            {{ t.home.coverage }}
+            @for (city of activeCities(); track city.slug; let last = $last) {
+              <a [routerLink]="['/dove-siamo', city.slug] | lp: lang">{{ city.name }}</a>{{ last ? '' : ', ' }}
+            }
+          </span>
+        </p>
+      }
+      <a class="link-arrow" [routerLink]="'/per-professionisti' | lp: lang" (click)="trackPro('hero')">
+        {{ t.cta.pro }} <app-icon name="arrow-right" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. COME FUNZIONA -->
+<section class="section" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="how-title">{{ t.home.howTitle }}</h2>
+      <a class="link-arrow" [routerLink]="'/come-funziona' | lp: lang">{{ t.home.howAll }} <app-icon name="arrow-right" /></a>
+    </div>
+    <ol class="steps" role="list">
+      @for (step of t.home.steps; track $index; let i = $index) {
+        <li class="steps__item">
+          <span class="steps__num" aria-hidden="true">{{ i + 1 }}</span>
+          <app-icon [name]="stepIcons[i]" [strokeWidth]="1.4" />
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- 4. SERVIZI ATTIVI -->
+<section class="section section--tight" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="services-title">{{ t.home.servicesTitle }}</h2>
+      <a class="link-arrow" [routerLink]="'/servizi' | lp: lang">{{ t.home.servicesAll }} <app-icon name="arrow-right" /></a>
+    </div>
+    @if (services().status === 'error') {
+      <p class="alert alert--error" role="alert"><app-icon name="alert" />{{ t.home.servicesError }}</p>
+    } @else {
+      <ul role="list" class="grid services-grid">
+        @for (service of services().value; track service.slug) {
+          <li><app-service-card [service]="service" /></li>
+        }
+      </ul>
+    }
+  </div>
+</section>
+
+<!-- 5. CAROSELLO PROFESSIONISTI -->
+<section class="section" aria-labelledby="pros-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="pros-title">{{ t.home.prosTitle }}</h2>
+      <div class="pros-filter">
+        <label class="field__label" for="pros-city">{{ t.home.prosZone }}</label>
+        <select id="pros-city" class="field__control" [value]="carouselCity()" (change)="carouselCity.set($any($event.target).value)">
+          <option value="">{{ t.home.prosAllCities }}</option>
+          @for (city of activeCities(); track city.slug) {
+            <option [value]="city.slug">{{ city.name }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    @switch (pros().status) {
+      @case ('error') {
+        <p class="alert alert--error" role="alert"><app-icon name="alert" />{{ t.home.prosError }}</p>
+      }
+      @default {
+        @if (carouselPros().length) {
+          <app-pros-carousel [professionals]="carouselPros()" [label]="t.home.prosTitle" />
+        } @else {
+          <p class="muted">{{ t.home.prosEmpty }}</p>
+        }
+      }
+    }
+
+    <p class="small muted ranking-note">
+      {{ t.home.ranking }}
+      <a [routerLink]="'/fiducia' | lp: lang" fragment="ordinamento">{{ t.home.rankingLink }}</a>
+      ·
+      <a [routerLink]="'/disponibilita' | lp: lang">{{ t.common.seeAll }}</a>
+    </p>
+  </div>
+</section>
+
+<!-- 6. STORYTELLING -->
+<section class="section section--raised" aria-labelledby="story-title">
+  <div class="container">
+    <div class="story-head">
+      <h2 id="story-title">{{ t.home.storyTitle }}</h2>
+      <p class="lead">{{ t.home.storySubtitle }}</p>
+    </div>
+    <ol class="story" role="list">
+      @for (moment of t.home.story; track $index; let i = $index) {
+        <li>
+          <figure>
+            <app-media ratio="4 / 5" [src]="site.images.storytelling[i]" icon="bag" [placeholderLabel]="t.placeholders.story[i]"
+                       sizes="(min-width: 1100px) 290px, (min-width: 640px) 45vw, 90vw" />
+            <figcaption>
+              <h3>{{ i + 1 }}. {{ moment.title }}</h3>
+              <p>{{ moment.text }}</p>
+            </figcaption>
+          </figure>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- 7. DOVE SIAMO : carte + liste accessible -->
+<section class="section" aria-labelledby="where-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2 id="where-title">{{ t.home.whereTitle }}</h2>
+        <p class="muted">{{ t.home.whereSubtitle }}</p>
+      </div>
+      <a class="link-arrow" [routerLink]="'/dove-siamo' | lp: lang">{{ t.home.whereAll }} <app-icon name="arrow-right" /></a>
+    </div>
+    <app-coverage-map [initialClusters]="clusters().value" [initialStatus]="clusters().status" [services]="services().value" />
+  </div>
+</section>
+
+<!-- 8. TRUSTPILOT + PILASTRI DI FIDUCIA -->
+<section class="section section--tight" aria-labelledby="trust-title">
+  <div class="container">
+    <h2 id="trust-title">{{ t.home.trustTitle }}</h2>
+    <div class="trust card">
+      <app-trustpilot-widget />
+      <p class="small muted trust__note">{{ t.home.trustNote }}</p>
+    </div>
+    <app-trust-pillars />
+  </div>
+</section>
+
+<!-- 9. INGRESSO PROFESSIONISTI -->
+<section class="section" aria-labelledby="pro-title">
+  <div class="container">
+    <div class="pro">
+      <app-media class="pro__media" [src]="site.images.proEntry" icon="user" [placeholderLabel]="t.placeholders.pro"
+                 sizes="(min-width: 960px) 420px, 100vw" />
+      <div class="pro__body">
+        <p class="eyebrow">{{ t.home.proEyebrow }}</p>
+        <h2 id="pro-title">{{ t.home.proTitle }}</h2>
+        <p class="lead">{{ t.home.proLead }}</p>
+        <a class="btn btn--primary" [routerLink]="'/per-professionisti' | lp: lang" (click)="trackPro('home_block')">
+          {{ t.home.proCta }} <app-icon name="arrow-right" />
+        </a>
+      </div>
+      <ul role="list" class="pro__benefits">
+        @for (b of t.home.proBenefits; track $index; let i = $index) {
+          <li><app-icon [name]="benefitIcons[i]" />{{ b }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,11 +1,30 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+  withRouterConfig,
+} from '@angular/router';
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
+import { langInterceptor } from './core/data/http/lang.interceptor';
+import { provideGlamroData } from './core/data/provide-glamro-data';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideClientHydration()
-  ]
+    // Zoneless : comportement par défaut depuis Angular 21, aucun provider nécessaire.
+    provideRouter(
+      routes,
+      // Les données des résolveurs et les paramètres arrivent dans les input() des pages.
+      withComponentInputBinding(),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
+      withRouterConfig({ paramsInheritanceStrategy: 'always' }),
+    ),
+    provideHttpClient(withFetch(), withInterceptors([langInterceptor])),
+    // Hydratation + cache de transfert des requêtes GET (pas de double appel API).
+    provideClientHydration(withEventReplay()),
+    provideGlamroData(),
+  ],
 };

@@ -1,0 +1,63 @@
+:host {
+  display: block;
+}
+
+.as {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1rem, 0.8rem + 1vw, 1.25rem);
+  background: rgba(17, 17, 17, 0.92);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-l);
+  backdrop-filter: blur(8px);
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-items: start;
+  }
+}
+
+.as__field .field__label {
+  font-size: 0.8125rem;
+  color: var(--c-muted);
+}
+
+.as__control {
+  position: relative;
+
+  app-icon {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--c-muted);
+    pointer-events: none;
+  }
+
+  .field__control {
+    padding-left: 2.6rem;
+    background-color: var(--c-card);
+  }
+}
+
+.as__submit {
+  @media (min-width: 720px) {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 1024px) {
+    grid-column: auto;
+    // Aligne le bouton sur les champs (hauteur du label + espace).
+    padding-top: calc(0.8125rem * 1.6 + 0.4rem);
+  }
+
+  .btn {
+    white-space: nowrap;
+  }
+}

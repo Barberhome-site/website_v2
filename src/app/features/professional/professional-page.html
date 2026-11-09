@@ -1,0 +1,144 @@
+@let t = i18n.d().profile;
+@let lang = i18n.lang();
+@if (professional(); as p) {
+  <div class="page-head">
+    <div class="container">
+      <app-breadcrumbs [items]="crumbs()" />
+      <div class="profile-head">
+        <app-avatar [name]="p.displayName" [image]="p.profileImage" [size]="140" />
+        <div>
+          <h1 class="profile-head__name">{{ p.displayName }}</h1>
+          <p class="profile-head__role">{{ t.role | fmt: { label: p.specialtyLabel, city: p.cityName } }}</p>
+          <ul role="list" class="profile-head__meta">
+            @if (p.verified) {
+              <li class="badge badge--verified"><app-icon name="check-circle" /> {{ i18n.d().card.verified }}</li>
+            }
+            @if (availability(); as a) {
+              <li class="badge"><app-icon name="calendar" /> {{ a }}</li>
+            }
+            <li class="badge"><app-icon name="pin" /> {{ p.serviceArea }}</li>
+          </ul>
+          <div class="cta-row">
+            <button type="button" class="btn btn--primary" (click)="book()">{{ i18n.d().card.book }}</button>
+            <a class="btn btn--outline" routerLink="." fragment="servizi">{{ t.ctaServices }}</a>
+          </div>
+          <p class="small muted">{{ t.appNote }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="two-col">
+      <div class="stack" style="--stack: 2.5rem">
+        <section aria-labelledby="about-title">
+          <h2 id="about-title">{{ t.skills }}</h2>
+          <p>{{ p.bio }}</p>
+          @if (p.skills.length) {
+            <ul class="chip-list">
+              @for (skill of p.skills; track skill) {
+                <li>{{ skill }}</li>
+              }
+            </ul>
+          }
+        </section>
+
+        <section id="servizi" aria-labelledby="svc-title">
+          <h2 id="svc-title">{{ t.services }}</h2>
+          <div class="table-scroll">
+            <table class="data-table">
+              <caption class="visually-hidden">{{ t.tableCaption | fmt: { name: p.displayName } }}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">{{ t.colService }}</th>
+                  <th scope="col">{{ t.colDuration }}</th>
+                  <th scope="col">{{ t.colPrice }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (svc of p.services; track svc.serviceSlug + svc.name) {
+                  <tr>
+                    <td><a [routerLink]="['/servizi', svc.serviceSlug] | lp: lang">{{ svc.name }}</a></td>
+                    <td>{{ svc.durationMinutes ? (t.minutes | fmt: { count: svc.durationMinutes }) : '—' }}</td>
+                    <td>{{ price(svc.priceFrom, svc.currency) ?? '—' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted">{{ t.priceNote }}</p>
+        </section>
+
+        <section aria-labelledby="cond-title">
+          <h2 id="cond-title">{{ t.conditions }}</h2>
+          <ul class="check-list">
+            @for (c of p.conditions; track c) {
+              <li>{{ c }}</li>
+            }
+          </ul>
+          <p class="small muted">
+            {{ t.conditionsSee }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>
+            {{ t.and }} <a [routerLink]="'/assistenza' | lp: lang" fragment="cancellazioni">{{ t.cancellations }}</a>.
+          </p>
+        </section>
+
+        <section aria-labelledby="rev-title">
+          <h2 id="rev-title">{{ t.reviews }}</h2>
+          <p class="small muted">{{ t.reviewsNote }}</p>
+          @if (p.reviews.length) {
+            @if (p.reviewSummary; as sum) {
+              <p class="review-summary"><app-icon name="star" /> {{ t.reviewsSummary | fmt: { average: sum.average, count: sum.count } }}</p>
+            }
+            <ul role="list" class="reviews">
+              @for (r of p.reviews; track r.id) {
+                <li class="card">
+                  <p class="reviews__meta"><strong>{{ r.authorDisplayName }}</strong> · {{ r.rating }}/5 · <time [attr.datetime]="r.date">{{ i18n.formatDate(r.date) }}</time></p>
+                  <p>{{ r.text }}</p>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p>{{ t.noReviews }}</p>
+          }
+        </section>
+      </div>
+
+      <aside class="stack" style="--stack: 1rem">
+        <div class="card">
+          <h2 class="h3-like">{{ t.areas }}</h2>
+          <ul class="chip-list">
+            @for (area of p.areasServed; track area) {
+              <li>{{ area }}</li>
+            }
+          </ul>
+          <p class="small muted" style="margin: 1rem 0 0">
+            <a [routerLink]="['/dove-siamo', p.citySlug] | lp: lang">{{ t.cityLink | fmt: { city: p.cityName } }}</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="h3-like">{{ t.verification }}</h2>
+          <ul class="check-list">
+            @if (p.verification.identity) {
+              <li>{{ t.identity }}</li>
+            }
+            @if (p.verification.qualifications) {
+              <li>{{ t.qualifications }}</li>
+            }
+          </ul>
+          @if (verifiedSince(); as since) {
+            <p class="small muted">{{ t.verifiedSince | fmt: { date: since } }}</p>
+          }
+          <a class="small" [routerLink]="'/fiducia' | lp: lang" fragment="verifica">{{ t.howVerify }}</a>
+        </div>
+
+        <div class="card">
+          <h2 class="h3-like">{{ t.bookInApp }}</h2>
+          <app-store-buttons placement="professional_profile" />
+        </div>
+      </aside>
+    </div>
+  </div>
+} @else {
+  <app-not-found-view />
+}

@@ -1,0 +1,130 @@
+@let t = i18n.d().map;
+<div class="cm">
+  <div class="cm__filters">
+    <div class="field cm__filter">
+      <label class="field__label" for="cm-service">{{ t.service }}</label>
+      <select id="cm-service" class="field__control" [value]="serviceSlug()" (change)="onServiceChange($any($event.target).value)">
+        <option value="">{{ i18n.d().search.allServices }}</option>
+        @for (service of services(); track service.slug) {
+          <option [value]="service.slug">{{ service.name }}</option>
+        }
+      </select>
+    </div>
+    <button type="button" class="btn btn--outline" (click)="useMyLocation()" [disabled]="geoBusy()">
+      <app-icon name="locate" />
+      {{ geoBusy() ? t.locating : t.useLocation }}
+    </button>
+  </div>
+
+  <div class="cm__status" role="status" aria-live="polite">
+    @if (geoMessage(); as message) {
+      <p class="alert alert--info"><app-icon name="info" />{{ message }}</p>
+    }
+  </div>
+
+  <div class="cm__grid">
+    <div class="cm__map">
+      @defer (on viewport) {
+        <app-italy-map [clusters]="clusters()" [selected]="selectedSlug()" (citySelected)="selectCity($event)" />
+      } @placeholder {
+        <div class="cm__map-ph" aria-hidden="true"></div>
+      }
+      <p class="cm__note"><app-icon name="info" /> {{ t.note }}</p>
+    </div>
+
+    <div class="cm__side" [class.has-panel]="selectedCluster()">
+      <!-- Liste accessible équivalente à la carte : toujours présente, lisible sans JavaScript -->
+      <div class="cm__list">
+        <h3 class="cm__list-title">
+          {{ t.citiesTitle }}
+          @if (serviceName(); as name) {
+            <span class="muted">· {{ name }}</span>
+          }
+        </h3>
+
+        @switch (clustersStatus()) {
+          @case ('loading') {
+            <p class="muted" role="status"><span class="visually-hidden">{{ i18n.d().common.loading }}</span><span class="spinner"></span></p>
+          }
+          @case ('error') {
+            <div class="alert alert--error" role="alert">
+              <app-icon name="alert" />
+              <div>
+                <p>{{ t.updateError }}</p>
+                <button type="button" class="btn btn--outline" (click)="retryClusters()">{{ i18n.d().common.retry }}</button>
+              </div>
+            </div>
+          }
+          @default {
+            @if (clusters().length === 0) {
+              <p class="muted">{{ t.noCities }}</p>
+            } @else {
+              <ul role="list" class="cm__cities">
+                @for (c of clusters(); track c.citySlug) {
+                  <li [class.is-selected]="c.citySlug === selectedSlug()">
+                    <a [routerLink]="['/dove-siamo', c.citySlug] | lp: i18n.lang()" class="cm__city-link">{{ c.cityName }}</a>
+                    <span class="cm__count">{{ t.available | fmt: { count: c.availableCount } }}</span>
+                    <button type="button" class="btn btn--icon" (click)="selectCity(c.citySlug)"
+                            [attr.aria-label]="t.showPros | fmt: { city: c.cityName }">
+                      <app-icon name="chevron-right" />
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+          }
+        }
+      </div>
+
+      @if (selectedCluster(); as city) {
+        <section class="cm__panel" aria-labelledby="cm-panel-title" (keydown.escape)="closePanel()">
+          <header class="cm__panel-head">
+            <h3 id="cm-panel-title" #panelHeading tabindex="-1">
+              {{ city.cityName }}
+              <span class="muted">{{ t.availableCount | fmt: { count: city.availableCount } }}</span>
+            </h3>
+            <button type="button" class="btn btn--icon" (click)="closePanel()" [attr.aria-label]="t.closePanel">
+              <app-icon name="close" />
+            </button>
+          </header>
+
+          @switch (panel().status) {
+            @case ('loading') {
+              <p role="status" class="cm__panel-state"><span class="spinner"></span><span class="visually-hidden">{{ t.loadingPros }}</span></p>
+            }
+            @case ('error') {
+              <div class="alert alert--error" role="alert">
+                <app-icon name="alert" />
+                <div>
+                  <p>{{ t.prosError }}</p>
+                  <button type="button" class="btn btn--outline" (click)="loadPanel()">{{ i18n.d().common.retry }}</button>
+                </div>
+              </div>
+            }
+            @case ('empty') {
+              <p class="cm__panel-state muted">
+                @if (serviceName(); as name) {
+                  {{ t.emptyService | fmt: { service: name, city: city.cityName } }}
+                } @else {
+                  {{ t.empty | fmt: { city: city.cityName } }}
+                }
+              </p>
+            }
+            @default {
+              <ul role="list" class="cm__pros">
+                @for (pro of panel().pros; track pro.professionalId) {
+                  <li><app-professional-card [pro]="pro" variant="row" [headingLevel]="4" /></li>
+                }
+              </ul>
+            }
+          }
+
+          <a class="btn btn--primary btn--block" [routerLink]="'/disponibilita' | lp: i18n.lang()"
+             [queryParams]="serviceSlug() ? { citta: city.citySlug, servizio: serviceSlug() } : { citta: city.citySlug }">
+            {{ t.seeAll }} <app-icon name="arrow-right" />
+          </a>
+        </section>
+      }
+    </div>
+  </div>
+</div>

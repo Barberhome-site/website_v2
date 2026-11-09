@@ -1,0 +1,96 @@
+@let t = i18n.d().serviceDetail;
+@let lang = i18n.lang();
+@if (service(); as s) {
+  <div class="page-head">
+    <div class="container">
+      <app-breadcrumbs [items]="crumbs()" />
+      <h1>{{ t.title | fmt: { label: s.professionalLabel } }}</h1>
+      <!-- Réponse directe en ouverture (GEO) -->
+      <p class="lead">{{ s.intro }}</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ servizio: s.slug }">
+          {{ i18n.d().services.findCta }}
+        </a>
+        <a class="btn btn--outline" [routerLink]="'/come-funziona' | lp: lang">{{ i18n.d().services.howCta }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="two-col">
+      <div class="stack" style="--stack: 2.5rem">
+        <section aria-labelledby="inc-title">
+          <h2 id="inc-title">{{ t.includes }}</h2>
+          <ul class="check-list">
+            @for (item of s.includes; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </section>
+
+        <section aria-labelledby="who-title">
+          <h2 id="who-title">{{ t.audience }}</h2>
+          <p>{{ s.audience }}</p>
+        </section>
+
+        <section aria-labelledby="cond-title">
+          <h2 id="cond-title">{{ t.conditions }}</h2>
+          <ul class="check-list">
+            @for (item of s.conditions; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+          <p class="small muted">
+            {{ t.cancelNote }}
+            <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>.
+            <a [routerLink]="'/assistenza' | lp: lang" fragment="cancellazioni">{{ t.cancelHow }}</a>
+          </p>
+        </section>
+      </div>
+
+      <aside class="card" aria-labelledby="cities-title">
+        <h2 id="cities-title" class="h3-like">{{ t.citiesTitle }}</h2>
+        @if (activeCities().length) {
+          <ul class="chip-list">
+            @for (city of activeCities(); track city.slug) {
+              <li><a [routerLink]="['/dove-siamo', city.slug] | lp: lang">{{ city.name }}</a></li>
+            }
+          </ul>
+        } @else {
+          <p class="muted">{{ t.noCities }}</p>
+        }
+        <p class="small muted" style="margin-top: 1rem">
+          {{ t.notListed }} <a [routerLink]="'/disponibilita' | lp: lang">{{ t.checkCap }}</a>.
+        </p>
+        <app-last-updated [date]="s.updatedAt" />
+      </aside>
+    </div>
+  </div>
+
+  @if (pros().value.length) {
+    <section class="section section--raised" aria-labelledby="pros-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="pros-title">{{ t.prosTitle | fmt: { label: s.professionalLabel } }}</h2>
+          <a class="link-arrow" [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ servizio: s.slug }">
+            {{ i18n.d().common.seeAll }} <app-icon name="arrow-right" />
+          </a>
+        </div>
+        <ul role="list" class="grid" style="--grid-min: 220px">
+          @for (pro of pros().value; track pro.professionalId) {
+            <li><app-professional-card [pro]="pro" /></li>
+          }
+        </ul>
+      </div>
+    </section>
+  }
+
+  @if (s.faqs.length) {
+    <section class="container section" aria-labelledby="faq-title">
+      <h2 id="faq-title">{{ i18n.d().common.faq }}</h2>
+      <app-faq-list [faqs]="s.faqs" [openFirst]="true" />
+    </section>
+  }
+} @else {
+  <app-not-found-view />
+}

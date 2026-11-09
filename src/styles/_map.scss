@@ -1,0 +1,68 @@
+// Styles globaux de la carte : Leaflet insère ses éléments hors de l'encapsulation Angular.
+.leaflet-container {
+  background: #121212 !important;
+  font-family: var(--font-body) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(10, 10, 10, 0.75) !important;
+  color: var(--c-muted) !important;
+  font-size: 11px !important;
+
+  a {
+    color: var(--c-text) !important;
+  }
+}
+
+.leaflet-bar a {
+  background: var(--c-card) !important;
+  color: var(--c-text) !important;
+  border-color: var(--c-border) !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+}
+
+.glamro-cluster {
+  background: none;
+  border: 0;
+
+  .glamro-cluster__count {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    color: var(--c-on-accent);
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 0 0 6px rgba(239, 210, 75, 0.22);
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .glamro-cluster__label {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--c-text);
+    text-shadow: 0 1px 3px #000;
+  }
+
+  &.is-selected .glamro-cluster__count {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(239, 210, 75, 0.22), 0 0 0 10px rgba(255, 255, 255, 0.85);
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    .glamro-cluster__count {
+      box-shadow: var(--focus-ring);
+    }
+  }
+}

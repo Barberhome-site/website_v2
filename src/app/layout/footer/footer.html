@@ -1,0 +1,64 @@
+@let t = i18n.d();
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a [routerLink]="'/' | lp: i18n.lang()" [attr.aria-label]="t.nav.logo">
+          <img [src]="site.logo.src" alt="" [width]="site.logo.width" [height]="site.logo.height" loading="lazy" />
+        </a>
+        <p class="footer__tagline">{{ t.brand.tagline }}</p>
+        <app-store-buttons placement="footer" />
+      </div>
+
+      <nav class="footer__col" aria-labelledby="f-nav">
+        <h2 id="f-nav" class="footer__title">GLAMRO</h2>
+        <ul role="list">
+          @for (item of site.nav; track item.path) {
+            <li><a [routerLink]="item.path | lp: i18n.lang()">{{ t.nav[item.key] }}</a></li>
+          }
+          <li><a [routerLink]="'/fiducia' | lp: i18n.lang()">{{ t.nav.trust }}</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="f-support">
+        <h2 id="f-support" class="footer__title">{{ t.footer.support }}</h2>
+        <ul role="list">
+          <li><a [routerLink]="'/assistenza' | lp: i18n.lang()">{{ t.footer.helpFaq }}</a></li>
+          <li><a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="cancellazioni">{{ t.footer.cancellations }}</a></li>
+          <li>
+            <a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="contatti" (click)="trackSupport('contact_page')">{{ t.footer.contacts }}</a>
+          </li>
+          <li>
+            <a [href]="'mailto:' + site.contact.supportEmail" (click)="trackSupport('email')">{{ site.contact.supportEmail }}</a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="f-legal">
+        <h2 id="f-legal" class="footer__title">{{ t.footer.legal }}</h2>
+        <ul role="list">
+          <li><a [routerLink]="'/legale/privacy' | lp: i18n.lang()">{{ t.footer.privacy }}</a></li>
+          <li><a [routerLink]="'/legale/cookie-policy' | lp: i18n.lang()">{{ t.footer.cookies }}</a></li>
+          <li><a [routerLink]="'/legale/condizioni-clienti' | lp: i18n.lang()">{{ t.footer.customerTerms }}</a></li>
+          <li><a [routerLink]="'/legale/condizioni-professionisti' | lp: i18n.lang()">{{ t.footer.proTerms }}</a></li>
+          <li>
+            <button type="button" class="footer__linkbtn" (click)="consent.openPreferences()">{{ t.footer.manageCookies }}</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <ul role="list" class="footer__social" [attr.aria-label]="t.footer.social">
+        @for (s of site.social; track s.url) {
+          <li>
+            <a [href]="s.url" target="_blank" rel="noopener">{{ s.label }}<span class="visually-hidden"> {{ t.common.newTab }}</span></a>
+          </li>
+        }
+      </ul>
+      <p class="footer__legal">
+        © {{ year }} {{ site.company.legalName }} · {{ t.footer.vat }} {{ site.company.vatNumber }} · {{ site.company.address }}
+      </p>
+    </div>
+  </div>
+</footer>
