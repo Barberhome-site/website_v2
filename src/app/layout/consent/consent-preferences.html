@@ -1,0 +1,56 @@
+@let t = i18n.d().consent;
+<dialog #dialog class="cp" aria-labelledby="cp-title" (close)="onDialogClose()">
+  <div class="cp__head">
+    <h2 id="cp-title" class="cp__title">{{ t.prefsTitle }}</h2>
+    <button type="button" class="btn btn--icon" (click)="consent.closePreferences()" [attr.aria-label]="t.closeNoSave">
+      <app-icon name="close" />
+    </button>
+  </div>
+
+  <div class="cp__body">
+    <p class="muted">
+      {{ t.prefsIntro }}
+      <a [routerLink]="'/legale/cookie-policy' | lp: i18n.lang()" (click)="consent.closePreferences()">{{ t.prefsIntroLink }}</a>.
+    </p>
+
+    @for (category of categories; track category) {
+      <div class="cp__cat">
+        <label class="choice cp__switch">
+          <input
+            type="checkbox"
+            [checked]="isChecked(category)"
+            [disabled]="required[category]"
+            (change)="toggle(category, $any($event.target).checked)"
+          />
+          <span>
+            <strong>{{ t.categories[category].label }}</strong>
+            @if (required[category]) {
+              <span class="badge">{{ t.alwaysActive }}</span>
+            }
+            <span class="cp__desc">{{ t.categories[category].description }}</span>
+          </span>
+        </label>
+
+        @if (trackersFor(category).length) {
+          <details class="cp__details">
+            <summary>{{ t.technologies | fmt: { count: trackersFor(category).length } }}</summary>
+            <ul role="list">
+              @for (tr of trackersFor(category); track tr.id) {
+                <li>
+                  <strong>{{ tr.name }}</strong> — {{ tr.provider }} ({{ tr.domain }})<br />
+                  <span class="muted">{{ i18n.d().trackers[tr.id].purpose }} {{ t.duration }}: {{ i18n.d().trackers[tr.id].duration }}.</span>
+                </li>
+              }
+            </ul>
+          </details>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="cp__actions">
+    <button type="button" class="btn btn--outline" (click)="consent.rejectAll()">{{ t.rejectAll }}</button>
+    <button type="button" class="btn btn--outline" (click)="save()">{{ t.save }}</button>
+    <button type="button" class="btn btn--outline" (click)="consent.acceptAll()">{{ t.acceptAll }}</button>
+  </div>
+</dialog>

@@ -1,0 +1,105 @@
+@let t = i18n.d().city;
+@let lang = i18n.lang();
+@if (city(); as c) {
+  <div class="page-head">
+    <div class="container">
+      <app-breadcrumbs [items]="crumbs()" />
+
+      @if (isActive()) {
+        <h1>{{ t.titleActive | fmt: { city: c.name } }}</h1>
+        <p class="lead">{{ c.intro }}</p>
+        <app-last-updated [date]="c.updatedAt" />
+        <div class="cta-row">
+          <a class="btn btn--primary" [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ citta: c.slug }">{{ t.ctaPros }}</a>
+          <a class="btn btn--outline" routerLink="." fragment="servizi">{{ t.ctaServices }}</a>
+        </div>
+      } @else {
+        <!-- Zone non couverte : message transparent, page non indexée -->
+        <h1>{{ t.titleInactive | fmt: { city: c.name } }}</h1>
+        <p class="lead">{{ t.leadInactive | fmt: { city: c.name } }}</p>
+        <div class="cta-row">
+          <a class="btn btn--primary" [routerLink]="'/dove-siamo' | lp: lang">{{ t.ctaCities }}</a>
+          <a class="btn btn--outline" [routerLink]="'/per-professionisti' | lp: lang">{{ t.ctaProInactive | fmt: { city: c.name } }}</a>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (isActive()) {
+    <div class="container section">
+      <div class="two-col">
+        <div class="stack" style="--stack: 2.5rem">
+          <section aria-labelledby="areas-title">
+            <h2 id="areas-title">{{ t.areas }}</h2>
+            <ul class="chip-list">
+              @for (area of c.areasServed; track area) {
+                <li>{{ area }}</li>
+              }
+            </ul>
+            <p class="small muted" style="margin-top: 1rem">
+              {{ t.areaHint }} <a [routerLink]="'/disponibilita' | lp: lang">{{ t.checkCap }}</a>.
+            </p>
+          </section>
+
+          <section id="servizi" aria-labelledby="svc-title">
+            <h2 id="svc-title">{{ t.servicesTitle | fmt: { city: c.name } }}</h2>
+            <ul class="chip-list">
+              @for (s of cityServices(); track s.slug) {
+                <li><a [routerLink]="['/servizi', s.slug] | lp: lang">{{ s.professionalLabel }}</a></li>
+              }
+            </ul>
+          </section>
+        </div>
+
+        <aside class="card" aria-labelledby="cond-title">
+          <h2 id="cond-title" class="h3-like">{{ t.conditionsTitle }}</h2>
+          <ul class="check-list">
+            @for (item of t.conditions; track $index) {
+              <li>{{ item }}</li>
+            }
+            <li>{{ t.cancelNote }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+
+    <section class="section section--raised" aria-labelledby="pros-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="pros-title">{{ t.prosTitle | fmt: { city: c.name } }}</h2>
+          <a class="link-arrow" [routerLink]="'/disponibilita' | lp: lang" [queryParams]="{ citta: c.slug }">
+            {{ i18n.d().common.seeAll }} <app-icon name="arrow-right" />
+          </a>
+        </div>
+        @switch (pros().status) {
+          @case ('error') {
+            <p class="alert alert--error" role="alert"><app-icon name="alert" />{{ t.prosError }}</p>
+          }
+          @default {
+            @if (pros().value.length) {
+              <ul role="list" class="grid" style="--grid-min: 220px">
+                @for (pro of pros().value; track pro.professionalId) {
+                  <li><app-professional-card [pro]="pro" /></li>
+                }
+              </ul>
+            } @else {
+              <p class="muted">{{ t.prosEmpty }}</p>
+            }
+          }
+        }
+        <p class="small muted" style="margin-top: 1rem">
+          {{ t.sponsoredNote }} <a [routerLink]="'/fiducia' | lp: lang" fragment="ordinamento">{{ t.rankingLink }}</a>
+        </p>
+      </div>
+    </section>
+
+    @if (c.faqs.length) {
+      <section class="container section" aria-labelledby="faq-title">
+        <h2 id="faq-title">{{ t.faqTitle | fmt: { city: c.name } }}</h2>
+        <app-faq-list [faqs]="c.faqs" />
+      </section>
+    }
+  }
+} @else {
+  <app-not-found-view />
+}

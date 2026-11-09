@@ -1,0 +1,45 @@
+<div
+  class="carousel"
+  role="region"
+  aria-roledescription="carosello"
+  [attr.aria-label]="label()"
+  (mouseenter)="setHover(true)"
+  (mouseleave)="setHover(false)"
+  (focusin)="onFocusIn()"
+  (focusout)="onFocusOut($event)"
+>
+  <div class="carousel__controls">
+    <button type="button" class="btn btn--icon" (click)="prev()" [attr.aria-label]="i18n.d().carousel.previous">
+      <app-icon name="chevron-left" />
+    </button>
+    @if (autoplayAvailable()) {
+      <button
+        type="button"
+        class="btn btn--icon"
+        (click)="togglePause()"
+        [attr.aria-label]="userPaused() ? i18n.d().carousel.play : i18n.d().carousel.pause"
+      >
+        <app-icon [name]="userPaused() ? 'play' : 'pause'" />
+      </button>
+    }
+    <button type="button" class="btn btn--icon" (click)="next()" [attr.aria-label]="i18n.d().carousel.next">
+      <app-icon name="chevron-right" />
+    </button>
+  </div>
+
+  <!-- Liste défilante : swipe natif, flèches clavier quand elle a le focus -->
+  <ul
+    #track
+    class="carousel__track"
+    role="list"
+    tabindex="0"
+    [attr.aria-label]="i18n.d().carousel.track"
+    (keydown)="onKeydown($event)"
+  >
+    @for (pro of professionals(); track pro.professionalId) {
+      <li>
+        <app-professional-card [pro]="pro" variant="card" />
+      </li>
+    }
+  </ul>
+</div>

@@ -1,0 +1,43 @@
+.profile-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  align-items: flex-start;
+}
+
+.profile-head__name {
+  margin-bottom: 0.25rem;
+}
+
+.profile-head__role {
+  font-size: var(--fs-lead);
+  margin-bottom: 0.75rem;
+}
+
+.profile-head__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.review-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+
+  app-icon {
+    color: var(--c-accent);
+  }
+}
+
+.reviews {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.reviews__meta {
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  margin-bottom: 0.4rem;
+}

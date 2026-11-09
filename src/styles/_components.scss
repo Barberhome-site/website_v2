@@ -1,0 +1,422 @@
+// ------------------------------------------------------------------
+// Boutons : hauteur min. 48 px (brief §8)
+// ------------------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-s);
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+
+  app-icon {
+    width: 1.15em;
+    height: 1.15em;
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: var(--c-accent);
+  color: var(--c-on-accent);
+  text-transform: uppercase;
+
+  &:hover:not([disabled]) {
+    background: var(--c-accent-hover);
+    color: var(--c-on-accent);
+  }
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--c-border-strong);
+  color: var(--c-text);
+
+  &:hover:not([disabled]) {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+  }
+}
+
+.btn--outline-accent {
+  background: transparent;
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+
+  &:hover:not([disabled]) {
+    background: var(--c-accent);
+    color: var(--c-on-accent);
+  }
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--icon {
+  width: 48px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  background: var(--c-card);
+  border-color: var(--c-border);
+  color: var(--c-text);
+
+  &:hover:not([disabled]) {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+  }
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: none;
+
+  app-icon {
+    width: 1.1em;
+    height: 1.1em;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  &:hover app-icon {
+    transform: translateX(3px);
+  }
+}
+
+// ------------------------------------------------------------------
+// Cartes, badges, avatars
+// ------------------------------------------------------------------
+.card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-m);
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--c-border);
+  color: var(--c-muted);
+
+  app-icon {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+.badge--verified {
+  color: var(--c-success);
+  border-color: rgba(95, 211, 141, 0.35);
+}
+
+.badge--sponsored {
+  color: var(--c-accent);
+  border-color: rgba(239, 210, 75, 0.45);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-pill);
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    font-size: 0.9375rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.6rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.2rem;
+      top: 0.45em;
+      width: 0.7rem;
+      height: 0.4rem;
+      border-left: 2px solid var(--c-accent);
+      border-bottom: 2px solid var(--c-accent);
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// ------------------------------------------------------------------
+// Formulaires : labels persistants, erreurs textuelles (brief §8)
+// ------------------------------------------------------------------
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.field__label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.field__hint {
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+}
+
+.field__control {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-bg);
+  color: var(--c-text);
+  transition: border-color var(--dur) var(--ease);
+
+  &::placeholder {
+    color: #8d8d88;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 3px rgba(239, 210, 75, 0.35);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--c-error);
+  }
+}
+
+select.field__control {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b7b7b2' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+}
+
+textarea.field__control {
+  min-height: 140px;
+  resize: vertical;
+}
+
+input[type='date'].field__control::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+}
+
+.field__error {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  font-size: var(--fs-small);
+  color: var(--c-error);
+  margin: 0;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1.25rem;
+
+  @media (min-width: 720px) {
+    grid-template-columns: 1fr 1fr;
+
+    .form-grid__full {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.6rem 0;
+  cursor: pointer;
+
+  input {
+    width: 22px;
+    height: 22px;
+    margin: 0.1rem 0 0;
+    accent-color: var(--c-accent);
+    flex-shrink: 0;
+  }
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+
+  legend {
+    padding: 0;
+    margin-bottom: 0.4rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+}
+
+.alert {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--c-border);
+  background: var(--c-card);
+
+  app-icon {
+    flex-shrink: 0;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0.1rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.alert--success {
+  border-color: rgba(95, 211, 141, 0.45);
+
+  app-icon {
+    color: var(--c-success);
+  }
+}
+
+.alert--error {
+  border-color: rgba(255, 138, 128, 0.5);
+
+  app-icon {
+    color: var(--c-error);
+  }
+}
+
+.alert--info app-icon {
+  color: var(--c-accent);
+}
+
+// ------------------------------------------------------------------
+// Texte long (pages légales, pages d'information)
+// ------------------------------------------------------------------
+.prose {
+  max-width: 72ch;
+
+  h2 {
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
+    margin-top: 2.5rem;
+  }
+
+  h3 {
+    margin-top: 1.75rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  .placeholder {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--c-accent);
+    background: rgba(239, 210, 75, 0.07);
+    color: var(--c-muted);
+    font-style: italic;
+  }
+}
+
+.data-table {
+  width: 100%;
+  font-size: 0.9375rem;
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--c-muted);
+    white-space: nowrap;
+  }
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-m);
+  margin: 1rem 0 1.5rem;
+}
+
+.spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 3px solid var(--c-border-strong);
+  border-top-color: var(--c-accent);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

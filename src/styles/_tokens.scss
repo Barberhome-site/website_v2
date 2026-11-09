@@ -1,0 +1,41 @@
+// Système visuel GLAMRO (brief §8)
+:root {
+  --c-bg: #0a0a0a;
+  --c-bg-raised: #111111;
+  --c-card: #1c1c1c;
+  --c-card-hover: #242424;
+  --c-text: #ffffff;
+  --c-muted: #b7b7b2;
+  --c-accent: #efd24b;
+  --c-accent-hover: #f5df73;
+  --c-on-accent: #0a0a0a;
+  --c-border: rgba(255, 255, 255, 0.14);
+  --c-border-strong: rgba(255, 255, 255, 0.28);
+  --c-success: #5fd38d;
+  --c-error: #ff8a80;
+
+  --font-display: 'Archivo Black', 'Arial Black', Arial, sans-serif;
+  --font-body: 'Inter', Arial, sans-serif;
+
+  --fs-body: 1rem; // 16 px minimum (brief)
+  --fs-small: 0.875rem;
+  --fs-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem);
+  --fs-h1: clamp(2.25rem, 1.4rem + 4.2vw, 4.75rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  --fs-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 18px;
+  --radius-pill: 999px;
+
+  --space-section: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+  --container: 1240px;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+
+  --header-h: 72px;
+  --focus-ring: 0 0 0 3px var(--c-bg), 0 0 0 6px var(--c-accent);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 180ms;
+}

@@ -1,0 +1,118 @@
+@let t = i18n.d().support;
+@let lang = i18n.lang();
+<div class="page-head">
+  <div class="container">
+    <app-breadcrumbs [items]="crumbs" />
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.lead }}</p>
+    <app-last-updated date="2026-11-02" />
+  </div>
+</div>
+
+<div class="container section">
+  <div class="two-col">
+    <div class="stack" style="--stack: 3rem">
+      <section aria-labelledby="faq-c">
+        <h2 id="faq-c">{{ t.clientFaqTitle }}</h2>
+        <app-faq-list [faqs]="t.clientFaqs" />
+      </section>
+
+      <section aria-labelledby="faq-p">
+        <h2 id="faq-p">{{ t.proFaqTitle }}</h2>
+        <app-faq-list [faqs]="t.proFaqs" />
+      </section>
+
+      <section id="cancellazioni" class="prose" aria-labelledby="canc-title">
+        <h2 id="canc-title">{{ t.cancelTitle }}</h2>
+        <p><strong>{{ t.cancelAnswer }}</strong></p>
+        <p class="placeholder">{{ t.cancelPlaceholder }}</p>
+        <p>{{ t.cancelMore }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>.</p>
+      </section>
+    </div>
+
+    <section id="contatti" class="card" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="h3-like">{{ t.contactTitle }}</h2>
+      <p class="muted small">
+        {{ t.orWrite }}
+        <a [href]="'mailto:' + site.contact.supportEmail" (click)="trackEmail()">{{ site.contact.supportEmail }}</a>.
+      </p>
+
+      <div aria-live="polite">
+        @if (result() === 'success') {
+          <div class="alert alert--success" role="status" style="margin-bottom: 1.25rem">
+            <app-icon name="check-circle" />
+            <p>{{ t.success }}</p>
+          </div>
+        }
+        @if (result() === 'error') {
+          <div class="alert alert--error" role="alert" style="margin-bottom: 1.25rem">
+            <app-icon name="alert" />
+            <p>{{ t.error }}</p>
+          </div>
+        }
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" (input)="onFirstInput()" novalidate class="stack" style="--stack: 1.25rem">
+        <div class="field">
+          <label class="field__label" for="sp-name">{{ t.name }}</label>
+          <input id="sp-name" class="field__control" formControlName="name" autocomplete="name"
+                 [attr.aria-invalid]="showError('name') ? 'true' : null"
+                 [attr.aria-describedby]="showError('name') ? 'sp-name-err' : null" />
+          @if (showError('name')) {
+            <p id="sp-name-err" class="field__error">{{ t.nameError }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="sp-email">{{ t.email }}</label>
+          <input id="sp-email" type="email" class="field__control" formControlName="email" autocomplete="email"
+                 [attr.aria-invalid]="showError('email') ? 'true' : null"
+                 [attr.aria-describedby]="showError('email') ? 'sp-email-err' : null" />
+          @if (showError('email')) {
+            <p id="sp-email-err" class="field__error">{{ t.emailError }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="sp-topic">{{ t.topic }}</label>
+          <select id="sp-topic" class="field__control" formControlName="topic"
+                  [attr.aria-invalid]="showError('topic') ? 'true' : null"
+                  [attr.aria-describedby]="showError('topic') ? 'sp-topic-err' : null">
+            <option value="" disabled>{{ t.topicPlaceholder }}</option>
+            @for (topic of t.topics; track $index) {
+              <option [value]="topic">{{ topic }}</option>
+            }
+          </select>
+          @if (showError('topic')) {
+            <p id="sp-topic-err" class="field__error">{{ t.topicError }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="sp-ref">{{ t.reference }} <span class="muted">{{ i18n.d().common.optional }}</span></label>
+          <input id="sp-ref" class="field__control" formControlName="bookingReference" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="sp-msg">{{ t.message }}</label>
+          <textarea id="sp-msg" class="field__control" formControlName="message"
+                    [attr.aria-invalid]="showError('message') ? 'true' : null"
+                    [attr.aria-describedby]="showError('message') ? 'sp-msg-err' : 'sp-msg-hint'"></textarea>
+          <span id="sp-msg-hint" class="field__hint">{{ t.messageHint }}</span>
+          @if (showError('message')) {
+            <p id="sp-msg-err" class="field__error">{{ t.messageError }}</p>
+          }
+        </div>
+
+        <p class="small muted">
+          {{ t.privacy }}
+          <a [routerLink]="'/legale/privacy' | lp: lang">{{ t.privacyLink }}</a>
+        </p>
+
+        <button type="submit" class="btn btn--primary btn--block" [disabled]="sending()">
+          {{ sending() ? i18n.d().common.sending : t.send }}
+        </button>
+      </form>
+    </section>
+  </div>
+</div>

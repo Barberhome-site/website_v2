@@ -1,0 +1,154 @@
+:host {
+  position: relative;
+  display: flex;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-m);
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+
+  &:hover,
+  &:focus-within {
+    border-color: var(--c-border-strong);
+    background: var(--c-card-hover);
+  }
+}
+
+.pc__profile {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg);
+  color: var(--c-text);
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+
+  app-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  &:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+  }
+}
+
+.pc__name {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.pc__role {
+  margin: 0.1rem 0 0;
+  color: var(--c-text);
+}
+
+.pc__area {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
+  margin: 0.25rem 0 0;
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+
+  app-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.15rem;
+  }
+}
+
+.pc__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.6rem;
+  margin-top: 0.75rem !important;
+}
+
+.pc__availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--c-muted);
+
+  app-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* Variante carte verticale */
+:host(.pc--card) {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1.25rem 1.25rem;
+  height: 100%;
+
+  app-avatar {
+    margin-bottom: 1rem;
+  }
+
+  .pc__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pc__area,
+  .pc__meta {
+    justify-content: center;
+  }
+
+  .pc__book {
+    margin-top: 1.25rem;
+  }
+}
+
+/* Variante ligne (panneau de la carte) */
+:host(.pc--row) {
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 0.85rem 0.85rem 1rem;
+
+  .pc__profile {
+    position: static;
+    flex-shrink: 0;
+  }
+
+  .pc__body {
+    flex: 1;
+    min-width: 0;
+    padding-right: 0.25rem;
+  }
+
+  .pc__meta {
+    margin-top: 0.5rem !important;
+  }
+
+  .pc__book {
+    flex-shrink: 0;
+    padding-inline: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  @media (max-width: 420px) {
+    flex-wrap: wrap;
+
+    .pc__body {
+      flex-basis: calc(100% - 64px - 0.9rem);
+    }
+
+    .pc__book {
+      flex: 1;
+    }
+  }
+}

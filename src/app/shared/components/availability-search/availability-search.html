@@ -1,0 +1,64 @@
+<form class="as" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <div class="field as__field">
+    <label class="field__label" [for]="id + '-loc'">{{ i18n.d().search.location }}</label>
+    <div class="as__control">
+      <app-icon name="pin" />
+      <input
+        class="field__control"
+        type="text"
+        [id]="id + '-loc'"
+        formControlName="location"
+        [attr.list]="id + '-cities'"
+        autocomplete="address-level2"
+        inputmode="text"
+        [placeholder]="i18n.d().search.locationPlaceholder"
+        [attr.aria-invalid]="showError('location') ? 'true' : null"
+        [attr.aria-describedby]="showError('location') ? id + '-loc-err' : null"
+      />
+    </div>
+    <datalist [id]="id + '-cities'">
+      @for (city of activeCities(); track city.slug) {
+        <option [value]="city.name"></option>
+      }
+    </datalist>
+    @if (showError('location')) {
+      <p class="field__error" [id]="id + '-loc-err'">{{ i18n.d().search.errorLocation }}</p>
+    }
+  </div>
+
+  <div class="field as__field">
+    <label class="field__label" [for]="id + '-svc'">{{ i18n.d().search.service }}</label>
+    <div class="as__control">
+      <app-icon name="scissors" />
+      <select class="field__control" [id]="id + '-svc'" formControlName="service">
+        <option value="">{{ i18n.d().search.allServices }}</option>
+        @for (service of services(); track service.slug) {
+          <option [value]="service.slug">{{ service.name }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="field as__field">
+    <label class="field__label" [for]="id + '-date'">{{ i18n.d().search.date }} <span class="muted">{{ i18n.d().common.optionalF }}</span></label>
+    <div class="as__control">
+      <app-icon name="calendar" />
+      <input
+        class="field__control"
+        type="date"
+        [id]="id + '-date'"
+        formControlName="date"
+        [min]="minDate"
+        [attr.aria-invalid]="showError('date') ? 'true' : null"
+        [attr.aria-describedby]="showError('date') ? id + '-date-err' : null"
+      />
+    </div>
+    @if (showError('date')) {
+      <p class="field__error" [id]="id + '-date-err'">{{ i18n.d().search.errorDate }}</p>
+    }
+  </div>
+
+  <div class="as__submit">
+    <button class="btn btn--primary btn--block" type="submit">{{ i18n.d().cta.primary }}</button>
+  </div>
+</form>

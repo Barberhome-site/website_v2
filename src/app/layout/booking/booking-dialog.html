@@ -1,0 +1,46 @@
+<dialog #dialog class="bd" aria-labelledby="bd-title" aria-describedby="bd-text" (close)="onDialogClose()">
+  @if (booking.professional(); as pro) {
+    <button type="button" class="btn btn--icon bd__close" (click)="close()" [attr.aria-label]="i18n.d().common.close">
+      <app-icon name="close" />
+    </button>
+
+    <div class="bd__head">
+      <app-avatar [name]="pro.displayName" [image]="pro.profileImage" [size]="72" />
+      <div>
+        <h2 id="bd-title" class="bd__title">{{ i18n.d().booking.title | fmt: { name: pro.displayName } }}</h2>
+        <p class="muted small">{{ pro.specialtyLabel }} · {{ pro.cityName }}</p>
+      </div>
+    </div>
+
+    <p id="bd-text">{{ i18n.d().booking.text }}</p>
+
+    @if (platform() === 'desktop') {
+      <p class="bd__label">{{ i18n.d().booking.desktop }}</p>
+      <div class="bd__stores">
+        <a class="btn btn--primary" [href]="stores.ios.url" rel="noopener" (click)="trackStore(stores.ios.id)">
+          <app-icon name="phone" /> {{ stores.ios.name }}
+        </a>
+        <a class="btn btn--primary" [href]="stores.android.url" rel="noopener" (click)="trackStore(stores.android.id)">
+          <app-icon name="phone" /> {{ stores.android.name }}
+        </a>
+      </div>
+    } @else {
+      <div class="bd__stores">
+        <a class="btn btn--primary btn--block" [href]="primaryStore().url" rel="noopener" (click)="trackStore(primaryStore().id)">
+          <app-icon name="phone" /> {{ i18n.d().booking.open | fmt: { store: primaryStore().name } }}
+        </a>
+      </div>
+
+      <div role="status" aria-live="polite" class="bd__countdown">
+        @if (countdown(); as seconds) {
+          <span>{{ i18n.d().booking.redirecting | fmt: { store: primaryStore().name, seconds: seconds } }}</span>
+          <button type="button" class="bd__cancel" (click)="cancelRedirect()">{{ i18n.d().booking.cancel }}</button>
+        }
+      </div>
+
+      <a class="small bd__other" [href]="secondaryStore().url" rel="noopener" (click)="trackStore(secondaryStore().id)">
+        {{ i18n.d().booking.other | fmt: { store: secondaryStore().name } }}
+      </a>
+    }
+  }
+</dialog>

@@ -1,0 +1,48 @@
+@let t = i18n.d();
+<header class="header">
+  <div class="container header__inner">
+    <a [routerLink]="'/' | lp: i18n.lang()" class="header__logo" [attr.aria-label]="t.nav.logo">
+      <img [src]="site.logo.src" alt="" [width]="site.logo.width" [height]="site.logo.height" />
+    </a>
+
+    <nav class="header__nav" [attr.aria-label]="t.nav.main">
+      <ul role="list">
+        @for (item of site.nav; track item.path) {
+          <li>
+            <a [routerLink]="item.path | lp: i18n.lang()" routerLinkActive="is-active" ariaCurrentWhenActive="page">{{ t.nav[item.key] }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <app-language-switcher class="header__lang" />
+
+    <a [routerLink]="'/disponibilita' | lp: i18n.lang()" class="btn btn--primary header__cta">{{ t.cta.primary }}</a>
+
+    <button
+      type="button"
+      class="btn btn--icon header__burger"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-menu"
+      [attr.aria-label]="menuOpen() ? t.nav.closeMenu : t.nav.openMenu"
+      (click)="toggleMenu()"
+    >
+      <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" [class.is-open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''">
+    <nav [attr.aria-label]="t.nav.mainMobile">
+      <ul role="list">
+        @for (item of site.nav; track item.path) {
+          <li>
+            <a [routerLink]="item.path | lp: i18n.lang()" routerLinkActive="is-active" ariaCurrentWhenActive="page">{{ t.nav[item.key] }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+    <a [routerLink]="'/disponibilita' | lp: i18n.lang()" class="btn btn--primary btn--block">{{ t.cta.primary }}</a>
+    <a [routerLink]="'/per-professionisti' | lp: i18n.lang()" class="btn btn--outline btn--block">{{ t.cta.pro }}</a>
+    <app-language-switcher variant="inline" class="mobile-menu__lang" />
+  </div>
+</header>

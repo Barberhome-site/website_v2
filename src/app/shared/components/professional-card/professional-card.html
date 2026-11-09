@@ -1,0 +1,41 @@
+@let p = pro();
+@let t = i18n.d().card;
+
+
+<app-avatar [name]="p.displayName" [image]="p.profileImage" [size]="variant() === 'card' ? 104 : 64" />
+
+<div class="pc__body">
+  @if (headingLevel() === 3) {
+    <h3 class="pc__name">{{ p.displayName }}</h3>
+  } @else {
+    <h4 class="pc__name">{{ p.displayName }}</h4>
+  }
+  <p class="pc__role">{{ p.specialtyLabel }}</p>
+  <p class="pc__area">
+    <app-icon name="pin" />
+    <span>{{ p.cityName }}<span class="visually-hidden">, {{ t.zone }}: </span><span aria-hidden="true"> · </span>{{ p.serviceArea }}</span>
+  </p>
+
+  <ul class="pc__meta" role="list">
+    @if (p.verified) {
+      <li class="badge badge--verified"><app-icon name="check-circle" /> {{ t.verified }}</li>
+    }
+    @if (p.sponsored) {
+      <li class="badge badge--sponsored">{{ t.sponsored }}</li>
+    }
+    @if (availability(); as a) {
+      <li class="pc__availability"><app-icon name="calendar" /> {{ a }}</li>
+    }
+  </ul>
+</div>
+
+<button type="button" class="btn btn--primary pc__book" [class.btn--block]="variant() === 'card'" (click)="book()"
+        [attr.aria-label]="t.bookWith | fmt: { name: p.displayName }">
+  {{ t.book }}
+</button>
+
+<!-- Icône profil : ouvre la page du professionnel -->
+<a class="pc__profile" [routerLink]="p.profileUrl | lp: i18n.lang()" [attr.aria-label]="t.profile | fmt: { name: p.displayName }"
+   [attr.title]="t.profile | fmt: { name: p.displayName }">
+  <app-icon name="user" />
+</a>

@@ -1,0 +1,138 @@
+@let t = i18n.d().legal;
+@if (document(); as d) {
+  <div class="page-head">
+    <div class="container">
+      <app-breadcrumbs [items]="crumbs()" />
+      <h1 lang="it">{{ d.title }}</h1>
+      <p class="lead" lang="it">{{ d.intro }}</p>
+      <p class="meta">
+        <span>{{ t.version | fmt: { version: d.version } }}</span>
+        <span>
+          {{ t.effective }}:
+          @if (d.effectiveDate) {
+            <time [attr.datetime]="d.effectiveDate">{{ i18n.formatDate(d.effectiveDate) }}</time>
+          } @else {
+            {{ t.toBeDefined }}
+          }
+        </span>
+      </p>
+      <app-last-updated [date]="d.updatedAt" />
+      @if (!isItalian()) {
+        <p class="alert alert--info notice" role="note">{{ t.italianOnly }}</p>
+      }
+      @if (d.draft) {
+        <p class="alert alert--info notice" role="note">{{ t.draft }}</p>
+      }
+    </div>
+  </div>
+
+  <div class="container section layout">
+    <nav class="toc" [attr.aria-label]="t.toc">
+      <ol lang="it">
+        @for (s of d.sections; track s.id) {
+          <li><a routerLink="." [fragment]="s.id">{{ s.title }}</a></li>
+        }
+      </ol>
+    </nav>
+
+    <div class="prose">
+      @for (s of d.sections; track s.id; let i = $index) {
+        <section [id]="s.id" [attr.aria-labelledby]="s.id + '-t'" lang="it">
+          <h2 [id]="s.id + '-t'">{{ i + 1 }}. {{ s.title }}</h2>
+          @for (b of s.blocks; track $index) {
+            @switch (b.type) {
+              @case ('p') {
+                <p>{{ $any(b).text }}</p>
+              }
+              @case ('placeholder') {
+                <p class="placeholder">{{ $any(b).text }}</p>
+              }
+              @case ('list') {
+                <ul>
+                  @for (item of $any(b).items; track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              }
+              @case ('table') {
+                <div class="table-scroll">
+                  <table class="data-table">
+                    <caption class="visually-hidden">{{ $any(b).caption }}</caption>
+                    <thead>
+                      <tr>
+                        @for (h of $any(b).head; track $index) {
+                          <th scope="col">{{ h }}</th>
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (row of $any(b).rows; track $index) {
+                        <tr>
+                          @for (cell of row; track $index) {
+                            <td>{{ cell }}</td>
+                          }
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              }
+              @case ('cookie-table') {
+                <!-- Tableau des technologies : traduit dans la langue de la page -->
+                <div class="table-scroll" [attr.lang]="i18n.lang()">
+                  <table class="data-table">
+                    <caption class="visually-hidden">{{ t.cookieTable.caption }}</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">{{ t.cookieTable.name }}</th>
+                        <th scope="col">{{ t.cookieTable.provider }}</th>
+                        <th scope="col">{{ t.cookieTable.domain }}</th>
+                        <th scope="col">{{ t.cookieTable.purpose }}</th>
+                        <th scope="col">{{ t.cookieTable.category }}</th>
+                        <th scope="col">{{ t.cookieTable.duration }}</th>
+                        <th scope="col">{{ t.cookieTable.transfers }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (tr of inventory; track tr.id) {
+                        <tr>
+                          <td>{{ tr.name }}</td>
+                          <td>{{ tr.provider }}</td>
+                          <td>{{ tr.domain }}</td>
+                          <td>{{ i18n.d().trackers[tr.id].purpose }}</td>
+                          <td>{{ i18n.d().consent.categories[tr.category].label }}</td>
+                          <td>{{ i18n.d().trackers[tr.id].duration }}</td>
+                          <td>{{ i18n.d().trackers[tr.id].transfers }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              }
+              @case ('manage-cookies') {
+                <p [attr.lang]="i18n.lang()">
+                  <button type="button" class="btn btn--outline-accent" (click)="consent.openPreferences()">{{ t.manageCookies }}</button>
+                </p>
+              }
+            }
+          }
+        </section>
+      }
+
+      <section id="versioni" aria-labelledby="versioni-t">
+        <h2 id="versioni-t">{{ t.previous }}</h2>
+        @if (d.previousVersions.length) {
+          <ul>
+            @for (v of d.previousVersions; track v.version) {
+              <li><a [href]="v.url">{{ t.previousItem | fmt: { version: v.version, date: i18n.formatDate(v.date) } }}</a></li>
+            }
+          </ul>
+        } @else {
+          <p>{{ t.noPrevious }}</p>
+        }
+      </section>
+    </div>
+  </div>
+} @else {
+  <app-not-found-view />
+}

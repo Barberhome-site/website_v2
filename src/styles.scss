@@ -1,0 +1,7 @@
+// Styles globaux GLAMRO — les polices (Inter, Archivo Black) sont auto-hébergées
+// via @fontsource (voir angular.json) : aucun appel à Google Fonts.
+@use 'styles/tokens';
+@use 'styles/base';
+@use 'styles/layout';
+@use 'styles/components';
+@use 'styles/map';

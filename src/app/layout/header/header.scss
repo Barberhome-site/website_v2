@@ -1,0 +1,129 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 800;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: var(--header-h);
+}
+
+.header__logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+
+  @media (min-width: 1200px) {
+    margin-right: auto;
+  }
+
+  img {
+    height: 34px;
+    width: auto;
+  }
+}
+
+.header__nav {
+  display: none;
+
+  ul {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.8rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-s);
+
+    &.is-active {
+      color: var(--c-accent);
+    }
+  }
+}
+
+.header__lang {
+  margin-left: auto;
+
+  @media (min-width: 1200px) {
+    margin-left: 0;
+  }
+}
+
+.header__cta {
+  display: none;
+  font-size: 0.8125rem;
+  padding-inline: 1.1rem;
+}
+
+@media (min-width: 1200px) {
+  .header__nav,
+  .header__cta {
+    display: inline-flex;
+  }
+
+  .header__burger,
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: var(--header-h) 0 0 0;
+  z-index: 799;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem var(--gutter) 2rem;
+  background: var(--c-bg);
+  overflow-y: auto;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease),
+    visibility 0s linear var(--dur);
+
+  &.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  ul {
+    margin-bottom: 1rem !important;
+  }
+
+  .mobile-menu__lang {
+    margin-top: 1rem;
+  }
+
+  li a {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--c-border);
+
+    &.is-active {
+      color: var(--c-accent);
+    }
+  }
+}

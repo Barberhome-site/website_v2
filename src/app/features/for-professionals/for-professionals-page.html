@@ -1,0 +1,55 @@
+@let t = i18n.d().pro;
+@let lang = i18n.lang();
+<div class="page-head">
+  <div class="container">
+    <app-breadcrumbs [items]="crumbs" />
+    <div class="hero-pro">
+      <div>
+        <p class="eyebrow">{{ t.eyebrow }}</p>
+        <h1>{{ t.title }}</h1>
+        <p class="lead">{{ t.lead }}</p>
+        <div class="cta-row">
+          <a class="btn btn--primary" [routerLink]="'/per-professionisti/candidatura' | lp: lang" (click)="trackApply('pro_hero')">{{ t.apply }}</a>
+          <a class="btn btn--outline" routerLink="." fragment="funzionamento">{{ t.how }}</a>
+        </div>
+      </div>
+      <app-media ratio="4 / 3" [src]="site.images.proEntry" icon="user" [placeholderLabel]="i18n.d().placeholders.proKit"
+                 sizes="(min-width: 960px) 480px, 100vw" />
+    </div>
+  </div>
+</div>
+
+<div class="container section">
+  <ul role="list" class="grid" style="--grid-min: 300px">
+    @for (topic of t.topics; track $index; let i = $index) {
+      <li [id]="topicIds[i]" class="card info-card">
+        <h2 class="h3-like"><app-icon [name]="topicIcons[i]" />{{ topic.title }}</h2>
+        <p>{{ topic.text }}</p>
+        @if (topic.placeholder) {
+          <p class="placeholder">{{ topic.placeholder }}</p>
+        }
+      </li>
+    }
+  </ul>
+</div>
+
+<section class="section section--raised" aria-labelledby="apply-title">
+  <div class="container two-col">
+    <div>
+      <h2 id="apply-title">{{ t.processTitle }}</h2>
+      <ol role="list" class="apply-steps">
+        @for (step of t.process; track $index) {
+          <li><div><strong>{{ step.title }}</strong><br /><span class="muted">{{ step.text }}</span></div></li>
+        }
+      </ol>
+      <div class="cta-row">
+        <a class="btn btn--primary" [routerLink]="'/per-professionisti/candidatura' | lp: lang" (click)="trackApply('pro_process')">{{ t.apply }}</a>
+        <a class="link-arrow" [routerLink]="'/legale/condizioni-professionisti' | lp: lang">{{ t.terms }} <app-icon name="arrow-right" /></a>
+      </div>
+    </div>
+    <div>
+      <h2>{{ i18n.d().common.faq }}</h2>
+      <app-faq-list [faqs]="t.faqs" />
+    </div>
+  </div>
+</section>
