@@ -7,7 +7,12 @@
           <img [src]="site.logo.src" alt="" [width]="site.logo.width" [height]="site.logo.height" loading="lazy" />
         </a>
         <p class="footer__tagline">{{ t.brand.tagline }}</p>
-        <app-store-buttons placement="footer" />
+        <div class="footer__apps">
+          <p class="footer__apps-title">{{ t.footer.clientApp }}</p>
+          <app-store-buttons app="client" size="small" placement="footer" />
+          <p class="footer__apps-title">{{ t.footer.proApp }}</p>
+          <app-store-buttons app="pro" size="small" placement="footer" />
+        </div>
       </div>
 
       <nav class="footer__col" aria-labelledby="f-nav">

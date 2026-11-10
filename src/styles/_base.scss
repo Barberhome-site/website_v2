@@ -101,6 +101,12 @@ main:focus {
   outline: none;
 }
 
+/* Pendant qu'un menu plein écran est ouvert : la page derrière ne défile pas. */
+html.is-scroll-locked,
+html.is-scroll-locked body {
+  overflow: hidden;
+}
+
 ul[role='list'],
 ol[role='list'] {
   list-style: none;

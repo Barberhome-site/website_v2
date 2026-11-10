@@ -1,6 +1,11 @@
 @let p = pro();
 @let t = i18n.d().card;
 
+<!-- Bandeau « Sponsorisé » : en premier dans le DOM, il est aussi annoncé en premier (brief §7, P2B) -->
+@if (p.sponsored) {
+  <span class="pc__ribbon">{{ t.sponsored }}</span>
+}
+
 
 <app-avatar [name]="p.displayName" [image]="p.profileImage" [size]="variant() === 'card' ? 104 : 64" />
 
@@ -19,9 +24,6 @@
   <ul class="pc__meta" role="list">
     @if (p.verified) {
       <li class="badge badge--verified"><app-icon name="check-circle" /> {{ t.verified }}</li>
-    }
-    @if (p.sponsored) {
-      <li class="badge badge--sponsored">{{ t.sponsored }}</li>
     }
     @if (availability(); as a) {
       <li class="pc__availability"><app-icon name="calendar" /> {{ a }}</li>

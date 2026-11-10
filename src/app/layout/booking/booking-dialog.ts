@@ -64,8 +64,9 @@ export class BookingDialog {
   private timer: ReturnType<typeof setInterval> | null = null;
 
   protected readonly stores = {
-    ios: { name: 'App Store', url: SITE.apps.appStoreUrl, id: 'app_store' },
-    android: { name: 'Google Play', url: SITE.apps.playStoreUrl, id: 'google_play' },
+    // Réservation = application clients.
+    ios: { name: 'App Store', url: SITE.apps.client.appStoreUrl, id: 'app_store' },
+    android: { name: 'Google Play', url: SITE.apps.client.playStoreUrl, id: 'google_play' },
   } as const;
 
   /** Store principal (mobile) et store secondaire. */
@@ -116,6 +117,7 @@ export class BookingDialog {
     this.stopCountdown();
     this.analytics.track('store_click', {
       store,
+      app: 'client',
       placement: 'booking_dialog',
       professional_id: this.booking.professional()?.professionalId,
     });

@@ -209,6 +209,8 @@ export const DE: Dict = {
     manageCookies: 'Cookies verwalten',
     social: 'Offizielle Social-Media-Profile',
     vat: 'USt-IdNr.',
+    clientApp: 'App für Kunden',
+    proApp: 'App für Profis',
   },
   notFound: {
     eyebrow: 'Fehler 404',
@@ -605,6 +607,8 @@ export const DE: Dict = {
       { title: 'Erste Buchungen', text: 'Du legst deine Verfügbarkeit fest und erhältst Anfragen.' },
     ],
     terms: 'Bedingungen für Profis',
+    appTitle: 'Lade die App für Profis herunter',
+    appText: 'Nach der Aktivierung deines Profils verwaltest du Services, Kalender und Buchungen in der App.',
     faqs: [
       {
         question: 'Brauche ich eine Umsatzsteuer-ID?',
