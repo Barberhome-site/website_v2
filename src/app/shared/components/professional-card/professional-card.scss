@@ -13,21 +13,37 @@
   }
 }
 
-.pc__ribbon {
+/* Bandeau diagonal « Sponsorizzato » dans le coin supérieur gauche.
+   Le conteneur découpe le bandeau et épouse l'arrondi intérieur de la carte. */
+.pc__ribbon-wrap {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-  padding: 0.35rem 0.8rem;
+  width: 120px;
+  height: 120px;
+  max-height: 100%; // variante ligne : ne déborde pas sous une carte basse
+  overflow: hidden;
+  border-top-left-radius: calc(var(--radius-m) - 1px);
+  pointer-events: none;
+}
+
+.pc__ribbon {
+  position: absolute;
+  // Centre du bandeau sur la diagonale, à ~60 px du coin : assez long pour « Sponsorizzato ».
+  top: 31px;
+  left: -34px;
+  width: 160px;
+  padding: 0.3rem 0;
+  transform: rotate(-45deg);
   background: var(--c-accent);
   color: var(--c-on-accent);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 600;
   line-height: 1.2;
-  text-transform: uppercase;
-  // Épouse l'arrondi intérieur de la carte (bordure de 1 px).
-  border-radius: calc(var(--radius-m) - 1px) 0 var(--radius-s) 0;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
 .pc__profile {
@@ -130,9 +146,26 @@
   }
 }
 
-/* Variante ligne (panneau de la carte) : place pour le bandeau au-dessus du contenu */
+/* Variante ligne (panneau de la carte) */
 :host(.pc--row.pc--sponsored) {
-  padding-top: 2.1rem;
+  // Décale l'avatar pour qu'il ne passe pas sous le bandeau.
+  padding-left: 3.75rem;
+}
+
+// Carte basse : bandeau plus fin et plus proche du coin (~50 px).
+:host(.pc--row) {
+  .pc__ribbon-wrap {
+    width: 96px;
+    height: 96px;
+  }
+
+  .pc__ribbon {
+    top: 26px;
+    left: -30px;
+    width: 130px;
+    padding: 0.2rem 0;
+    font-size: 0.625rem;
+  }
 }
 
 :host(.pc--row) {
