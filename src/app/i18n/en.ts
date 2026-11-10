@@ -209,6 +209,8 @@ export const EN: Dict = {
     manageCookies: 'Manage cookies',
     social: 'Official social profiles',
     vat: 'VAT',
+    clientApp: 'App for clients',
+    proApp: 'App for professionals',
   },
   notFound: {
     eyebrow: 'Error 404',
@@ -603,6 +605,8 @@ export const EN: Dict = {
       { title: 'First bookings', text: 'You set your availability and receive client requests.' },
     ],
     terms: 'Professional Terms',
+    appTitle: 'Download the professional app',
+    appText: 'Once your profile is active, manage services, schedule and bookings from the app.',
     faqs: [
       {
         question: 'Do I need a VAT number?',

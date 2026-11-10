@@ -37,13 +37,18 @@ export const SITE = {
   ],
 
   /**
-   * Apps mobiles (TODO : URL réelles des stores).
-   * `universalLinkBase` : domaine des universal links / app links (ouvre l'app si installée).
+   * Apps mobiles : une app pour les clients, une app pour les professionnels.
+   * TODO : remplacer par les URL réelles des fiches App Store / Google Play.
    */
   apps: {
-    appStoreUrl: 'https://apps.apple.com/it/app/glamro/id0000000000',
-    playStoreUrl: 'https://play.google.com/store/apps/details?id=it.glamro.app',
-    universalLinkBase: 'https://app.glamro.it',
+    client: {
+      appStoreUrl: 'https://apps.apple.com/it/app/glamro/id0000000000',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=it.glamro.app',
+    },
+    pro: {
+      appStoreUrl: 'https://apps.apple.com/it/app/glamro-pro/id0000000001',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=it.glamro.pro',
+    },
   },
 
   /** Images du site (voir public/images/LEGGIMI.md). `null` = emplacement neutre. */
@@ -63,3 +68,5 @@ export const SITE = {
 } as const;
 
 export type NavKey = (typeof SITE.nav)[number]['key'];
+
+export type AppKind = keyof typeof SITE.apps;

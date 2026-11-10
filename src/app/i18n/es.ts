@@ -209,6 +209,8 @@ export const ES: Dict = {
     manageCookies: 'Gestionar cookies',
     social: 'Perfiles sociales oficiales',
     vat: 'NIF-IVA',
+    clientApp: 'App para clientes',
+    proApp: 'App para profesionales',
   },
   notFound: {
     eyebrow: 'Error 404',
@@ -608,6 +610,8 @@ export const ES: Dict = {
       { title: 'Primeras reservas', text: 'Configuras tu disponibilidad y recibes las solicitudes de los clientes.' },
     ],
     terms: 'Condiciones para profesionales',
+    appTitle: 'Descarga la app para profesionales',
+    appText: 'Una vez activado tu perfil, gestiona servicios, agenda y reservas desde la app.',
     faqs: [
       {
         question: '¿Necesito número de IVA?',

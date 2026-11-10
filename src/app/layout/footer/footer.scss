@@ -35,6 +35,17 @@
   font-weight: 600;
 }
 
+.footer__apps-title {
+  margin: 1rem 0 0.5rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--c-muted);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 .footer__title {
   font-family: var(--font-body);
   font-size: 0.8125rem;

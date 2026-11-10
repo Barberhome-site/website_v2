@@ -9,6 +9,7 @@ import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { FaqList } from '../../shared/components/faq-list/faq-list';
 import { Icon, IconName } from '../../shared/components/icon/icon';
 import { Media } from '../../shared/components/media/media';
+import { StoreButtons } from '../../shared/components/store-buttons/store-buttons';
 
 /**
  * Parcours professionnel autonome (brief §3) : exigences, fonctionnement, coûts, paiements,
@@ -16,7 +17,7 @@ import { Media } from '../../shared/components/media/media';
  */
 @Component({
   selector: 'app-for-professionals-page',
-  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, FaqList, Icon, Media],
+  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, FaqList, Icon, Media, StoreButtons],
   templateUrl: './for-professionals-page.html',
   styles: `
     .hero-pro { display: grid; gap: 2rem; align-items: center; }
@@ -31,6 +32,8 @@ import { Media } from '../../shared/components/media/media';
     .info-card h3 { display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
     .info-card app-icon { color: var(--c-accent); width: 1.5rem; height: 1.5rem; }
     .info-card p { margin: 0; color: var(--c-muted); }
+    .pro-app { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--c-border); }
+    .pro-app h3 { margin-bottom: .35rem; }
     .info-card .placeholder { margin-top: .5rem; font-size: var(--fs-small); font-style: italic; color: #8d8d88; }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

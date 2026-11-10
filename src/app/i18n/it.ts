@@ -212,6 +212,8 @@ export const IT = {
     manageCookies: 'Gestisci cookie',
     social: 'Profili social ufficiali',
     vat: 'P.IVA',
+    clientApp: 'App per clienti',
+    proApp: 'App per professionisti',
   },
   notFound: {
     eyebrow: 'Errore 404',
@@ -611,6 +613,8 @@ export const IT = {
       { title: 'Prime prenotazioni', text: 'Imposti la disponibilità e ricevi le richieste dei clienti.' },
     ],
     terms: 'Condizioni Professionisti',
+    appTitle: 'Scarica l\'app per professionisti',
+    appText: 'Dopo l\'attivazione del profilo gestisci servizi, agenda e prenotazioni dall\'app.',
     faqs: [
       {
         question: 'Devo avere la partita IVA?',

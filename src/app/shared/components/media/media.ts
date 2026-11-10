@@ -14,7 +14,7 @@ import { Icon, IconName } from '../icon/icon';
     @if (src(); as source) {
       <img [ngSrc]="source" [alt]="alt()" fill [priority]="priority()" [sizes]="sizes()" />
     } @else {
-      <div class="ph" [attr.role]="alt() ? 'img' : null" [attr.aria-label]="alt() || null"
+      <div class="ph" [class.ph--corner]="placeholderAlign() === 'corner'" [attr.role]="alt() ? 'img' : null" [attr.aria-label]="alt() || null"
            [attr.aria-hidden]="alt() ? null : 'true'">
         <app-icon [name]="icon()" [strokeWidth]="1.2" />
         @if (placeholderLabel()) {
@@ -35,6 +35,8 @@ import { Icon, IconName } from '../icon/icon';
     }
     .ph app-icon { width: clamp(2.5rem, 18%, 4.5rem); height: clamp(2.5rem, 18%, 4.5rem); }
     .ph__label { font-size: .8125rem; color: #8d8d88; max-width: 28ch; }
+    .ph--corner { flex-direction: row; align-items: flex-start; justify-content: flex-end; padding: 1.5rem; text-align: right; }
+    .ph--corner app-icon { width: 2rem; height: 2rem; }
   `,
   host: { '[style.aspect-ratio]': 'ratio()' },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,4 +50,6 @@ export class Media {
   readonly ratio = input<string | null>(null);
   readonly icon = input<IconName>('sparkle');
   readonly placeholderLabel = input('');
+  /** `corner` : emplacement discret en haut à droite (derrière un texte, ex. la hero). */
+  readonly placeholderAlign = input<'center' | 'corner'>('center');
 }

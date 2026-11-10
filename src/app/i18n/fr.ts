@@ -209,6 +209,8 @@ export const FR: Dict = {
     manageCookies: 'Gérer les cookies',
     social: 'Réseaux sociaux officiels',
     vat: 'N° TVA',
+    clientApp: 'App clients',
+    proApp: 'App professionnels',
   },
   notFound: {
     eyebrow: 'Erreur 404',
@@ -608,6 +610,8 @@ export const FR: Dict = {
       { title: 'Premières réservations', text: 'Vous définissez vos disponibilités et recevez les demandes des clients.' },
     ],
     terms: 'Conditions Professionnels',
+    appTitle: 'Téléchargez l\'app professionnels',
+    appText: 'Une fois votre profil activé, gérez services, agenda et réservations depuis l\'app.',
     faqs: [
       {
         question: 'Dois-je avoir un numéro de TVA ?',

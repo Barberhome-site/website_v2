@@ -46,6 +46,11 @@
         <a class="btn btn--primary" [routerLink]="'/per-professionisti/candidatura' | lp: lang" (click)="trackApply('pro_process')">{{ t.apply }}</a>
         <a class="link-arrow" [routerLink]="'/legale/condizioni-professionisti' | lp: lang">{{ t.terms }} <app-icon name="arrow-right" /></a>
       </div>
+      <div class="pro-app">
+        <h3>{{ t.appTitle }}</h3>
+        <p class="muted">{{ t.appText }}</p>
+        <app-store-buttons app="pro" placement="pro_page" />
+      </div>
     </div>
     <div>
       <h2>{{ i18n.d().common.faq }}</h2>

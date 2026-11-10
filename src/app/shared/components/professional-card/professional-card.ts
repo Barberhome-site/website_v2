@@ -18,7 +18,10 @@ import { Icon } from '../icon/icon';
   imports: [RouterLink, Avatar, Icon, LocalizePathPipe, FormatPipe],
   templateUrl: './professional-card.html',
   styleUrl: './professional-card.scss',
-  host: { '[class]': '"pc pc--" + variant()' },
+  host: {
+    '[class]': '"pc pc--" + variant()',
+    '[class.pc--sponsored]': 'pro().sponsored',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfessionalCard {

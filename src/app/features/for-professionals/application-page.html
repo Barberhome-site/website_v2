@@ -14,7 +14,9 @@
       <app-icon name="check-circle" />
       <div>
         <p><strong>{{ t.success }}</strong></p>
-        <a class="btn btn--outline" [routerLink]="'/per-professionisti' | lp: lang">{{ t.back }}</a>
+        <p class="muted">{{ i18n.d().pro.appText }}</p>
+        <app-store-buttons app="pro" placement="application_success" />
+        <p style="margin-top: 1rem"><a [routerLink]="'/per-professionisti' | lp: lang">{{ t.back }}</a></p>
       </div>
     </div>
   } @else {

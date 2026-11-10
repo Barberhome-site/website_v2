@@ -106,6 +106,18 @@ sur iPhone/iPad ou Android, le bon store est détecté et ouvert automatiquement
 sur ordinateur, les deux stores sont proposés. Quand l'authentification existera, il suffira de remplacer le
 contenu de cette popup : les composants appellent toujours `BookingService.open(pro)`.
 
+### Apps et liens profonds
+
+Deux applications : `apps.client` (réservation) et `apps.pro` (professionnels) dans `site.config.ts`.
+Le composant `<app-store-buttons app="client|pro">` affiche les liens de l'une ou l'autre.
+
+Pas de *universal links* pour l'instant : la popup envoie vers la fiche du store. Plus tard, pour ouvrir
+directement l'app sur le bon écran (ex. le profil d'un professionnel) quand elle est installée, il faudra :
+- publier `/.well-known/apple-app-site-association` (iOS) et `/.well-known/assetlinks.json` (Android)
+  sur le domaine (ex. `glamro.it`), dans `public/.well-known/` ;
+- déclarer ce domaine dans chaque app (Associated Domains côté iOS, intent filters côté Android) ;
+- dans la popup, ajouter un bouton « Ouvrir dans l'app » vers ce lien, avec repli sur le store.
+
 ## Carte (Stadia Maps)
 
 Fond « Alidade Smooth Dark » de Stadia Maps, chargé seulement avec le consentement « contenuti di terze parti »
@@ -167,7 +179,7 @@ Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` 
 
 - [ ] **Photos** (hero rider, storytelling ×4, bloc pro, chi siamo) → `site.config.ts`, voir `public/images/LEGGIMI.md`
 - [ ] **Données société** (raison sociale, P.IVA, siège, REA) et e-mails support/privacy → `site.config.ts`
-- [ ] **URL des stores**, domaine des universal links, **réseaux sociaux officiels** → `site.config.ts`
+- [ ] **URL des stores** des deux apps (clients et professionnels) et **réseaux sociaux officiels** → `site.config.ts` (`apps.client`, `apps.pro`)
 - [ ] **Trustpilot** : `businessUnitId` et `templateId` → `environment.ts`
 - [ ] **Textes légaux** définitifs validés par le conseil juridique → `features/legal/legal-docs.ts`
 - [ ] **Règles métier** (fenêtres d'annulation, commissions, paiements, vérification) → pages Come funziona,

@@ -13,6 +13,23 @@
   }
 }
 
+.pc__ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 0.35rem 0.8rem;
+  background: var(--c-accent);
+  color: var(--c-on-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  // Épouse l'arrondi intérieur de la carte (bordure de 1 px).
+  border-radius: calc(var(--radius-m) - 1px) 0 var(--radius-s) 0;
+}
+
 .pc__profile {
   position: absolute;
   top: 0.5rem;
@@ -113,7 +130,11 @@
   }
 }
 
-/* Variante ligne (panneau de la carte) */
+/* Variante ligne (panneau de la carte) : place pour le bandeau au-dessus du contenu */
+:host(.pc--row.pc--sponsored) {
+  padding-top: 2.1rem;
+}
+
 :host(.pc--row) {
   align-items: center;
   gap: 0.9rem;

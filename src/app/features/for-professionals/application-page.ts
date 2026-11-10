@@ -19,6 +19,7 @@ import { SeoService } from '../../core/seo/seo.service';
 import { asyncState } from '../../core/utils/async-state';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { Icon } from '../../shared/components/icon/icon';
+import { StoreButtons } from '../../shared/components/store-buttons/store-buttons';
 
 type Field = 'firstName' | 'lastName' | 'email' | 'phone' | 'citySlug' | 'otherCity' | 'specialties' | 'experience' | 'hasVatNumber' | 'privacyAck';
 
@@ -29,7 +30,7 @@ function atLeastOne(control: AbstractControl<string[]>): ValidationErrors | null
 /** Formulaire de candidature : labels persistants, erreurs textuelles, autocomplete, message de succès. */
 @Component({
   selector: 'app-application-page',
-  imports: [ReactiveFormsModule, RouterLink, LocalizePathPipe, Breadcrumbs, Icon],
+  imports: [ReactiveFormsModule, RouterLink, LocalizePathPipe, Breadcrumbs, Icon, StoreButtons],
   templateUrl: './application-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
