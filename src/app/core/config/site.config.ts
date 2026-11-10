@@ -42,12 +42,12 @@ export const SITE = {
    */
   apps: {
     client: {
-      appStoreUrl: 'https://apps.apple.com/it/app/glamro/id0000000000',
-      playStoreUrl: 'https://play.google.com/store/apps/details?id=it.glamro.app',
+      appStoreUrl: 'https://apps.apple.com/it/app/glamro-clienti/id6756219312',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=com.glamro.clientapp',
     },
     pro: {
-      appStoreUrl: 'https://apps.apple.com/it/app/glamro-pro/id0000000001',
-      playStoreUrl: 'https://play.google.com/store/apps/details?id=it.glamro.pro',
+      appStoreUrl: 'https://apps.apple.com/it/app/glamro-pro/id6758321869',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=com.glamropro.app',
     },
   },
 
