@@ -118,7 +118,7 @@ export const DE: Dict = {
     geoDenied: 'Du hast den Zugriff auf deinen Standort nicht erlaubt. Wähle eine Stadt aus der Liste.',
     geoFailed: 'Dein Standort konnte nicht ermittelt werden. Wähle eine Stadt aus der Liste.',
     mapLabel: 'Karte der Städte, in denen GLAMRO aktiv ist',
-    consentText: 'Die Karte nutzt eine externe Kartengrundlage (Stadia Maps / OpenStreetMap).',
+    consentText: 'Die Karte nutzt eine externe Kartengrundlage (LFMaps / OpenStreetMap).',
     show: 'Karte anzeigen',
     manage: 'Cookies verwalten',
     listHint: 'Die Städteliste enthält dieselben Informationen.',
@@ -165,7 +165,7 @@ export const DE: Dict = {
       },
       functional: {
         label: 'Inhalte von Drittanbietern',
-        description: 'Offizielles Trustpilot-Bewertungswidget und Hintergrund der interaktiven Karte (Stadia Maps / OpenStreetMap).',
+        description: 'Offizielles Trustpilot-Bewertungswidget und Hintergrund der interaktiven Karte (LFMaps / OpenStreetMap).',
       },
       analytics: {
         label: 'Statistik',
@@ -190,8 +190,8 @@ export const DE: Dict = {
       transfers: 'Mögliche Übermittlung in die USA (EU-US Data Privacy Framework) – zu prüfen',
     },
     trustpilot: { purpose: 'Zeigt die offizielle Trustpilot-Bewertung und -Rezensionen von GLAMRO.', duration: 'Per Scan zu prüfen', transfers: 'Zu prüfen' },
-    stadia: {
-      purpose: 'Lädt den Kartenhintergrund. Setzt keine Cookies; erhält die IP-Adresse (Logs werden höchstens 30 Tage gespeichert).',
+    basemap: {
+      purpose: 'Lädt den Kartenhintergrund (LFMaps / OpenFreeMap, über Cloudflare). Setzt keine Cookies; erhält die IP-Adresse. Kartenkacheln können im Browser-Cache bleiben.',
       duration: 'Keine Cookies',
       transfers: 'Zu prüfen',
     },

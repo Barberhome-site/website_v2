@@ -7,7 +7,7 @@ import { ConsentCategory } from './consent.model';
  *
  * IMPORTANT : à valider par une scansione effettiva du site en production avant publication.
  */
-export type TrackerId = 'consent' | 'ga' | 'gaSession' | 'trustpilot' | 'stadia';
+export type TrackerId = 'consent' | 'ga' | 'gaSession' | 'trustpilot' | 'basemap';
 
 export interface TrackerInfo {
   id: TrackerId;
@@ -22,5 +22,5 @@ export const COOKIE_INVENTORY: TrackerInfo[] = [
   { id: 'ga', name: '_ga', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'gaSession', name: '_ga_<ID>', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'trustpilot', name: 'TrustBox', provider: 'Trustpilot A/S', domain: 'widget.trustpilot.com', category: 'functional' },
-  { id: 'stadia', name: 'Stadia Maps (tiles)', provider: 'Stadia Maps', domain: 'tiles.stadiamaps.com', category: 'functional' },
+  { id: 'basemap', name: 'LFMaps (vector tiles)', provider: 'LFMaps / OpenFreeMap', domain: 'data.lfmaps.fr', category: 'functional' },
 ];

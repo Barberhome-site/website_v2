@@ -7,13 +7,10 @@ export const environment = {
   /** Vide en dev : aucun appel Google Analytics depuis la machine locale. */
   gaMeasurementId: '',
   /**
-   * Stadia Maps (fond de carte). En production : déclarer le domaine dans le tableau de bord Stadia
-   * (recommandé, aucune clé exposée) ou renseigner une clé API. ATTENTION : le plan gratuit
-   * n'autorise pas l'usage commercial — plan Starter requis pour glamro.it.
+   * Fond de carte : style vectoriel LFMaps (gratuit, sans clé, usage commercial autorisé).
+   * Les couleurs claires de Positron sont inversées en CSS (voir styles/_map.scss).
    */
-  stadiaMaps: {
-    apiKey: '',
-  },
+  mapStyleUrl: 'https://data.lfmaps.fr/styles/positron',
   trustpilot: {
     businessUnitId: '',
     templateId: '',

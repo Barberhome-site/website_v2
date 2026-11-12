@@ -23,7 +23,7 @@ export interface ConsentRecord {
  * Version de la politique cookies/consentement.
  * L'incrémenter quand la liste des technologies change : le bandeau sera reproposé.
  */
-export const CONSENT_VERSION = '2026-11-v2';
+export const CONSENT_VERSION = '2026-11-v3';
 
 /** Durée de validité du choix (Garante : ne pas reproposer le bandeau avant 6 mois). */
 export const CONSENT_MAX_AGE_DAYS = 180;
