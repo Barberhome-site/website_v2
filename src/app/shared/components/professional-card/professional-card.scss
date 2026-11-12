@@ -204,6 +204,37 @@
   }
 }
 
+.pc__role {
+  margin: 0.1rem 0 0;
+  color: var(--c-text);
+}
+
+/* Lignes icône + texte (zone, disponibilité).
+   L'icône est calée sur la PREMIÈRE ligne de texte, même quand le texte passe sur deux lignes :
+   marge haute = (hauteur de ligne − taille de l'icône) / 2. */
+.pc__area,
+.pc__availability {
+  --line: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin: 0.25rem 0 0;
+  font-size: var(--fs-small);
+  line-height: var(--line);
+  color: var(--c-muted);
+
+  app-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-top: calc((var(--line) * 1em - 1rem) / 2);
+  }
+}
+
+.pc__availability {
+  margin-top: 0.6rem;
+  font-size: 0.8125rem;
+}
+
 /* Variante carte verticale */
 :host(.pc--card) {
   flex-direction: column;

@@ -49,6 +49,9 @@ export const ES: Dict = {
     mockBar: 'Vista previa de desarrollo: datos de ejemplo, API aún no conectada.',
     appStore: 'App Store',
     googlePlay: 'Google Play',
+    /** Texte alternatif des badges officiels (= texte du badge). */
+    appStoreBadge: 'Consíguelo en el App Store',
+    googlePlayBadge: 'Descargar en Google Play',
   },
   placeholders: {
     hero: 'Foto de campaña: rider GLAMRO en bicicleta con la mochila',

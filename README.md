@@ -118,6 +118,17 @@ directement l'app sur le bon écran (ex. le profil d'un professionnel) quand ell
 - déclarer ce domaine dans chaque app (Associated Domains côté iOS, intent filters côté Android) ;
 - dans la popup, ajouter un bouton « Ouvrir dans l'app » vers ce lien, avec repli sur le store.
 
+## Badges App Store / Google Play
+
+Badges officiels localisés (it, en, fr, es, de) dans `public/badges/`, affichés par `app-store-buttons`.
+- **App Store** : artwork Apple (« Download on the App Store » localisé).
+- **Google Play** : artwork Google converti en SVG ([pioug/google-play-badges](https://github.com/pioug/google-play-badges)),
+  avec la bordure grise d'origine remise.
+- Règles des marques : ne jamais modifier, recolorer, animer ni recréer un badge ; App Store en premier ;
+  Google Play de taille égale ou supérieure. Pour une version plus récente, retélécharger depuis
+  [App Store Marketing Tools](https://toolbox.marketingtools.apple.com/) et la
+  [page des badges Google Play](https://play.google.com/intl/en_us/badges/), en gardant les mêmes noms de fichiers.
+
 ## Carte (OpenFreeMap + MapLibre)
 
 Fond vectoriel « Dark » d'[OpenFreeMap](https://openfreemap.org/) : gratuit, sans clé, sans inscription ni quota,
@@ -187,7 +198,7 @@ Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` 
 - [ ] **Preuves datées** de la revendication « Il primo beauty delivery in Italia » (brief §2)
 - [ ] **Scan cookies** réel du site en production pour valider `cookie-inventory.ts`
 - [ ] Choix final de la **CMP** : la CMP interne suffit, ou remplacer `ConsentService` par une CMP commerciale
-- [ ] **Badges officiels** App Store / Google Play (actuellement des boutons texte)
+- [ ] **Mentions de marques** (Apple, App Store, Google Play) dans les mentions légales
 - [ ] **Carte** : vérifier dans les DevTools (onglet Réseau) les domaines appelés par le style OpenFreeMap et ajuster la CSP si besoin
 - [ ] **Relecture des traductions** EN / FR / ES / DE par des natifs (ton, termes métier)
 - [ ] Tests : WCAG 2.2 AA, Core Web Vitals, responsive 320 → 1440 px, deep links
