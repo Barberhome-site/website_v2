@@ -118,7 +118,7 @@ export const EN: Dict = {
     geoDenied: 'You did not allow access to your location. Choose a city from the list.',
     geoFailed: 'Your location could not be detected. Choose a city from the list.',
     mapLabel: 'Map of the cities where GLAMRO is active',
-    consentText: 'The map uses an external base map (LFMaps / OpenStreetMap).',
+    consentText: 'The map uses an external base map (OpenFreeMap / OpenStreetMap).',
     show: 'Show the map',
     manage: 'Manage cookies',
     listHint: 'The list of cities contains the same information.',
@@ -165,7 +165,7 @@ export const EN: Dict = {
       },
       functional: {
         label: 'Third-party content',
-        description: 'Official Trustpilot reviews widget and the interactive map background (LFMaps / OpenStreetMap).',
+        description: 'Official Trustpilot reviews widget and the interactive map background (OpenFreeMap / OpenStreetMap).',
       },
       analytics: {
         label: 'Statistics',
@@ -191,7 +191,7 @@ export const EN: Dict = {
     },
     trustpilot: { purpose: 'Shows GLAMRO\'s official Trustpilot score and reviews.', duration: 'To be verified by scan', transfers: 'To be verified' },
     basemap: {
-      purpose: 'Loads the map background (LFMaps / OpenFreeMap, via Cloudflare). Sets no cookies; receives the IP address. Map tiles may be kept in the browser cache.',
+      purpose: 'Loads the map background (OpenFreeMap). Sets no cookies; receives the IP address. Map tiles may be kept in the browser cache.',
       duration: 'No cookies',
       transfers: 'To be verified',
     },

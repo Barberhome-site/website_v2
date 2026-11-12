@@ -1,21 +1,8 @@
 // Styles globaux de la carte : MapLibre insère ses éléments hors de l'encapsulation Angular.
 
-// Fond « Positron » (clair) inversé pour le thème sombre — technique du gist BrendonKoz :
-// https://gist.github.com/BrendonKoz/b1df234fe3ee388b402cd8e98f7eedbd
-// Le filtre ne touche que le canvas WebGL (une seule couche composée par le GPU) :
-// marqueurs, contrôles et attribution sont des éléments HTML à part, non filtrés.
-// À ajuster en direct dans les DevTools en modifiant la variable sur :root.
-:root {
-  --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-}
-
 .maplibregl-map {
   background: #121212;
   font-family: var(--font-body) !important;
-}
-
-.maplibregl-canvas.map-tiles {
-  filter: var(--map-tiles-filter, none);
 }
 
 .maplibregl-ctrl-attrib {

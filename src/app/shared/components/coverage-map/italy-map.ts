@@ -30,8 +30,7 @@ const VENDOR = '/vendor/maplibre';
 /**
  * Carte interactive de l'Italie (MapLibre GL, chargé à la demande).
  *  - Clusters par ville au centre approximatif : jamais de position de professionnel.
- *  - Fond de carte : style vectoriel « Positron » de LFMaps (OpenFreeMap), clair à l'origine et inversé
- *    en CSS pour le thème sombre (filtre sur le canvas uniquement : marqueurs et contrôles intacts).
+ *  - Fond de carte : style vectoriel « Dark » d'OpenFreeMap (déjà sombre, aucun filtre CSS).
  *  - Service tiers : chargé seulement avec le consentement « contenuti di terze parti » ou après un clic.
  *  - Ce composant n'est rendu que dans le navigateur (@defer dans CoverageMap).
  *  - Niveaux de zoom MapLibre (tuiles 512 px) = anciens niveaux Leaflet − 1.
@@ -145,16 +144,12 @@ export class ItalyMap {
         pitchWithRotate: false,
         touchPitch: false,
         renderWorldCopies: false,
-        attributionControl: {
-          compact: true,
-          customAttribution:
-            '<a href="https://lfmaps.fr/" target="_blank" rel="noopener">LFMaps</a> · &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
-        },
+        // Attribution OpenFreeMap / OpenMapTiles / OpenStreetMap fournie par le style (obligatoire).
+        attributionControl: { compact: true },
       });
       map.touchZoomRotate.disableRotation();
       map.keyboard.disableRotation();
       map.addControl(new ml.NavigationControl({ showCompass: false }), 'top-left');
-      map.getCanvas().classList.add('map-tiles');
 
       this.map = map;
       this.status.set('ready');

@@ -18,7 +18,7 @@ const angularApp = new AngularNodeAppEngine();
  * La CSP liste uniquement les domaines réellement utilisés :
  *  - Google Analytics (chargé seulement après consentement)
  *  - Trustpilot (widget, chargé seulement après consentement)
- *  - LFMaps / OpenFreeMap (style, tuiles vectorielles, polices et sprites de la carte)
+ *  - OpenFreeMap (style, tuiles vectorielles, polices et sprites de la carte)
  *  - MapLibre : worker auto-hébergé (worker-src 'self'), images des sprites décodées en blob:
  * À compléter quand l'URL de l'API sera connue (connect-src).
  */
@@ -35,7 +35,7 @@ app.use((_req, res, next) => {
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net",
       "font-src 'self'",
-      "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustpilot.com https://data.lfmaps.fr https://tiles.openfreemap.org",
+      "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustpilot.com https://tiles.openfreemap.org",
       "worker-src 'self'",
       "frame-src https://widget.trustpilot.com",
       "base-uri 'self'",

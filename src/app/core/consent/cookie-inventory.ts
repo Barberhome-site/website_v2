@@ -22,5 +22,5 @@ export const COOKIE_INVENTORY: TrackerInfo[] = [
   { id: 'ga', name: '_ga', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'gaSession', name: '_ga_<ID>', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'trustpilot', name: 'TrustBox', provider: 'Trustpilot A/S', domain: 'widget.trustpilot.com', category: 'functional' },
-  { id: 'basemap', name: 'LFMaps (vector tiles)', provider: 'LFMaps / OpenFreeMap', domain: 'data.lfmaps.fr', category: 'functional' },
+  { id: 'basemap', name: 'OpenFreeMap (vector tiles)', provider: 'OpenFreeMap', domain: 'tiles.openfreemap.org', category: 'functional' },
 ];

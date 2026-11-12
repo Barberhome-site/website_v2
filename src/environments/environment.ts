@@ -23,10 +23,9 @@ export const environment = {
    * Tant que businessUnitId/templateId sont vides, le site affiche un lien neutre vers le profil.
    */
   /**
-   * Fond de carte : style vectoriel LFMaps (gratuit, sans clé, usage commercial autorisé).
-   * Les couleurs claires de Positron sont inversées en CSS (voir styles/_map.scss).
+   * Fond de carte : style vectoriel « Dark » d'OpenFreeMap (gratuit, sans clé ni quota, usage commercial autorisé).
    */
-  mapStyleUrl: 'https://data.lfmaps.fr/styles/positron',
+  mapStyleUrl: 'https://tiles.openfreemap.org/styles/dark',
 
   trustpilot: {
     businessUnitId: '',

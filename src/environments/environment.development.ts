@@ -7,10 +7,9 @@ export const environment = {
   /** Vide en dev : aucun appel Google Analytics depuis la machine locale. */
   gaMeasurementId: '',
   /**
-   * Fond de carte : style vectoriel LFMaps (gratuit, sans clé, usage commercial autorisé).
-   * Les couleurs claires de Positron sont inversées en CSS (voir styles/_map.scss).
+   * Fond de carte : style vectoriel « Dark » d'OpenFreeMap (gratuit, sans clé ni quota, usage commercial autorisé).
    */
-  mapStyleUrl: 'https://data.lfmaps.fr/styles/positron',
+  mapStyleUrl: 'https://tiles.openfreemap.org/styles/dark',
   trustpilot: {
     businessUnitId: '',
     templateId: '',

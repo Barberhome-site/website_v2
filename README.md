@@ -118,14 +118,13 @@ directement l'app sur le bon écran (ex. le profil d'un professionnel) quand ell
 - déclarer ce domaine dans chaque app (Associated Domains côté iOS, intent filters côté Android) ;
 - dans la popup, ajouter un bouton « Ouvrir dans l'app » vers ce lien, avec repli sur le store.
 
-## Carte (LFMaps + MapLibre)
+## Carte (OpenFreeMap + MapLibre)
 
-Fond vectoriel « Positron » de [LFMaps](https://lfmaps.fr/) (données OpenStreetMap servies par OpenFreeMap) :
-gratuit, sans clé ni quota, usage commercial autorisé ; seule obligation, garder l'attribution OpenStreetMap visible.
+Fond vectoriel « Dark » d'[OpenFreeMap](https://openfreemap.org/) : gratuit, sans clé, sans inscription ni quota,
+usage commercial autorisé. L'attribution (OpenFreeMap © OpenMapTiles, données OpenStreetMap) est obligatoire :
+MapLibre l'affiche automatiquement à partir du style.
 - Rendu par **MapLibre GL** (`maplibre-gl`), chargé à la demande, seulement avec le consentement
   « contenuti di terze parti » ou après un clic sur « Mostra la mappa ».
-- Positron est un style clair : il est **inversé en CSS** (`--map-tiles-filter` dans `styles/_map.scss`),
-  sur le canvas uniquement. Pour régler le rendu, modifier la variable sur `:root` dans les DevTools.
 - Le worker MapLibre et sa CSS sont copiés dans `/vendor/maplibre` par `angular.json` (pas de `blob:` dans la CSP).
 - URL du style : `mapStyleUrl` dans `environment.ts`.
 
@@ -189,6 +188,6 @@ Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` 
 - [ ] **Scan cookies** réel du site en production pour valider `cookie-inventory.ts`
 - [ ] Choix final de la **CMP** : la CMP interne suffit, ou remplacer `ConsentService` par une CMP commerciale
 - [ ] **Badges officiels** App Store / Google Play (actuellement des boutons texte)
-- [ ] **Carte** : vérifier dans les DevTools (onglet Réseau) les domaines appelés par le style LFMaps et ajuster la CSP si besoin
+- [ ] **Carte** : vérifier dans les DevTools (onglet Réseau) les domaines appelés par le style OpenFreeMap et ajuster la CSP si besoin
 - [ ] **Relecture des traductions** EN / FR / ES / DE par des natifs (ton, termes métier)
 - [ ] Tests : WCAG 2.2 AA, Core Web Vitals, responsive 320 → 1440 px, deep links
