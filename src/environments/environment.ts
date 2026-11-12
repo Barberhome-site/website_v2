@@ -23,13 +23,9 @@ export const environment = {
    * Tant que businessUnitId/templateId sont vides, le site affiche un lien neutre vers le profil.
    */
   /**
-   * Stadia Maps (fond de carte). En production : déclarer le domaine dans le tableau de bord Stadia
-   * (recommandé, aucune clé exposée) ou renseigner une clé API. ATTENTION : le plan gratuit
-   * n'autorise pas l'usage commercial — plan Starter requis pour glamro.it.
+   * Fond de carte : style vectoriel « Dark » d'OpenFreeMap (gratuit, sans clé ni quota, usage commercial autorisé).
    */
-  stadiaMaps: {
-    apiKey: '',
-  },
+  mapStyleUrl: 'https://tiles.openfreemap.org/styles/dark',
 
   trustpilot: {
     businessUnitId: '',

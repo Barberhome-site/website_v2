@@ -1,10 +1,11 @@
-// Styles globaux de la carte : Leaflet insère ses éléments hors de l'encapsulation Angular.
-.leaflet-container {
-  background: #121212 !important;
+// Styles globaux de la carte : MapLibre insère ses éléments hors de l'encapsulation Angular.
+
+.maplibregl-map {
+  background: #121212;
   font-family: var(--font-body) !important;
 }
 
-.leaflet-control-attribution {
+.maplibregl-ctrl-attrib {
   background: rgba(10, 10, 10, 0.75) !important;
   color: var(--c-muted) !important;
   font-size: 11px !important;
@@ -14,18 +15,42 @@
   }
 }
 
-.leaflet-bar a {
+// Bouton « i » de l'attribution compacte : icône noire d'origine → inversée.
+.maplibregl-ctrl-attrib-button {
+  filter: invert(1);
+}
+
+.maplibregl-ctrl-group {
   background: var(--c-card) !important;
-  color: var(--c-text) !important;
-  border-color: var(--c-border) !important;
-  width: 36px !important;
-  height: 36px !important;
-  line-height: 36px !important;
+  border: 1px solid var(--c-border);
+  box-shadow: none !important;
+
+  button {
+    width: 36px !important;
+    height: 36px !important;
+
+    & + button {
+      border-top-color: var(--c-border) !important;
+    }
+
+    .maplibregl-ctrl-icon {
+      filter: invert(1);
+    }
+
+    &:not(:disabled):hover {
+      background-color: var(--c-card-hover) !important;
+    }
+  }
 }
 
 .glamro-cluster {
+  width: 44px;
+  height: 44px;
+  padding: 0;
   background: none;
   border: 0;
+  cursor: pointer;
+  font: inherit;
 
   .glamro-cluster__count {
     display: grid;
@@ -51,6 +76,10 @@
     font-size: 0.85rem;
     color: var(--c-text);
     text-shadow: 0 1px 3px #000;
+  }
+
+  &.is-selected {
+    z-index: 2;
   }
 
   &.is-selected .glamro-cluster__count {

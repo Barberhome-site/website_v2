@@ -23,7 +23,7 @@ export function initials(displayName: string): string {
     .join('');
 }
 
-/** Échappe une chaîne avant de l'insérer dans du HTML construit à la main (icônes Leaflet). */
+/** Échappe une chaîne avant de l'insérer dans du HTML construit à la main (marqueurs de la carte). */
 export function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 }

@@ -13,7 +13,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import type * as Leaflet from 'leaflet';
+import type * as MapLibre from 'maplibre-gl';
 import { environment } from '../../../../environments/environment';
 import { ConsentService } from '../../../core/consent/consent.service';
 import { I18n } from '../../../core/i18n/i18n.service';
@@ -22,14 +22,18 @@ import { escapeHtml } from '../../../core/utils/text';
 import { loadStylesheet } from '../../../core/utils/script-loader';
 import { Icon } from '../icon/icon';
 
-type LeafletNs = typeof Leaflet;
+type MapLibreNs = typeof MapLibre;
+
+/** Fichiers MapLibre copiés tels quels par angular.json (assets → /vendor/maplibre). */
+const VENDOR = '/vendor/maplibre';
 
 /**
- * Carte interactive de l'Italie (Leaflet, chargé à la demande).
+ * Carte interactive de l'Italie (MapLibre GL, chargé à la demande).
  *  - Clusters par ville au centre approximatif : jamais de position de professionnel.
- *  - Le fond de carte (Stadia Maps « Alidade Smooth Dark ») est un service tiers : chargé seulement avec le
- *    consentement « contenuti di terze parti » ou après un clic explicite.
+ *  - Fond de carte : style vectoriel « Dark » d'OpenFreeMap (déjà sombre, aucun filtre CSS).
+ *  - Service tiers : chargé seulement avec le consentement « contenuti di terze parti » ou après un clic.
  *  - Ce composant n'est rendu que dans le navigateur (@defer dans CoverageMap).
+ *  - Niveaux de zoom MapLibre (tuiles 512 px) = anciens niveaux Leaflet − 1.
  */
 @Component({
   selector: 'app-italy-map',
@@ -81,9 +85,9 @@ export class ItalyMap {
   protected readonly canShow = computed(() => this.activated() || this.consent.isGranted('functional'));
   protected readonly status = signal<'idle' | 'loading' | 'ready' | 'error'>('idle');
 
-  private L: LeafletNs | null = null;
-  private map: Leaflet.Map | null = null;
-  private layer: Leaflet.LayerGroup | null = null;
+  private ml: MapLibreNs | null = null;
+  private map: MapLibre.Map | null = null;
+  private markers: MapLibre.Marker[] = [];
   private fitted = false;
   private reduceMotion = false;
 
@@ -118,76 +122,85 @@ export class ItalyMap {
   private async init(): Promise<void> {
     this.status.set('loading');
     try {
-      loadStylesheet(this.doc, '/vendor/leaflet/leaflet.css');
-      const mod = await import('leaflet');
-      const L = ((mod as unknown as { default?: LeafletNs }).default ?? mod) as LeafletNs;
-      this.L = L;
+      loadStylesheet(this.doc, `${VENDOR}/maplibre-gl.css`);
+      const ml = await import('maplibre-gl');
+      // Worker auto-hébergé (pas de blob:) ; ?v= évite un worker en cache d'une version précédente.
+      ml.setWorkerUrl(`${VENDOR}/maplibre-gl-worker.mjs?v=${ml.getVersion()}`);
+      this.ml = ml;
 
-      const map = L.map(this.canvas().nativeElement, {
-        center: [42.2, 12.6],
-        zoom: 6,
-        minZoom: 5,
-        maxZoom: 11, // données agrégées : pas de zoom au niveau de la rue
-        zoomSnap: 0.5,
-        scrollWheelZoom: false,
-        maxBounds: L.latLngBounds([34.5, 5], [48.5, 20]),
+      const map = new ml.Map({
+        container: this.canvas().nativeElement,
+        style: environment.mapStyleUrl,
+        center: [12.6, 42.2],
+        zoom: 5,
+        minZoom: 4,
+        maxZoom: 10, // données agrégées : pas de zoom au niveau de la rue
+        maxBounds: [
+          [5, 34.5],
+          [20, 48.5],
+        ],
+        scrollZoom: false,
+        dragRotate: false,
+        pitchWithRotate: false,
+        touchPitch: false,
+        renderWorldCopies: false,
+        // Attribution OpenFreeMap / OpenMapTiles / OpenStreetMap fournie par le style (obligatoire).
+        attributionControl: { compact: true },
       });
-      // Stadia Maps — Alidade Smooth Dark. Sans clé : authentification par domaine (à déclarer
-      // dans le tableau de bord Stadia) ; localhost fonctionne sans configuration.
-      const key = environment.stadiaMaps.apiKey;
-      L.tileLayer(
-        `https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png${key ? `?api_key=${encodeURIComponent(key)}` : ''}`,
-        {
-          minZoom: 0,
-          maxZoom: 20,
-          attribution:
-            '&copy; <a href="https://www.stadiamaps.com/" target="_blank" rel="noopener">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
-        },
-      ).addTo(map);
+      map.touchZoomRotate.disableRotation();
+      map.keyboard.disableRotation();
+      map.addControl(new ml.NavigationControl({ showCompass: false }), 'top-left');
 
-      this.layer = L.layerGroup().addTo(map);
       this.map = map;
       this.status.set('ready');
     } catch {
+      // WebGL indisponible, chunk introuvable… : la liste des villes reste utilisable.
       this.status.set('error');
     }
   }
 
   private renderMarkers(clusters: CityCluster[], selected: string | null): void {
-    const L = this.L;
+    const ml = this.ml;
     const map = this.map;
-    const layer = this.layer;
-    if (!L || !map || !layer) {
+    if (!ml || !map) {
       return;
     }
-    layer.clearLayers();
+    for (const m of this.markers) {
+      m.remove();
+    }
+    this.markers = [];
 
     for (const c of clusters) {
       const label = this.i18n.format(this.i18n.d().map.markerLabel, { city: c.cityName, count: c.availableCount });
-      const marker = L.marker([c.latitudeApprox, c.longitudeApprox], {
-        icon: L.divIcon({
-          className: `glamro-cluster${c.citySlug === selected ? ' is-selected' : ''}`,
-          html: `<span class="glamro-cluster__count">${c.availableCount}</span><span class="glamro-cluster__label">${escapeHtml(c.cityName)}</span>`,
-          iconSize: [44, 44],
-          iconAnchor: [22, 22],
-        }),
-        keyboard: true,
-        title: label,
-        alt: label,
-        riseOnHover: true,
+      const el = this.doc.createElement('button');
+      el.type = 'button';
+      el.className = `glamro-cluster${c.citySlug === selected ? ' is-selected' : ''}`;
+      el.innerHTML = `<span class="glamro-cluster__count" aria-hidden="true">${c.availableCount}</span><span class="glamro-cluster__label" aria-hidden="true">${escapeHtml(c.cityName)}</span>`;
+      el.title = label;
+      el.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        this.citySelected.emit(c.citySlug);
       });
-      marker.on('click', () => this.citySelected.emit(c.citySlug));
-      marker.addTo(layer);
+
+      const marker = new ml.Marker({ element: el, anchor: 'center' }).setLngLat([c.longitudeApprox, c.latitudeApprox]).addTo(map);
+      // MapLibre pose un aria-label générique (« Map marker ») : on le remplace après coup.
+      marker.getElement().setAttribute('aria-label', label);
+      this.markers.push(marker);
     }
 
     const target = clusters.find((c) => c.citySlug === selected);
     if (target) {
-      map.setView([target.latitudeApprox, target.longitudeApprox], Math.max(map.getZoom(), 8), {
-        animate: !this.reduceMotion,
+      map.easeTo({
+        center: [target.longitudeApprox, target.latitudeApprox],
+        zoom: Math.max(map.getZoom(), 7),
+        duration: this.reduceMotion ? 0 : 600,
       });
     } else if (!this.fitted && clusters.length) {
-      const points = clusters.map((c) => [c.latitudeApprox, c.longitudeApprox] as [number, number]);
-      map.fitBounds(L.latLngBounds(points), { padding: [48, 48], maxZoom: 7 });
+      const bounds = new ml.LngLatBounds();
+      for (const c of clusters) {
+        bounds.extend([c.longitudeApprox, c.latitudeApprox]);
+      }
+      map.fitBounds(bounds, { padding: 48, maxZoom: 6, animate: false });
       this.fitted = true;
     }
   }
