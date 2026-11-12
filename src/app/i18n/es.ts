@@ -49,6 +49,9 @@ export const ES: Dict = {
     mockBar: 'Vista previa de desarrollo: datos de ejemplo, API aún no conectada.',
     appStore: 'App Store',
     googlePlay: 'Google Play',
+    /** Texte alternatif des badges officiels (= texte du badge). */
+    appStoreBadge: 'Consíguelo en el App Store',
+    googlePlayBadge: 'Descargar en Google Play',
   },
   placeholders: {
     hero: 'Foto de campaña: rider GLAMRO en bicicleta con la mochila',
@@ -60,6 +63,7 @@ export const ES: Dict = {
   },
   card: {
     verified: 'Perfil verificado',
+    verifiedHint: 'Este profesional ha completado la verificación de perfil de GLAMRO.',
     sponsored: 'Patrocinado',
     availableToday: 'Disponible desde hoy',
     availableTomorrow: 'Disponible desde mañana',

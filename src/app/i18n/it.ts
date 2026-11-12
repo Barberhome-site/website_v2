@@ -52,6 +52,9 @@ export const IT = {
     mockBar: 'Anteprima di sviluppo: dati di esempio, API non ancora collegata.',
     appStore: 'App Store',
     googlePlay: 'Google Play',
+    /** Texte alternatif des badges officiels (= texte du badge). */
+    appStoreBadge: 'Scarica su App Store',
+    googlePlayBadge: 'Disponibile su Google Play',
   },
   placeholders: {
     hero: 'Foto campagna: rider GLAMRO in bicicletta con lo zaino',
@@ -63,6 +66,7 @@ export const IT = {
   },
   card: {
     verified: 'Profilo verificato',
+    verifiedHint: 'Questo professionista ha completato la verifica del profilo GLAMRO.',
     sponsored: 'Sponsorizzato',
     availableToday: 'Disponibile da oggi',
     availableTomorrow: 'Disponibile da domani',
