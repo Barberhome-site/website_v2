@@ -63,6 +63,7 @@ export const IT = {
   },
   card: {
     verified: 'Profilo verificato',
+    verifiedHint: 'Questo professionista ha completato la verifica del profilo GLAMRO.',
     sponsored: 'Sponsorizzato',
     availableToday: 'Disponibile da oggi',
     availableTomorrow: 'Disponibile da domani',

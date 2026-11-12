@@ -77,28 +77,76 @@
 }
 
 .cm__cities li {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.35rem 0;
   border-bottom: 1px solid var(--c-border);
 
   &:last-child {
     border-bottom: 0;
   }
+}
 
-  &.is-selected .cm__city-link {
-    color: var(--c-accent);
+/* Ligne entière cliquable : sélectionne la ville sur la carte. */
+.cm__city {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 54px;
+  padding: 0.35rem 0.5rem;
+  margin-inline: -0.5rem;
+  box-sizing: content-box;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: none;
+  color: var(--c-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+
+    .cm__chevron {
+      border-color: var(--c-border-strong);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  &.is-selected {
+    .cm__city-name {
+      color: var(--c-accent);
+    }
+
+    .cm__chevron {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+    }
   }
 }
 
-.cm__city-link {
+.cm__city-name {
   flex: 1;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
   font-weight: 600;
-  text-decoration: none;
+}
+
+.cm__chevron {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--c-border);
+  border-radius: 50%;
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+
+  app-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
 }
 
 .cm__count {
@@ -141,10 +189,60 @@
   margin-bottom: 1.25rem !important;
 }
 
-/* Bureau : le panneau remplace la liste dans la colonne latérale. */
+/* Bureau : hauteur fixe. La carte ne change pas de taille quand on choisit une ville ;
+   la liste et le panneau remplissent la colonne et défilent à l'intérieur. */
 @media (min-width: 960px) {
+  .cm__map {
+    height: 500px;
+    min-height: 0;
+  }
+
+  .cm__side {
+    position: relative;
+    min-height: 0;
+  }
+
+  .cm__list,
+  .cm__panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .cm__cities {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    // marge pour que l'anneau de focus et la barre de défilement ne soient pas rognés
+    padding: 0.25rem 0.5rem !important;
+    margin-inline: -0.5rem !important;
+  }
+
   .cm__side.has-panel .cm__list {
     display: none;
+  }
+
+  .cm__pros {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    align-content: start;
+    padding-right: 0.35rem !important;
+    margin-right: -0.35rem !important;
+  }
+
+  .cm__cities,
+  .cm__pros {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-border-strong) transparent;
+  }
+
+  .cm__panel-head,
+  .cm__panel > .btn {
+    flex-shrink: 0;
   }
 }
 

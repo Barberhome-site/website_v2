@@ -11,6 +11,39 @@
     border-color: var(--c-border-strong);
     background: var(--c-card-hover);
   }
+
+  // Focus clavier sur le lien du nom → anneau autour de toute la carte.
+  &:has(.pc__link:focus-visible) {
+    box-shadow: var(--focus-ring);
+  }
+}
+
+/* Lien du nom étendu à toute la carte. Les éléments interactifs (Prenota, coche) passent au-dessus. */
+.pc__link {
+  color: inherit;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+:host(:hover) .pc__link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pc__book {
+  position: relative;
+  z-index: 2;
 }
 
 /* Bandeau diagonal « Sponsorizzato » dans le coin supérieur gauche.
@@ -46,74 +79,128 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
-.pc__profile {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--c-border);
-  background: var(--c-bg);
-  color: var(--c-text);
-  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
-
-  app-icon {
-    width: 1.2rem;
-    height: 1.2rem;
-  }
-
-  &:hover {
-    border-color: var(--c-accent);
-    color: var(--c-accent);
-  }
+.pc__title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .pc__name {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 700;
+  min-width: 0;
 }
 
-.pc__role {
-  margin: 0.1rem 0 0;
-  color: var(--c-text);
+/* Coche verte « profil vérifié » + infobulle (survol, focus clavier ou clic). */
+.pc__verified {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
-.pc__area {
-  display: flex;
-  gap: 0.35rem;
-  align-items: flex-start;
-  margin: 0.25rem 0 0;
-  font-size: var(--fs-small);
-  color: var(--c-muted);
+.pc__verified-btn {
+  display: grid;
+  place-items: center;
+  // Zone de clic agrandie sans changer la taille visuelle de la coche.
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: -0.3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: help;
 
-  app-icon {
-    width: 1rem;
-    height: 1rem;
-    margin-top: 0.15rem;
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    overflow: visible;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 0;
   }
 }
 
-.pc__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.6rem;
-  margin-top: 0.75rem !important;
+.pc__verified-shape {
+  fill: var(--c-success);
 }
 
-.pc__availability {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.8125rem;
-  color: var(--c-muted);
+.pc__verified-check {
+  fill: none;
+  stroke: #0a0a0a;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-  app-icon {
-    width: 1rem;
-    height: 1rem;
+// Popover (couche supérieure) positionné en JS : position fixe, left/top calculés à l'ouverture.
+.pc__tip {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  width: max-content;
+  max-width: min(15rem, calc(100vw - 16px));
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(95, 211, 141, 0.35);
+  border-radius: var(--radius-s);
+  background: #101010;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  color: var(--c-muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  overflow: visible;
+
+  strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    color: var(--c-success);
+  }
+
+  // Petite flèche vers la coche (en haut si l'infobulle est dessous, en bas sinon).
+  &::before {
+    content: '';
+    position: absolute;
+    left: var(--arrow-x, 50%);
+    width: 0.6rem;
+    height: 0.6rem;
+    background: #101010;
+    border: 1px solid rgba(95, 211, 141, 0.35);
+  }
+
+  &[data-side='bottom']::before {
+    bottom: 100%;
+    border-right: 0;
+    border-bottom: 0;
+    transform: translate(-50%, 50%) rotate(45deg);
+  }
+
+  &[data-side='top']::before {
+    top: 100%;
+    border-left: 0;
+    border-top: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &:popover-open {
+    animation: pc-tip-in var(--dur) var(--ease);
+  }
+}
+
+@keyframes pc-tip-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc__tip:popover-open {
+    animation: none;
   }
 }
 
@@ -136,8 +223,9 @@
     align-items: center;
   }
 
+  .pc__title,
   .pc__area,
-  .pc__meta {
+  .pc__availability {
     justify-content: center;
   }
 
@@ -146,37 +234,29 @@
   }
 }
 
-/* Variante ligne (panneau de la carte) */
-:host(.pc--row.pc--sponsored) {
-  // Décale l'avatar pour qu'il ne passe pas sous le bandeau.
-  padding-left: 3.75rem;
-}
-
-// Carte basse : bandeau plus fin et plus proche du coin (~50 px).
+/* Variante ligne (panneau de la carte).
+   Marge gauche identique pour toutes les cartes (sponsorisées ou non) : le bandeau a sa place
+   dans le coin sans jamais décaler le contenu d'une carte par rapport aux autres. */
+// Carte basse : bandeau fin, au plus près du coin (~40 px).
 :host(.pc--row) {
   .pc__ribbon-wrap {
-    width: 96px;
-    height: 96px;
+    width: 84px;
+    height: 84px;
   }
 
   .pc__ribbon {
-    top: 26px;
-    left: -30px;
-    width: 130px;
-    padding: 0.2rem 0;
-    font-size: 0.625rem;
+    top: 20px;
+    left: -29px;
+    width: 116px;
+    padding: 0.15rem 0;
+    font-size: 0.5625rem;
   }
 }
 
 :host(.pc--row) {
   align-items: center;
   gap: 0.9rem;
-  padding: 0.85rem 0.85rem 0.85rem 1rem;
-
-  .pc__profile {
-    position: static;
-    flex-shrink: 0;
-  }
+  padding: 0.85rem 0.85rem 0.85rem 2.25rem;
 
   .pc__body {
     flex: 1;
@@ -184,8 +264,8 @@
     padding-right: 0.25rem;
   }
 
-  .pc__meta {
-    margin-top: 0.5rem !important;
+  .pc__availability {
+    margin-top: 0.4rem;
   }
 
   .pc__book {

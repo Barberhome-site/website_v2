@@ -60,6 +60,7 @@ export const ES: Dict = {
   },
   card: {
     verified: 'Perfil verificado',
+    verifiedHint: 'Este profesional ha completado la verificación de perfil de GLAMRO.',
     sponsored: 'Patrocinado',
     availableToday: 'Disponible desde hoy',
     availableTomorrow: 'Disponible desde mañana',

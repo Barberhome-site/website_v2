@@ -11,34 +11,45 @@
 <app-avatar [name]="p.displayName" [image]="p.profileImage" [size]="variant() === 'card' ? 104 : 64" />
 
 <div class="pc__body">
-  @if (headingLevel() === 3) {
-    <h3 class="pc__name">{{ p.displayName }}</h3>
-  } @else {
-    <h4 class="pc__name">{{ p.displayName }}</h4>
-  }
+  <div class="pc__title">
+    <!-- Le lien du nom couvre toute la carte (::after) : la carte entière ouvre le profil. -->
+    @if (headingLevel() === 3) {
+      <h3 class="pc__name"><a class="pc__link" [routerLink]="p.profileUrl | lp: i18n.lang()">{{ p.displayName }}</a></h3>
+    } @else {
+      <h4 class="pc__name"><a class="pc__link" [routerLink]="p.profileUrl | lp: i18n.lang()">{{ p.displayName }}</a></h4>
+    }
+
+    @if (p.verified) {
+      <span class="pc__verified">
+        <button #verifiedBtn type="button" class="pc__verified-btn" [attr.aria-label]="t.verified" [attr.aria-describedby]="tipId"
+                (click)="toggleTip()" (pointerenter)="onPointer($event, true)" (pointerleave)="onPointer($event, false)"
+                (focus)="onFocus()" (blur)="hideTip()">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path class="pc__verified-shape" d="M9.41 2.34 Q12 -1.74 14.59 2.34 Q18.87 0.10 19.07 4.93 Q23.90 5.13 21.66 9.41 Q25.74 12 21.66 14.59 Q23.90 18.87 19.07 19.07 Q18.87 23.90 14.59 21.66 Q12 25.74 9.41 21.66 Q5.13 23.90 4.93 19.07 Q0.10 18.87 2.34 14.59 Q-1.74 12 2.34 9.41 Q0.10 5.13 4.93 4.93 Q5.13 0.10 9.41 2.34Z" />
+            <path class="pc__verified-check" d="M7.6 12.3l3 3 5.8-6.2" />
+          </svg>
+        </button>
+        <!-- Popover : affiché dans la couche supérieure, jamais coupé par un conteneur qui défile -->
+        <span #tip class="pc__tip" popover="manual" role="tooltip" [id]="tipId">
+          <strong>{{ t.verified }}</strong>
+          {{ t.verifiedHint }}
+        </span>
+      </span>
+    }
+  </div>
+
   <p class="pc__role">{{ p.specialtyLabel }}</p>
   <p class="pc__area">
     <app-icon name="pin" />
     <span>{{ p.cityName }}<span class="visually-hidden">, {{ t.zone }}: </span><span aria-hidden="true"> · </span>{{ p.serviceArea }}</span>
   </p>
 
-  <ul class="pc__meta" role="list">
-    @if (p.verified) {
-      <li class="badge badge--verified"><app-icon name="check-circle" /> {{ t.verified }}</li>
-    }
-    @if (availability(); as a) {
-      <li class="pc__availability"><app-icon name="calendar" /> {{ a }}</li>
-    }
-  </ul>
+  @if (availability(); as a) {
+    <p class="pc__availability"><app-icon name="calendar" /> {{ a }}</p>
+  }
 </div>
 
 <button type="button" class="btn btn--primary pc__book" [class.btn--block]="variant() === 'card'" (click)="book()"
         [attr.aria-label]="t.bookWith | fmt: { name: p.displayName }">
   {{ t.book }}
 </button>
-
-<!-- Icône profil : ouvre la page du professionnel -->
-<a class="pc__profile" [routerLink]="p.profileUrl | lp: i18n.lang()" [attr.aria-label]="t.profile | fmt: { name: p.displayName }"
-   [attr.title]="t.profile | fmt: { name: p.displayName }">
-  <app-icon name="user" />
-</a>

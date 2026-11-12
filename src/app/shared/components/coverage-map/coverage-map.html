@@ -61,12 +61,13 @@
             } @else {
               <ul role="list" class="cm__cities">
                 @for (c of clusters(); track c.citySlug) {
-                  <li [class.is-selected]="c.citySlug === selectedSlug()">
-                    <a [routerLink]="['/dove-siamo', c.citySlug] | lp: i18n.lang()" class="cm__city-link">{{ c.cityName }}</a>
-                    <span class="cm__count">{{ t.available | fmt: { count: c.availableCount } }}</span>
-                    <button type="button" class="btn btn--icon" (click)="selectCity(c.citySlug)"
-                            [attr.aria-label]="t.showPros | fmt: { city: c.cityName }">
-                      <app-icon name="chevron-right" />
+                  <!-- Toute la ligne sélectionne la ville sur la carte ; la page de la ville reste accessible via « Tutte le città ». -->
+                  <li>
+                    <button type="button" class="cm__city" [class.is-selected]="c.citySlug === selectedSlug()"
+                            (click)="selectCity(c.citySlug)">
+                      <span class="cm__city-name">{{ c.cityName }}</span>
+                      <span class="cm__count">{{ t.available | fmt: { count: c.availableCount } }}</span>
+                      <span class="cm__chevron" aria-hidden="true"><app-icon name="chevron-right" /></span>
                     </button>
                   </li>
                 }
