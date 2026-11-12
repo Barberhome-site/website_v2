@@ -118,6 +118,31 @@ directement l'app sur le bon écran (ex. le profil d'un professionnel) quand ell
 - déclarer ce domaine dans chaque app (Associated Domains côté iOS, intent filters côté Android) ;
 - dans la popup, ajouter un bouton « Ouvrir dans l'app » vers ce lien, avec repli sur le store.
 
+## Langue du visiteur
+
+- La langue vient de l'URL (`/` italien, `/en`, `/fr`, `/es`, `/de`).
+- Le choix fait dans le menu des langues est enregistré dans le cookie **`glamro_lang`** (1 an, technique,
+  sans consentement, listé dans l'inventaire des cookies).
+- Retour sur `/` avec une autre langue enregistrée → page d'accueil de cette langue (302 dans `server.ts`,
+  et côté navigateur en secours quand `/` est servie en statique). Les autres URL ne sont jamais redirigées.
+- Sans choix enregistré, si la langue du navigateur est disponible et différente de celle de la page :
+  bandeau « Ce site est disponible en français — Passer en français / Rester en italien » (`layout/lang-suggest`).
+  Pas de redirection automatique (déconseillé par Google).
+
+## Aperçu sur Vercel
+
+Fichiers fournis : `vercel.json` et `api/index.mjs` (fonction qui exécute le serveur SSR d'Angular).
+- **Import du projet** : importer le dépôt GitHub, sans changer les réglages de build (ils sont dans `vercel.json`).
+- **Variables d'environnement** (Settings → Environment Variables), sinon le rendu serveur retombe en rendu client
+  sur les domaines `*.vercel.app` (protection SSRF d'Angular, voir `security.allowedHosts`) :
+  - `NG_ALLOWED_HOSTS` = `*.vercel.app`
+  - `NG_TRUST_PROXY_HEADERS` = `X-FORWARDED-PORT,X-FORWARDED-PATH,X-FORWARDED-FOR,X-FORWARDED-HOST,X-FORWARDED-PROTO`
+- Les pages prérendues sont servies en statique par Vercel ; les autres passent par la fonction.
+- Sur `*.vercel.app` : en-tête `X-Robots-Tag: noindex` (pas d'indexation de l'aperçu) et Google Analytics
+  désactivé (GA ne se charge que sur `glamro.it`).
+- Limite de l'aperçu : les en-têtes de sécurité (CSP…) de `server.ts` ne s'appliquent pas aux pages statiques.
+  Pour une mise en production sur Vercel, il faudra les déclarer aussi dans `vercel.json`.
+
 ## Badges App Store / Google Play
 
 Badges officiels localisés (it, en, fr, es, de) dans `public/badges/`, affichés par `app-store-buttons`.

@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, signal } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
-import { LANGS, LANG_INFO } from '../../core/i18n/i18n.config';
+import { LANGS, LANG_INFO, Lang } from '../../core/i18n/i18n.config';
 import { FormatPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
+import { LangPreference } from '../../core/i18n/lang-preference.service';
 import { Icon } from '../../shared/components/icon/icon';
 
 let nextId = 0;
@@ -35,7 +36,7 @@ let nextId = 0;
             @for (l of langs; track l) {
               <li>
                 <a [routerLink]="i18n.urlFor(l)" [attr.hreflang]="l" [attr.lang]="l"
-                   [attr.aria-current]="l === i18n.lang() ? 'true' : null" (click)="open.set(false)">
+                   [attr.aria-current]="l === i18n.lang() ? 'true' : null" (click)="choose(l)">
                   <span class="ls__short" aria-hidden="true">{{ info[l].short }}</span> {{ info[l].label }}
                 </a>
               </li>
@@ -53,6 +54,7 @@ export class LanguageSwitcher {
   protected readonly langs = LANGS;
   protected readonly info = LANG_INFO;
   protected readonly open = signal(false);
+  private readonly pref = inject(LangPreference);
   /** Identifiant unique : le composant est présent deux fois (header et menu mobile). */
   protected readonly listId = `ls-list-${nextId++}`;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -64,6 +66,12 @@ export class LanguageSwitcher {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.open.set(false));
+  }
+
+  /** Le choix est enregistré (cookie glamro_lang) pour les prochaines visites. */
+  protected choose(lang: Lang): void {
+    this.pref.save(lang);
+    this.open.set(false);
   }
 
   /** Ferme le menu quand le focus quitte le composant. */

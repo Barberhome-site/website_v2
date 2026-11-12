@@ -14,17 +14,20 @@ import { environment } from '../environments/environment';
 import { AnalyticsService } from './core/analytics/analytics.service';
 import { ConsentService } from './core/consent/consent.service';
 import { I18n } from './core/i18n/i18n.service';
+import { LangPreference } from './core/i18n/lang-preference.service';
 import { BookingDialog } from './layout/booking/booking-dialog';
 import { ConsentBanner } from './layout/consent/consent-banner';
 import { ConsentPreferences } from './layout/consent/consent-preferences';
 import { Footer } from './layout/footer/footer';
 import { Header } from './layout/header/header';
+import { LangSuggest } from './layout/lang-suggest/lang-suggest';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, ConsentBanner, ConsentPreferences, BookingDialog],
+  imports: [RouterOutlet, Header, Footer, ConsentBanner, ConsentPreferences, BookingDialog, LangSuggest],
   template: `
     <a class="skip-link" href="#contenuto" (click)="skipToContent($event)">{{ i18n.d().nav.skip }}</a>
+    <app-lang-suggest />
 
     @if (useMockData) {
       <p class="mock-bar" role="note">{{ i18n.d().common.mockBar }}</p>
@@ -61,7 +64,11 @@ export class App {
   constructor() {
     const consent = inject(ConsentService);
     // Lecture du consentement APRÈS l'hydratation : le HTML serveur et client restent identiques.
-    afterNextRender(() => consent.init());
+    const langPref = inject(LangPreference);
+    afterNextRender(() => {
+      consent.init();
+      langPref.init();
+    });
 
     let firstNavigation = true;
     inject(Router)

@@ -183,6 +183,7 @@ export const FR: Dict = {
   },
   trackers: {
     consent: { purpose: 'Mémorise vos choix de cookies, la version et la date du consentement.', duration: '6 mois', transfers: 'Aucun' },
+    lang: { purpose: 'Mémorise la langue choisie, pour afficher le site dans cette langue lors de votre prochaine visite.', duration: '1 an', transfers: 'Aucun' },
     ga: {
       purpose: 'Distingue les visiteurs de façon pseudonyme pour les statistiques d\'utilisation.',
       duration: '2 ans',
