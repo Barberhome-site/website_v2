@@ -42,7 +42,8 @@ export class AnalyticsService {
   private loaded = false;
 
   constructor() {
-    if (!this.isBrowser || !this.measurementId) {
+    // Uniquement sur le vrai domaine : les aperçus (Vercel, localhost…) ne polluent pas les statistiques.
+    if (!this.isBrowser || !this.measurementId || !/(^|\.)glamro\.it$/.test(this.win.location.hostname)) {
       return;
     }
     effect(() => {

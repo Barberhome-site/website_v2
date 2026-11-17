@@ -186,6 +186,7 @@ export const IT = {
   },
   trackers: {
     consent: { purpose: 'Memorizza le scelte sui cookie, la versione e la data del consenso.', duration: '6 mesi', transfers: 'Nessuno' },
+    lang: { purpose: 'Memorizza la lingua scelta, per mostrarti il sito nella stessa lingua alla prossima visita.', duration: '1 anno', transfers: 'Nessuno' },
     ga: {
       purpose: 'Distingue i visitatori in forma pseudonima per le statistiche di utilizzo.',
       duration: '2 anni',

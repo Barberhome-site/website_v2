@@ -7,7 +7,7 @@ import { ConsentCategory } from './consent.model';
  *
  * IMPORTANT : à valider par une scansione effettiva du site en production avant publication.
  */
-export type TrackerId = 'consent' | 'ga' | 'gaSession' | 'trustpilot' | 'basemap';
+export type TrackerId = 'consent' | 'lang' | 'ga' | 'gaSession' | 'trustpilot' | 'basemap';
 
 export interface TrackerInfo {
   id: TrackerId;
@@ -19,6 +19,7 @@ export interface TrackerInfo {
 
 export const COOKIE_INVENTORY: TrackerInfo[] = [
   { id: 'consent', name: 'glamro_consent (localStorage)', provider: 'GLAMRO', domain: 'www.glamro.it', category: 'necessary' },
+  { id: 'lang', name: 'glamro_lang', provider: 'GLAMRO', domain: 'www.glamro.it', category: 'necessary' },
   { id: 'ga', name: '_ga', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'gaSession', name: '_ga_<ID>', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'trustpilot', name: 'TrustBox', provider: 'Trustpilot A/S', domain: 'widget.trustpilot.com', category: 'functional' },

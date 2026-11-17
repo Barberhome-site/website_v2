@@ -6,6 +6,8 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { DEFAULT_LANG, localizePath } from './app/core/i18n/i18n.config';
+import { readLangCookie } from './app/core/i18n/lang-cookie';
 import { buildSitemapXml } from './server/sitemap';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
@@ -55,6 +57,22 @@ app.get('/sitemap.xml', async (_req, res, next) => {
   }
 });
 
+/**
+ * Page d'accueil italienne (`/`) : si le visiteur a choisi une autre langue (cookie glamro_lang),
+ * on l'envoie vers la page d'accueil de cette langue. Seule `/` est concernée : un lien partagé
+ * vers une autre page garde toujours sa langue. Les robots n'ont pas de cookie : rien ne change pour eux.
+ */
+app.get('/', (req, res, next) => {
+  res.vary('Cookie');
+  const lang = readLangCookie(req.headers.cookie);
+  if (lang && lang !== DEFAULT_LANG) {
+    res.set('Cache-Control', 'private, no-store');
+    res.redirect(302, localizePath('/', lang));
+    return;
+  }
+  next();
+});
+
 /** Fichiers statiques du dossier /browser. */
 app.use(
   express.static(browserDistFolder, {
@@ -84,3 +102,6 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
 }
 
 export const reqHandler = createNodeRequestHandler(app);
+
+/** Point d'entrée des plateformes serverless (Vercel : api/index.mjs). */
+export default reqHandler;
