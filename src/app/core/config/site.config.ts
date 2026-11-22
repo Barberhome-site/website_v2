@@ -14,31 +14,34 @@ export const SITE = {
     { key: 'about', path: '/chi-siamo' },
   ],
 
+  /** Données société (documents légaux GLAMRO S.R.L.). */
   company: {
-    legalName: '[Ragione sociale]',
-    vatNumber: '[Partita IVA]',
-    address: '[Sede legale]',
-    rea: '[REA]',
+    legalName: 'GLAMRO S.R.L.',
+    vatNumber: '03036060428',
+    address: 'Via Matteotti n. 54, 60121 Ancona (AN)',
+    rea: 'REA AN-267591',
+    shareCapital: 'Capitale sociale € 7.000,00 i.v.',
+    pec: 'glamrosrl@ionospec.it',
+    phone: '+39 392 366 1225',
   },
 
   contact: {
-    /** TODO : vérifier les adresses réelles. */
-    supportEmail: 'assistenza@glamro.it',
-    privacyEmail: 'privacy@glamro.it',
+    /** Canal officiel des réclamations et de l'assistance (Policy reclami). */
+    supportEmail: 'support@glamro.it',
+    /** Contact du titulaire du traitement (Informativa privacy). */
+    privacyEmail: 'contact@glamro.it',
   },
 
-  /** TODO : URL des profils officiels. */
+  /** Profils officiels. */
   social: [
-    { label: 'Instagram', url: 'https://www.instagram.com/glamro' },
-    { label: 'TikTok', url: 'https://www.tiktok.com/@glamro' },
-    { label: 'Facebook', url: 'https://www.facebook.com/glamro' },
-    { label: 'YouTube', url: 'https://www.youtube.com/@glamro' },
-    { label: 'LinkedIn', url: 'https://www.linkedin.com/company/glamro' },
+    { label: 'Instagram', url: 'https://www.instagram.com/glamro.it' },
+    { label: 'TikTok', url: 'https://www.tiktok.com/@glamro.it' },
+    { label: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61587333056576' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/company/glamro-srl/' },
   ],
 
   /**
    * Apps mobiles : une app pour les clients, une app pour les professionnels.
-   * TODO : remplacer par les URL réelles des fiches App Store / Google Play.
    */
   apps: {
     client: {

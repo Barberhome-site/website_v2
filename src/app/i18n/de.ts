@@ -211,6 +211,9 @@ export const DE: Dict = {
     cookies: 'Cookie-Richtlinie',
     customerTerms: 'Kundenbedingungen',
     proTerms: 'Bedingungen für Profis',
+    platformRules: 'Plattformregeln',
+    complaintsPolicy: 'Beschwerderichtlinie',
+    hygiene: 'Hygiene und Sicherheit',
     manageCookies: 'Cookies verwalten',
     social: 'Offizielle Social-Media-Profile',
     vat: 'USt-IdNr.',
@@ -427,13 +430,13 @@ export const DE: Dict = {
         title: 'Bezahlung',
         answer: 'Du bezahlst in der App mit sicheren Zahlungsmethoden.',
         detail: 'Kein Bargeld mit der Fachkraft. Die Quittung findest du in der App.',
-        placeholder: '[Zu ergänzen: Zeitpunkt der Belastung, akzeptierte Zahlungsmittel, Zahlungsdienstleister, Ausstellung von Steuerbelegen.]',
+        placeholder: 'Akzeptierte Zahlungsmittel: Kreditkarte, Apple Pay und Google Pay. GLAMRO kassiert im Namen und für Rechnung der Fachkraft. Bargeld wird für gebuchte Leistungen nicht akzeptiert, ausgenommen freiwilliges Trinkgeld.',
       },
       {
         title: 'Stornierung',
         answer: 'Du kannst in der App stornieren oder ändern – gemäß den bei der Buchung angezeigten Bedingungen.',
         detail: 'Die Regeln gelten auch, wenn die Fachkraft storniert oder nicht erscheint.',
-        placeholder: '[Mit den Kundenbedingungen zu ergänzen: kostenlose Stornofristen, eventuelle Kosten, Verspätungen, Nichterscheinen, Erstattungsfristen.]',
+        placeholder: 'Kostenlose Stornierung bis 24 Stunden vorher: Erstattung oder Guthaben in der App. Weniger als 24 Stunden vorher: keine Erstattung (Gebühr von 100 %). Bei Verspätung wird höchstens 20 Minuten gewartet: Ist die Fachkraft zu spät, kannst du umbuchen oder den vollen Betrag zurückerhalten; ist der Kunde zu spät, wird die Leistung berechnet.',
       },
       {
         title: 'Support',
@@ -477,7 +480,7 @@ export const DE: Dict = {
       title: 'Zahlungen',
       answer: 'Du bezahlst in der App mit sicheren Zahlungsmethoden; Bargeld ist nicht nötig.',
       text: 'Kartendaten werden vom Zahlungsdienstleister verarbeitet und nicht von GLAMRO gespeichert.',
-      placeholder: '[Zu ergänzen: Name des Zahlungsdienstleisters, Zeitpunkt der Belastung, Abwicklung von Erstattungen.]',
+      placeholder: 'Akzeptierte Zahlungsmittel: Kreditkarte, Apple Pay und Google Pay. GLAMRO kassiert im Namen und für Rechnung der Fachkraft. Erstattungen erfolgen als GLAMRO-Guthaben in der App oder auf das ursprüngliche Zahlungsmittel, innerhalb von 5–10 Werktagen.',
     },
     reviews: {
       title: 'Bewertungen',
@@ -487,7 +490,7 @@ export const DE: Dict = {
         { label: 'Bewertungen zu Profis', text: 'von GLAMRO nur nach einem auf der Plattform gebuchten und bezahlten Service gesammelt und im Profil der Fachkraft angezeigt.' },
       ],
       noFake: 'Wir veröffentlichen weder selbst geschriebene Bewertungen noch erfundene Punktzahlen.',
-      placeholder: '[Zu ergänzen: Prüfung der Bewertungen, Moderation, Umgang mit negativen Bewertungen (Omnibus-Richtlinie).]',
+      placeholder: 'Bewertungen müssen wahrheitsgemäß sein und der erhaltenen Leistung entsprechen. GLAMRO entfernt beleidigende, anstößige oder falsche Bewertungen.',
     },
     ranking: {
       title: 'So sortieren wir die Ergebnisse',
@@ -500,7 +503,7 @@ export const DE: Dict = {
       answer: 'Du kannst uns vor, während und nach dem Service kontaktieren.',
       text: 'Schreib uns über die App oder die Seite',
       link: 'Hilfe',
-      placeholder: '[Zu ergänzen: Kanäle, Zeiten und Antwortzeiten.]',
+      placeholder: 'Offizielle Kanäle: ein Ticket in der App (Bereich «Assistenza Ordine») oder eine E-Mail an support@glamro.it.',
     },
     safety: {
       title: 'Sicherheit',
@@ -514,7 +517,7 @@ export const DE: Dict = {
     complaints: {
       title: 'Beschwerden',
       answer: 'Wenn etwas nicht stimmt, reiche eine Beschwerde über die App oder die Hilfe-Seite ein.',
-      placeholder: '[Zu ergänzen: erforderliche Nachweise, Antwortzeiten, Eskalation, Abhilfen, aktuelles Verfahren zur Streitbeilegung.]',
+      placeholder: 'Bei einer Leistung muss die Beschwerde innerhalb von 24 Stunden nach Ende des Termins eingehen, mit Buchungsnummer, Beschreibung des Problems und gegebenenfalls Fotos. GLAMRO prüft den Fall: Ist die Fachkraft verantwortlich, kann der Betrag ganz oder teilweise erstattet werden. Erscheint die Fachkraft nicht, wird der volle Betrag automatisch erstattet. Details in der Beschwerderichtlinie.',
     },
     seoDescription:
       'Wie GLAMRO Profis prüft, Zahlungen und Bewertungen handhabt, Ergebnisse sortiert und Kundschaft und Profis unterstützt.',
@@ -541,7 +544,7 @@ export const DE: Dict = {
     cancelTitle: 'Stornierungen und Erstattungen',
     cancelAnswer: 'Du kannst eine Buchung in der App stornieren oder ändern – gemäß den vor der Bestätigung angezeigten Bedingungen.',
     cancelPlaceholder:
-      '[Mit den Kundenbedingungen zu ergänzen: kostenlose Stornofrist, eventuelle Kosten, Verspätungen, Nichterscheinen, Fristen und Art der Erstattung.]',
+      'Kostenlose Stornierung bis 24 Stunden vorher: Erstattung oder Guthaben in der App. Weniger als 24 Stunden vorher: keine Erstattung (Gebühr von 100 %). Bei Verspätung wird höchstens 20 Minuten gewartet: Ist die Fachkraft zu spät, kannst du umbuchen oder den vollen Betrag zurückerhalten; ist der Kunde zu spät, wird die Leistung berechnet. Erstattungen erfolgen als GLAMRO-Guthaben oder auf das ursprüngliche Zahlungsmittel, innerhalb von 5–10 Werktagen.',
     cancelMore: 'Alle Details in den',
     customerTerms: 'Kundenbedingungen',
     contactTitle: 'Support kontaktieren',
@@ -596,7 +599,7 @@ export const DE: Dict = {
       {
         title: 'Verantwortung',
         text: 'Du arbeitest als selbstständige Fachkraft: Du hältst die Service- und Hygienestandards von GLAMRO und die Regeln deiner Branche ein.',
-        placeholder: '[Erforderliche Versicherung, Standards, Sperrgründe anzugeben.]',
+        placeholder: 'Geforderte Standards: Pünktlichkeit, professionelle Kleidung, desinfizierte Werkzeuge und Einwegmaterial, wo vorgesehen, ein professioneller Umgang mit Kunden. Wiederholte Verstöße führen zu einer schriftlichen Abmahnung, einer vorübergehenden Sperre oder der Löschung des Kontos (Plattformregeln).',
       },
       {
         title: 'Support',
@@ -672,7 +675,7 @@ export const DE: Dict = {
     roleTitle: 'Unsere Rolle',
     roleText:
       'GLAMRO betreibt die Plattform und kümmert sich um die Prüfung der Profis, Buchungen, Zahlungen und Support. Der Service wird von unabhängigen Profis ausgeführt.',
-    rolePlaceholder: '[Mit der Rechtsberatung zu klären: wer den Dienstleistungsvertrag schließt und welche Pflichten GLAMRO übernimmt.]',
+    rolePlaceholder: 'GLAMRO ist ein technischer Vermittler: Der Vertrag über die Beauty-Leistung wird direkt zwischen Kunde und Fachkraft geschlossen. GLAMRO betreibt die Plattform, die Buchung und die Zahlung, die es im Namen und für Rechnung der Fachkraft kassiert.',
     glossaryTitle: 'Glossar',
     glossary: [
       { term: 'Beauty Delivery', definition: 'Beauty- oder Wellness-Service am Ort, den die Kundschaft wählt.' },

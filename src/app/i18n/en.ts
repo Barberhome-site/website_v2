@@ -211,6 +211,9 @@ export const EN: Dict = {
     cookies: 'Cookie policy',
     customerTerms: 'Customer Terms',
     proTerms: 'Professional Terms',
+    platformRules: 'Platform rules',
+    complaintsPolicy: 'Complaints policy',
+    hygiene: 'Hygiene and safety',
     manageCookies: 'Manage cookies',
     social: 'Official social profiles',
     vat: 'VAT',
@@ -427,13 +430,13 @@ export const EN: Dict = {
         title: 'Payment',
         answer: 'You pay in the app with secure payment methods.',
         detail: 'No need to handle cash with the professional. The receipt is available in the app.',
-        placeholder: '[To be completed: when the charge happens, accepted methods, payment provider, issuing of tax documents.]',
+        placeholder: 'Accepted methods: credit card, Apple Pay and Google Pay. GLAMRO collects payment in the name and on behalf of the professional. Cash is not accepted for booked services, except optional tips.',
       },
       {
         title: 'Cancellation',
         answer: 'You can cancel or change in the app under the terms shown at the time of booking.',
         detail: 'The rules also apply when the professional cancels or does not show up.',
-        placeholder: '[To be completed with the Customer Terms: free cancellation windows, any costs, delays, no-shows, refund times.]',
+        placeholder: 'Free cancellation up to 24 hours before: refund or in-app credit. Less than 24 hours before: no refund (100% fee). Lateness: the wait is 20 minutes at most. If the professional is late, you can reschedule or get a full refund; if the client is late, the service is charged.',
       },
       {
         title: 'Support',
@@ -477,7 +480,7 @@ export const EN: Dict = {
       title: 'Payments',
       answer: 'You pay in the app with secure payment methods; no cash needed.',
       text: 'Card details are handled by the payment provider and are not stored by GLAMRO.',
-      placeholder: '[To be completed: payment provider name, when the charge happens, refund handling.]',
+      placeholder: 'Accepted methods: credit card, Apple Pay and Google Pay. GLAMRO collects payment in the name and on behalf of the professional. Refunds are issued as GLAMRO credit in the app or to the original payment method within 5–10 working days.',
     },
     reviews: {
       title: 'Reviews',
@@ -487,7 +490,7 @@ export const EN: Dict = {
         { label: 'Reviews of professionals', text: 'collected by GLAMRO only after a service booked and paid on the platform, and shown on the professional\'s profile.' },
       ],
       noFake: 'We do not publish reviews written by us or made-up scores.',
-      placeholder: '[To be completed: how reviews are verified, moderation, handling of negative reviews (Omnibus Directive).]',
+      placeholder: 'Reviews must be truthful and consistent with the service received. GLAMRO removes abusive, offensive or false reviews.',
     },
     ranking: {
       title: 'How we sort results',
@@ -500,7 +503,7 @@ export const EN: Dict = {
       answer: 'You can contact us before, during and after the service.',
       text: 'Write to us from the app or from the',
       link: 'Help page',
-      placeholder: '[To be completed: channels, hours and response times.]',
+      placeholder: 'Official channels: a ticket in the app («Assistenza Ordine» section) or an email to support@glamro.it.',
     },
     safety: {
       title: 'Safety',
@@ -514,7 +517,7 @@ export const EN: Dict = {
     complaints: {
       title: 'Complaints',
       answer: 'If something goes wrong, open a complaint from the app or the Help page.',
-      placeholder: '[To be completed: evidence required, response times, escalation, remedies, updated dispute resolution procedure.]',
+      placeholder: 'For a service, complaints must be sent within 24 hours of the end of the appointment, with the booking number, a description of the problem and any photos. GLAMRO reviews the case: if the professional is responsible, the amount may be refunded in full or in part. If the professional does not show up, the refund is full and automatic. Details in the Complaints policy.',
     },
     seoDescription: 'How GLAMRO verifies professionals, handles payments and reviews, sorts results and supports clients and professionals.',
   },
@@ -540,7 +543,7 @@ export const EN: Dict = {
     cancelTitle: 'Cancellations and refunds',
     cancelAnswer: 'You can cancel or change a booking in the app, under the terms shown before you confirm.',
     cancelPlaceholder:
-      '[To be completed with the Customer Terms: free cancellation window, any costs, delays, no-shows, refund times and methods.]',
+      'Free cancellation up to 24 hours before: refund or in-app credit. Less than 24 hours before: no refund (100% fee). Lateness: the wait is 20 minutes at most. If the professional is late, you can reschedule or get a full refund; if the client is late, the service is charged. Refunds are issued as GLAMRO credit or to the original payment method within 5–10 working days.',
     cancelMore: 'Full details in the',
     customerTerms: 'Customer Terms',
     contactTitle: 'Contact support',
@@ -594,7 +597,7 @@ export const EN: Dict = {
       {
         title: 'Responsibilities',
         text: 'You work as an independent professional: you follow GLAMRO service and hygiene standards and the rules of your sector.',
-        placeholder: '[Required insurance, standards, reasons for suspension to be stated.]',
+        placeholder: 'Required standards: punctuality, professional clothing, sanitised tools and single-use items where required, a professional tone with clients. Repeated breaches lead to a written warning, temporary suspension or account deletion (Platform rules).',
       },
       {
         title: 'Support',
@@ -669,7 +672,7 @@ export const EN: Dict = {
       'We bring beauty services where they are needed: at home, at the office, in a hotel or at an event venue. Clients search by city, service and date, choose a verified professional and book in the app.',
     roleTitle: 'Our role',
     roleText: 'GLAMRO runs the platform, professional verification, bookings, payments and support. The service is performed by independent professionals.',
-    rolePlaceholder: '[To be clarified with legal counsel: who concludes the service contract and which obligations GLAMRO takes on.]',
+    rolePlaceholder: 'GLAMRO is a technology intermediary: the contract for the beauty service is made directly between the client and the professional. GLAMRO runs the platform, the booking and the payment, which it collects in the name and on behalf of the professional.',
     glossaryTitle: 'Glossary',
     glossary: [
       { term: 'Beauty delivery', definition: 'A beauty or wellness service performed at the place chosen by the client.' },

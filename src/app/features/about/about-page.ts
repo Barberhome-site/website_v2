@@ -31,7 +31,7 @@ import { Media } from '../../shared/components/media/media';
 
       <h2>{{ t.roleTitle }}</h2>
       <p>{{ t.roleText }}</p>
-      <p class="placeholder">{{ t.rolePlaceholder }}</p>
+      <p [class.placeholder]="t.rolePlaceholder.startsWith('[')">{{ t.rolePlaceholder }}</p>
 
       <h2>{{ t.glossaryTitle }}</h2>
       <dl>
@@ -45,7 +45,8 @@ import { Media } from '../../shared/components/media/media';
       <p>
         {{ site.company.legalName }}<br />
         {{ t.address }}: {{ site.company.address }}<br />
-        {{ i18n.d().footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }}
+        {{ i18n.d().footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }} · {{ site.company.shareCapital }}<br />
+        PEC: {{ site.company.pec }}
       </p>
       <p>
         {{ t.contacts }}: <a [href]="'mailto:' + site.contact.supportEmail">{{ site.contact.supportEmail }}</a> ·

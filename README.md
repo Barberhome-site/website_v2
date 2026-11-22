@@ -68,7 +68,8 @@ src/
 | `/come-funziona`, `/fiducia`, `/per-professionisti`, `/chi-siamo` | Pages éditoriales | Pré-rendu |
 | `/assistenza` | FAQ, annulations/remboursements, formulaire de contact | SSR |
 | `/per-professionisti/candidatura` | Formulaire de candidature (noindex) | SSR |
-| `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti` | Documents légaux versionnés | Pré-rendu |
+| `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti`, `/regolamento-piattaforma`, `/policy-reclami`, `/disclaimer-igienico-sanitario` | Documents légaux versionnés | Pré-rendu |
+| `/privacy`, `/cookie`, `/cookie-policy`, `/termini`, `/termini-professionisti` | Anciennes adresses (site précédent, app) | Redirection 301 vers `/legale/...` |
 
 ## Langues (it, en, fr, es, de)
 
@@ -195,7 +196,7 @@ bios viennent de l'API, en italien.
 
 **Variables d'environnement (serveur)** :
 - `GLAMRO_API_URL` : base des routes de l'API (défaut : `apiBaseUrl` de l'environnement, ex. `https://api.glamro.it/api`).
-- `SITE_MEDIA_ORIGINS` : domaines des photos des professionnels pour la CSP (défaut : `https://*.amazonaws.com https://*.cloudfront.net`).
+- `SITE_MEDIA_ORIGINS` : domaines des photos des professionnels pour la CSP (défaut : `https://glamro.s3.eu-south-1.amazonaws.com`).
   À remplacer par le domaine exact de `S3_PUBLIC_BASE_URL` du backend.
 
 **Pas encore branché** (pas d'endpoint public dans le backend) : candidatures pro, demandes d'assistance
@@ -225,20 +226,21 @@ bios viennent de l'API, en italien.
   erreurs textuelles, `autocomplete`, messages de succès, `<dialog>` natif pour les préférences.
 - **Performance** : pages chargées à la demande, carte en `@defer`, polices auto-hébergées (pas de Google Fonts),
   `NgOptimizedImage` (lazy loading, preload de la hero), dimensions fixes contre le CLS.
-- **Légal** : structure des 4 documents avec version, date d'efficacité, date de mise à jour, sommaire, archive des
-  versions ; tableau des cookies généré depuis l'inventaire ; lien ODR supprimé.
+- **Légal** : 7 documents avec version, date d'efficacité, date de mise à jour, sommaire, archive des versions.
+  Textes repris des documents en vigueur de GLAMRO S.R.L. (sauf Condizioni Professionisti, encore à fournir) ;
+  dans la cookie policy, la liste des cookies est générée depuis l'inventaire réel du site.
 
 ## À compléter avant la mise en ligne
 
 Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` dans l'interface.
 
 - [ ] **Photos** (hero rider, storytelling ×4, bloc pro, chi siamo) → `site.config.ts`, voir `public/images/LEGGIMI.md`
-- [ ] **Données société** (raison sociale, P.IVA, siège, REA) et e-mails support/privacy → `site.config.ts`
-- [ ] **URL des stores** des deux apps (clients et professionnels) et **réseaux sociaux officiels** → `site.config.ts` (`apps.client`, `apps.pro`)
+- [x] **Données société**, e-mails, URL des stores et réseaux sociaux → `site.config.ts`
 - [ ] **Trustpilot** : `businessUnitId` et `templateId` → `environment.ts`
-- [ ] **Textes légaux** définitifs validés par le conseil juridique → `features/legal/legal-docs.ts`
-- [ ] **Règles métier** (fenêtres d'annulation, commissions, paiements, vérification) → pages Come funziona,
-      Fiducia, Assistenza, Per professionisti (blocs `placeholder`)
+- [ ] **Textes légaux** : fournir les **Condizioni Professionisti** et la date de l'informativa privacy ; retirer le
+      lien ODR (plateforme fermée le 20/07/2025) des T&C et de la Policy reclami → `features/legal/legal-docs.ts`
+- [ ] **Règles métier** restantes (documents de vérification, prestataire de paiement, critères de classement P2B,
+      horaires du support, commissions, versements, assurance) → textes entre `[crochets]` dans les i18n
 - [ ] **Preuves datées** de la revendication « Il primo beauty delivery in Italia » (brief §2)
 - [ ] **Scan cookies** réel du site en production pour valider `cookie-inventory.ts`
 - [ ] Choix final de la **CMP** : la CMP interne suffit, ou remplacer `ConsentService` par une CMP commerciale
