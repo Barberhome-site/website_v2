@@ -8,7 +8,7 @@ import {
   withRouterConfig,
 } from '@angular/router';
 import { routes } from './app.routes';
-import { langInterceptor } from './core/data/http/lang.interceptor';
+import { siteApiInterceptor } from './core/data/http/site-api.interceptor';
 import { provideGlamroData } from './core/data/provide-glamro-data';
 
 export const appConfig: ApplicationConfig = {
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
       withRouterConfig({ paramsInheritanceStrategy: 'always' }),
     ),
-    provideHttpClient(withFetch(), withInterceptors([langInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([siteApiInterceptor])),
     // Hydratation + cache de transfert des requêtes GET (pas de double appel API).
     provideClientHydration(withEventReplay()),
     provideGlamroData(),

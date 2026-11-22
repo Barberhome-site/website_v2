@@ -42,7 +42,7 @@ const STAGE_ICONS: IconName[] = ['search', 'user', 'calendar', 'bike', 'card', '
               <p><strong>{{ s.answer }}</strong></p>
               <p>{{ s.detail }}</p>
               @if (s.placeholder) {
-                <p class="placeholder">{{ s.placeholder }}</p>
+                <p [class.placeholder]="s.placeholder.startsWith('[')">{{ s.placeholder }}</p>
               }
             </div>
           </li>

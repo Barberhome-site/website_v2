@@ -25,7 +25,7 @@
       <section id="cancellazioni" class="prose" aria-labelledby="canc-title">
         <h2 id="canc-title">{{ t.cancelTitle }}</h2>
         <p><strong>{{ t.cancelAnswer }}</strong></p>
-        <p class="placeholder">{{ t.cancelPlaceholder }}</p>
+        <p [class.placeholder]="t.cancelPlaceholder.startsWith('[')">{{ t.cancelPlaceholder }}</p>
         <p>{{ t.cancelMore }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>.</p>
       </section>
     </div>

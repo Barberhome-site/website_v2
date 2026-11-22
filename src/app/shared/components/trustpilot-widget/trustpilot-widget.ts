@@ -32,17 +32,22 @@ interface TrustpilotGlobal {
   imports: [Icon],
   template: `
     @if (canLoad()) {
-      <div
-        #widget
-        class="trustpilot-widget"
-        [attr.data-locale]="i18n.locale()"
-        [attr.data-template-id]="config.templateId"
-        [attr.data-businessunit-id]="config.businessUnitId"
-        data-style-height="240px"
-        data-style-width="100%"
-        data-theme="dark"
-      >
-        <a [href]="config.profileUrl" target="_blank" rel="noopener" (click)="trackClick()">Trustpilot</a>
+      <div class="tp">
+        <p class="tp__title">{{ i18n.d().trustpilot.title }}</p>
+        <p class="muted">{{ i18n.d().trustpilot.invite }}</p>
+        <div
+          #widget
+          class="trustpilot-widget tp__box"
+          [attr.data-locale]="i18n.locale()"
+          [attr.data-template-id]="config.templateId"
+          [attr.data-businessunit-id]="config.businessUnitId"
+          [attr.data-style-height]="config.height"
+          [style.min-height]="config.height"
+          data-style-width="100%"
+          data-theme="dark"
+        >
+          <a [href]="config.profileUrl" target="_blank" rel="noopener" (click)="trackClick()">Trustpilot</a>
+        </div>
       </div>
     } @else {
       <div class="tp-fallback">
@@ -63,9 +68,14 @@ interface TrustpilotGlobal {
   `,
   styles: `
     :host { display: block; }
-    .tp-fallback { display: flex; flex-direction: column; gap: .25rem; }
-    .tp-fallback p { margin: 0; }
-    .tp-fallback__title { font-weight: 700; font-size: 1.15rem; }
+    .tp, .tp-fallback { display: flex; flex-direction: column; gap: .25rem; }
+    .tp p, .tp-fallback p { margin: 0; }
+    .tp__title, .tp-fallback__title { font-weight: 700; font-size: 1.15rem; }
+    /*
+     * Le site est en color-scheme: dark ; l'iframe Trustpilot est en clair. Quand les deux diffèrent,
+     * le navigateur peint un fond blanc opaque derrière l'iframe. Même schéma = fond transparent.
+     */
+    .tp__box { margin-top: .75rem; color-scheme: light; }
     .tp-fallback__consent { margin-top: .5rem !important; }
     .tp-fallback__btn {
       background: none; border: 0; padding: 0; min-height: 44px; color: var(--c-text);

@@ -31,7 +31,8 @@ ce sont des outils du build Angular. Les approuver avec `npm approve-scripts` (i
 src/
 ├── server.ts                    Serveur Express SSR + en-têtes de sécurité (CSP) + /sitemap.xml
 ├── server/sitemap.ts            Sitemap : uniquement URL canoniques publiées, lastmod réel
-├── environments/                siteUrl, useMockData, apiBaseUrl, ID Google Analytics, Trustpilot
+├── server/site-api/             /site-api : appels à l'API GLAMRO, cache, données minimales (voir plus bas)
+├── environments/                siteUrl, useMockData, apiBaseUrl, balise Google (GTM-…), Trustpilot
 ├── styles/                      Système visuel du brief (couleurs, typo, boutons 48 px, focus, formulaires)
 └── app/
     ├── app.routes.ts            Arborescence (slugs italiens), une branche par langue
@@ -39,7 +40,8 @@ src/
     ├── app.routes.server.ts     Rendu par route : Prerender (pages stables) / Server (données live)
     ├── core/
     │   ├── models/              Modèles du domaine (contrat que l'API devra remplir)
-    │   ├── data/                ★ Point de branchement de l'API (voir plus bas)
+    │   ├── data/                ★ Source des données : exemple (mock) ou réelles (/site-api)
+    │   ├── content/             Contenu éditorial : catégories, villes suivies, traductions
     │   ├── seo/                 title, description, canonical, robots, Open Graph, JSON-LD
     │   ├── i18n/                Langue courante, pipes `lp` (liens) et `fmt` (paramètres), résolveur
     │   ├── booking/             Ouverture de la popup « Prenota »
@@ -66,7 +68,8 @@ src/
 | `/come-funziona`, `/fiducia`, `/per-professionisti`, `/chi-siamo` | Pages éditoriales | Pré-rendu |
 | `/assistenza` | FAQ, annulations/remboursements, formulaire de contact | SSR |
 | `/per-professionisti/candidatura` | Formulaire de candidature (noindex) | SSR |
-| `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti` | Documents légaux versionnés | Pré-rendu |
+| `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti`, `/regolamento-piattaforma`, `/policy-reclami`, `/disclaimer-igienico-sanitario` | Documents légaux versionnés | Pré-rendu |
+| `/index`, `/privacy`, `/cookie`, `/cookie-policy`, `/terms`, `/termini`, `/termini-professionisti`, `/documents/*.pdf` | Anciennes adresses (site précédent `midnight-welcome`, app) | Redirection 301 vers la nouvelle page |
 
 ## Langues (it, en, fr, es, de)
 
@@ -94,8 +97,8 @@ src/
   ```
 - **Ajouter une langue** : l'ajouter dans `core/i18n/i18n.config.ts` (`LANGS`, `LANG_INFO`), créer `i18n/xx.ts`
   typé `Dict`, l'ajouter aux `LOADERS` de `i18n.service.ts`.
-- **Données** : l'API recevra la langue via l'en-tête `Accept-Language` (`core/data/http/lang.interceptor.ts`) ;
-  les données d'exemple sont déjà traduites (`core/data/mock/mock-i18n.ts`).
+- **Données** : `HttpGlamroDataSource` envoie `?lang=` à `/site-api` ; les textes des services et des villes
+  sont traduits dans `core/content/` (les contenus venant de l'API restent en italien).
 - **Documents légaux** : l'interface est traduite, mais le corps reste en italien (texte de référence soumis au
   conseil juridique) avec un avertissement ; le canonical de ces pages pointe vers la version italienne.
 
@@ -164,23 +167,40 @@ MapLibre l'affiche automatiquement à partir du style.
 - Le worker MapLibre et sa CSS sont copiés dans `/vendor/maplibre` par `angular.json` (pas de `blob:` dans la CSP).
 - URL du style : `mapStyleUrl` dans `environment.ts`.
 
-## Brancher l'API (plus tard)
+## Données réelles (API GLAMRO)
 
 Tout le site lit les données via **une seule classe abstraite** : `core/data/glamro-data-source.ts`.
-Aujourd'hui elle est fournie par `MockGlamroDataSource` (données d'exemple). Pour passer à l'API :
+- `useMockData: true` → `MockGlamroDataSource` (données d'exemple, bandeau jaune « dati di esempio »).
+- `useMockData: false` → `HttpGlamroDataSource`, qui appelle **`/site-api`** sur le serveur du site.
+  Par défaut : `false` partout ; API de dev en développement, API de production en production.
 
-1. **`environments/environment.ts`** : `useMockData: false` et `apiBaseUrl` réelle.
-2. **`core/data/http/http-glamro-data-source.ts`** : ajuster les chemins des endpoints (hypothèses actuelles :
-   `/services`, `/cities`, `/map/clusters`, `/professionals`, `/availability`, `/consents`…).
-3. **`core/data/http/api-mappers.ts`** : convertir le JSON reçu vers les modèles internes. Le mapper des profils
-   accepte déjà camelCase **et** snake_case (`professional_id`, `display_name`…, champs proposés par le brief).
-4. **`server/sitemap.ts`** : remplacer `loadDataset()` par des appels à l'API.
-5. **`server.ts`** : ajouter le domaine de l'API dans `connect-src` de la CSP.
+**`/site-api`** (`src/server/site-api/`) est la seule couche qui parle à l'API GLAMRO (`barberhome-backend`).
+Le navigateur ne l'appelle jamais directement.
+- Endpoints du backend utilisés, **sans aucune modification du backend** : `GET /services` (catalogue et
+  couverture autour d'un point), `GET /discovery/nearby-professionals`, `GET /professionals/:id/profile`.
+- Données minimales : le serveur renvoie seulement ce que le site affiche. Nom public « Prénom N. »
+  (le nom de famille complet ne quitte jamais le serveur), aucune coordonnée, aucune donnée interne.
+- Cache mémoire de 2 à 30 minutes selon les données, et `Cache-Control` sur les réponses.
+- Pendant le rendu serveur, les requêtes `/site-api` sont traitées en mémoire (`site-api.interceptor.ts`) ;
+  le cache de transfert d'Angular évite un second appel dans le navigateur.
 
-Les composants n'ont pas à changer. Le bandeau jaune « dati di esempio » disparaît dès que `useMockData` est à `false`.
+**Villes** : liste suivie par le site dans `core/content/site-content.ts` (nom, région, centre, préfixes de CAP).
+Une ville est active dès qu'au moins un professionnel publié couvre son centre (rayon 20 km) ; sinon elle passe en
+liste d'attente (page non indexée). Ajouter une ville = une ligne dans `CITIES` + son nom et sa région dans
+`core/content/content-texts.ts`.
 
-En SSR, Angular attend les réponses `HttpClient` avant d'envoyer la page, et les transfère au navigateur
-(pas de double appel). Les listes peu volatiles (services, villes) sont mises en cache.
+**Catégories** : correspondance avec le catalogue de l'API dans `src/server/site-api/catalog.ts`
+(barber = sous-catégorie BARBA, nails = MANI + PIEDI ; PACCHETTI n'a pas de page). Les textes des pages
+de services et de villes restent ceux du site (`core/content`), dans les 5 langues ; les noms des services et les
+bios viennent de l'API, en italien.
+
+**Variables d'environnement (serveur)** :
+- `GLAMRO_API_URL` : base des routes de l'API (défaut : `apiBaseUrl` de l'environnement, ex. `https://api.glamro.it/api`).
+- `SITE_MEDIA_ORIGINS` : domaines des photos des professionnels pour la CSP (défaut : `https://glamro.s3.eu-south-1.amazonaws.com`).
+  À remplacer par le domaine exact de `S3_PUBLIC_BASE_URL` du backend.
+
+**Pas encore branché** (pas d'endpoint public dans le backend) : candidatures pro, demandes d'assistance
+(le formulaire affiche une erreur qui invite à écrire par email) et preuve de consentement côté serveur.
 
 ## Ce que couvre le code (rapport au brief)
 
@@ -201,25 +221,28 @@ En SSR, Angular attend les réponses `HttpClient` avant d'envoyer la page, et le
   distinction avis GLAMRO / avis des professionnels.
 - **Cookies (P0)** : rien d'autre que le nécessaire avant le choix ; Accetta / Rifiuta / Personalizza au même
   niveau ; X = refus ; preuve (version, date, choix) stockée et envoyée à l'API ; « Gestisci cookie » dans le footer ;
-  GA4 (Consent Mode v2) chargé seulement après consentement, sans données personnelles ni query string.
+  GA4 (Consent Mode v2, conteneur `GTM-M625CVRL`) chargé seulement après consentement, sans données personnelles ;
+  dans GA, masquer le paramètre d'URL `cap` (Flux de données → Masquer les données → Paramètres de requête d'URL).
 - **Accessibilité** : skip link, focus visible, boutons ≥ 48 px, cibles ≥ 44 px, un H1 par page, labels persistants,
   erreurs textuelles, `autocomplete`, messages de succès, `<dialog>` natif pour les préférences.
 - **Performance** : pages chargées à la demande, carte en `@defer`, polices auto-hébergées (pas de Google Fonts),
   `NgOptimizedImage` (lazy loading, preload de la hero), dimensions fixes contre le CLS.
-- **Légal** : structure des 4 documents avec version, date d'efficacité, date de mise à jour, sommaire, archive des
-  versions ; tableau des cookies généré depuis l'inventaire ; lien ODR supprimé.
+- **Légal** : 7 documents avec version, date d'efficacité, date de mise à jour, sommaire, archive des versions.
+  Textes repris des documents en vigueur de GLAMRO S.R.L. (sauf Condizioni Professionisti, encore à fournir) ;
+  dans la cookie policy, la liste des cookies est générée depuis l'inventaire réel du site.
 
 ## À compléter avant la mise en ligne
 
 Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` dans l'interface.
 
 - [ ] **Photos** (hero rider, storytelling ×4, bloc pro, chi siamo) → `site.config.ts`, voir `public/images/LEGGIMI.md`
-- [ ] **Données société** (raison sociale, P.IVA, siège, REA) et e-mails support/privacy → `site.config.ts`
-- [ ] **URL des stores** des deux apps (clients et professionnels) et **réseaux sociaux officiels** → `site.config.ts` (`apps.client`, `apps.pro`)
-- [ ] **Trustpilot** : `businessUnitId` et `templateId` → `environment.ts`
-- [ ] **Textes légaux** définitifs validés par le conseil juridique → `features/legal/legal-docs.ts`
-- [ ] **Règles métier** (fenêtres d'annulation, commissions, paiements, vérification) → pages Come funziona,
-      Fiducia, Assistenza, Per professionisti (blocs `placeholder`)
+- [x] **Données société**, e-mails, URL des stores et réseaux sociaux → `site.config.ts`
+- [x] **Trustpilot** : widget Review Collector configuré (plan gratuit) ; passer à un widget de note (Mini, Micro…)
+      quand il y aura des avis → `templateId` et `height` dans `environment.ts`
+- [ ] **Textes légaux** : fournir les **Condizioni Professionisti** et la date de l'informativa privacy ; retirer le
+      lien ODR (plateforme fermée le 20/07/2025) des T&C et de la Policy reclami → `features/legal/legal-docs.ts`
+- [ ] **Règles métier** restantes (documents de vérification, prestataire de paiement, critères de classement P2B,
+      horaires du support, commissions, versements, assurance) → textes entre `[crochets]` dans les i18n
 - [ ] **Preuves datées** de la revendication « Il primo beauty delivery in Italia » (brief §2)
 - [ ] **Scan cookies** réel du site en production pour valider `cookie-inventory.ts`
 - [ ] Choix final de la **CMP** : la CMP interne suffit, ou remplacer `ConsentService` par une CMP commerciale

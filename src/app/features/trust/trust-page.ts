@@ -35,14 +35,14 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
             <li>{{ item }}</li>
           }
         </ul>
-        <p class="placeholder">{{ t.verification.placeholder }}</p>
+        <p [class.placeholder]="t.verification.placeholder.startsWith('[')">{{ t.verification.placeholder }}</p>
       </section>
 
       <section id="pagamenti" aria-labelledby="t-pagamenti">
         <h2 id="t-pagamenti">{{ t.payments.title }}</h2>
         <p><strong>{{ t.payments.answer }}</strong></p>
         <p>{{ t.payments.text }}</p>
-        <p class="placeholder">{{ t.payments.placeholder }}</p>
+        <p [class.placeholder]="t.payments.placeholder.startsWith('[')">{{ t.payments.placeholder }}</p>
       </section>
 
       <section id="recensioni" aria-labelledby="t-recensioni">
@@ -54,7 +54,7 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
           }
         </ul>
         <p>{{ t.reviews.noFake }}</p>
-        <p class="placeholder">{{ t.reviews.placeholder }}</p>
+        <p [class.placeholder]="t.reviews.placeholder.startsWith('[')">{{ t.reviews.placeholder }}</p>
         <div class="card"><app-trustpilot-widget /></div>
       </section>
 
@@ -62,14 +62,14 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
         <h2 id="t-ordinamento">{{ t.ranking.title }}</h2>
         <p><strong>{{ t.ranking.answer }}</strong></p>
         <p>{{ t.ranking.text }}</p>
-        <p class="placeholder">{{ t.ranking.placeholder }}</p>
+        <p [class.placeholder]="t.ranking.placeholder.startsWith('[')">{{ t.ranking.placeholder }}</p>
       </section>
 
       <section id="assistenza" aria-labelledby="t-assistenza">
         <h2 id="t-assistenza">{{ t.support.title }}</h2>
         <p><strong>{{ t.support.answer }}</strong></p>
         <p>{{ t.support.text }} <a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="contatti">{{ t.support.link }}</a>.</p>
-        <p class="placeholder">{{ t.support.placeholder }}</p>
+        <p [class.placeholder]="t.support.placeholder.startsWith('[')">{{ t.support.placeholder }}</p>
       </section>
 
       <section id="sicurezza" aria-labelledby="t-sicurezza">
@@ -85,7 +85,7 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
       <section id="reclami" aria-labelledby="t-reclami">
         <h2 id="t-reclami">{{ t.complaints.title }}</h2>
         <p><strong>{{ t.complaints.answer }}</strong></p>
-        <p class="placeholder">{{ t.complaints.placeholder }}</p>
+        <p [class.placeholder]="t.complaints.placeholder.startsWith('[')">{{ t.complaints.placeholder }}</p>
       </section>
     </div>
   `,

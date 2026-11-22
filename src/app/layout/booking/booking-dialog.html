@@ -17,17 +17,17 @@
     @if (platform() === 'desktop') {
       <p class="bd__label">{{ i18n.d().booking.desktop }}</p>
       <div class="bd__stores">
-        <a class="btn btn--primary" [href]="stores.ios.url" rel="noopener" (click)="trackStore(stores.ios.id)">
-          <app-icon name="phone" /> {{ stores.ios.name }}
+        <a class="btn btn--primary" [href]="stores.ios.url" target="_blank" rel="noopener" (click)="trackStore(stores.ios.id)">
+          <app-icon name="phone" /> {{ stores.ios.name }}<span class="visually-hidden"> {{ i18n.d().common.newTab }}</span>
         </a>
-        <a class="btn btn--primary" [href]="stores.android.url" rel="noopener" (click)="trackStore(stores.android.id)">
-          <app-icon name="phone" /> {{ stores.android.name }}
+        <a class="btn btn--primary" [href]="stores.android.url" target="_blank" rel="noopener" (click)="trackStore(stores.android.id)">
+          <app-icon name="phone" /> {{ stores.android.name }}<span class="visually-hidden"> {{ i18n.d().common.newTab }}</span>
         </a>
       </div>
     } @else {
       <div class="bd__stores">
-        <a class="btn btn--primary btn--block" [href]="primaryStore().url" rel="noopener" (click)="trackStore(primaryStore().id)">
-          <app-icon name="phone" /> {{ i18n.d().booking.open | fmt: { store: primaryStore().name } }}
+        <a class="btn btn--primary btn--block" [href]="primaryStore().url" target="_blank" rel="noopener" (click)="trackStore(primaryStore().id)">
+          <app-icon name="phone" /> {{ i18n.d().booking.open | fmt: { store: primaryStore().name } }}<span class="visually-hidden"> {{ i18n.d().common.newTab }}</span>
         </a>
       </div>
 
@@ -38,8 +38,8 @@
         }
       </div>
 
-      <a class="small bd__other" [href]="secondaryStore().url" rel="noopener" (click)="trackStore(secondaryStore().id)">
-        {{ i18n.d().booking.other | fmt: { store: secondaryStore().name } }}
+      <a class="small bd__other" [href]="secondaryStore().url" target="_blank" rel="noopener" (click)="trackStore(secondaryStore().id)">
+        {{ i18n.d().booking.other | fmt: { store: secondaryStore().name } }}<span class="visually-hidden"> {{ i18n.d().common.newTab }}</span>
       </a>
     }
   }

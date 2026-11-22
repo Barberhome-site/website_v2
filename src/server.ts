@@ -9,6 +9,7 @@ import { join } from 'node:path';
 import { DEFAULT_LANG, localizePath } from './app/core/i18n/i18n.config';
 import { readLangCookie } from './app/core/i18n/lang-cookie';
 import { buildSitemapXml } from './server/sitemap';
+import { handleSiteApi, siteApi } from './server/site-api';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -24,6 +25,35 @@ const angularApp = new AngularNodeAppEngine();
  *  - MapLibre : worker auto-hébergé (worker-src 'self'), images des sprites décodées en blob:
  * À compléter quand l'URL de l'API sera connue (connect-src).
  */
+/**
+ * Origines des photos des professionnels (bucket S3 du backend). La variable SITE_MEDIA_ORIGINS
+ * (domaines séparés par des espaces) permet d'en ajouter, par exemple un CDN plus tard.
+ */
+const MEDIA_ORIGINS = process.env['SITE_MEDIA_ORIGINS'] || 'https://glamro.s3.eu-south-1.amazonaws.com';
+
+/**
+ * Anciennes adresses : site précédent (dépôt midnight-welcome : routes et PDF de public/documents)
+ * et liens de l'app mobile. Redirection permanente vers les nouvelles pages.
+ */
+const LEGACY_LEGAL: Record<string, string> = {
+  '/index': '/',
+  '/privacy': '/legale/privacy',
+  '/cookie': '/legale/cookie-policy',
+  '/cookie-policy': '/legale/cookie-policy',
+  '/terms': '/legale/condizioni-clienti',
+  '/termini': '/legale/condizioni-clienti',
+  '/termini-professionisti': '/legale/condizioni-professionisti',
+  '/documents/Informativa_trattamento_dati.pdf': '/legale/privacy',
+  '/documents/Informativa_Cookie.pdf': '/legale/cookie-policy',
+  '/documents/Termini_Condizioni.pdf': '/legale/condizioni-clienti',
+  '/documents/Regolamento_piattaforma.pdf': '/legale/regolamento-piattaforma',
+  '/documents/Policy_Reclami.pdf': '/legale/policy-reclami',
+  '/documents/Disclaimer_igienico_sanitario.pdf': '/legale/disclaimer-igienico-sanitario',
+};
+for (const [from, to] of Object.entries(LEGACY_LEGAL)) {
+  app.get(from, (_req, res) => res.redirect(301, to));
+}
+
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -35,7 +65,7 @@ app.use((_req, res, next) => {
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://widget.trustpilot.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net",
+      `img-src 'self' data: blob: https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net ${MEDIA_ORIGINS}`,
       "font-src 'self'",
       "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustpilot.com https://tiles.openfreemap.org",
       "worker-src 'self'",
@@ -45,6 +75,19 @@ app.use((_req, res, next) => {
     ].join('; '),
   );
   next();
+});
+
+/**
+ * Données réelles pour le site (src/server/site-api) : le navigateur appelle /site-api,
+ * le serveur interroge l'API GLAMRO, met en cache et renvoie seulement les champs affichés.
+ */
+app.get('/site-api/*path', async (req, res) => {
+  const url = new URL(req.originalUrl, 'http://site.local');
+  const result = await handleSiteApi(siteApi, url.pathname, url.searchParams);
+  res
+    .status(result.status)
+    .set('Cache-Control', result.maxAge ? `public, max-age=${result.maxAge}, s-maxage=${result.maxAge}` : 'no-store')
+    .json(result.body);
 });
 
 /** Sitemap générée côté serveur : seulement les URL canoniques publiées, avec lastmod réel. */

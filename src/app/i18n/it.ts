@@ -135,6 +135,7 @@ export const IT = {
   },
   trustpilot: {
     title: 'Recensioni su GLAMRO',
+    invite: 'Hai prenotato con GLAMRO? Raccontaci com\'è andata con una recensione su Trustpilot.',
     text: 'Le recensioni dei clienti su GLAMRO sono pubblicate sul profilo ufficiale Trustpilot.',
     link: 'Leggi le recensioni su Trustpilot',
     consent: 'Per vedere qui il widget ufficiale, attiva i contenuti di terze parti.',
@@ -197,7 +198,7 @@ export const IT = {
       duration: '2 anni',
       transfers: 'Possibile trasferimento negli USA (EU-US Data Privacy Framework) — da verificare',
     },
-    trustpilot: { purpose: 'Mostra punteggio e recensioni ufficiali di GLAMRO su Trustpilot.', duration: 'Da verificare con la scansione', transfers: 'Da verificare' },
+    trustpilot: { purpose: 'Mostra il widget ufficiale Trustpilot di GLAMRO per lasciare una recensione.', duration: 'Da verificare con la scansione', transfers: 'Da verificare' },
     basemap: {
       purpose: 'Carica lo sfondo cartografico della mappa (OpenFreeMap). Non imposta cookie; riceve l\'indirizzo IP. Le tessere possono restare nella cache del browser.',
       duration: 'Nessun cookie',
@@ -214,6 +215,9 @@ export const IT = {
     cookies: 'Cookie policy',
     customerTerms: 'Condizioni Clienti',
     proTerms: 'Condizioni Professionisti',
+    platformRules: 'Regolamento della piattaforma',
+    complaintsPolicy: 'Policy reclami',
+    hygiene: 'Igiene e sicurezza',
     manageCookies: 'Gestisci cookie',
     social: 'Profili social ufficiali',
     vat: 'P.IVA',
@@ -433,13 +437,13 @@ export const IT = {
         title: 'Pagamento',
         answer: 'Paghi nell\'app con metodi di pagamento protetti.',
         detail: 'Non devi gestire contanti con il professionista. La ricevuta è disponibile nell\'app.',
-        placeholder: '[Da completare: momento dell\'addebito, metodi accettati, fornitore dei pagamenti, emissione dei documenti fiscali.]',
+        placeholder: 'Metodi accettati: carta di credito, Apple Pay e Google Pay. GLAMRO incassa in nome e per conto del professionista. Non sono accettati contanti per i servizi prenotati, salvo mance facoltative.',
       },
       {
         title: 'Cancellazione',
         answer: 'Puoi cancellare o modificare dall\'app secondo le condizioni mostrate al momento della prenotazione.',
         detail: 'Le regole valgono anche quando è il professionista a cancellare o a non presentarsi.',
-        placeholder: '[Da completare con le Condizioni Clienti: finestre di cancellazione gratuita, eventuali costi, ritardi, assenze, tempi di rimborso.]',
+        placeholder: 'Cancellazione gratuita fino a 24 ore prima: rimborso o credito nell\'app. Meno di 24 ore prima: nessun rimborso (penale del 100%). In caso di ritardo si attende al massimo 20 minuti: se ritarda il professionista puoi riprogrammare o avere il rimborso completo; se ritarda il cliente, il servizio viene addebitato.',
       },
       {
         title: 'Assistenza',
@@ -483,7 +487,7 @@ export const IT = {
       title: 'Pagamenti',
       answer: 'Paghi nell\'app con metodi di pagamento protetti; non servono contanti.',
       text: 'I dati della carta sono gestiti dal fornitore dei pagamenti e non vengono memorizzati da GLAMRO.',
-      placeholder: '[Da completare: nome del fornitore dei pagamenti, momento dell\'addebito, gestione dei rimborsi.]',
+      placeholder: 'Metodi accettati: carta di credito, Apple Pay e Google Pay. GLAMRO incassa in nome e per conto del professionista. I rimborsi avvengono come credito GLAMRO nell\'app oppure sul metodo di pagamento originale, entro 5–10 giorni lavorativi.',
     },
     reviews: {
       title: 'Recensioni',
@@ -493,7 +497,7 @@ export const IT = {
         { label: 'Recensioni sui professionisti', text: 'raccolte da GLAMRO solo dopo un servizio prenotato e pagato sulla piattaforma, e mostrate nel profilo del professionista.' },
       ],
       noFake: 'Non pubblichiamo recensioni scritte da noi né punteggi inventati.',
-      placeholder: '[Da completare: come vengono verificate le recensioni, moderazione, gestione delle recensioni negative (Direttiva Omnibus).]',
+      placeholder: 'Le recensioni devono essere veritiere e coerenti con il servizio ricevuto. GLAMRO rimuove le recensioni ingiuriose, offensive o false.',
     },
     ranking: {
       title: 'Come ordiniamo i risultati',
@@ -506,7 +510,7 @@ export const IT = {
       answer: 'Puoi contattarci prima, durante e dopo il servizio.',
       text: 'Scrivici dall\'app o dalla pagina',
       link: 'Assistenza',
-      placeholder: '[Da completare: canali, orari e tempi di risposta.]',
+      placeholder: 'Canali ufficiali: ticket dall\'app (sezione «Assistenza Ordine») o email a support@glamro.it.',
     },
     safety: {
       title: 'Sicurezza',
@@ -520,7 +524,7 @@ export const IT = {
     complaints: {
       title: 'Reclami',
       answer: 'Se qualcosa non va, apri un reclamo dall\'app o dalla pagina Assistenza.',
-      placeholder: '[Da completare: prove richieste, tempi di risposta, escalation, rimedi, procedura di risoluzione delle controversie aggiornata.]',
+      placeholder: 'Per un servizio, il reclamo va inviato entro 24 ore dalla fine dell\'appuntamento, con il numero della prenotazione, la descrizione del problema ed eventuali foto. GLAMRO verifica il caso: se il professionista è responsabile, l\'importo può essere rimborsato in tutto o in parte. Se il professionista non si presenta, il rimborso è integrale e automatico. Dettagli nella Policy reclami.',
     },
     seoDescription:
       'Come GLAMRO verifica i professionisti, gestisce pagamenti e recensioni, ordina i risultati e assiste clienti e professionisti.',
@@ -547,7 +551,7 @@ export const IT = {
     cancelTitle: 'Cancellazioni e rimborsi',
     cancelAnswer: 'Puoi cancellare o modificare una prenotazione dall\'app, secondo le condizioni mostrate prima della conferma.',
     cancelPlaceholder:
-      '[Da completare con le Condizioni Clienti: finestra di cancellazione gratuita, eventuali costi, ritardi, assenze, tempi e modalità di rimborso.]',
+      'Cancellazione gratuita fino a 24 ore prima: rimborso o credito nell\'app. Meno di 24 ore prima: nessun rimborso (penale del 100%). In caso di ritardo si attende al massimo 20 minuti: se ritarda il professionista puoi riprogrammare o avere il rimborso completo; se ritarda il cliente, il servizio viene addebitato. I rimborsi arrivano come credito GLAMRO oppure sul metodo di pagamento originale, entro 5–10 giorni lavorativi.',
     cancelMore: 'Dettagli completi nelle',
     customerTerms: 'Condizioni Clienti',
     contactTitle: 'Contatta l\'assistenza',
@@ -602,7 +606,7 @@ export const IT = {
       {
         title: 'Responsabilità',
         text: 'Lavori come professionista indipendente: rispetti gli standard di servizio e igiene GLAMRO e le norme del tuo settore.',
-        placeholder: '[Assicurazione richiesta, standard, cause di sospensione da indicare.]',
+        placeholder: 'Standard richiesti: puntualità, abbigliamento professionale, strumenti igienizzati e monouso dove previsto, tono professionale con il cliente. Le violazioni ripetute comportano un avviso scritto, la sospensione temporanea o la cancellazione dell\'account (Regolamento della piattaforma).',
       },
       {
         title: 'Assistenza',
@@ -678,7 +682,7 @@ export const IT = {
     roleTitle: 'Il nostro ruolo',
     roleText:
       'GLAMRO gestisce la piattaforma, la verifica dei professionisti, le prenotazioni, i pagamenti e l\'assistenza. Il servizio è eseguito da professionisti indipendenti.',
-    rolePlaceholder: '[Da precisare con il consulente legale: chi conclude il contratto del servizio e quali obblighi assume GLAMRO.]',
+    rolePlaceholder: 'GLAMRO è un intermediario tecnologico: il contratto per il servizio beauty è concluso direttamente tra cliente e professionista. GLAMRO gestisce la piattaforma, la prenotazione e il pagamento, che incassa in nome e per conto del professionista.',
     glossaryTitle: 'Glossario',
     glossary: [
       { term: 'Beauty delivery', definition: 'Servizio beauty o wellness svolto nel luogo scelto dal cliente.' },

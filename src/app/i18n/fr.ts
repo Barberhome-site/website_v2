@@ -132,6 +132,7 @@ export const FR: Dict = {
   },
   trustpilot: {
     title: 'Avis sur GLAMRO',
+    invite: 'Vous avez réservé avec GLAMRO ? Racontez-nous comment ça s\'est passé avec un avis sur Trustpilot.',
     text: 'Les avis des clients sur GLAMRO sont publiés sur le profil officiel Trustpilot.',
     link: 'Lire les avis sur Trustpilot',
     consent: 'Pour afficher ici le widget officiel, activez les contenus tiers.',
@@ -194,7 +195,7 @@ export const FR: Dict = {
       duration: '2 ans',
       transfers: 'Transfert possible vers les États-Unis (EU-US Data Privacy Framework) — à vérifier',
     },
-    trustpilot: { purpose: 'Affiche la note et les avis officiels de GLAMRO sur Trustpilot.', duration: 'À vérifier lors du scan', transfers: 'À vérifier' },
+    trustpilot: { purpose: 'Affiche le widget officiel Trustpilot de GLAMRO pour laisser un avis.', duration: 'À vérifier lors du scan', transfers: 'À vérifier' },
     basemap: {
       purpose: 'Charge le fond de carte (OpenFreeMap). Ne dépose aucun cookie ; reçoit l\'adresse IP. Les tuiles peuvent rester dans le cache du navigateur.',
       duration: 'Aucun cookie',
@@ -211,6 +212,9 @@ export const FR: Dict = {
     cookies: 'Politique cookies',
     customerTerms: 'Conditions Clients',
     proTerms: 'Conditions Professionnels',
+    platformRules: 'Règlement de la plateforme',
+    complaintsPolicy: 'Politique de réclamations',
+    hygiene: 'Hygiène et sécurité',
     manageCookies: 'Gérer les cookies',
     social: 'Réseaux sociaux officiels',
     vat: 'N° TVA',
@@ -430,13 +434,13 @@ export const FR: Dict = {
         title: 'Paiement',
         answer: 'Vous payez dans l\'app avec des moyens de paiement sécurisés.',
         detail: 'Pas d\'espèces à gérer avec le professionnel. Le reçu est disponible dans l\'app.',
-        placeholder: '[À compléter : moment du débit, moyens acceptés, prestataire de paiement, émission des documents fiscaux.]',
+        placeholder: 'Moyens acceptés : carte bancaire, Apple Pay et Google Pay. GLAMRO encaisse au nom et pour le compte du professionnel. Les espèces ne sont pas acceptées pour les services réservés, sauf pourboires facultatifs.',
       },
       {
         title: 'Annulation',
         answer: 'Vous pouvez annuler ou modifier dans l\'app selon les conditions affichées lors de la réservation.',
         detail: 'Les règles s\'appliquent aussi lorsque c\'est le professionnel qui annule ou ne se présente pas.',
-        placeholder: '[À compléter avec les Conditions Clients : délais d\'annulation gratuite, frais éventuels, retards, absences, délais de remboursement.]',
+        placeholder: 'Annulation gratuite jusqu\'à 24 heures avant : remboursement ou crédit dans l\'app. Moins de 24 heures avant : aucun remboursement (pénalité de 100 %). En cas de retard, l\'attente est de 20 minutes au maximum : si le professionnel est en retard, vous pouvez reprogrammer ou être remboursé intégralement ; si le client est en retard, le service est facturé.',
       },
       {
         title: 'Assistance',
@@ -480,7 +484,7 @@ export const FR: Dict = {
       title: 'Paiements',
       answer: 'Vous payez dans l\'app avec des moyens de paiement sécurisés ; pas besoin d\'espèces.',
       text: 'Les données de carte sont gérées par le prestataire de paiement et ne sont pas conservées par GLAMRO.',
-      placeholder: '[À compléter : nom du prestataire de paiement, moment du débit, gestion des remboursements.]',
+      placeholder: 'Moyens acceptés : carte bancaire, Apple Pay et Google Pay. GLAMRO encaisse au nom et pour le compte du professionnel. Les remboursements se font en crédit GLAMRO dans l\'app ou sur le moyen de paiement d\'origine, sous 5 à 10 jours ouvrés.',
     },
     reviews: {
       title: 'Avis',
@@ -490,7 +494,7 @@ export const FR: Dict = {
         { label: 'Avis sur les professionnels', text: 'recueillis par GLAMRO uniquement après un service réservé et payé sur la plateforme, et affichés sur le profil du professionnel.' },
       ],
       noFake: 'Nous ne publions ni avis rédigés par nous, ni notes inventées.',
-      placeholder: '[À compléter : vérification des avis, modération, traitement des avis négatifs (directive Omnibus).]',
+      placeholder: 'Les avis doivent être sincères et correspondre au service reçu. GLAMRO supprime les avis injurieux, offensants ou faux.',
     },
     ranking: {
       title: 'Comment nous classons les résultats',
@@ -503,7 +507,7 @@ export const FR: Dict = {
       answer: 'Vous pouvez nous contacter avant, pendant et après le service.',
       text: 'Écrivez-nous depuis l\'app ou depuis la page',
       link: 'Aide',
-      placeholder: '[À compléter : canaux, horaires et délais de réponse.]',
+      placeholder: 'Canaux officiels : un ticket dans l\'app (rubrique « Assistenza Ordine ») ou un email à support@glamro.it.',
     },
     safety: {
       title: 'Sécurité',
@@ -517,7 +521,7 @@ export const FR: Dict = {
     complaints: {
       title: 'Réclamations',
       answer: 'En cas de problème, ouvrez une réclamation depuis l\'app ou la page Aide.',
-      placeholder: '[À compléter : justificatifs demandés, délais de réponse, escalade, solutions, procédure de règlement des litiges à jour.]',
+      placeholder: 'Pour un service, la réclamation doit être envoyée dans les 24 heures suivant la fin du rendez-vous, avec le numéro de réservation, la description du problème et d\'éventuelles photos. GLAMRO examine le cas : si le professionnel est responsable, le montant peut être remboursé en tout ou en partie. Si le professionnel ne se présente pas, le remboursement est intégral et automatique. Détails dans la Politique de réclamations.',
     },
     seoDescription:
       'Comment GLAMRO vérifie les professionnels, gère paiements et avis, classe les résultats et accompagne clients et professionnels.',
@@ -544,7 +548,7 @@ export const FR: Dict = {
     cancelTitle: 'Annulations et remboursements',
     cancelAnswer: 'Vous pouvez annuler ou modifier une réservation dans l\'app, selon les conditions affichées avant la confirmation.',
     cancelPlaceholder:
-      '[À compléter avec les Conditions Clients : délai d\'annulation gratuite, frais éventuels, retards, absences, délais et modes de remboursement.]',
+      'Annulation gratuite jusqu\'à 24 heures avant : remboursement ou crédit dans l\'app. Moins de 24 heures avant : aucun remboursement (pénalité de 100 %). En cas de retard, l\'attente est de 20 minutes au maximum : si le professionnel est en retard, vous pouvez reprogrammer ou être remboursé intégralement ; si le client est en retard, le service est facturé. Les remboursements se font en crédit GLAMRO ou sur le moyen de paiement d\'origine, sous 5 à 10 jours ouvrés.',
     cancelMore: 'Tous les détails dans les',
     customerTerms: 'Conditions Clients',
     contactTitle: 'Contacter l\'assistance',
@@ -599,7 +603,7 @@ export const FR: Dict = {
       {
         title: 'Responsabilités',
         text: 'Vous travaillez comme professionnel indépendant : vous respectez les standards de service et d\'hygiène GLAMRO et les règles de votre secteur.',
-        placeholder: '[Assurance requise, standards, motifs de suspension à préciser.]',
+        placeholder: 'Standards exigés : ponctualité, tenue professionnelle, outils désinfectés et matériel à usage unique quand c\'est prévu, ton professionnel avec le client. Les manquements répétés entraînent un avertissement écrit, une suspension temporaire ou la suppression du compte (Règlement de la plateforme).',
       },
       {
         title: 'Assistance',
@@ -675,7 +679,7 @@ export const FR: Dict = {
     roleTitle: 'Notre rôle',
     roleText:
       'GLAMRO gère la plateforme, la vérification des professionnels, les réservations, les paiements et l\'assistance. Le service est réalisé par des professionnels indépendants.',
-    rolePlaceholder: '[À préciser avec le conseil juridique : qui conclut le contrat de service et quelles obligations GLAMRO assume.]',
+    rolePlaceholder: 'GLAMRO est un intermédiaire technologique : le contrat de service beauté est conclu directement entre le client et le professionnel. GLAMRO gère la plateforme, la réservation et le paiement, qu\'il encaisse au nom et pour le compte du professionnel.',
     glossaryTitle: 'Glossaire',
     glossary: [
       { term: 'Beauty delivery', definition: 'Service beauté ou bien-être réalisé au lieu choisi par le client.' },

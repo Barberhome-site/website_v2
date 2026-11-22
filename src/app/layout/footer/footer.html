@@ -46,6 +46,9 @@
           <li><a [routerLink]="'/legale/cookie-policy' | lp: i18n.lang()">{{ t.footer.cookies }}</a></li>
           <li><a [routerLink]="'/legale/condizioni-clienti' | lp: i18n.lang()">{{ t.footer.customerTerms }}</a></li>
           <li><a [routerLink]="'/legale/condizioni-professionisti' | lp: i18n.lang()">{{ t.footer.proTerms }}</a></li>
+          <li><a [routerLink]="'/legale/regolamento-piattaforma' | lp: i18n.lang()">{{ t.footer.platformRules }}</a></li>
+          <li><a [routerLink]="'/legale/policy-reclami' | lp: i18n.lang()">{{ t.footer.complaintsPolicy }}</a></li>
+          <li><a [routerLink]="'/legale/disclaimer-igienico-sanitario' | lp: i18n.lang()">{{ t.footer.hygiene }}</a></li>
           <li>
             <button type="button" class="footer__linkbtn" (click)="consent.openPreferences()">{{ t.footer.manageCookies }}</button>
           </li>
@@ -62,7 +65,7 @@
         }
       </ul>
       <p class="footer__legal">
-        © {{ year }} {{ site.company.legalName }} · {{ t.footer.vat }} {{ site.company.vatNumber }} · {{ site.company.address }}
+        © {{ year }} {{ site.company.legalName }} · {{ site.company.address }} · {{ t.footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }} · {{ site.company.shareCapital }}
       </p>
     </div>
   </div>

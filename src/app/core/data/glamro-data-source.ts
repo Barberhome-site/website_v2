@@ -19,8 +19,8 @@ import { ConsentRecord } from '../consent/consent.model';
  *
  * Les composants injectent `GlamroDataSource` et ne savent pas d'où viennent les données.
  * Deux implémentations :
- *  - `MockGlamroDataSource`  → données d'exemple locales (situation actuelle)
- *  - `HttpGlamroDataSource`  → appels à l'API GLAMRO (à finaliser quand l'API sera prête)
+ *  - `MockGlamroDataSource`  → données d'exemple locales
+ *  - `HttpGlamroDataSource`  → données réelles de l'API GLAMRO, via /site-api (src/server/site-api)
  *
  * Le choix se fait dans `provideGlamroData()` selon `environment.useMockData`.
  *

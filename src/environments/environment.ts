@@ -8,28 +8,31 @@ export const environment = {
   /** URL publique du site, utilisée pour canonical, Open Graph, JSON-LD et sitemap. */
   siteUrl: 'https://www.glamro.it',
 
-  /**
-   * Source des données.
-   * TODO API : passer `useMockData` à false et renseigner `apiBaseUrl` quand l'API sera disponible.
-   */
-  useMockData: true,
-  apiBaseUrl: 'https://api.glamro.it/v1',
-
-  /** Google Analytics 4 — chargé UNIQUEMENT après consentement « analytics » (brief §13). */
-  gaMeasurementId: 'G-FK165T4KP6',
+  /** Source des données : `true` = données d'exemple, `false` = API GLAMRO via /site-api. */
+  useMockData: false,
+  /** API GLAMRO (routes /api), appelée uniquement par le serveur. Remplaçable par GLAMRO_API_URL. */
+  apiBaseUrl: 'https://api.glamro.it/api',
 
   /**
-   * Trustpilot TrustBox officiel (brief §7).
-   * Tant que businessUnitId/templateId sont vides, le site affiche un lien neutre vers le profil.
+   * Balise Google (Analytics 4) — chargée UNIQUEMENT après consentement « analytics » (brief §13).
+   * Conteneur Tag Manager `GTM-…` (snippet actuel fourni par Google Analytics) ou ID de mesure `G-…`.
    */
+  googleTagId: 'GTM-M625CVRL',
+
   /**
    * Fond de carte : style vectoriel « Dark » d'OpenFreeMap (gratuit, sans clé ni quota, usage commercial autorisé).
    */
   mapStyleUrl: 'https://tiles.openfreemap.org/styles/dark',
 
+  /**
+   * Trustpilot TrustBox officiel (brief §7). Widget « Review Collector » (plan gratuit) : un bouton
+   * « Recensiscici su Trustpilot ». Si businessUnitId/templateId sont vides, le site affiche un lien
+   * neutre vers le profil. Pour passer plus tard à un widget de note (Mini, Micro…), changer templateId et height.
+   */
   trustpilot: {
-    businessUnitId: '',
-    templateId: '',
+    businessUnitId: '6af514939898c9d06ed3ca8f',
+    templateId: '56278e9abfbbba0bdcd568bc',
+    height: '52px',
     profileUrl: 'https://it.trustpilot.com/review/glamro.it',
   },
 };

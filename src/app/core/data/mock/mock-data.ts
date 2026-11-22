@@ -7,151 +7,14 @@
  *
  * Aucun avis ni note n'est inventé ici (listes `reviews` vides).
  */
-import {
-  City,
-  Faq,
-  ProfessionalProfile,
-  ProfessionalSummary,
-  ServiceCategory,
-} from '../../models/glamro.models';
+import { City, Faq, ProfessionalProfile, ProfessionalSummary, ServiceCategory } from '../../models/glamro.models';
 import { addDaysIso, todayIso } from '../../utils/dates';
 import { Lang } from '../../i18n/i18n.config';
-import { MOCK_TEXTS } from './mock-i18n';
+import { CONTENT_TEXTS } from '../../content/content-texts';
+import { SERVICES_IT } from '../../content/site-content';
 
 const UPDATED = '2026-11-02';
-
-/* ------------------------------------------------------------------ */
-/* Servizi                                                             */
-/* ------------------------------------------------------------------ */
-
-type RawService = Omit<ServiceCategory, 'activeCitySlugs'>;
-
-const COMMON_CONDITIONS = [
-  'Prezzo, durata e condizioni di cancellazione sono indicati nel profilo prima della conferma.',
-  'Il professionista porta prodotti e strumenti necessari al servizio.',
-  'Il pagamento avviene nell\'app GLAMRO con metodi di pagamento protetti.',
-];
-
-const RAW_SERVICES: RawService[] = [
-  {
-    slug: 'capelli',
-    name: 'Capelli',
-    professionalLabel: 'Parrucchieri',
-    shortDescription: 'Taglio, piega, colore e trattamenti',
-    intro:
-      'Con GLAMRO prenoti un parrucchiere verificato che viene a casa tua, in ufficio o in hotel, nelle città in cui il servizio è attivo. Scegli servizio, data e professionista in base alla disponibilità reale.',
-    audience: 'Per chi vuole taglio, piega o colore senza spostarsi, anche prima di un evento o in giornate piene.',
-    includes: ['Taglio donna e uomo', 'Piega e styling', 'Colore e ritocco radici', 'Trattamenti ristrutturanti'],
-    conditions: ['Serve uno spazio con una sedia e una presa elettrica vicina.', ...COMMON_CONDITIONS],
-    image: null,
-    faqs: [
-      {
-        question: 'Devo avere prodotti o strumenti a casa?',
-        answer: 'No. Il professionista porta prodotti e strumenti. Ti serve solo uno spazio con una sedia e una presa elettrica.',
-      },
-      {
-        question: 'Posso prenotare un colore a domicilio?',
-        answer: 'Sì, se il professionista lo offre nel suo profilo. Durata e prezzo sono indicati prima della conferma.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
-    slug: 'barber',
-    name: 'Barber',
-    professionalLabel: 'Barbieri',
-    shortDescription: 'Taglio uomo, barba e rifinitura',
-    intro:
-      'GLAMRO ti mette in contatto con barbieri verificati che raggiungono l\'indirizzo che scegli per taglio, barba e rifinitura, nelle città attive.',
-    audience: 'Per chi vuole un taglio o la cura della barba a casa o in ufficio, senza attese.',
-    includes: ['Taglio uomo', 'Regolazione e modellatura barba', 'Rasatura', 'Rifinitura collo e contorni'],
-    conditions: COMMON_CONDITIONS,
-    image: null,
-    faqs: [
-      {
-        question: 'Quanto dura un appuntamento?',
-        answer: 'La durata dipende dal servizio scelto ed è indicata nel profilo del professionista prima della prenotazione.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
-    slug: 'make-up',
-    name: 'Make-up',
-    professionalLabel: 'Make-up artist',
-    shortDescription: 'Trucco per eventi, cerimonie e foto',
-    intro:
-      'Con GLAMRO prenoti una make-up artist verificata che arriva dove ti prepari: casa, hotel o location dell\'evento, nelle città in cui il servizio è attivo.',
-    audience: 'Per eventi, cerimonie, servizi fotografici o semplicemente per un trucco curato prima di uscire.',
-    includes: ['Trucco giorno e sera', 'Trucco per cerimonie', 'Trucco per foto e video', 'Prova trucco'],
-    conditions: COMMON_CONDITIONS,
-    image: null,
-    faqs: [
-      {
-        question: 'Si può prenotare per più persone?',
-        answer: 'Dipende dalla disponibilità del professionista. Indica il numero di persone al momento della prenotazione nell\'app.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
-    slug: 'nails',
-    name: 'Nails',
-    professionalLabel: 'Nail artist',
-    shortDescription: 'Manicure, pedicure e semipermanente',
-    intro:
-      'GLAMRO ti permette di prenotare manicure, pedicure e semipermanente con professioniste verificate che vengono da te, nelle città attive.',
-    audience: 'Per chi vuole mani e piedi curati a casa, con strumenti sterilizzati portati dal professionista.',
-    includes: ['Manicure', 'Pedicure', 'Smalto semipermanente', 'Rimozione e ricostruzione'],
-    conditions: ['Serve un tavolo e una buona illuminazione.', ...COMMON_CONDITIONS],
-    image: null,
-    faqs: [
-      {
-        question: 'Gli strumenti sono sterilizzati?',
-        answer: 'Gli standard igienici richiesti ai professionisti sono descritti nella pagina Fiducia e sicurezza.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
-    slug: 'estetica',
-    name: 'Estetica',
-    professionalLabel: 'Estetiste',
-    shortDescription: 'Trattamenti viso, corpo e depilazione',
-    intro:
-      'Con GLAMRO prenoti un\'estetista verificata per trattamenti viso, corpo e depilazione direttamente a casa tua, nelle città in cui il servizio è attivo.',
-    audience: 'Per chi vuole trattamenti estetici senza spostarsi, con prodotti e lettino portati dal professionista quando previsto.',
-    includes: ['Pulizia del viso', 'Trattamenti corpo', 'Depilazione', 'Laminazione ciglia e sopracciglia'],
-    conditions: COMMON_CONDITIONS,
-    image: null,
-    faqs: [
-      {
-        question: 'Il professionista porta il lettino?',
-        answer: 'Se il trattamento lo richiede, è indicato nella scheda del servizio all\'interno del profilo.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
-    slug: 'massaggi',
-    name: 'Massaggi',
-    professionalLabel: 'Massaggiatori',
-    shortDescription: 'Massaggi rilassanti e decontratturanti',
-    intro:
-      'GLAMRO ti mette in contatto con massaggiatori verificati per massaggi benessere a domicilio, nelle città attive. Non si tratta di prestazioni sanitarie.',
-    audience: 'Per chi vuole un massaggio benessere a casa o in hotel, nei tempi che preferisce.',
-    includes: ['Massaggio rilassante', 'Massaggio decontratturante', 'Linfodrenante', 'Massaggio di coppia, se disponibile'],
-    conditions: ['I massaggi offerti sono trattamenti di benessere, non prestazioni sanitarie.', ...COMMON_CONDITIONS],
-    image: null,
-    faqs: [
-      {
-        question: 'Serve avere un lettino a casa?',
-        answer: 'No, se il professionista indica nel profilo che porta il lettino. Ti serve solo uno spazio libero di circa 2 × 3 metri.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-];
+const RAW_SERVICES = SERVICES_IT;
 
 /* ------------------------------------------------------------------ */
 /* Città                                                               */
@@ -369,7 +232,7 @@ const fill = (template: string, params: Record<string, string>) =>
   template.replace(/\{(\w+)\}/g, (_, key: string) => params[key] ?? '');
 
 function translateDataset(data: MockDataset, lang: Exclude<Lang, 'it'>): MockDataset {
-  const tx = MOCK_TEXTS[lang];
+  const tx = CONTENT_TEXTS[lang];
   const area = (a: string) => tx.areas[a] ?? a;
   const cityName = (slug: string, fallback: string) => tx.cityNames[slug] ?? fallback;
   const serviceName = (slug: string) => tx.services[slug]?.name ?? slug;
