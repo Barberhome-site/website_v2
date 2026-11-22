@@ -16,8 +16,11 @@ export const environment = {
   /** API GLAMRO (routes /api), appelée uniquement par le serveur. Remplaçable par GLAMRO_API_URL. */
   apiBaseUrl: 'https://api.glamro.it/api',
 
-  /** Google Analytics 4 — chargé UNIQUEMENT après consentement « analytics » (brief §13). */
-  gaMeasurementId: 'G-FK165T4KP6',
+  /**
+   * Balise Google (Analytics 4) — chargée UNIQUEMENT après consentement « analytics » (brief §13).
+   * Conteneur Tag Manager `GTM-…` (snippet actuel fourni par Google Analytics) ou ID de mesure `G-…`.
+   */
+  googleTagId: 'GTM-M625CVRL',
 
   /**
    * Trustpilot TrustBox officiel (brief §7).

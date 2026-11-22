@@ -6,7 +6,7 @@ export const environment = {
   useMockData: false,
   apiBaseUrl: 'https://dev-api.glamro.it/api',
   /** Vide en dev : aucun appel Google Analytics depuis la machine locale. */
-  gaMeasurementId: '',
+  googleTagId: '',
   /**
    * Fond de carte : style vectoriel « Dark » d'OpenFreeMap (gratuit, sans clé ni quota, usage commercial autorisé).
    */

@@ -30,20 +30,26 @@ const FORBIDDEN_KEYS = /(e-?mail|phone|telefono|name|nome|cognome|address|indiri
  * Google Analytics 4, chargé UNIQUEMENT après consentement « analytics ».
  * - Aucun script Google n'est chargé avant le choix de l'utilisateur.
  * - La révocation coupe immédiatement l'envoi et supprime les cookies _ga.
- * - Les URL envoyées ne contiennent jamais la query string.
+ *
+ * Deux façons de charger la balise, selon l'ID configuré :
+ * - `GTM-…` (snippet actuel de Google Analytics) : conteneur Tag Manager `gtm.js`. Le conteneur envoie
+ *   lui-même les pages vues (au chargement, puis à chaque navigation grâce à la « mesure améliorée »).
+ *   À la révocation, la page est rechargée pour retirer le conteneur, qui n'a pas d'interrupteur global.
+ * - `G-…` : `gtag.js`, avec des pages vues envoyées par le site, sans la query string.
  */
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
   private readonly doc = inject(DOCUMENT);
   private readonly consent = inject(ConsentService);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-  private readonly measurementId = environment.gaMeasurementId;
+  private readonly tagId = environment.googleTagId;
+  private readonly isContainer = this.tagId.startsWith('GTM-');
   private enabled = false;
   private loaded = false;
 
   constructor() {
     // Uniquement sur le vrai domaine : les aperçus (Vercel, localhost…) ne polluent pas les statistiques.
-    if (!this.isBrowser || !this.measurementId || !/(^|\.)glamro\.it$/.test(this.win.location.hostname)) {
+    if (!this.isBrowser || !this.tagId || !/(^|\.)glamro\.it$/.test(this.win.location.hostname)) {
       return;
     }
     effect(() => {
@@ -64,7 +70,7 @@ export class AnalyticsService {
   }
 
   pageView(path: string, title: string): void {
-    if (!this.enabled) {
+    if (!this.enabled || this.isContainer) {
       return;
     }
     const cleanPath = path.split(/[?#]/)[0];
@@ -81,9 +87,11 @@ export class AnalyticsService {
     return this.doc.defaultView as unknown as GtagWindow;
   }
 
-  /** Drapeau officiel de Google pour couper la collecte : window['ga-disable-<ID>']. */
+  /** Drapeau officiel de Google pour couper la collecte : window['ga-disable-<ID de mesure>']. */
   private setGaDisabled(disabled: boolean): void {
-    (this.win as unknown as Record<string, unknown>)[`ga-disable-${this.measurementId}`] = disabled;
+    if (!this.isContainer) {
+      (this.win as unknown as Record<string, unknown>)[`ga-disable-${this.tagId}`] = disabled;
+    }
   }
 
   private gtag(): Gtag | undefined {
@@ -111,16 +119,22 @@ export class AnalyticsService {
         ad_personalization: 'denied',
         analytics_storage: 'denied',
       });
+      w.gtag('consent', 'update', { analytics_storage: 'granted' });
       w.gtag('js', new Date());
-      w.gtag('config', this.measurementId, { send_page_view: false });
+      if (this.isContainer) {
+        loadScript(this.doc, `https://www.googletagmanager.com/gtm.js?id=${this.tagId}`).catch(() => undefined);
+      } else {
+        w.gtag('config', this.tagId, { send_page_view: false });
+        loadScript(this.doc, `https://www.googletagmanager.com/gtag/js?id=${this.tagId}`).catch(() => undefined);
+      }
       this.loaded = true;
-      loadScript(this.doc, `https://www.googletagmanager.com/gtag/js?id=${this.measurementId}`).catch(() => undefined);
+    } else {
+      w.gtag!('consent', 'update', { analytics_storage: 'granted' });
     }
-    w.gtag!('consent', 'update', { analytics_storage: 'granted' });
     this.enabled = true;
 
-    const path = w.location.pathname;
-    this.pageView(path, this.doc.title);
+    // Le conteneur envoie lui-même la première page vue à son chargement.
+    this.pageView(w.location.pathname, this.doc.title);
   }
 
   private disable(): void {
@@ -132,6 +146,10 @@ export class AnalyticsService {
     this.setGaDisabled(true);
     this.enabled = false;
     this.deleteGaCookies();
+    if (this.isContainer && this.loaded) {
+      // Le choix est déjà enregistré : au rechargement, le conteneur n'est plus chargé.
+      w.location.reload();
+    }
   }
 
   private deleteGaCookies(): void {

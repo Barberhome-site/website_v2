@@ -32,7 +32,7 @@ src/
 ├── server.ts                    Serveur Express SSR + en-têtes de sécurité (CSP) + /sitemap.xml
 ├── server/sitemap.ts            Sitemap : uniquement URL canoniques publiées, lastmod réel
 ├── server/site-api/             /site-api : appels à l'API GLAMRO, cache, données minimales (voir plus bas)
-├── environments/                siteUrl, useMockData, apiBaseUrl, ID Google Analytics, Trustpilot
+├── environments/                siteUrl, useMockData, apiBaseUrl, balise Google (GTM-…), Trustpilot
 ├── styles/                      Système visuel du brief (couleurs, typo, boutons 48 px, focus, formulaires)
 └── app/
     ├── app.routes.ts            Arborescence (slugs italiens), une branche par langue
@@ -221,7 +221,8 @@ bios viennent de l'API, en italien.
   distinction avis GLAMRO / avis des professionnels.
 - **Cookies (P0)** : rien d'autre que le nécessaire avant le choix ; Accetta / Rifiuta / Personalizza au même
   niveau ; X = refus ; preuve (version, date, choix) stockée et envoyée à l'API ; « Gestisci cookie » dans le footer ;
-  GA4 (Consent Mode v2) chargé seulement après consentement, sans données personnelles ni query string.
+  GA4 (Consent Mode v2, conteneur `GTM-M625CVRL`) chargé seulement après consentement, sans données personnelles ;
+  dans GA, masquer le paramètre d'URL `cap` (Flux de données → Masquer les données → Paramètres de requête d'URL).
 - **Accessibilité** : skip link, focus visible, boutons ≥ 48 px, cibles ≥ 44 px, un H1 par page, labels persistants,
   erreurs textuelles, `autocomplete`, messages de succès, `<dialog>` natif pour les préférences.
 - **Performance** : pages chargées à la demande, carte en `@defer`, polices auto-hébergées (pas de Google Fonts),
