@@ -132,6 +132,7 @@ export const FR: Dict = {
   },
   trustpilot: {
     title: 'Avis sur GLAMRO',
+    invite: 'Vous avez réservé avec GLAMRO ? Racontez-nous comment ça s\'est passé avec un avis sur Trustpilot.',
     text: 'Les avis des clients sur GLAMRO sont publiés sur le profil officiel Trustpilot.',
     link: 'Lire les avis sur Trustpilot',
     consent: 'Pour afficher ici le widget officiel, activez les contenus tiers.',
@@ -194,7 +195,7 @@ export const FR: Dict = {
       duration: '2 ans',
       transfers: 'Transfert possible vers les États-Unis (EU-US Data Privacy Framework) — à vérifier',
     },
-    trustpilot: { purpose: 'Affiche la note et les avis officiels de GLAMRO sur Trustpilot.', duration: 'À vérifier lors du scan', transfers: 'À vérifier' },
+    trustpilot: { purpose: 'Affiche le widget officiel Trustpilot de GLAMRO pour laisser un avis.', duration: 'À vérifier lors du scan', transfers: 'À vérifier' },
     basemap: {
       purpose: 'Charge le fond de carte (OpenFreeMap). Ne dépose aucun cookie ; reçoit l\'adresse IP. Les tuiles peuvent rester dans le cache du navigateur.',
       duration: 'Aucun cookie',

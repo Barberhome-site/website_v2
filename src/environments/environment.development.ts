@@ -12,8 +12,9 @@ export const environment = {
    */
   mapStyleUrl: 'https://tiles.openfreemap.org/styles/dark',
   trustpilot: {
-    businessUnitId: '',
-    templateId: '',
+    businessUnitId: '6af514939898c9d06ed3ca8f',
+    templateId: '56278e9abfbbba0bdcd568bc',
+    height: '52px',
     profileUrl: 'https://it.trustpilot.com/review/glamro.it',
   },
 };

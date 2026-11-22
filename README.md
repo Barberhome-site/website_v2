@@ -237,7 +237,8 @@ Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` 
 
 - [ ] **Photos** (hero rider, storytelling ×4, bloc pro, chi siamo) → `site.config.ts`, voir `public/images/LEGGIMI.md`
 - [x] **Données société**, e-mails, URL des stores et réseaux sociaux → `site.config.ts`
-- [ ] **Trustpilot** : `businessUnitId` et `templateId` → `environment.ts`
+- [x] **Trustpilot** : widget Review Collector configuré (plan gratuit) ; passer à un widget de note (Mini, Micro…)
+      quand il y aura des avis → `templateId` et `height` dans `environment.ts`
 - [ ] **Textes légaux** : fournir les **Condizioni Professionisti** et la date de l'informativa privacy ; retirer le
       lien ODR (plateforme fermée le 20/07/2025) des T&C et de la Policy reclami → `features/legal/legal-docs.ts`
 - [ ] **Règles métier** restantes (documents de vérification, prestataire de paiement, critères de classement P2B,
