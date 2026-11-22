@@ -32,15 +32,23 @@ const angularApp = new AngularNodeAppEngine();
 const MEDIA_ORIGINS = process.env['SITE_MEDIA_ORIGINS'] || 'https://glamro.s3.eu-south-1.amazonaws.com';
 
 /**
- * Anciennes adresses des documents légaux (site précédent et liens de l'app mobile) :
- * redirection permanente vers les pages `/legale/...`.
+ * Anciennes adresses : site précédent (dépôt midnight-welcome : routes et PDF de public/documents)
+ * et liens de l'app mobile. Redirection permanente vers les nouvelles pages.
  */
 const LEGACY_LEGAL: Record<string, string> = {
+  '/index': '/',
   '/privacy': '/legale/privacy',
   '/cookie': '/legale/cookie-policy',
   '/cookie-policy': '/legale/cookie-policy',
+  '/terms': '/legale/condizioni-clienti',
   '/termini': '/legale/condizioni-clienti',
   '/termini-professionisti': '/legale/condizioni-professionisti',
+  '/documents/Informativa_trattamento_dati.pdf': '/legale/privacy',
+  '/documents/Informativa_Cookie.pdf': '/legale/cookie-policy',
+  '/documents/Termini_Condizioni.pdf': '/legale/condizioni-clienti',
+  '/documents/Regolamento_piattaforma.pdf': '/legale/regolamento-piattaforma',
+  '/documents/Policy_Reclami.pdf': '/legale/policy-reclami',
+  '/documents/Disclaimer_igienico_sanitario.pdf': '/legale/disclaimer-igienico-sanitario',
 };
 for (const [from, to] of Object.entries(LEGACY_LEGAL)) {
   app.get(from, (_req, res) => res.redirect(301, to));

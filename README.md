@@ -69,7 +69,7 @@ src/
 | `/assistenza` | FAQ, annulations/remboursements, formulaire de contact | SSR |
 | `/per-professionisti/candidatura` | Formulaire de candidature (noindex) | SSR |
 | `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti`, `/regolamento-piattaforma`, `/policy-reclami`, `/disclaimer-igienico-sanitario` | Documents légaux versionnés | Pré-rendu |
-| `/privacy`, `/cookie`, `/cookie-policy`, `/termini`, `/termini-professionisti` | Anciennes adresses (site précédent, app) | Redirection 301 vers `/legale/...` |
+| `/index`, `/privacy`, `/cookie`, `/cookie-policy`, `/terms`, `/termini`, `/termini-professionisti`, `/documents/*.pdf` | Anciennes adresses (site précédent `midnight-welcome`, app) | Redirection 301 vers la nouvelle page |
 
 ## Langues (it, en, fr, es, de)
 
