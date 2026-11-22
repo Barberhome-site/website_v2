@@ -71,7 +71,11 @@ interface TrustpilotGlobal {
     .tp, .tp-fallback { display: flex; flex-direction: column; gap: .25rem; }
     .tp p, .tp-fallback p { margin: 0; }
     .tp__title, .tp-fallback__title { font-weight: 700; font-size: 1.15rem; }
-    .tp__box { margin-top: .75rem; }
+    /*
+     * Le site est en color-scheme: dark ; l'iframe Trustpilot est en clair. Quand les deux diffèrent,
+     * le navigateur peint un fond blanc opaque derrière l'iframe. Même schéma = fond transparent.
+     */
+    .tp__box { margin-top: .75rem; color-scheme: light; }
     .tp-fallback__consent { margin-top: .5rem !important; }
     .tp-fallback__btn {
       background: none; border: 0; padding: 0; min-height: 44px; color: var(--c-text);
