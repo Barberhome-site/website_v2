@@ -8,11 +8,8 @@ export const environment = {
   /** URL publique du site, utilisée pour canonical, Open Graph, JSON-LD et sitemap. */
   siteUrl: 'https://www.glamro.it',
 
-  /**
-   * Source des données : `true` = données d'exemple, `false` = API GLAMRO via /site-api.
-   * TODO : passer à false quand les données réelles auront été validées sur l'environnement de dev.
-   */
-  useMockData: true,
+  /** Source des données : `true` = données d'exemple, `false` = API GLAMRO via /site-api. */
+  useMockData: false,
   /** API GLAMRO (routes /api), appelée uniquement par le serveur. Remplaçable par GLAMRO_API_URL. */
   apiBaseUrl: 'https://api.glamro.it/api',
 

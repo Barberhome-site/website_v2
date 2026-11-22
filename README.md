@@ -172,7 +172,7 @@ MapLibre l'affiche automatiquement à partir du style.
 Tout le site lit les données via **une seule classe abstraite** : `core/data/glamro-data-source.ts`.
 - `useMockData: true` → `MockGlamroDataSource` (données d'exemple, bandeau jaune « dati di esempio »).
 - `useMockData: false` → `HttpGlamroDataSource`, qui appelle **`/site-api`** sur le serveur du site.
-  Par défaut : `false` en développement (API de dev), `true` en production tant que les données ne sont pas validées.
+  Par défaut : `false` partout ; API de dev en développement, API de production en production.
 
 **`/site-api`** (`src/server/site-api/`) est la seule couche qui parle à l'API GLAMRO (`barberhome-backend`).
 Le navigateur ne l'appelle jamais directement.
