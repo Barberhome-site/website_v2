@@ -38,10 +38,17 @@
     }
   </div>
 
-  <p class="pc__role">{{ p.specialtyLabel }}</p>
+  @if (p.specialtyLabel) {
+    <p class="pc__role">{{ p.specialtyLabel }}</p>
+  }
   <p class="pc__area">
     <app-icon name="pin" />
-    <span>{{ p.cityName }}<span class="visually-hidden">, {{ t.zone }}: </span><span aria-hidden="true"> · </span>{{ p.serviceArea }}</span>
+    <span>
+      {{ p.cityName }}
+      @if (p.serviceArea) {
+        <span class="visually-hidden">, {{ t.zone }}: </span><span aria-hidden="true"> · </span>{{ p.serviceArea }}
+      }
+    </span>
   </p>
 
   @if (availability(); as a) {

@@ -9,6 +9,7 @@ import { join } from 'node:path';
 import { DEFAULT_LANG, localizePath } from './app/core/i18n/i18n.config';
 import { readLangCookie } from './app/core/i18n/lang-cookie';
 import { buildSitemapXml } from './server/sitemap';
+import { handleSiteApi, siteApi } from './server/site-api';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -24,6 +25,12 @@ const angularApp = new AngularNodeAppEngine();
  *  - MapLibre : worker auto-hébergé (worker-src 'self'), images des sprites décodées en blob:
  * À compléter quand l'URL de l'API sera connue (connect-src).
  */
+/**
+ * Origines des photos des professionnels (stockage S3 / CDN du backend : S3_PUBLIC_BASE_URL).
+ * Variable SITE_MEDIA_ORIGINS (séparées par des espaces) pour la remplacer par le domaine exact.
+ */
+const MEDIA_ORIGINS = process.env['SITE_MEDIA_ORIGINS'] || 'https://*.amazonaws.com https://*.cloudfront.net';
+
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -35,7 +42,7 @@ app.use((_req, res, next) => {
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://widget.trustpilot.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net",
+      `img-src 'self' data: blob: https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net ${MEDIA_ORIGINS}`,
       "font-src 'self'",
       "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustpilot.com https://tiles.openfreemap.org",
       "worker-src 'self'",
@@ -45,6 +52,19 @@ app.use((_req, res, next) => {
     ].join('; '),
   );
   next();
+});
+
+/**
+ * Données réelles pour le site (src/server/site-api) : le navigateur appelle /site-api,
+ * le serveur interroge l'API GLAMRO, met en cache et renvoie seulement les champs affichés.
+ */
+app.get('/site-api/*path', async (req, res) => {
+  const url = new URL(req.originalUrl, 'http://site.local');
+  const result = await handleSiteApi(siteApi, url.pathname, url.searchParams);
+  res
+    .status(result.status)
+    .set('Cache-Control', result.maxAge ? `public, max-age=${result.maxAge}, s-maxage=${result.maxAge}` : 'no-store')
+    .json(result.body);
 });
 
 /** Sitemap générée côté serveur : seulement les URL canoniques publiées, avec lastmod réel. */

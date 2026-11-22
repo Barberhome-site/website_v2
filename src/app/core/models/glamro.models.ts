@@ -1,9 +1,9 @@
 /**
  * Modèles du domaine GLAMRO, utilisés par toute l'application.
  *
- * Ce sont les formes INTERNES du front. Quand l'API sera disponible, son JSON sera
- * converti vers ces modèles dans `core/data/http/api-mappers.ts` : les composants
- * n'auront pas à changer, même si l'API utilise d'autres noms de champs.
+ * Ce sont les formes INTERNES du front. Le JSON de l'API GLAMRO est converti vers ces
+ * modèles côté serveur, dans `src/server/site-api` : les composants ne dépendent pas
+ * du format de l'API.
  *
  * Les champs « minimaux » proposés par le brief (§7) sont tous présents :
  *  - profils : professional_id, display_name, profile_image, specialties, verified,

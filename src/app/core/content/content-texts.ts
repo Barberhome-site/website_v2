@@ -1,10 +1,11 @@
 /**
- * ⚠️ DONNÉES D'EXEMPLE — traductions du contenu mock (services, villes, profils).
- * En production, ces contenus viendront de l'API/CMS dans la langue demandée
- * (en-tête Accept-Language envoyé par HttpGlamroDataSource).
+ * Traductions du contenu éditorial du site (en, fr, es, de ; l'italien est dans site-content.ts).
+ *  - `services`, `cityNames`, `regions` : contenu réel, utilisé avec l'API (site-content.ts).
+ *  - `areas`, `cityIntro`, `cityFaqs`, `specialties`, `bio`, `languages` : servent seulement
+ *    aux données d'exemple (core/data/mock), qui citent des quartiers fictifs.
  */
-import { Faq } from '../../models/glamro.models';
-import { Lang } from '../../i18n/i18n.config';
+import { Faq } from '../models/glamro.models';
+import { Lang } from '../i18n/i18n.config';
 
 export interface ServiceText {
   name: string;
@@ -17,7 +18,7 @@ export interface ServiceText {
   faqs: Faq[];
 }
 
-export interface MockTexts {
+export interface ContentTexts {
   services: Record<string, ServiceText>;
   cityNames: Record<string, string>;
   regions: Record<string, string>;
@@ -59,7 +60,7 @@ const common = {
   ],
 };
 
-export const MOCK_TEXTS: Record<Translated, MockTexts> = {
+export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
   /* ================================================================ EN */
   en: {
     services: {
@@ -127,8 +128,8 @@ export const MOCK_TEXTS: Record<Translated, MockTexts> = {
         faqs: [{ question: 'Do I need a massage table at home?', answer: 'No, if the professional states on their profile that they bring one. You only need a free space of about 2 × 3 metres.' }],
       },
     },
-    cityNames: { milano: 'Milan', roma: 'Rome', torino: 'Turin', bologna: 'Bologna', firenze: 'Florence', napoli: 'Naples', bari: 'Bari' },
-    regions: { Lombardia: 'Lombardy', Lazio: 'Lazio', Piemonte: 'Piedmont', 'Emilia-Romagna': 'Emilia-Romagna', Toscana: 'Tuscany', Campania: 'Campania', Puglia: 'Apulia' },
+    cityNames: { milano: 'Milan', roma: 'Rome', torino: 'Turin', bologna: 'Bologna', firenze: 'Florence', napoli: 'Naples', bari: 'Bari', genova: 'Genoa', venezia: 'Venice', verona: 'Verona', padova: 'Padua', brescia: 'Brescia', bergamo: 'Bergamo', palermo: 'Palermo', catania: 'Catania' },
+    regions: { Lombardia: 'Lombardy', Lazio: 'Lazio', Piemonte: 'Piedmont', 'Emilia-Romagna': 'Emilia-Romagna', Toscana: 'Tuscany', Campania: 'Campania', Puglia: 'Apulia', Liguria: 'Liguria', Veneto: 'Veneto', Sicilia: 'Sicily' },
     areas: { 'Centro storico': 'Historic centre', Centro: 'City centre' },
     cityIntro: 'In {city}, GLAMRO is active with verified beauty professionals who come to your home, office or hotel in the areas listed.',
     cityInactiveIntro: 'GLAMRO cannot yet be booked in {city}.',
@@ -219,8 +220,8 @@ export const MOCK_TEXTS: Record<Translated, MockTexts> = {
         faqs: [{ question: 'Faut-il une table de massage à la maison ?', answer: 'Non, si le professionnel indique sur son profil qu\'il en apporte une. Il vous faut seulement un espace libre d\'environ 2 × 3 mètres.' }],
       },
     },
-    cityNames: { milano: 'Milan', roma: 'Rome', torino: 'Turin', bologna: 'Bologne', firenze: 'Florence', napoli: 'Naples', bari: 'Bari' },
-    regions: { Lombardia: 'Lombardie', Lazio: 'Latium', Piemonte: 'Piémont', 'Emilia-Romagna': 'Émilie-Romagne', Toscana: 'Toscane', Campania: 'Campanie', Puglia: 'Pouilles' },
+    cityNames: { milano: 'Milan', roma: 'Rome', torino: 'Turin', bologna: 'Bologne', firenze: 'Florence', napoli: 'Naples', bari: 'Bari', genova: 'Gênes', venezia: 'Venise', verona: 'Vérone', padova: 'Padoue', brescia: 'Brescia', bergamo: 'Bergame', palermo: 'Palerme', catania: 'Catane' },
+    regions: { Lombardia: 'Lombardie', Lazio: 'Latium', Piemonte: 'Piémont', 'Emilia-Romagna': 'Émilie-Romagne', Toscana: 'Toscane', Campania: 'Campanie', Puglia: 'Pouilles', Liguria: 'Ligurie', Veneto: 'Vénétie', Sicilia: 'Sicile' },
     areas: { 'Centro storico': 'Centre historique', Centro: 'Centre-ville' },
     cityIntro: 'À {city}, GLAMRO est actif avec des professionnels de la beauté vérifiés qui se déplacent à domicile, au bureau ou à l\'hôtel dans les zones indiquées.',
     cityInactiveIntro: 'GLAMRO n\'est pas encore réservable à {city}.',
@@ -311,8 +312,8 @@ export const MOCK_TEXTS: Record<Translated, MockTexts> = {
         faqs: [{ question: '¿Necesito una camilla en casa?', answer: 'No, si el profesional indica en su perfil que la lleva. Solo necesitas un espacio libre de unos 2 × 3 metros.' }],
       },
     },
-    cityNames: { milano: 'Milán', roma: 'Roma', torino: 'Turín', bologna: 'Bolonia', firenze: 'Florencia', napoli: 'Nápoles', bari: 'Bari' },
-    regions: { Lombardia: 'Lombardía', Lazio: 'Lacio', Piemonte: 'Piamonte', 'Emilia-Romagna': 'Emilia-Romaña', Toscana: 'Toscana', Campania: 'Campania', Puglia: 'Apulia' },
+    cityNames: { milano: 'Milán', roma: 'Roma', torino: 'Turín', bologna: 'Bolonia', firenze: 'Florencia', napoli: 'Nápoles', bari: 'Bari', genova: 'Génova', venezia: 'Venecia', verona: 'Verona', padova: 'Padua', brescia: 'Brescia', bergamo: 'Bérgamo', palermo: 'Palermo', catania: 'Catania' },
+    regions: { Lombardia: 'Lombardía', Lazio: 'Lacio', Piemonte: 'Piamonte', 'Emilia-Romagna': 'Emilia-Romaña', Toscana: 'Toscana', Campania: 'Campania', Puglia: 'Apulia', Liguria: 'Liguria', Veneto: 'Véneto', Sicilia: 'Sicilia' },
     areas: { 'Centro storico': 'Centro histórico', Centro: 'Centro' },
     cityIntro: 'En {city}, GLAMRO está activo con profesionales de belleza verificados que van a casa, a la oficina o al hotel en las zonas indicadas.',
     cityInactiveIntro: 'GLAMRO todavía no se puede reservar en {city}.',
@@ -403,8 +404,8 @@ export const MOCK_TEXTS: Record<Translated, MockTexts> = {
         faqs: [{ question: 'Brauche ich eine Massageliege zu Hause?', answer: 'Nein, wenn die Fachkraft im Profil angibt, dass sie eine mitbringt. Du brauchst nur etwa 2 × 3 Meter freien Platz.' }],
       },
     },
-    cityNames: { milano: 'Mailand', roma: 'Rom', torino: 'Turin', bologna: 'Bologna', firenze: 'Florenz', napoli: 'Neapel', bari: 'Bari' },
-    regions: { Lombardia: 'Lombardei', Lazio: 'Latium', Piemonte: 'Piemont', 'Emilia-Romagna': 'Emilia-Romagna', Toscana: 'Toskana', Campania: 'Kampanien', Puglia: 'Apulien' },
+    cityNames: { milano: 'Mailand', roma: 'Rom', torino: 'Turin', bologna: 'Bologna', firenze: 'Florenz', napoli: 'Neapel', bari: 'Bari', genova: 'Genua', venezia: 'Venedig', verona: 'Verona', padova: 'Padua', brescia: 'Brescia', bergamo: 'Bergamo', palermo: 'Palermo', catania: 'Catania' },
+    regions: { Lombardia: 'Lombardei', Lazio: 'Latium', Piemonte: 'Piemont', 'Emilia-Romagna': 'Emilia-Romagna', Toscana: 'Toskana', Campania: 'Kampanien', Puglia: 'Apulien', Liguria: 'Ligurien', Veneto: 'Venetien', Sicilia: 'Sizilien' },
     areas: { 'Centro storico': 'Altstadt', Centro: 'Zentrum' },
     cityIntro: 'In {city} ist GLAMRO mit geprüften Beauty-Fachkräften aktiv, die in den angegebenen Gebieten nach Hause, ins Büro oder ins Hotel kommen.',
     cityInactiveIntro: 'GLAMRO ist in {city} noch nicht buchbar.',

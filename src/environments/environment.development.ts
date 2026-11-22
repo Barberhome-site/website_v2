@@ -2,8 +2,9 @@
 export const environment = {
   production: false,
   siteUrl: 'http://localhost:4200',
-  useMockData: true,
-  apiBaseUrl: 'http://localhost:8080/v1',
+  /** `false` : vraies données de l'API de dev (dev-api.glamro.it). `true` pour revenir aux données d'exemple. */
+  useMockData: false,
+  apiBaseUrl: 'https://dev-api.glamro.it/api',
   /** Vide en dev : aucun appel Google Analytics depuis la machine locale. */
   gaMeasurementId: '',
   /**

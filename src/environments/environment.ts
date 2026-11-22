@@ -9,11 +9,12 @@ export const environment = {
   siteUrl: 'https://www.glamro.it',
 
   /**
-   * Source des données.
-   * TODO API : passer `useMockData` à false et renseigner `apiBaseUrl` quand l'API sera disponible.
+   * Source des données : `true` = données d'exemple, `false` = API GLAMRO via /site-api.
+   * TODO : passer à false quand les données réelles auront été validées sur l'environnement de dev.
    */
   useMockData: true,
-  apiBaseUrl: 'https://api.glamro.it/v1',
+  /** API GLAMRO (routes /api), appelée uniquement par le serveur. Remplaçable par GLAMRO_API_URL. */
+  apiBaseUrl: 'https://api.glamro.it/api',
 
   /** Google Analytics 4 — chargé UNIQUEMENT après consentement « analytics » (brief §13). */
   gaMeasurementId: 'G-FK165T4KP6',

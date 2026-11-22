@@ -33,7 +33,9 @@
       <div class="stack" style="--stack: 2.5rem">
         <section aria-labelledby="about-title">
           <h2 id="about-title">{{ t.skills }}</h2>
-          <p>{{ p.bio }}</p>
+          @if (p.bio) {
+            <p>{{ p.bio }}</p>
+          }
           @if (p.skills.length) {
             <ul class="chip-list">
               @for (skill of p.skills; track skill) {
@@ -58,7 +60,13 @@
               <tbody>
                 @for (svc of p.services; track svc.serviceSlug + svc.name) {
                   <tr>
-                    <td><a [routerLink]="['/servizi', svc.serviceSlug] | lp: lang">{{ svc.name }}</a></td>
+                    <td>
+                      @if (svc.serviceSlug) {
+                        <a [routerLink]="['/servizi', svc.serviceSlug] | lp: lang">{{ svc.name }}</a>
+                      } @else {
+                        {{ svc.name }}
+                      }
+                    </td>
                     <td>{{ svc.durationMinutes ? (t.minutes | fmt: { count: svc.durationMinutes }) : '—' }}</td>
                     <td>{{ price(svc.priceFrom, svc.currency) ?? '—' }}</td>
                   </tr>
@@ -72,7 +80,7 @@
         <section aria-labelledby="cond-title">
           <h2 id="cond-title">{{ t.conditions }}</h2>
           <ul class="check-list">
-            @for (c of p.conditions; track c) {
+            @for (c of p.conditions; track $index) {
               <li>{{ c }}</li>
             }
           </ul>

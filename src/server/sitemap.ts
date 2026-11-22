@@ -4,10 +4,11 @@
  *  - liens hreflang entre les versions linguistiques (xhtml:link) ;
  *  - `lastmod` réel (date de mise à jour du contenu).
  *
- * TODO API : quand l'API sera disponible, remplacer `loadDataset()` par des appels à l'API.
+ * Données : site-api (API GLAMRO) ou données d'exemple selon `environment.useMockData`.
  */
 import { environment } from '../environments/environment';
 import { buildMockDataset } from '../app/core/data/mock/mock-data';
+import { siteApi } from './site-api';
 import { DEFAULT_LANG, LANGS, localizePath } from '../app/core/i18n/i18n.config';
 import { LEGAL_DOCS } from '../app/features/legal/legal-docs';
 
@@ -30,7 +31,15 @@ const STATIC_PAGES: SitemapEntry[] = [
 ];
 
 async function loadDataset() {
-  return buildMockDataset();
+  if (environment.useMockData) {
+    return buildMockDataset();
+  }
+  const [services, cities, professionals] = await Promise.all([
+    siteApi.getServices(DEFAULT_LANG),
+    siteApi.getCities(DEFAULT_LANG),
+    siteApi.getProfessionals({}, DEFAULT_LANG),
+  ]);
+  return { services, cities, professionals };
 }
 
 export async function buildSitemapXml(): Promise<string> {
