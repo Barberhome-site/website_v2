@@ -18,24 +18,57 @@ const CONTEXT = 'https://schema.org';
 
 const url = (path: string, lang: Lang) => absoluteUrl(localizePath(path, lang));
 
+/** Organization completa: indirizzo, telefono, email, P.IVA, social e store. */
 export function organizationLd(slogan: string): object {
   return {
     '@context': CONTEXT,
     '@type': 'Organization',
     '@id': absoluteUrl('/#organization'),
     name: SITE.name,
+    legalName: SITE.company.legalName,
     url: absoluteUrl('/'),
     logo: absoluteUrl(SITE.logo.src),
     slogan,
-    sameAs: SITE.social.map((s) => s.url),
+    email: SITE.contact.email,
+    telephone: SITE.contact.phone,
+    vatID: `IT${SITE.company.vatNumber}`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.company.streetAddress,
+      postalCode: SITE.company.postalCode,
+      addressLocality: SITE.company.locality,
+      addressRegion: SITE.company.region,
+      addressCountry: 'IT',
+    },
+    sameAs: [
+      ...SITE.social.map((s) => s.url),
+      SITE.apps.client.appStoreUrl,
+      SITE.apps.client.playStoreUrl,
+      SITE.apps.pro.appStoreUrl,
+      SITE.apps.pro.playStoreUrl,
+    ],
     contactPoint: [
       {
         '@type': 'ContactPoint',
         contactType: 'customer support',
-        email: SITE.contact.supportEmail,
-        availableLanguage: ['it', 'en', 'fr', 'es', 'de'],
+        email: SITE.contact.email,
+        telephone: SITE.contact.phone,
+        availableLanguage: ['it', 'en'],
       },
     ],
+  };
+}
+
+/** FAQPage: solo domande e risposte realmente visibili nella pagina. */
+export function faqLd(faqs: { question: string; answer: string }[]): object {
+  return {
+    '@context': CONTEXT,
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
   };
 }
 
@@ -114,24 +147,18 @@ export function cityPageLd(
   };
 }
 
-/** Person + aggregateRating seulement si les avis sont réels, visibles et présents. */
+/**
+ * Profilo come ProfessionalService, con il nome pubblico del profilo.
+ * Mai AggregateRating o Review finché non ci sono recensioni vere (prompt di correzione, punto 10.5).
+ */
 export function professionalLd(pro: ProfessionalProfile, lang: Lang): object {
-  const ld: Record<string, unknown> = {
+  return {
     '@context': CONTEXT,
-    '@type': 'Person',
+    '@type': 'ProfessionalService',
     name: pro.displayName,
-    jobTitle: pro.specialtyLabel,
+    description: pro.specialtyLabel,
     url: url(pro.profileUrl, lang),
     areaServed: { '@type': 'City', name: pro.cityName },
     knowsAbout: pro.skills,
   };
-  if (pro.reviewSummary && pro.reviewSummary.count > 0 && pro.reviews.length > 0) {
-    ld['aggregateRating'] = {
-      '@type': 'AggregateRating',
-      ratingValue: pro.reviewSummary.average,
-      reviewCount: pro.reviewSummary.count,
-      bestRating: 5,
-    };
-  }
-  return ld;
 }

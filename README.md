@@ -1,4 +1,23 @@
-# GLAMRO — site web (Angular 22, SSR)
+# GLAMRO — sito web (Angular 22, SSR)
+
+> **Stato al 24/11/2026 — correzioni pre-lancio** (branch `fix/correzioni-pre-lancio`).
+> Questa sezione prevale sul resto del README, che descrive in parte la versione precedente.
+>
+> - **Lingue**: solo italiano e inglese. `/fr`, `/es`, `/de` → 301 alla pagina italiana (`src/server/legacy-redirects.ts`).
+> - **Pagine legali** (testi v3): `/termini`, `/termini-professionisti`, `/privacy`, `/cookie`, `/cancellazioni-rimborsi`.
+>   I testi sono in `content/legal/*.md` e NON si modificano nel codice: si sostituisce il `.md` e si lancia
+>   `node tools/build-legal-docs.mjs`, che rigenera `src/app/features/legal/legal-docs.ts`.
+>   Finché il legale non approva, `LEGAL_DRAFT = true` mostra un avviso in cima alle pagine.
+> - **Vecchi indirizzi**: `/legale/…`, `/per-professionisti/candidatura`, `/clients`, `/professionals`, `/contact`,
+>   `/servizi/barber`, `/servizi/nails` → 301. `/professionisti` (senza id) resta il link di download di GLAMRO Pro.
+> - **Categorie**: capelli (anche barba), make-up, estetica, massaggi.
+> - **Contatti e dati societari**: solo in `src/app/core/config/site.config.ts` (unica email: contact@glamro.it).
+> - **Rimossi**: Trustpilot, storytelling e foto segnaposto, modulo di candidatura, etichetta «Sponsorizzato», contatori.
+> - **Ingresso professionisti**: temporaneo (store GLAMRO Pro + WhatsApp) finché non ci sono le API di onboarding.
+> - **SSR sul dominio di prova**: servono le variabili `NG_ALLOWED_HOSTS` e `NG_TRUST_PROXY_HEADERS` su Vercel
+>   (vedi «Aperçu sur Vercel»), altrimenti l'HTML arriva vuoto e il contenuto è reso solo dal browser.
+> - **Non pubblicare su www.glamro.it** senza l'approvazione di Andrea: il sito va online insieme alla nuova app clienti.
+
 
 Site vitrine et de réservation de GLAMRO, construit à partir du *Master Brief Sito Web GLAMRO 2026* (v. 2 octobre 2026).
 Interface en 5 langues (it, en, fr, es, de), code commenté en français.

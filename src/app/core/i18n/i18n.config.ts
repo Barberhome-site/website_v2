@@ -6,7 +6,7 @@ import { translateSegments } from './route-slugs';
  * les autres langues ont un préfixe ET des segments traduits (/en/services, /fr/services…).
  * Table des traductions de segments : route-slugs.ts.
  */
-export const LANGS = ['it', 'en', 'fr', 'es', 'de'] as const;
+export const LANGS = ['it', 'en'] as const;
 export type Lang = (typeof LANGS)[number];
 
 export const DEFAULT_LANG: Lang = 'it';
@@ -27,9 +27,6 @@ export interface LangInfo {
 export const LANG_INFO: Record<Lang, LangInfo> = {
   it: { label: 'Italiano', short: 'IT', locale: 'it-IT', ogLocale: 'it_IT' },
   en: { label: 'English', short: 'EN', locale: 'en-GB', ogLocale: 'en_GB' },
-  fr: { label: 'Français', short: 'FR', locale: 'fr-FR', ogLocale: 'fr_FR' },
-  es: { label: 'Español', short: 'ES', locale: 'es-ES', ogLocale: 'es_ES' },
-  de: { label: 'Deutsch', short: 'DE', locale: 'de-DE', ogLocale: 'de_DE' },
 };
 
 export function isLang(value: unknown): value is Lang {

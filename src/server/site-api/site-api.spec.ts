@@ -59,24 +59,24 @@ describe('site-api', () => {
 
   it('calcule villes, services et carte à partir de l\'API', async () => {
     const api = createSiteApi(get);
-    const cities = await api.getCities('fr');
+    const cities = await api.getCities('en');
     const milan = cities.find((c) => c.slug === 'milano')!;
     expect(milan).toMatchObject({ status: 'active', availableCount: 2, name: 'Milan' });
-    expect([...milan.activeServiceSlugs].sort()).toEqual(['barber', 'capelli', 'estetica', 'nails']);
+    expect([...milan.activeServiceSlugs].sort()).toEqual(['capelli', 'estetica']);
     expect(cities.find((c) => c.slug === 'napoli')).toMatchObject({ status: 'waitlist', indexable: false });
 
     const services = await api.getServices('it');
-    expect(services.map((s) => s.slug).sort()).toEqual(['barber', 'capelli', 'estetica', 'massaggi', 'nails']);
+    expect(services.map((s) => s.slug).sort()).toEqual(['capelli', 'estetica', 'massaggi']);
     expect(await api.getService('make-up', 'it')).toBeNull();
 
-    const clusters = await api.getCityClusters('nails', 'en');
-    expect(clusters.map((c) => [c.citySlug, c.availableCount])).toEqual([['milano', 1]]);
+    const clusters = await api.getCityClusters('massaggi', 'en');
+    expect(clusters.map((c) => [c.citySlug, c.availableCount])).toEqual([['roma', 1]]);
   });
 
   it('liste les professionnels par ville, service et date', async () => {
     const api = createSiteApi(get);
     expect((await api.getProfessionals({ limit: 16 }, 'it')).map((p) => p.displayName)).toEqual(['Giulia R.', 'Sara V.', 'Luca B.']);
-    expect((await api.getProfessionals({ serviceSlug: 'barber' }, 'it')).map((p) => p.professionalId)).toEqual([A]);
+    expect((await api.getProfessionals({ serviceSlug: 'capelli' }, 'it')).map((p) => p.professionalId)).toEqual([A]);
     expect((await api.getProfessionals({ citySlug: 'milano', date: '2026-11-23' }, 'it')).map((p) => p.professionalId)).toEqual([A]);
   });
 
@@ -97,7 +97,7 @@ describe('site-api', () => {
 
   it('gère CAP, zones non couvertes et pannes', async () => {
     const api = createSiteApi(get);
-    const ok = await api.searchAvailability({ postalCode: '20121', serviceSlug: 'nails' }, 'it');
+    const ok = await api.searchAvailability({ postalCode: '20121', serviceSlug: 'estetica' }, 'it');
     expect(ok.status).toBe('ok');
     const nc = await api.searchAvailability({ citySlug: 'bari' }, 'it');
     expect(nc.status).toBe('not_covered');

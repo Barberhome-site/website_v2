@@ -58,9 +58,9 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--c-accent);
-    color: var(--c-on-accent);
-    font-weight: 800;
+    /* Area coperta (indicativa), senza contatori: mai la posizione di un professionista. */
+    background: rgba(239, 210, 75, 0.32);
+    border: 2px solid var(--c-accent);
     font-size: 0.95rem;
     box-shadow: 0 0 0 6px rgba(239, 210, 75, 0.22);
     transition: transform var(--dur) var(--ease);

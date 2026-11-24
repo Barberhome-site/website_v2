@@ -2,9 +2,9 @@
  * Correspondance entre les catégories du site et le catalogue de l'API.
  *
  * API (GET /api/services) : CAPELLI, ESTETICA, MASSAGGI, MAKEUP, PACCHETTI, avec des sous-catégories.
- * Site : capelli, barber, make-up, nails, estetica, massaggi.
- *  - une catégorie entière → filtre `categoryId` de la recherche ;
- *  - une partie d'une catégorie (barber = BARBA, nails = MANI + PIEDI) → filtre `serviceIds`.
+ * Sito: capelli (anche barba), make-up, estetica, massaggi.
+ *  - una categoria intera → filtro `categoryId` della ricerca ;
+ *  - una parte di categoria (regola con `subcategories`) → filtro `serviceIds` (oggi nessuna).
  * PACCHETTI n'a pas de page sur le site.
  */
 
@@ -23,9 +23,7 @@ interface Rule {
 
 const RULES: Record<string, Rule> = {
   capelli: { category: 'CAPELLI' },
-  barber: { category: 'CAPELLI', subcategories: ['BARBA'] },
   'make-up': { category: 'MAKEUP' },
-  nails: { category: 'ESTETICA', subcategories: ['MANI', 'PIEDI'] },
   estetica: { category: 'ESTETICA' },
   massaggi: { category: 'MASSAGGI' },
 };

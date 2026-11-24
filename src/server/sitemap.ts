@@ -20,14 +20,14 @@ interface SitemapEntry {
 }
 
 const STATIC_PAGES: SitemapEntry[] = [
-  { path: '/', lastmod: '2026-11-09' },
-  { path: '/servizi', lastmod: '2026-11-09' },
-  { path: '/dove-siamo', lastmod: '2026-11-09' },
-  { path: '/come-funziona', lastmod: '2026-11-09' },
-  { path: '/fiducia', lastmod: '2026-11-02' },
-  { path: '/assistenza', lastmod: '2026-11-02' },
-  { path: '/per-professionisti', lastmod: '2026-11-09' },
-  { path: '/chi-siamo', lastmod: '2026-11-09' },
+  { path: '/', lastmod: '2026-11-24' },
+  { path: '/servizi', lastmod: '2026-11-24' },
+  { path: '/dove-siamo', lastmod: '2026-11-24' },
+  { path: '/come-funziona', lastmod: '2026-11-24' },
+  { path: '/fiducia', lastmod: '2026-11-24' },
+  { path: '/assistenza', lastmod: '2026-11-24' },
+  { path: '/per-professionisti', lastmod: '2026-11-24' },
+  { path: '/chi-siamo', lastmod: '2026-11-24' },
 ];
 
 async function loadDataset() {
@@ -54,7 +54,7 @@ export async function buildSitemapXml(): Promise<string> {
       .filter((c) => c.status === 'active' && c.indexable)
       .map((c) => ({ path: `/dove-siamo/${c.slug}`, lastmod: c.updatedAt })),
     ...professionals.filter((p) => p.verified).map((p) => ({ path: p.profileUrl })),
-    ...Object.values(LEGAL_DOCS).map((d) => ({ path: `/legale/${d.key}`, lastmod: d.updatedAt, italianOnly: true })),
+    ...Object.values(LEGAL_DOCS).map((d) => ({ path: `/${d.key}`, lastmod: d.updatedAt, italianOnly: true })),
   ];
 
   const urls: string[] = [];

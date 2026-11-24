@@ -118,7 +118,7 @@ export interface ProfessionalServiceOffer {
   currency?: string;
 }
 
-/** Avis recueilli par la plateforme sur un professionnel (distinct de Trustpilot). */
+/** Avis recueilli par la plateforme sur un professionnel. */
 export interface ProfessionalReview {
   id: string;
   rating: number;

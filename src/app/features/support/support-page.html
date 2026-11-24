@@ -25,8 +25,8 @@
       <section id="cancellazioni" class="prose" aria-labelledby="canc-title">
         <h2 id="canc-title">{{ t.cancelTitle }}</h2>
         <p><strong>{{ t.cancelAnswer }}</strong></p>
-        <p [class.placeholder]="t.cancelPlaceholder.startsWith('[')">{{ t.cancelPlaceholder }}</p>
-        <p>{{ t.cancelMore }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>.</p>
+        <p>{{ t.cancelPlaceholder }}</p>
+        <p>{{ t.cancelMore }} <a [routerLink]="'/termini' | lp: lang">{{ t.customerTerms }}</a>.</p>
       </section>
     </div>
 
@@ -34,7 +34,9 @@
       <h2 id="contact-title" class="h3-like">{{ t.contactTitle }}</h2>
       <p class="muted small">
         {{ t.orWrite }}
-        <a [href]="'mailto:' + site.contact.supportEmail" (click)="trackEmail()">{{ site.contact.supportEmail }}</a>.
+        <a [href]="'mailto:' + site.contact.email" (click)="trackEmail()">{{ site.contact.email }}</a>
+        · <a [href]="site.contact.phoneHref">{{ site.contact.phone }}</a>
+        · <a [href]="site.contact.whatsappUrl" target="_blank" rel="noopener">WhatsApp</a>
       </p>
 
       <div aria-live="polite">
@@ -106,7 +108,7 @@
 
         <p class="small muted">
           {{ t.privacy }}
-          <a [routerLink]="'/legale/privacy' | lp: lang">{{ t.privacyLink }}</a>
+          <a [routerLink]="'/privacy' | lp: lang">{{ t.privacyLink }}</a>
         </p>
 
         <button type="submit" class="btn btn--primary btn--block" [disabled]="sending()">

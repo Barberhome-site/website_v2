@@ -25,4 +25,8 @@ export class Footer {
   protected trackSupport(channel: string): void {
     this.analytics.track('support_click', { channel, placement: 'footer' });
   }
+
+  protected trackWhatsapp(): void {
+    this.analytics.track('whatsapp_click', { placement: 'footer' });
+  }
 }

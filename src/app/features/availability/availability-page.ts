@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, combineLatest, map, of, startWith, switchMap } from 'rxjs';
+import { SITE } from '../../core/config/site.config';
 import { GlamroDataSource } from '../../core/data/glamro-data-source';
 import { FormatPipe, LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
@@ -39,6 +40,7 @@ function toQuery(params: ParamMap): AvailabilityQuery | null {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvailabilityPage {
+  protected readonly site = SITE;
   private readonly data = inject(GlamroDataSource);
   private readonly route = inject(ActivatedRoute);
   protected readonly i18n = inject(I18n);

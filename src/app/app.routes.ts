@@ -3,6 +3,7 @@ import { i18nResolver } from './core/i18n/i18n.resolver';
 import { Lang, PREFIXED_LANGS } from './core/i18n/i18n.config';
 import { routePath } from './core/i18n/route-slugs';
 import { cityResolver, professionalResolver, serviceResolver } from './core/routing/resolvers';
+import { LEGAL_DOC_KEYS } from './features/legal/legal-keys';
 
 /**
  * Pages du site (brief §4). Chargées à la demande.
@@ -64,17 +65,15 @@ function pageRoutes(lang: Lang): Routes {
         import('./features/for-professionals/for-professionals-page').then((m) => m.ForProfessionalsPage),
     },
     {
-      path: p('per-professionisti/candidatura'),
-      loadComponent: () => import('./features/for-professionals/application-page').then((m) => m.ApplicationPage),
-    },
-    {
       path: p('chi-siamo'),
       loadComponent: () => import('./features/about/about-page').then((m) => m.AboutPage),
     },
-    {
-      path: p('legale/:doc'),
+    // Pagine legali (testi v3): la chiave del documento arriva al componente come input `doc`.
+    ...LEGAL_DOC_KEYS.map((doc) => ({
+      path: p(doc),
+      data: { doc },
       loadComponent: () => import('./features/legal/legal-page').then((m) => m.LegalPage),
-    },
+    })),
     {
       path: '**',
       loadComponent: () => import('./features/not-found/not-found-page').then((m) => m.NotFoundPage),
@@ -83,7 +82,7 @@ function pageRoutes(lang: Lang): Routes {
 }
 
 export const routes: Routes = [
-  // /en/…, /fr/…, /es/…, /de/…
+  // /en/…
   ...PREFIXED_LANGS.map((lang) => ({
     path: lang,
     data: { lang },

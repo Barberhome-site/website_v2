@@ -69,7 +69,7 @@ const RAW_CITIES: RawCity[] = [
     region: 'Piemonte',
     status: 'active',
     indexable: true,
-    intro: 'A Torino GLAMRO è attivo con professionisti verificati per capelli e barber nelle zone indicate.',
+    intro: 'A Torino GLAMRO è attivo con professionisti verificati per capelli e barba nelle zone indicate.',
     areasServed: ['Centro', 'Crocetta', 'San Salvario', 'Vanchiglia'],
     postalCodePrefixes: ['101'],
     latitudeApprox: 45.0703,
@@ -83,7 +83,7 @@ const RAW_CITIES: RawCity[] = [
     region: 'Emilia-Romagna',
     status: 'active',
     indexable: true,
-    intro: 'A Bologna GLAMRO è attivo con make-up artist e nail artist verificati nelle zone indicate.',
+    intro: 'A Bologna GLAMRO è attivo con make-up artist ed estetiste verificati nelle zone indicate.',
     areasServed: ['Centro storico', 'Santo Stefano', 'Saragozza'],
     postalCodePrefixes: ['401'],
     latitudeApprox: 44.4949,
@@ -143,21 +143,21 @@ type RawPro = Omit<ProfessionalSummary, 'profileUrl' | 'cityName' | 'nextAvailab
 
 const RAW_PROS: RawPro[] = [
   { professionalId: 'giulia-m', displayName: 'Giulia M.', specialties: ['capelli'], specialtyLabel: 'Parrucchiera', verified: true, serviceArea: 'Centro storico, Porta Romana', citySlug: 'milano', availableInDays: 1 },
-  { professionalId: 'luca-r', displayName: 'Luca R.', specialties: ['barber'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'Isola, Porta Nuova', citySlug: 'milano', availableInDays: 0 },
+  { professionalId: 'luca-r', displayName: 'Luca R.', specialties: ['capelli'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'Isola, Porta Nuova', citySlug: 'milano', availableInDays: 0 },
   { professionalId: 'sara-p', displayName: 'Sara P.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'Città Studi', citySlug: 'milano', availableInDays: 2 },
-  { professionalId: 'chiara-s', displayName: 'Chiara S.', specialties: ['nails'], specialtyLabel: 'Nail artist', verified: true, serviceArea: 'Navigli', citySlug: 'milano', availableInDays: 1, sponsored: true },
+  { professionalId: 'chiara-s', displayName: 'Chiara S.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'Navigli', citySlug: 'milano', availableInDays: 1 },
   { professionalId: 'alessia-t', displayName: 'Alessia T.', specialties: ['capelli'], specialtyLabel: 'Parrucchiera', verified: true, serviceArea: 'Prati, Centro storico', citySlug: 'roma', availableInDays: 0 },
   { professionalId: 'lorenzo-b', displayName: 'Lorenzo B.', specialties: ['make-up'], specialtyLabel: 'Make-up artist', verified: true, serviceArea: 'Parioli', citySlug: 'roma', availableInDays: 3 },
-  { professionalId: 'martina-c', displayName: 'Martina C.', specialties: ['estetica', 'nails'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'San Giovanni', citySlug: 'roma', availableInDays: 1 },
+  { professionalId: 'martina-c', displayName: 'Martina C.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'San Giovanni', citySlug: 'roma', availableInDays: 1 },
   { professionalId: 'andrea-f', displayName: 'Andrea F.', specialties: ['massaggi'], specialtyLabel: 'Massaggiatore', verified: true, serviceArea: 'Trastevere', citySlug: 'roma', availableInDays: 2 },
   { professionalId: 'elena-b', displayName: 'Elena B.', specialties: ['capelli'], specialtyLabel: 'Parrucchiera', verified: true, serviceArea: 'Crocetta, Centro', citySlug: 'torino', availableInDays: 1 },
-  { professionalId: 'davide-g', displayName: 'Davide G.', specialties: ['barber'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'San Salvario', citySlug: 'torino', availableInDays: 4 },
+  { professionalId: 'davide-g', displayName: 'Davide G.', specialties: ['capelli'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'San Salvario', citySlug: 'torino', availableInDays: 4 },
   { professionalId: 'marco-d', displayName: 'Marco D.', specialties: ['make-up'], specialtyLabel: 'Make-up artist', verified: true, serviceArea: 'Centro storico', citySlug: 'bologna', availableInDays: 2 },
-  { professionalId: 'francesca-l', displayName: 'Francesca L.', specialties: ['nails'], specialtyLabel: 'Nail artist', verified: true, serviceArea: 'Saragozza', citySlug: 'bologna', availableInDays: 0 },
+  { professionalId: 'francesca-l', displayName: 'Francesca L.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'Saragozza', citySlug: 'bologna', availableInDays: 0 },
   { professionalId: 'matteo-v', displayName: 'Matteo V.', specialties: ['massaggi'], specialtyLabel: 'Massaggiatore', verified: true, serviceArea: 'Campo di Marte', citySlug: 'firenze', availableInDays: 1 },
   { professionalId: 'sofia-n', displayName: 'Sofia N.', specialties: ['make-up'], specialtyLabel: 'Make-up artist', verified: true, serviceArea: 'Oltrarno', citySlug: 'firenze', availableInDays: 5 },
   { professionalId: 'federica-a', displayName: 'Federica A.', specialties: ['capelli'], specialtyLabel: 'Parrucchiera', verified: true, serviceArea: 'Chiaia, Posillipo', citySlug: 'napoli', availableInDays: 1 },
-  { professionalId: 'simone-e', displayName: 'Simone E.', specialties: ['barber'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'Vomero', citySlug: 'napoli', availableInDays: 0 },
+  { professionalId: 'simone-e', displayName: 'Simone E.', specialties: ['capelli'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'Vomero', citySlug: 'napoli', availableInDays: 0 },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -170,8 +170,8 @@ export interface MockDataset {
   professionals: ProfessionalProfile[];
 }
 
-const PRICE_FROM: Record<string, number> = { capelli: 45, barber: 30, 'make-up': 60, nails: 35, estetica: 50, massaggi: 65 };
-const DURATION: Record<string, number> = { capelli: 60, barber: 40, 'make-up': 60, nails: 50, estetica: 60, massaggi: 60 };
+const PRICE_FROM: Record<string, number> = { capelli: 45, 'make-up': 60, estetica: 50, massaggi: 65 };
+const DURATION: Record<string, number> = { capelli: 60, 'make-up': 60, estetica: 60, massaggi: 60 };
 
 /** Construit le jeu de données (disponibilités relatives à la date du jour) dans la langue demandée. */
 export function buildMockDataset(today: string = todayIso(), lang: Lang = 'it'): MockDataset {
@@ -184,7 +184,7 @@ export function buildMockDataset(today: string = todayIso(), lang: Lang = 'it'):
     nextAvailability: addDaysIso(today, availableInDays),
     profileUrl: `/professionisti/${p.professionalId}`,
     profileImage: null,
-    bio: `${p.displayName} lavora come ${p.specialtyLabel.toLowerCase()} e si sposta nelle zone indicate con il proprio kit di lavoro. (Testo di esempio.)`,
+    bio: `${p.displayName} lavora come ${p.specialtyLabel.toLowerCase()} e si sposta nelle zone indicate con i propri prodotti e strumenti. (Testo di esempio.)`,
     skills: p.specialties.map((s) => serviceName.get(s) ?? s),
     services: p.specialties.map((s) => ({
       serviceSlug: s,
@@ -264,7 +264,7 @@ function translateDataset(data: MockDataset, lang: Exclude<Lang, 'it'>): MockDat
         .map((a) => area(a.trim()))
         .join(', '),
       areasServed: p.areasServed.map(area),
-      bio: fill(tx.bio, { name: p.displayName, label: lang === 'de' ? specialtyLabel : specialtyLabel.toLowerCase() }),
+      bio: fill(tx.bio, { name: p.displayName, label: specialtyLabel.toLowerCase() }),
       skills: p.specialties.map(serviceName),
       services: p.services.map((o) => ({ ...o, name: serviceName(o.serviceSlug) })),
       conditions: tx.proConditions,

@@ -1,21 +1,41 @@
 # GLAMRO
 
-> Glamro è una piattaforma di beauty delivery: connette clienti e professionisti beauty e wellness verificati e permette di scegliere servizio, luogo, momento e professionista in base alla disponibilità reale.
+> GLAMRO è una piattaforma italiana di beauty delivery: i clienti prenotano in app professionisti beauty verificati che vanno a casa loro. Claim: "Il beauty diventa delivery."
 
-Supporto sperimentale per assistenti e motori di risposta. Non sostituisce sitemap, link interni e rendering server side.
+## Fatti principali
+
+- Gestore: GLAMRO S.R.L., Via Giacomo Matteotti 54, 60121 Ancona (AN), P.IVA 03036060428, REA AN-312608.
+- Categorie di professionisti: parrucchieri (anche barbieri), estetiste, make-up artist, massaggiatori del benessere.
+- Servizi: capelli (anche barba), make-up, estetica e massaggi. I massaggi sono trattamenti di benessere, non prestazioni sanitarie.
+- I professionisti sono indipendenti, con partita IVA. Parrucchieri ed estetiste devono avere un salone o centro con SCIA, proprio o di appoggio. Un profilo diventa prenotabile solo dopo la verifica manuale dei documenti.
+- Prezzi: il professionista sceglie il prezzo e incassa il 100%. Il cliente paga a parte un supplemento GLAMRO del 20% (minimo 6 €). Ordine minimo 20 €. I prezzi mostrati sul sito sono finali, supplemento incluso.
+- Pagamento: in app, con carta di credito o di debito (Stripe). La carta si registra alla prenotazione, l'importo viene bloccato 24 ore prima e addebitato solo a servizio svolto.
+- Cancellazione del cliente: gratis dall'app fino a 1 ora prima del servizio. Nell'ultima ora, o se il cliente non si fa trovare, il servizio viene addebitato per intero. Il professionista aspetta 15 minuti.
+- Se il professionista cancella, non si presenta o arriva con più di 30 minuti di ritardo, il cliente è rimborsato per intero, supplemento compreso, sul metodo di pagamento usato.
+- La prenotazione avviene nell'app GLAMRO (iOS e Android), non dal sito. I professionisti usano l'app GLAMRO Pro.
+- Le città in cui il servizio è prenotabile sono elencate nella pagina "Dove siamo" e dipendono dai professionisti verificati attivi.
+- GLAMRO è gratis per i professionisti: nessun costo di iscrizione, nessun abbonamento.
 
 ## Pagine principali
 
-- [Servizi](https://www.glamro.it/servizi): categorie di servizio attive (capelli, barber, make-up, nails, estetica, massaggi)
+- [Servizi](https://www.glamro.it/servizi): capelli, make-up, estetica, massaggi
 - [Come funziona](https://www.glamro.it/come-funziona): ricerca, scelta, prenotazione, arrivo, pagamento, cancellazione e assistenza
 - [Dove siamo](https://www.glamro.it/dove-siamo): città in cui il servizio è prenotabile
-- [Fiducia e sicurezza](https://www.glamro.it/fiducia): verifica dei professionisti, pagamenti, recensioni, ordinamento dei risultati
-- [Per professionisti](https://www.glamro.it/per-professionisti): requisiti e candidatura
+- [Fiducia e sicurezza](https://www.glamro.it/fiducia): verifica dei professionisti, pagamenti, ordine dei risultati, reclami
+- [Per professionisti](https://www.glamro.it/per-professionisti): requisiti, costi, pagamenti e come entrare in GLAMRO
 - [Assistenza](https://www.glamro.it/assistenza): FAQ, cancellazioni, rimborsi e contatti
 
 ## Documenti legali
 
-- [Privacy](https://www.glamro.it/legale/privacy)
-- [Cookie policy](https://www.glamro.it/legale/cookie-policy)
-- [Condizioni Clienti](https://www.glamro.it/legale/condizioni-clienti)
-- [Condizioni Professionisti](https://www.glamro.it/legale/condizioni-professionisti)
+- [Termini e Condizioni Clienti](https://www.glamro.it/termini)
+- [Termini e Condizioni Professionisti](https://www.glamro.it/termini-professionisti)
+- [Privacy Policy](https://www.glamro.it/privacy)
+- [Cookie Policy](https://www.glamro.it/cookie)
+- [Cancellazioni, rimborsi e reclami](https://www.glamro.it/cancellazioni-rimborsi)
+
+## Contatti
+
+- Email: contact@glamro.it
+- Telefono e WhatsApp: +39 392 366 1225
+
+English version: https://www.glamro.it/en

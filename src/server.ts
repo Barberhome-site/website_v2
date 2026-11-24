@@ -8,6 +8,8 @@ import express from 'express';
 import { join } from 'node:path';
 import { DEFAULT_LANG, localizePath } from './app/core/i18n/i18n.config';
 import { readLangCookie } from './app/core/i18n/lang-cookie';
+import { SITE } from './app/core/config/site.config';
+import { legacyRedirect } from './server/legacy-redirects';
 import { buildSitemapXml } from './server/sitemap';
 import { handleSiteApi, siteApi } from './server/site-api';
 
@@ -20,7 +22,6 @@ const angularApp = new AngularNodeAppEngine();
  * En-têtes de sécurité de base (brief §17 : CSP et gestion sûre des scripts tiers).
  * La CSP liste uniquement les domaines réellement utilisés :
  *  - Google Analytics (chargé seulement après consentement)
- *  - Trustpilot (widget, chargé seulement après consentement)
  *  - OpenFreeMap (style, tuiles vectorielles, polices et sprites de la carte)
  *  - MapLibre : worker auto-hébergé (worker-src 'self'), images des sprites décodées en blob:
  * À compléter quand l'URL de l'API sera connue (connect-src).
@@ -32,27 +33,47 @@ const angularApp = new AngularNodeAppEngine();
 const MEDIA_ORIGINS = process.env['SITE_MEDIA_ORIGINS'] || 'https://glamro.s3.eu-south-1.amazonaws.com';
 
 /**
- * Anciennes adresses : site précédent (dépôt midnight-welcome : routes et PDF de public/documents)
- * et liens de l'app mobile. Redirection permanente vers les nouvelles pages.
+ * Dominio di prova: nessuna indicizzazione su *.vercel.app (anche per file statici e redirect).
+ * L'indicizzazione avviene solo su www.glamro.it. Su Vercel lo stesso header è in vercel.json.
  */
-const LEGACY_LEGAL: Record<string, string> = {
-  '/index': '/',
-  '/privacy': '/legale/privacy',
-  '/cookie': '/legale/cookie-policy',
-  '/cookie-policy': '/legale/cookie-policy',
-  '/terms': '/legale/condizioni-clienti',
-  '/termini': '/legale/condizioni-clienti',
-  '/termini-professionisti': '/legale/condizioni-professionisti',
-  '/documents/Informativa_trattamento_dati.pdf': '/legale/privacy',
-  '/documents/Informativa_Cookie.pdf': '/legale/cookie-policy',
-  '/documents/Termini_Condizioni.pdf': '/legale/condizioni-clienti',
-  '/documents/Regolamento_piattaforma.pdf': '/legale/regolamento-piattaforma',
-  '/documents/Policy_Reclami.pdf': '/legale/policy-reclami',
-  '/documents/Disclaimer_igienico_sanitario.pdf': '/legale/disclaimer-igienico-sanitario',
-};
-for (const [from, to] of Object.entries(LEGACY_LEGAL)) {
-  app.get(from, (_req, res) => res.redirect(301, to));
-}
+app.use((req, res, next) => {
+  if (/\.vercel\.app$/i.test(req.hostname)) {
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  }
+  next();
+});
+
+/**
+ * www.glamro.it/professionisti è il link di download dell'app GLAMRO Pro (già in uso su materiali e QR):
+ * da telefono porta allo store giusto, da computer alla sezione professionisti con i badge degli store.
+ * I profili restano su /professionisti/… (rotta Angular).
+ */
+app.get(['/professionisti', '/professionisti/'], (req, res) => {
+  const ua = req.headers['user-agent'] ?? '';
+  res.vary('User-Agent').set('Cache-Control', 'private, no-store');
+  if (/iPhone|iPad|iPod/i.test(ua)) {
+    res.redirect(302, SITE.apps.pro.appStoreUrl);
+  } else if (/Android/i.test(ua)) {
+    res.redirect(302, SITE.apps.pro.playStoreUrl);
+  } else {
+    res.redirect(302, '/per-professionisti#entra');
+  }
+});
+
+/** Vecchi indirizzi (lingue rimosse, vecchie pagine legali, sito precedente): redirect 301. */
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    next();
+    return;
+  }
+  const target = legacyRedirect(req.path);
+  if (target && target !== req.path) {
+    const query = req.originalUrl.includes('?') ? req.originalUrl.slice(req.originalUrl.indexOf('?')) : '';
+    res.redirect(301, target + query);
+    return;
+  }
+  next();
+});
 
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -63,13 +84,13 @@ app.use((_req, res, next) => {
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://widget.trustpilot.com",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline'",
-      `img-src 'self' data: blob: https://www.google-analytics.com https://*.trustpilot.com https://*.trustpilot.net ${MEDIA_ORIGINS}`,
+      `img-src 'self' data: blob: https://www.google-analytics.com ${MEDIA_ORIGINS}`,
       "font-src 'self'",
-      "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustpilot.com https://tiles.openfreemap.org",
+      "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://tiles.openfreemap.org",
       "worker-src 'self'",
-      "frame-src https://widget.trustpilot.com",
+      "frame-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
     ].join('; '),

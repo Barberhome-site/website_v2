@@ -1,4 +1,71 @@
 @let t = i18n.d().legal;
+
+<!-- Testo con grassetti (**…**) reso con <strong>, senza innerHTML. -->
+<ng-template #rich let-text>
+  @for (seg of text | rich; track $index) {
+    @if (seg.bold) {
+      <strong>{{ seg.text }}</strong>
+    } @else {
+      {{ seg.text }}
+    }
+  }
+</ng-template>
+
+<ng-template #blocksTpl let-blocks>
+  @for (b of blocks; track $index) {
+    @switch (b.type) {
+      @case ('p') {
+        <p><ng-container *ngTemplateOutlet="rich; context: { $implicit: b.text }" /></p>
+      }
+      @case ('h3') {
+        <h3>{{ b.text }}</h3>
+      }
+      @case ('list') {
+        <ul>
+          @for (item of b.items; track $index) {
+            <li><ng-container *ngTemplateOutlet="rich; context: { $implicit: item }" /></li>
+          }
+        </ul>
+      }
+      @case ('olist') {
+        <ol [attr.start]="b.start">
+          @for (item of b.items; track $index) {
+            <li><ng-container *ngTemplateOutlet="rich; context: { $implicit: item }" /></li>
+          }
+        </ol>
+      }
+      @case ('table') {
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption class="visually-hidden">{{ b.caption }}</caption>
+            <thead>
+              <tr>
+                @for (h of b.head; track $index) {
+                  <th scope="col">{{ h }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of b.rows; track $index) {
+                <tr>
+                  @for (cell of row; track $index) {
+                    <td><ng-container *ngTemplateOutlet="rich; context: { $implicit: cell }" /></td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+      @case ('manage-cookies') {
+        <p [attr.lang]="i18n.lang()">
+          <button type="button" class="btn btn--outline-accent" (click)="consent.openPreferences()">{{ t.manageCookies }}</button>
+        </p>
+      }
+    }
+  }
+</ng-template>
+
 @if (document(); as d) {
   <div class="page-head">
     <div class="container">
@@ -28,109 +95,25 @@
 
   <div class="container section layout">
     <nav class="toc" [attr.aria-label]="t.toc">
-      <ol lang="it">
+      <ul lang="it">
         @for (s of d.sections; track s.id) {
           <li><a routerLink="." [fragment]="s.id">{{ s.title }}</a></li>
         }
-      </ol>
+      </ul>
     </nav>
 
     <div class="prose">
-      @for (s of d.sections; track s.id; let i = $index) {
+      @if (d.preamble.length) {
+        <div lang="it">
+          <ng-container *ngTemplateOutlet="blocksTpl; context: { $implicit: d.preamble }" />
+        </div>
+      }
+      @for (s of d.sections; track s.id) {
         <section [id]="s.id" [attr.aria-labelledby]="s.id + '-t'" lang="it">
-          <h2 [id]="s.id + '-t'">{{ i + 1 }}. {{ s.title }}</h2>
-          @for (b of s.blocks; track $index) {
-            @switch (b.type) {
-              @case ('p') {
-                <p>{{ $any(b).text }}</p>
-              }
-              @case ('placeholder') {
-                <p class="placeholder">{{ $any(b).text }}</p>
-              }
-              @case ('list') {
-                <ul>
-                  @for (item of $any(b).items; track $index) {
-                    <li>{{ item }}</li>
-                  }
-                </ul>
-              }
-              @case ('table') {
-                <div class="table-scroll">
-                  <table class="data-table">
-                    <caption class="visually-hidden">{{ $any(b).caption }}</caption>
-                    <thead>
-                      <tr>
-                        @for (h of $any(b).head; track $index) {
-                          <th scope="col">{{ h }}</th>
-                        }
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @for (row of $any(b).rows; track $index) {
-                        <tr>
-                          @for (cell of row; track $index) {
-                            <td>{{ cell }}</td>
-                          }
-                        </tr>
-                      }
-                    </tbody>
-                  </table>
-                </div>
-              }
-              @case ('cookie-table') {
-                <!-- Tableau des technologies : traduit dans la langue de la page -->
-                <div class="table-scroll" [attr.lang]="i18n.lang()">
-                  <table class="data-table">
-                    <caption class="visually-hidden">{{ t.cookieTable.caption }}</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">{{ t.cookieTable.name }}</th>
-                        <th scope="col">{{ t.cookieTable.provider }}</th>
-                        <th scope="col">{{ t.cookieTable.domain }}</th>
-                        <th scope="col">{{ t.cookieTable.purpose }}</th>
-                        <th scope="col">{{ t.cookieTable.category }}</th>
-                        <th scope="col">{{ t.cookieTable.duration }}</th>
-                        <th scope="col">{{ t.cookieTable.transfers }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @for (tr of inventory; track tr.id) {
-                        <tr>
-                          <td>{{ tr.name }}</td>
-                          <td>{{ tr.provider }}</td>
-                          <td>{{ tr.domain }}</td>
-                          <td>{{ i18n.d().trackers[tr.id].purpose }}</td>
-                          <td>{{ i18n.d().consent.categories[tr.category].label }}</td>
-                          <td>{{ i18n.d().trackers[tr.id].duration }}</td>
-                          <td>{{ i18n.d().trackers[tr.id].transfers }}</td>
-                        </tr>
-                      }
-                    </tbody>
-                  </table>
-                </div>
-              }
-              @case ('manage-cookies') {
-                <p [attr.lang]="i18n.lang()">
-                  <button type="button" class="btn btn--outline-accent" (click)="consent.openPreferences()">{{ t.manageCookies }}</button>
-                </p>
-              }
-            }
-          }
+          <h2 [id]="s.id + '-t'">{{ s.title }}</h2>
+          <ng-container *ngTemplateOutlet="blocksTpl; context: { $implicit: s.blocks }" />
         </section>
       }
-
-      <section id="versioni" aria-labelledby="versioni-t">
-        <h2 id="versioni-t">{{ t.previous }}</h2>
-        @if (d.previousVersions.length) {
-          <ul>
-            @for (v of d.previousVersions; track v.version) {
-              <li><a [href]="v.url">{{ t.previousItem | fmt: { version: v.version, date: i18n.formatDate(v.date) } }}</a></li>
-            }
-          </ul>
-        } @else {
-          <p>{{ t.noPrevious }}</p>
-        }
-      </section>
     </div>
   </div>
 } @else {

@@ -12,7 +12,8 @@ export type AnalyticsEventName =
   | 'store_click'
   | 'pro_cta_click'
   | 'start_application'
-  | 'trustpilot_click'
+  | 'whatsapp_click'
+  | 'postal_code_not_covered'
   | 'support_click';
 
 export type AnalyticsParams = Record<string, string | number | boolean | null | undefined>;

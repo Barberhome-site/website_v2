@@ -48,6 +48,10 @@
             <app-icon name="info" />
             <div>
               <p>{{ t.notCoveredText }}</p>
+              <p>
+                <a [href]="'mailto:' + site.contact.email">{{ site.contact.email }}</a>
+                · <a [href]="site.contact.whatsappUrl" target="_blank" rel="noopener">WhatsApp</a>
+              </p>
               <p>{{ t.tryCities }}</p>
               <ul class="chip-list">
                 @for (city of res.nearestCities; track city.slug) {
@@ -60,7 +64,7 @@
           <div class="section-head">
             <div>
               <h2 id="results-title" class="h3-like">
-                {{ (res.professionals.length === 1 ? t.countOne : t.countOther) | fmt: { count: res.professionals.length, city: res.city.name } }}
+                {{ (res.professionals.length === 1 ? t.countOne : t.countOther) | fmt: { city: res.city.name } }}
               </h2>
               <p class="muted small">
                 @if (serviceName(); as sn) {

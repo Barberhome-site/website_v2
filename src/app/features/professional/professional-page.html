@@ -85,7 +85,7 @@
             }
           </ul>
           <p class="small muted">
-            {{ t.conditionsSee }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>
+            {{ t.conditionsSee }} <a [routerLink]="'/termini' | lp: lang">{{ t.customerTerms }}</a>
             {{ t.and }} <a [routerLink]="'/assistenza' | lp: lang" fragment="cancellazioni">{{ t.cancellations }}</a>.
           </p>
         </section>
@@ -106,7 +106,7 @@
               }
             </ul>
           } @else {
-            <p>{{ t.noReviews }}</p>
+            <ul class="chip-list"><li>{{ t.noReviews }}</li></ul>
           }
         </section>
       </div>

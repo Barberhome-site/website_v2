@@ -12,11 +12,9 @@ import { asyncState } from '../../core/utils/async-state';
 import { AvailabilitySearch } from '../../shared/components/availability-search/availability-search';
 import { CoverageMap } from '../../shared/components/coverage-map/coverage-map';
 import { Icon, IconName } from '../../shared/components/icon/icon';
-import { Media } from '../../shared/components/media/media';
 import { ProsCarousel } from '../../shared/components/pros-carousel/pros-carousel';
 import { ServiceCard } from '../../shared/components/service-card/service-card';
 import { TrustPillars } from '../../shared/components/trust-pillars/trust-pillars';
-import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trustpilot-widget';
 
 @Component({
   selector: 'app-home-page',
@@ -26,11 +24,9 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
     AvailabilitySearch,
     CoverageMap,
     Icon,
-    Media,
     ProsCarousel,
     ServiceCard,
     TrustPillars,
-    TrustpilotWidget,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
@@ -64,11 +60,11 @@ export class HomePage {
   constructor() {
     const t = this.i18n.d();
     inject(SeoService).set({
-      title: `${SITE.name} — ${t.brand.promise}`,
+      title: t.home.seoTitle,
       rawTitle: true,
       description: t.home.seoDescription,
       path: '/',
-      jsonLd: [organizationLd(t.brand.promise), websiteLd(this.i18n.lang())],
+      jsonLd: [organizationLd(t.brand.positioning), websiteLd(this.i18n.lang())],
     });
   }
 

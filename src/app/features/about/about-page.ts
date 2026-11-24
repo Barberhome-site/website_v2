@@ -6,11 +6,10 @@ import { I18n } from '../../core/i18n/i18n.service';
 import { organizationLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
-import { Media } from '../../shared/components/media/media';
 
 @Component({
   selector: 'app-about-page',
-  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, Media],
+  imports: [RouterLink, LocalizePathPipe, Breadcrumbs],
   template: `
     @let t = i18n.d().about;
     <div class="page-head">
@@ -21,9 +20,6 @@ import { Media } from '../../shared/components/media/media';
       </div>
     </div>
 
-    <div class="container section">
-      <app-media ratio="16 / 7" [src]="site.images.about" icon="bike" [placeholderLabel]="i18n.d().placeholders.about" />
-    </div>
 
     <div class="container section section--tight prose">
       <h2>{{ t.whatTitle }}</h2>
@@ -31,7 +27,7 @@ import { Media } from '../../shared/components/media/media';
 
       <h2>{{ t.roleTitle }}</h2>
       <p>{{ t.roleText }}</p>
-      <p [class.placeholder]="t.rolePlaceholder.startsWith('[')">{{ t.rolePlaceholder }}</p>
+      <p>{{ t.rolePlaceholder }}</p>
 
       <h2>{{ t.glossaryTitle }}</h2>
       <dl>
@@ -49,13 +45,14 @@ import { Media } from '../../shared/components/media/media';
         PEC: {{ site.company.pec }}
       </p>
       <p>
-        {{ t.contacts }}: <a [href]="'mailto:' + site.contact.supportEmail">{{ site.contact.supportEmail }}</a> ·
+        {{ t.contacts }}: <a [href]="'mailto:' + site.contact.email">{{ site.contact.email }}</a> ·
+        <a [href]="site.contact.phoneHref">{{ site.contact.phone }}</a> ·
+        <a [href]="site.contact.whatsappUrl" target="_blank" rel="noopener">WhatsApp</a> ·
         <a [routerLink]="'/assistenza' | lp: i18n.lang()">{{ i18n.d().support.title }}</a>
       </p>
     </div>
   `,
   styles: `
-    app-media { border-radius: var(--radius-l); }
     dd { margin: 0 0 1rem; color: var(--c-muted); }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

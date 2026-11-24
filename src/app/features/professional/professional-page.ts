@@ -16,7 +16,7 @@ import { StoreButtons } from '../../shared/components/store-buttons/store-button
 
 /**
  * Profil professionnel : compétences, services, zones, vérification, disponibilité,
- * conditions et avis authentiques recueillis par la plateforme (distincts de Trustpilot).
+ * conditions et avis authentiques recueillis par la plateforme.
  */
 @Component({
   selector: 'app-professional-page',
@@ -61,12 +61,13 @@ export class ProfessionalPage {
         return;
       }
       const t = this.i18n.d().profile;
-      // En allemand, les noms gardent leur majuscule.
-      const label = this.i18n.lang() === 'de' ? p.specialtyLabel : p.specialtyLabel.toLowerCase();
+      const label = p.specialtyLabel.toLowerCase();
       this.seo.set({
         title: this.i18n.format(t.seoTitle, { name: p.displayName, label, city: p.cityName }),
         description: this.i18n.format(t.seoDescription, { name: p.displayName, label, city: p.cityName, area: p.serviceArea }),
         path: p.profileUrl,
+        // Profili senza servizi pubblicati: fuori dall'indice.
+        noindex: p.services.length === 0,
         type: 'profile',
         image: p.profileImage?.src,
         breadcrumbs: this.crumbs(),

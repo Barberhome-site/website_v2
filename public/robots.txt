@@ -1,27 +1,45 @@
 # robots.txt — GLAMRO
-# Brief §11 : OAI-SearchBot autorisé pour apparaître dans la recherche ChatGPT.
-# GPTBot (entraînement) est à évaluer séparément : bloqué par défaut ici.
-# Chemins traduits : voir src/app/core/i18n/route-slugs.ts (à garder synchronisé).
+# Crawler di ricerca e di addestramento AI consentiti. Bloccate solo ricerca interna e aree private.
+# Percorsi tradotti: vedi src/app/core/i18n/route-slugs.ts (da tenere allineato).
+# Il dominio di prova (*.vercel.app) è escluso dall'indicizzazione con l'header X-Robots-Tag: noindex.
 
 User-agent: *
 Allow: /
-# Résultats de recherche (noindex)
 Disallow: /disponibilita
 Disallow: /en/availability
-Disallow: /fr/disponibilite
-Disallow: /es/disponibilidad
-Disallow: /de/verfuegbarkeit
-# Formulaire de candidature (noindex)
-Disallow: /per-professionisti/candidatura
-Disallow: /en/for-professionals/apply
-Disallow: /fr/pour-les-professionnels/candidature
-Disallow: /es/para-profesionales/solicitud
-Disallow: /de/fuer-profis/bewerbung
+Disallow: /site-api/
 
 User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: GPTBot
-Disallow: /
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 Sitemap: https://www.glamro.it/sitemap.xml

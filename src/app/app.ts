@@ -21,10 +21,11 @@ import { ConsentPreferences } from './layout/consent/consent-preferences';
 import { Footer } from './layout/footer/footer';
 import { Header } from './layout/header/header';
 import { LangSuggest } from './layout/lang-suggest/lang-suggest';
+import { WhatsappFab } from './layout/whatsapp-fab/whatsapp-fab';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, ConsentBanner, ConsentPreferences, BookingDialog, LangSuggest],
+  imports: [RouterOutlet, Header, Footer, ConsentBanner, ConsentPreferences, BookingDialog, LangSuggest, WhatsappFab],
   template: `
     <a class="skip-link" href="#contenuto" (click)="skipToContent($event)">{{ i18n.d().nav.skip }}</a>
     <app-lang-suggest />
@@ -42,6 +43,7 @@ import { LangSuggest } from './layout/lang-suggest/lang-suggest';
     <app-consent-banner />
     <app-consent-preferences />
     <app-booking-dialog />
+    <app-whatsapp-fab />
   `,
   styles: `
     :host { display: flex; flex-direction: column; min-height: 100vh; }

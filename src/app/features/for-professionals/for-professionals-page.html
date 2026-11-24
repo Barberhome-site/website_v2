@@ -5,16 +5,15 @@
     <app-breadcrumbs [items]="crumbs" />
     <div class="hero-pro">
       <div>
+        <img class="pro-logo" [src]="site.proLogo.src" alt="GLAMRO Pro" [width]="site.proLogo.width" [height]="site.proLogo.height" />
         <p class="eyebrow">{{ t.eyebrow }}</p>
         <h1>{{ t.title }}</h1>
         <p class="lead">{{ t.lead }}</p>
         <div class="cta-row">
-          <a class="btn btn--primary" [routerLink]="'/per-professionisti/candidatura' | lp: lang" (click)="trackApply('pro_hero')">{{ t.apply }}</a>
+          <a class="btn btn--primary" routerLink="." fragment="entra" (click)="trackJoin('pro_hero')">{{ t.apply }}</a>
           <a class="btn btn--outline" routerLink="." fragment="funzionamento">{{ t.how }}</a>
         </div>
       </div>
-      <app-media ratio="4 / 3" [src]="site.images.proEntry" icon="user" [placeholderLabel]="i18n.d().placeholders.proKit"
-                 sizes="(min-width: 960px) 480px, 100vw" />
     </div>
   </div>
 </div>
@@ -25,9 +24,6 @@
       <li [id]="topicIds[i]" class="card info-card">
         <h2 class="h3-like"><app-icon [name]="topicIcons[i]" />{{ topic.title }}</h2>
         <p>{{ topic.text }}</p>
-        @if (topic.placeholder) {
-          <p [class.placeholder]="topic.placeholder.startsWith('[')">{{ topic.placeholder }}</p>
-        }
       </li>
     }
   </ul>
@@ -42,14 +38,20 @@
           <li><div><strong>{{ step.title }}</strong><br /><span class="muted">{{ step.text }}</span></div></li>
         }
       </ol>
-      <div class="cta-row">
-        <a class="btn btn--primary" [routerLink]="'/per-professionisti/candidatura' | lp: lang" (click)="trackApply('pro_process')">{{ t.apply }}</a>
-        <a class="link-arrow" [routerLink]="'/legale/condizioni-professionisti' | lp: lang">{{ t.terms }} <app-icon name="arrow-right" /></a>
-      </div>
-      <div class="pro-app">
-        <h3>{{ t.appTitle }}</h3>
-        <p class="muted">{{ t.appText }}</p>
+      <!--
+        Ingresso in piattaforma. Soluzione TEMPORANEA finché le API di onboarding del backend non sono pronte:
+        store di GLAMRO Pro + WhatsApp precompilato. Quando le API ci sono, qui va il percorso guidato
+        (chi sei → tipo → dati → documenti → servizi → Stripe → consensi → «Profilo in verifica»).
+      -->
+      <div id="entra" class="pro-app">
+        <h3>{{ t.join.title }}</h3>
+        <p class="muted">{{ t.join.text }}</p>
         <app-store-buttons app="pro" placement="pro_page" />
+        <div class="cta-row">
+          <a class="btn btn--outline" [href]="whatsappHref()" target="_blank" rel="noopener" (click)="trackWhatsapp()">{{ t.join.whatsapp }}</a>
+          <a class="btn btn--outline" [href]="site.partners.fiscozenUrl" target="_blank" rel="noopener sponsored">{{ t.join.fiscozen }}</a>
+        </div>
+        <p><a class="link-arrow" [routerLink]="'/termini-professionisti' | lp: lang">{{ t.terms }} <app-icon name="arrow-right" /></a></p>
       </div>
     </div>
     <div>

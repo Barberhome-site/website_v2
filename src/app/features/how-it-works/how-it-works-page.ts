@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
+import { faqLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { FaqList } from '../../shared/components/faq-list/faq-list';
@@ -42,7 +43,7 @@ const STAGE_ICONS: IconName[] = ['search', 'user', 'calendar', 'bike', 'card', '
               <p><strong>{{ s.answer }}</strong></p>
               <p>{{ s.detail }}</p>
               @if (s.placeholder) {
-                <p [class.placeholder]="s.placeholder.startsWith('[')">{{ s.placeholder }}</p>
+                <p>{{ s.placeholder }}</p>
               }
             </div>
           </li>
@@ -88,6 +89,7 @@ export class HowItWorksPage {
       description: t.how.seoDescription,
       path: '/come-funziona',
       breadcrumbs: this.crumbs,
+      jsonLd: [faqLd(t.how.faqs)],
     });
   }
 }

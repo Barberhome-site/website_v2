@@ -11,10 +11,4 @@ export const environment = {
    * Fond de carte : style vectoriel « Dark » d'OpenFreeMap (gratuit, sans clé ni quota, usage commercial autorisé).
    */
   mapStyleUrl: 'https://tiles.openfreemap.org/styles/dark',
-  trustpilot: {
-    businessUnitId: '6af514939898c9d06ed3ca8f',
-    templateId: '56278e9abfbbba0bdcd568bc',
-    height: '52px',
-    profileUrl: 'https://it.trustpilot.com/review/glamro.it',
-  },
 };

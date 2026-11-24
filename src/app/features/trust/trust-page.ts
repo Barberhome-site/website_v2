@@ -5,7 +5,6 @@ import { I18n } from '../../core/i18n/i18n.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { LastUpdated } from '../../shared/components/last-updated/last-updated';
-import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trustpilot-widget';
 
 /**
  * Page « Fiducia » (brief §4 et §9) : critères de vérification, paiements, avis,
@@ -14,7 +13,7 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
  */
 @Component({
   selector: 'app-trust-page',
-  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, LastUpdated, TrustpilotWidget],
+  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, LastUpdated],
   template: `
     @let t = i18n.d().trust;
     <div class="page-head">
@@ -35,14 +34,19 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
             <li>{{ item }}</li>
           }
         </ul>
-        <p [class.placeholder]="t.verification.placeholder.startsWith('[')">{{ t.verification.placeholder }}</p>
       </section>
 
       <section id="pagamenti" aria-labelledby="t-pagamenti">
         <h2 id="t-pagamenti">{{ t.payments.title }}</h2>
         <p><strong>{{ t.payments.answer }}</strong></p>
         <p>{{ t.payments.text }}</p>
-        <p [class.placeholder]="t.payments.placeholder.startsWith('[')">{{ t.payments.placeholder }}</p>
+        <p>{{ t.payments.placeholder }}</p>
+      </section>
+
+      <section id="cancellazioni" aria-labelledby="t-cancellazioni">
+        <h2 id="t-cancellazioni">{{ t.cancellations.title }}</h2>
+        <p>{{ t.cancellations.answer }}</p>
+        <p><a [routerLink]="'/cancellazioni-rimborsi' | lp: i18n.lang()">{{ i18n.d().footer.cancellations }}</a></p>
       </section>
 
       <section id="recensioni" aria-labelledby="t-recensioni">
@@ -54,22 +58,19 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
           }
         </ul>
         <p>{{ t.reviews.noFake }}</p>
-        <p [class.placeholder]="t.reviews.placeholder.startsWith('[')">{{ t.reviews.placeholder }}</p>
-        <div class="card"><app-trustpilot-widget /></div>
+        <p>{{ t.reviews.placeholder }}</p>
       </section>
 
       <section id="ordinamento" aria-labelledby="t-ordinamento">
         <h2 id="t-ordinamento">{{ t.ranking.title }}</h2>
         <p><strong>{{ t.ranking.answer }}</strong></p>
-        <p>{{ t.ranking.text }}</p>
-        <p [class.placeholder]="t.ranking.placeholder.startsWith('[')">{{ t.ranking.placeholder }}</p>
       </section>
 
       <section id="assistenza" aria-labelledby="t-assistenza">
         <h2 id="t-assistenza">{{ t.support.title }}</h2>
         <p><strong>{{ t.support.answer }}</strong></p>
         <p>{{ t.support.text }} <a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="contatti">{{ t.support.link }}</a>.</p>
-        <p [class.placeholder]="t.support.placeholder.startsWith('[')">{{ t.support.placeholder }}</p>
+        <p>{{ t.support.placeholder }}</p>
       </section>
 
       <section id="sicurezza" aria-labelledby="t-sicurezza">
@@ -85,7 +86,7 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
       <section id="reclami" aria-labelledby="t-reclami">
         <h2 id="t-reclami">{{ t.complaints.title }}</h2>
         <p><strong>{{ t.complaints.answer }}</strong></p>
-        <p [class.placeholder]="t.complaints.placeholder.startsWith('[')">{{ t.complaints.placeholder }}</p>
+        <p>{{ t.complaints.placeholder }}</p>
       </section>
     </div>
   `,

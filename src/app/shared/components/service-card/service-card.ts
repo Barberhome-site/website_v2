@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormatPipe, LocalizePathPipe } from '../../../core/i18n/i18n.pipes';
+import { LocalizePathPipe } from '../../../core/i18n/i18n.pipes';
 import { I18n } from '../../../core/i18n/i18n.service';
 import { ServiceCategory } from '../../../core/models/glamro.models';
 import { Media } from '../media/media';
@@ -8,11 +8,10 @@ import { Media } from '../media/media';
 /** Carte catégorie de service, liée à sa page /servizi/:slug. */
 @Component({
   selector: 'app-service-card',
-  imports: [RouterLink, Media, LocalizePathPipe, FormatPipe],
+  imports: [RouterLink, Media, LocalizePathPipe],
   template: `
     @let s = service();
     <app-media ratio="4 / 3" [src]="s.image?.src" [alt]="s.image?.alt ?? ''" icon="scissors"
-               [placeholderLabel]="i18n.d().placeholders.service | fmt: { label: s.professionalLabel }"
                sizes="(min-width: 1100px) 300px, (min-width: 640px) 45vw, 90vw" />
     <div class="sc__body">
       <h3 class="sc__title">

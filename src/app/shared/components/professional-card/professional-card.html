@@ -1,13 +1,6 @@
 @let p = pro();
 @let t = i18n.d().card;
 
-<!-- Bandeau « Sponsorisé » : en premier dans le DOM, il est aussi annoncé en premier (brief §7, P2B) -->
-@if (p.sponsored) {
-  <div class="pc__ribbon-wrap">
-    <span class="pc__ribbon">{{ t.sponsored }}</span>
-  </div>
-}
-
 <app-avatar [name]="p.displayName" [image]="p.profileImage" [size]="variant() === 'card' ? 104 : 64" />
 
 <div class="pc__body">

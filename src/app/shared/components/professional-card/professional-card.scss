@@ -46,7 +46,7 @@
   z-index: 2;
 }
 
-/* Bandeau diagonal « Sponsorizzato » dans le coin supérieur gauche.
+/* Bandeau diagonal in evidenza (oggi non usato: nessuna posizione a pagamento) dans le coin supérieur gauche.
    Le conteneur découpe le bandeau et épouse l'arrondi intérieur de la carte. */
 .pc__ribbon-wrap {
   position: absolute;
@@ -63,7 +63,7 @@
 
 .pc__ribbon {
   position: absolute;
-  // Centre du bandeau sur la diagonale, à ~60 px du coin : assez long pour « Sponsorizzato ».
+  // Centre du bandeau sur la diagonale, à ~60 px du coin : assez long pour in evidenza (oggi non usato: nessuna posizione a pagamento).
   top: 31px;
   left: -34px;
   width: 160px;

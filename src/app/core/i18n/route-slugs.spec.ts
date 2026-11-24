@@ -1,7 +1,7 @@
 import { LANGS, langOfUrl, localizePath, stripLang } from './i18n.config';
 import { ROUTE_SLUGS, canonicalSlug, routePath } from './route-slugs';
 
-/** Chemins canoniques (italiens) représentatifs du site. */
+/** Percorsi canonici (italiani) rappresentativi del sito. */
 const PATHS = [
   '/',
   '/servizi',
@@ -15,27 +15,33 @@ const PATHS = [
   '/fiducia',
   '/assistenza',
   '/per-professionisti',
-  '/per-professionisti/candidatura',
   '/chi-siamo',
-  '/legale/privacy',
-  '/legale/condizioni-clienti',
+  '/termini',
+  '/termini-professionisti',
+  '/privacy',
+  '/cookie',
+  '/cancellazioni-rimborsi',
 ];
 
 describe('route-slugs', () => {
-  it('traduit les chemins vers chaque langue', () => {
+  it('ha solo italiano e inglese', () => {
+    expect([...LANGS]).toEqual(['it', 'en']);
+  });
+
+  it('traduce i percorsi in inglese', () => {
     expect(localizePath('/servizi/capelli', 'it')).toBe('/servizi/capelli');
     expect(localizePath('/servizi/capelli', 'en')).toBe('/en/services/hair');
-    expect(localizePath('/servizi/capelli', 'fr')).toBe('/fr/services/coiffure');
-    expect(localizePath('/servizi/capelli', 'de')).toBe('/de/leistungen/haare');
-    expect(localizePath('/', 'es')).toBe('/es');
+    expect(localizePath('/termini', 'en')).toBe('/en/terms');
+    expect(localizePath('/cancellazioni-rimborsi', 'en')).toBe('/en/cancellations-refunds');
+    expect(localizePath('/', 'en')).toBe('/en');
   });
 
-  it('ne traduit ni les villes ni les identifiants de professionnels', () => {
-    expect(localizePath('/dove-siamo/milano', 'fr')).toBe('/fr/ou-sommes-nous/milano');
-    expect(localizePath('/professionisti/giulia-m', 'de')).toBe('/de/profis/giulia-m');
+  it('non traduce città e identificativi dei professionisti', () => {
+    expect(localizePath('/dove-siamo/milano', 'en')).toBe('/en/where-we-are/milano');
+    expect(localizePath('/professionisti/giulia-m', 'en')).toBe('/en/professionals/giulia-m');
   });
 
-  it('fait l’aller-retour italien → langue → italien sans perte', () => {
+  it('fa andata e ritorno italiano → lingua → italiano senza perdite', () => {
     for (const lang of LANGS) {
       for (const path of PATHS) {
         const localized = localizePath(path, lang);
@@ -45,7 +51,7 @@ describe('route-slugs', () => {
     }
   });
 
-  it('n’a jamais deux traductions identiques dans un même groupe', () => {
+  it('non ha mai due traduzioni uguali nello stesso gruppo', () => {
     for (const table of Object.values(ROUTE_SLUGS)) {
       for (const group of Object.values(table)) {
         const values = Object.values(group);
@@ -55,11 +61,10 @@ describe('route-slugs', () => {
     }
   });
 
-  it('retrouve le slug canonique et construit les chemins de routes', () => {
-    expect(canonicalSlug('services', 'coiffure', 'fr')).toBe('capelli');
-    expect(canonicalSlug('legal', 'datenschutz', 'de')).toBe('privacy');
-    expect(canonicalSlug('services', 'inconnu', 'en')).toBe('inconnu');
-    expect(routePath('servizi/:slug', 'es')).toBe('servicios/:slug');
-    expect(routePath('per-professionisti/candidatura', 'en')).toBe('for-professionals/apply');
+  it('ritrova lo slug canonico e costruisce i percorsi delle rotte', () => {
+    expect(canonicalSlug('services', 'hair', 'en')).toBe('capelli');
+    expect(canonicalSlug('services', 'sconosciuto', 'en')).toBe('sconosciuto');
+    expect(routePath('servizi/:slug', 'en')).toBe('services/:slug');
+    expect(routePath('privacy', 'en')).toBe('privacy');
   });
 });

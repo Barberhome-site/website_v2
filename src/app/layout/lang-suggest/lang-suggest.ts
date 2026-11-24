@@ -10,31 +10,13 @@ const TEXT: Record<Lang, { available: string; switchTo: string; stay: string; na
     available: 'Questo sito è disponibile in italiano.',
     switchTo: 'Passa all’italiano',
     stay: 'Resta in {lang}',
-    names: { it: 'italiano', en: 'inglese', fr: 'francese', es: 'spagnolo', de: 'tedesco' },
+    names: { it: 'italiano', en: 'inglese' },
   },
   en: {
     available: 'This site is available in English.',
     switchTo: 'Switch to English',
     stay: 'Stay in {lang}',
-    names: { it: 'Italian', en: 'English', fr: 'French', es: 'Spanish', de: 'German' },
-  },
-  fr: {
-    available: 'Ce site est disponible en français.',
-    switchTo: 'Passer en français',
-    stay: 'Rester en {lang}',
-    names: { it: 'italien', en: 'anglais', fr: 'français', es: 'espagnol', de: 'allemand' },
-  },
-  es: {
-    available: 'Este sitio está disponible en español.',
-    switchTo: 'Cambiar a español',
-    stay: 'Seguir en {lang}',
-    names: { it: 'italiano', en: 'inglés', fr: 'francés', es: 'español', de: 'alemán' },
-  },
-  de: {
-    available: 'Diese Website ist auf Deutsch verfügbar.',
-    switchTo: 'Auf Deutsch wechseln',
-    stay: 'Auf {lang} bleiben',
-    names: { it: 'Italienisch', en: 'Englisch', fr: 'Französisch', es: 'Spanisch', de: 'Deutsch' },
+    names: { it: 'Italian', en: 'English' },
   },
 };
 

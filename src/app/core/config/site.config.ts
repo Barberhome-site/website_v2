@@ -1,6 +1,6 @@
 /**
- * Réglages globaux du site (hors textes : les textes sont dans src/app/i18n/*.ts).
- * Les valeurs entre crochets [ ... ] sont à compléter avant la mise en ligne.
+ * Impostazioni globali del sito (i testi sono in src/app/i18n/*.ts).
+ * Contatti e dati societari: identici ovunque, si cambiano solo qui.
  */
 export const SITE = {
   name: 'GLAMRO',
@@ -18,18 +18,32 @@ export const SITE = {
   company: {
     legalName: 'GLAMRO S.R.L.',
     vatNumber: '03036060428',
-    address: 'Via Matteotti n. 54, 60121 Ancona (AN)',
-    rea: 'REA AN-267591',
+    address: 'Via Giacomo Matteotti 54, 60121 Ancona (AN)',
+    streetAddress: 'Via Giacomo Matteotti 54',
+    postalCode: '60121',
+    locality: 'Ancona',
+    region: 'AN',
+    rea: 'REA AN-312608',
     shareCapital: 'Capitale sociale € 7.000,00 i.v.',
     pec: 'glamrosrl@ionospec.it',
     phone: '+39 392 366 1225',
   },
 
   contact: {
-    /** Canal officiel des réclamations et de l'assistance (Policy reclami). */
-    supportEmail: 'support@glamro.it',
-    /** Contact du titulaire du traitement (Informativa privacy). */
-    privacyEmail: 'contact@glamro.it',
+    /** Unica email di GLAMRO: assistenza, reclami, privacy. */
+    email: 'contact@glamro.it',
+    /** Telefono e WhatsApp (stesso numero). */
+    phone: '+39 392 366 1225',
+    phoneHref: 'tel:+393923661225',
+    whatsappUrl: 'https://wa.me/393923661225',
+  },
+
+  /**
+   * Link partner forniti da GLAMRO.
+   * Fiscozen: pulsante «Non hai la partita IVA? Aprila con Fiscozen» nella sezione professionisti.
+   */
+  partners: {
+    fiscozenUrl: 'https://www.fiscozen.it/promo/partner/',
   },
 
   /** Profils officiels. */
@@ -54,18 +68,19 @@ export const SITE = {
     },
   },
 
-  /** Images du site (voir public/images/LEGGIMI.md). `null` = emplacement neutre. */
-  images: {
-    hero: null as string | null,
-    storytelling: [null, null, null, null] as (string | null)[],
-    proEntry: null as string | null,
-    about: null as string | null,
-  },
-
   logo: {
     src: '/brand/glamro-logo.png',
     width: 553,
     height: 120,
+  },
+  /**
+   * Logo GLAMRO Pro con la valigetta (file ufficiale, copia ridotta a 256 px, non ridisegnato):
+   * si usa nella sezione professionisti. Il resto del sito usa il logo clienti qui sopra.
+   */
+  proLogo: {
+    src: '/brand/glamro-pro.jpg',
+    width: 256,
+    height: 256,
   },
   defaultOgImage: '/brand/og-default.jpg',
 } as const;
