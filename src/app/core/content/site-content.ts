@@ -27,7 +27,10 @@ const COMMON_CONDITIONS = [
   'Paghi nell\'app con carta di credito o di debito. L\'importo viene addebitato solo a servizio svolto.',
 ];
 
-/** Catégories du site, en italien (traductions : content-texts.ts). */
+/**
+ * Categorie del sito, in italiano (traduzioni: content-texts.ts).
+ * Foto dei servizi: stock Pexels dalla cartella GLAMRO (public/images/servizi), scelte in base alla descrizione.
+ */
 export const SERVICES_IT: ServiceContent[] = [
   {
     slug: 'capelli',
@@ -39,7 +42,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per chi vuole taglio, piega, colore o cura della barba senza spostarsi, anche prima di un evento o in giornate piene.',
     includes: ['Taglio donna e uomo', 'Piega e styling', 'Colore e ritocco radici', 'Trattamenti ristrutturanti', 'Regolazione e modellatura della barba'],
     conditions: ['Serve uno spazio con una sedia e una presa elettrica vicina.', ...COMMON_CONDITIONS],
-    image: null,
+    image: { src: '/images/servizi/capelli.webp', alt: 'Una parrucchiera arriccia i capelli di una cliente', width: 1000, height: 750 },
     faqs: [
       {
         question: 'Devo avere prodotti o strumenti a casa?',
@@ -62,7 +65,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per eventi, cerimonie, servizi fotografici o semplicemente per un trucco curato prima di uscire.',
     includes: ['Trucco giorno e sera', 'Trucco per cerimonie', 'Trucco per foto e video', 'Prova trucco'],
     conditions: COMMON_CONDITIONS,
-    image: null,
+    image: { src: '/images/servizi/make-up.webp', alt: 'Una make-up artist prepara pennello e cipria', width: 1000, height: 750 },
     faqs: [
       {
         question: 'Si può prenotare per più persone?',
@@ -81,7 +84,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per chi vuole trattamenti estetici senza spostarsi, con prodotti e lettino portati dal professionista quando previsto.',
     includes: ['Pulizia del viso', 'Trattamenti corpo', 'Linfodrenante', 'Depilazione', 'Laminazione ciglia e sopracciglia'],
     conditions: COMMON_CONDITIONS,
-    image: null,
+    image: { src: '/images/servizi/estetica.webp', alt: 'Trattamento viso con massaggio', width: 1000, height: 750 },
     faqs: [
       {
         question: 'Il professionista porta il lettino?',
@@ -100,7 +103,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per chi vuole un massaggio benessere a casa o in hotel, nei tempi che preferisce.',
     includes: ['Massaggio rilassante', 'Massaggio decontratturante'],
     conditions: ['I massaggi offerti sono trattamenti di benessere, non prestazioni sanitarie.', ...COMMON_CONDITIONS],
-    image: null,
+    image: { src: '/images/servizi/massaggi.webp', alt: 'Massaggio rilassante alla schiena', width: 1000, height: 750 },
     faqs: [
       {
         question: 'Serve avere un lettino a casa?',
