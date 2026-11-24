@@ -12,6 +12,7 @@ import { asyncState } from '../../core/utils/async-state';
 import { AvailabilitySearch } from '../../shared/components/availability-search/availability-search';
 import { CoverageMap } from '../../shared/components/coverage-map/coverage-map';
 import { Icon, IconName } from '../../shared/components/icon/icon';
+import { Media } from '../../shared/components/media/media';
 import { ProsCarousel } from '../../shared/components/pros-carousel/pros-carousel';
 import { ServiceCard } from '../../shared/components/service-card/service-card';
 import { TrustPillars } from '../../shared/components/trust-pillars/trust-pillars';
@@ -24,6 +25,7 @@ import { TrustPillars } from '../../shared/components/trust-pillars/trust-pillar
     AvailabilitySearch,
     CoverageMap,
     Icon,
+    Media,
     ProsCarousel,
     ServiceCard,
     TrustPillars,

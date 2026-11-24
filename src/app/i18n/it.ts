@@ -9,7 +9,7 @@ export const IT = {
   brand: {
     promise: 'Il beauty, dove, come e quando vuoi.',
     positioning: 'Il beauty diventa delivery.',
-    explanation: 'Prenota professionisti beauty verificati, dove e quando il servizio è disponibile.',
+    explanation: 'Ordina parrucchieri, estetiste, make-up artist e massaggiatori a casa tua.',
     tagline: 'Il beauty diventa delivery.',
   },
   cta: {
@@ -258,6 +258,29 @@ export const IT = {
     prosEmpty: 'Nessun professionista disponibile in questa zona al momento.',
     ranking: 'In base alla vicinanza, al servizio richiesto e alla disponibilità. Oggi non ci sono posizioni a pagamento.',
     rankingLink: 'Come ordiniamo i risultati',
+    storyTitle: 'Una nuova idea di bellezza',
+    storySubtitle: 'Stessi gesti. Un luogo tutto tuo.',
+    story: [
+      {
+        title: 'Si prepara',
+        text: 'Il professionista seleziona prodotti e strumenti per il tuo servizio.',
+      },
+      {
+        title: 'Arriva da te',
+        text: 'Si muove in città per raggiungere l\'indirizzo che hai scelto.',
+      },
+      {
+        title: 'A casa tua',
+        text: 'Arriva all\'orario concordato, con tutto il necessario.',
+      },
+      {
+        title: 'Vivi il tuo momento',
+        text: 'Il servizio si svolge dove ti senti a tuo agio.',
+      },
+    ],
+    whereTitle: 'Dove siamo',
+    whereSubtitle: 'Professionisti verificati nelle città in cui il servizio è prenotabile.',
+    whereAll: 'Tutte le città',
     proEyebrow: 'GLAMRO Pro',
     proTitle: 'Per professionisti',
     proLead: 'Scegli tu prezzi, orari e zone. Noi ti portiamo le prenotazioni e gestiamo i pagamenti.',
@@ -268,7 +291,7 @@ export const IT = {
       'Pagamenti in app tramite Stripe',
       'Assistenza in app e su WhatsApp',
     ],
-    h1: 'Beauty a domicilio, come, dove e quando vuoi',
+    h1: 'Il beauty diventa delivery.',
     seoTitle: 'Parrucchiere, make-up, estetista e massaggi a domicilio | GLAMRO',
     mapTitle: 'Zone coperte',
   },

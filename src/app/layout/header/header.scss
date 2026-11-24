@@ -2,9 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 800;
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--c-border);
+  /* Fascia gialla GLAMRO (#EFD24B) con logo e testi neri. */
+  background: var(--c-accent);
+  color: var(--c-on-accent);
+  border-bottom: 1px solid rgba(10, 10, 10, 0.15);
 }
 
 .header__inner {
@@ -43,9 +44,17 @@
     font-weight: 500;
     text-decoration: none;
     border-radius: var(--radius-s);
+    color: var(--c-on-accent);
+
+    &:hover {
+      background: rgba(10, 10, 10, 0.08);
+      color: var(--c-on-accent);
+    }
 
     &.is-active {
-      color: var(--c-accent);
+      color: var(--c-on-accent);
+      box-shadow: inset 0 -3px 0 var(--c-on-accent);
+      border-radius: 0;
     }
   }
 }
@@ -58,6 +67,23 @@
 .header__cta {
   font-size: 0.8125rem;
   padding-inline: 1.1rem;
+}
+
+/* Sul giallo il pulsante principale è nero, il burger resta scuro. */
+.header .header__cta {
+  background: var(--c-on-accent);
+  color: var(--c-accent);
+
+  &:hover {
+    background: #222;
+    color: var(--c-accent);
+  }
+}
+
+.header .header__burger {
+  background: var(--c-on-accent);
+  border-color: var(--c-on-accent);
+  color: var(--c-accent);
 }
 
 @media (min-width: 1200px) {

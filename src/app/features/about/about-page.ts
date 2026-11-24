@@ -6,10 +6,11 @@ import { I18n } from '../../core/i18n/i18n.service';
 import { organizationLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
+import { Media } from '../../shared/components/media/media';
 
 @Component({
   selector: 'app-about-page',
-  imports: [RouterLink, LocalizePathPipe, Breadcrumbs],
+  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, Media],
   template: `
     @let t = i18n.d().about;
     <div class="page-head">
@@ -20,6 +21,10 @@ import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
       </div>
     </div>
 
+
+    <div class="container section">
+      <app-media ratio="16 / 7" [src]="site.images.about" />
+    </div>
 
     <div class="container section section--tight prose">
       <h2>{{ t.whatTitle }}</h2>
@@ -53,6 +58,7 @@ import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
     </div>
   `,
   styles: `
+    app-media { border-radius: var(--radius-l); }
     dd { margin: 0 0 1rem; color: var(--c-muted); }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

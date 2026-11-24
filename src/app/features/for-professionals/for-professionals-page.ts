@@ -9,6 +9,7 @@ import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { FaqList } from '../../shared/components/faq-list/faq-list';
 import { Icon, IconName } from '../../shared/components/icon/icon';
+import { Media } from '../../shared/components/media/media';
 import { StoreButtons } from '../../shared/components/store-buttons/store-buttons';
 
 /**
@@ -17,10 +18,12 @@ import { StoreButtons } from '../../shared/components/store-buttons/store-button
  */
 @Component({
   selector: 'app-for-professionals-page',
-  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, FaqList, Icon, StoreButtons],
+  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, FaqList, Icon, Media, StoreButtons],
   templateUrl: './for-professionals-page.html',
   styles: `
-    .hero-pro { max-width: 780px; }
+    .hero-pro { display: grid; gap: 2rem; align-items: center; }
+    @media (min-width: 960px) { .hero-pro { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+    .hero-pro app-media { border-radius: var(--radius-l); }
     .pro-logo { display: block; width: 72px; height: 72px; border-radius: 16px; margin-bottom: 1rem; }
     .pro-app { scroll-margin-top: calc(var(--header-h) + 1rem); }
     .pro-app .cta-row { margin-top: 1rem; }

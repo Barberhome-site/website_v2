@@ -5,7 +5,7 @@ export const EN: Dict = {
   brand: {
     promise: 'Beauty, where, how and when you want.',
     positioning: 'Beauty becomes delivery.',
-    explanation: 'Book verified beauty professionals, where and when the service is available.',
+    explanation: 'Order hairdressers, beauticians, make-up artists and massage therapists to your home.',
     tagline: 'Beauty becomes delivery.',
   },
   cta: {
@@ -254,6 +254,29 @@ export const EN: Dict = {
     prosEmpty: 'No professionals available in this area at the moment.',
     ranking: 'Based on proximity, the service requested and availability. There are currently no paid placements.',
     rankingLink: 'How we sort results',
+    storyTitle: 'A new idea of beauty',
+    storySubtitle: 'Same gestures. A place of your own.',
+    story: [
+      {
+        title: 'Getting ready',
+        text: 'The professional selects products and tools for your service.',
+      },
+      {
+        title: 'On the way to you',
+        text: 'They travel across the city to reach the address you chose.',
+      },
+      {
+        title: 'At your place',
+        text: 'They arrive at the agreed time, with everything needed.',
+      },
+      {
+        title: 'Enjoy your moment',
+        text: 'The service takes place where you feel at ease.',
+      },
+    ],
+    whereTitle: 'Where we are',
+    whereSubtitle: 'Verified professionals in the cities where the service can be booked.',
+    whereAll: 'All cities',
     proEyebrow: 'GLAMRO Pro',
     proTitle: 'For professionals',
     proLead: 'You choose prices, hours and areas. We bring you bookings and handle payments.',
@@ -264,7 +287,7 @@ export const EN: Dict = {
       'In-app payments through Stripe',
       'Support in the app and on WhatsApp',
     ],
-    h1: 'Beauty at home, how, where and when you want',
+    h1: 'Beauty becomes delivery.',
     seoTitle: 'Hairdresser, make-up, beautician and massage at home | GLAMRO',
     mapTitle: 'Areas covered',
   },

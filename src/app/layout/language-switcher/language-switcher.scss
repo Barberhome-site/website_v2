@@ -69,3 +69,19 @@
   font-weight: 700;
   color: var(--c-muted);
 }
+
+/* Il menu a tendina resta scuro con testo chiaro anche dentro la fascia gialla dell'header. */
+.ls__list {
+  color: var(--c-text);
+}
+
+:host-context(.header) .ls__toggle {
+  border-color: rgba(10, 10, 10, 0.35);
+  color: var(--c-on-accent);
+
+  &:hover,
+  &[aria-expanded='true'] {
+    border-color: var(--c-on-accent);
+    color: var(--c-on-accent);
+  }
+}

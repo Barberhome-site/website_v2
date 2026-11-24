@@ -68,8 +68,21 @@ export const SITE = {
     },
   },
 
+  /**
+   * Foto del sito (public/images, WebP). Immagini di campagna GLAMRO; `servizio-capelli` è una foto stock Pexels.
+   * Da sostituire con foto vere con liberatoria quando disponibili: basta cambiare il file o il percorso qui.
+   */
+  images: {
+    hero: '/images/hero-scooter-uomo.webp',
+    storytelling: ['/images/trolley-donna.webp', '/images/scooter-donna.webp', '/images/trolley-hotel.webp', '/images/servizio-capelli.webp'],
+    proEntry: '/images/team-bici.webp',
+    about: '/images/bici-citta.webp',
+  },
+
+  /** Logo clienti: bianco su fondo scuro (footer), nero sulla fascia gialla dell'header. */
   logo: {
     src: '/brand/glamro-logo.png',
+    darkSrc: '/brand/glamro-logo-nero.png',
     width: 553,
     height: 120,
   },

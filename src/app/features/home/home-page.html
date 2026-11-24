@@ -1,26 +1,24 @@
 @let t = i18n.d();
 @let lang = i18n.lang();
 
-<!-- HERO: titolo, claim, ricerca e mappa delle zone coperte (in quest'ordine, anche da mobile) -->
+<!-- 2. HERO : promesse, positionnement, delivery, couverture vérifiable, CTA primaire -->
 <section class="hero" aria-labelledby="hero-title">
+  <!-- Foto di apertura: il professionista in scooter resta a destra, il testo a sinistra. -->
+  <app-media class="hero__bg" [src]="site.images.hero" [priority]="true" sizes="100vw" />
+  <div class="hero__shade" aria-hidden="true"></div>
+
   <div class="container hero__inner">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">{{ t.home.h1 }}</h1>
       <span class="accent-rule" aria-hidden="true"></span>
-      <p class="hero__positioning">{{ t.brand.positioning }}</p>
+      <p class="hero__lead">{{ t.brand.explanation }}</p>
     </div>
 
     <div id="verifica" class="hero__search">
       <app-availability-search variant="hero" [cities]="cities().value" [services]="services().value" />
     </div>
 
-    <!-- Mappa unita alla ricerca: zone coperte, mai la posizione di un professionista. Caricata in lazy (@defer nel componente). -->
-    <div class="hero__map" role="group" [attr.aria-label]="t.home.mapTitle">
-      <app-coverage-map [initialClusters]="clusters().value" [initialStatus]="clusters().status" [services]="services().value" />
-    </div>
-
     <div class="hero__foot">
-      <!-- «Prenotabile oggi a…»: solo città con almeno un professionista verificato e prenotabile; altrimenti la barra non compare. -->
       @if (activeCities().length) {
         <p class="hero__coverage">
           <app-icon name="pin" />
@@ -116,7 +114,45 @@
   </div>
 </section>
 
-<!-- GARANZIE -->
+<!-- 6. STORYTELLING -->
+<section class="section section--raised" aria-labelledby="story-title">
+  <div class="container">
+    <div class="story-head">
+      <h2 id="story-title">{{ t.home.storyTitle }}</h2>
+      <p class="lead">{{ t.home.storySubtitle }}</p>
+    </div>
+    <ol class="story" role="list">
+      @for (moment of t.home.story; track $index; let i = $index) {
+        <li>
+          <figure>
+            <app-media ratio="4 / 5" [src]="site.images.storytelling[i]"
+                       sizes="(min-width: 1100px) 290px, (min-width: 640px) 45vw, 90vw" />
+            <figcaption>
+              <h3>{{ i + 1 }}. {{ moment.title }}</h3>
+              <p>{{ moment.text }}</p>
+            </figcaption>
+          </figure>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- 7. DOVE SIAMO : carte + liste accessible -->
+<section class="section" aria-labelledby="where-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2 id="where-title">{{ t.home.whereTitle }}</h2>
+        <p class="muted">{{ t.home.whereSubtitle }}</p>
+      </div>
+      <a class="link-arrow" [routerLink]="'/dove-siamo' | lp: lang">{{ t.home.whereAll }} <app-icon name="arrow-right" /></a>
+    </div>
+    <app-coverage-map [initialClusters]="clusters().value" [initialStatus]="clusters().status" [services]="services().value" />
+  </div>
+</section>
+
+<!-- 8. GARANZIE (nessuna recensione finché non ce ne sono di vere) -->
 <section class="section section--tight" aria-label="GLAMRO">
   <div class="container">
     <app-trust-pillars />
@@ -127,6 +163,7 @@
 <section class="section" aria-labelledby="pro-title">
   <div class="container">
     <div class="pro">
+      <app-media class="pro__media" [src]="site.images.proEntry" sizes="(min-width: 960px) 420px, 100vw" />
       <div class="pro__body">
         <img class="pro__logo" [src]="site.proLogo.src" alt="GLAMRO Pro" [width]="site.proLogo.width" [height]="site.proLogo.height" loading="lazy" />
         <p class="eyebrow">{{ t.home.proEyebrow }}</p>
