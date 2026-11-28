@@ -5,7 +5,6 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
-  computed,
   effect,
   inject,
   input,
@@ -15,7 +14,6 @@ import {
 } from '@angular/core';
 import type * as MapLibre from 'maplibre-gl';
 import { environment } from '../../../../environments/environment';
-import { ConsentService } from '../../../core/consent/consent.service';
 import { I18n } from '../../../core/i18n/i18n.service';
 import { CityCluster } from '../../../core/models/glamro.models';
 import { escapeHtml } from '../../../core/utils/text';
@@ -31,7 +29,7 @@ const VENDOR = '/vendor/maplibre';
  * Carte interactive de l'Italie (MapLibre GL, chargé à la demande).
  *  - Clusters par ville au centre approximatif : jamais de position de professionnel.
  *  - Fond de carte : style vectoriel « Dark » d'OpenFreeMap (déjà sombre, aucun filtre CSS).
- *  - Service tiers : chargé seulement avec le consentement « contenuti di terze parti » ou après un clic.
+ *  - Fond de carte OpenFreeMap : pas de cookie, chargé sans consentement (Cookie Policy v3 : « Non richiesto »).
  *  - Ce composant n'est rendu que dans le navigateur (@defer dans CoverageMap).
  *  - Niveaux de zoom MapLibre (tuiles 512 px) = anciens niveaux Leaflet − 1.
  */
@@ -42,14 +40,7 @@ const VENDOR = '/vendor/maplibre';
     @let t = i18n.d().map;
     <div #canvas class="im__canvas" [attr.aria-label]="t.mapLabel"></div>
 
-    @if (!canShow()) {
-      <div class="im__overlay">
-        <p>{{ t.consentText }}</p>
-        <button type="button" class="btn btn--primary" (click)="activate()">{{ t.show }}</button>
-        <button type="button" class="btn btn--outline" (click)="consent.openPreferences()">{{ t.manage }}</button>
-        <p class="small muted">{{ t.listHint }}</p>
-      </div>
-    } @else if (status() === 'loading') {
+    @if (status() === 'loading') {
       <div class="im__overlay" role="status"><span class="spinner"></span><span class="visually-hidden">{{ t.loadingMap }}</span></div>
     } @else if (status() === 'error') {
       <div class="im__overlay" role="alert">
@@ -75,14 +66,11 @@ export class ItalyMap {
   readonly selected = input<string | null>(null);
   readonly citySelected = output<string>();
 
-  protected readonly consent = inject(ConsentService);
   protected readonly i18n = inject(I18n);
   private readonly doc = inject(DOCUMENT);
   private readonly canvas = viewChild.required<ElementRef<HTMLDivElement>>('canvas');
 
-  private readonly activated = signal(false);
   private readonly browserReady = signal(false);
-  protected readonly canShow = computed(() => this.activated() || this.consent.isGranted('functional'));
   protected readonly status = signal<'idle' | 'loading' | 'ready' | 'error'>('idle');
 
   private ml: MapLibreNs | null = null;
@@ -98,7 +86,7 @@ export class ItalyMap {
     });
 
     effect(() => {
-      if (this.browserReady() && this.canShow() && this.status() === 'idle') {
+      if (this.browserReady() && this.status() === 'idle') {
         void this.init();
       }
     });
@@ -112,11 +100,6 @@ export class ItalyMap {
     });
 
     inject(DestroyRef).onDestroy(() => this.map?.remove());
-  }
-
-  /** Affichage pour cette visite uniquement, sans modifier les préférences. */
-  protected activate(): void {
-    this.activated.set(true);
   }
 
   private async init(): Promise<void> {

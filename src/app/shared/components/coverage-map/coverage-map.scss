@@ -153,13 +153,13 @@
 .cm__panel-head {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
 
+  /* Même taille que le titre de la liste des villes (h3 global). */
   h3 {
     margin: 0;
-    font-size: 1.2rem;
 
     span {
       display: block;

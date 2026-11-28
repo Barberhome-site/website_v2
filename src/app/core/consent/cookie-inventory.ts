@@ -22,5 +22,5 @@ export const COOKIE_INVENTORY: TrackerInfo[] = [
   { id: 'lang', name: 'glamro_lang', provider: 'GLAMRO', domain: 'www.glamro.it', category: 'necessary' },
   { id: 'ga', name: '_ga', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
   { id: 'gaSession', name: '_ga_<ID>', provider: 'Google Ireland Ltd.', domain: '.glamro.it', category: 'analytics' },
-  { id: 'basemap', name: 'OpenFreeMap (vector tiles)', provider: 'OpenFreeMap', domain: 'tiles.openfreemap.org', category: 'functional' },
+  { id: 'basemap', name: 'OpenFreeMap (vector tiles)', provider: 'OpenFreeMap', domain: 'tiles.openfreemap.org', category: 'necessary' },
 ];

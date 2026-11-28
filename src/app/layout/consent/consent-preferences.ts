@@ -36,7 +36,8 @@ export class ConsentPreferences {
   protected readonly i18n = inject(I18n);
   private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
 
-  protected readonly categories: ConsentCategory[] = ['necessary', 'functional', 'analytics', 'marketing'];
+  // « functional » n'a plus d'outil depuis le passage de la carte en « necessary » : catégorie non affichée.
+  protected readonly categories: ConsentCategory[] = ['necessary', 'analytics', 'marketing'];
   protected readonly required = CONSENT_REQUIRED;
   protected readonly draft = signal<ConsentChoices>({ functional: false, analytics: false, marketing: false });
 

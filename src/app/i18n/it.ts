@@ -122,10 +122,6 @@ export const IT = {
     geoDenied: 'Non hai autorizzato l\'accesso alla posizione. Scegli una città dall\'elenco.',
     geoFailed: 'Non è stato possibile rilevare la posizione. Scegli una città dall\'elenco.',
     mapLabel: 'Mappa delle città in cui GLAMRO è attivo',
-    consentText: 'La mappa usa uno sfondo cartografico esterno (OpenFreeMap / OpenStreetMap).',
-    show: 'Mostra la mappa',
-    manage: 'Gestisci cookie',
-    listHint: 'L\'elenco delle città contiene le stesse informazioni.',
     loadingMap: 'Caricamento della mappa',
     mapError: 'La mappa non è disponibile in questo momento. Usa l\'elenco delle città.',
     markerLabel: '{city}: zona coperta',
@@ -138,7 +134,7 @@ export const IT = {
   consent: {
     bannerTitle: 'La tua privacy',
     bannerText:
-      'Usiamo cookie tecnici necessari al funzionamento del sito. Con il tuo consenso usiamo anche statistiche (Google Analytics) e contenuti di terze parti (la mappa). Chiudendo questo avviso restano attivi solo i cookie necessari. Puoi cambiare idea in qualsiasi momento da «Gestisci cookie» nel footer.',
+      'Usiamo cookie tecnici necessari al funzionamento del sito. Con il tuo consenso usiamo anche statistiche (Google Analytics). Chiudendo questo avviso restano attivi solo i cookie necessari. Puoi cambiare idea in qualsiasi momento da «Gestisci cookie» nel footer.',
     policy: 'Cookie policy',
     reject: 'Rifiuta',
     customize: 'Personalizza',
