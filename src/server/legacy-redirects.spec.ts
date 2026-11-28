@@ -41,6 +41,15 @@ describe('legacyRedirect', () => {
     expect(legacyRedirect('/de/rechtliches/beschwerderichtlinie')).toBe('/cancellazioni-rimborsi');
   });
 
+  it('envoie les catégories supprimées vers Capelli et Estetica', () => {
+    expect(legacyRedirect('/servizi/barber')).toBe('/servizi/capelli');
+    expect(legacyRedirect('/servizi/nails')).toBe('/servizi/estetica');
+    expect(legacyRedirect('/en/services/barber')).toBe('/en/services/hair');
+    expect(legacyRedirect('/en/services/nails')).toBe('/en/services/beauty-treatments');
+    expect(legacyRedirect('/fr/services/ongles')).toBe('/servizi/estetica');
+    expect(legacyRedirect('/de/leistungen/barbier')).toBe('/servizi/capelli');
+  });
+
   it('redirige les adresses fixes du site précédent, de l\'app et du backend', () => {
     expect(legacyRedirect('/terms')).toBe('/termini');
     expect(legacyRedirect('/termini-clienti')).toBe('/termini');
@@ -50,7 +59,7 @@ describe('legacyRedirect', () => {
   });
 
   it('laisse passer les adresses actuelles', () => {
-    for (const path of ['/', '/servizi/capelli', '/en/services/hair', '/termini', '/privacy', '/cookie', '/en/terms', '/fresco']) {
+    for (const path of ['/', '/servizi/capelli', '/servizi/estetica', '/en/services/hair', '/termini', '/privacy', '/cookie', '/en/terms', '/fresco']) {
       expect(legacyRedirect(path)).toBeNull();
     }
   });

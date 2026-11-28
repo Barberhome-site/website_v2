@@ -216,8 +216,9 @@ liste d'attente (page non indexée). Ajouter une ville = une ligne dans `CITIES`
 `core/content/content-texts.ts`.
 
 **Catégories** : correspondance avec le catalogue de l'API dans `src/server/site-api/catalog.ts`
-(barber = sous-catégorie BARBA, nails = MANI + PIEDI ; PACCHETTI n'a pas de page). Les textes des pages
-de services et de villes restent ceux du site (`core/content`), dans les 5 langues ; les noms des services et les
+(quatre catégories : capelli avec la barbe, make-up, estetica sans les ongles MANI et PIEDI, massaggi ; PACCHETTI n'a
+pas de page). `/servizi/barber` et `/servizi/nails` redirigent en 301. Les textes des pages de services et de villes
+restent ceux du site (`core/content`), en italien et en anglais ; les noms des services et les
 bios viennent de l'API, en italien.
 
 **Variables d'environnement (serveur)** :

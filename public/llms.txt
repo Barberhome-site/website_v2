@@ -6,7 +6,7 @@ Supporto sperimentale per assistenti e motori di risposta. Non sostituisce sitem
 
 ## Pagine principali
 
-- [Servizi](https://www.glamro.it/servizi): categorie di servizio attive (capelli, barber, make-up, nails, estetica, massaggi)
+- [Servizi](https://www.glamro.it/servizi): categorie di servizio attive (capelli e barba, make-up, estetica, massaggi)
 - [Come funziona](https://www.glamro.it/come-funziona): ricerca, scelta, prenotazione, arrivo, pagamento, cancellazione e assistenza
 - [Dove siamo](https://www.glamro.it/dove-siamo): città in cui il servizio è prenotabile
 - [Fiducia e sicurezza](https://www.glamro.it/fiducia): verifica dei professionisti, pagamenti, recensioni, ordinamento dei risultati

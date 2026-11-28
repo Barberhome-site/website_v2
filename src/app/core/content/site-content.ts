@@ -27,17 +27,17 @@ const COMMON_CONDITIONS = [
   'Il pagamento avviene nell\'app GLAMRO con metodi di pagamento protetti.',
 ];
 
-/** Catégories du site, en italien (traductions : content-texts.ts). */
+/** Catégories du site, en italien (traductions : content-texts.ts). Brief : pas d'ongles, la barbe est dans Capelli. */
 export const SERVICES_IT: ServiceContent[] = [
   {
     slug: 'capelli',
     name: 'Capelli',
-    professionalLabel: 'Parrucchieri',
-    shortDescription: 'Taglio, piega, colore e trattamenti',
+    professionalLabel: 'Parrucchieri e barbieri',
+    shortDescription: 'Taglio, piega, colore e barba',
     intro:
-      'Con GLAMRO prenoti un parrucchiere verificato che viene a casa tua, in ufficio o in hotel, nelle città in cui il servizio è attivo. Scegli servizio, data e professionista in base alla disponibilità reale.',
-    audience: 'Per chi vuole taglio, piega o colore senza spostarsi, anche prima di un evento o in giornate piene.',
-    includes: ['Taglio donna e uomo', 'Piega e styling', 'Colore e ritocco radici', 'Trattamenti ristrutturanti'],
+      'Con GLAMRO prenoti un parrucchiere o un barbiere verificato che viene a casa tua, in ufficio o in hotel, nelle città in cui il servizio è attivo. Scegli servizio, data e professionista in base alla disponibilità reale.',
+    audience: 'Per chi vuole taglio, piega, colore o la cura della barba senza spostarsi, anche prima di un evento o in giornate piene.',
+    includes: ['Taglio donna e uomo', 'Piega e styling', 'Colore e ritocco radici', 'Barba e rifinitura'],
     conditions: ['Serve uno spazio con una sedia e una presa elettrica vicina.', ...COMMON_CONDITIONS],
     image: null,
     faqs: [
@@ -48,25 +48,6 @@ export const SERVICES_IT: ServiceContent[] = [
       {
         question: 'Posso prenotare un colore a domicilio?',
         answer: 'Sì, se il professionista lo offre nel suo profilo. Durata e prezzo sono indicati prima della conferma.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
-    slug: 'barber',
-    name: 'Barber',
-    professionalLabel: 'Barbieri',
-    shortDescription: 'Taglio uomo, barba e rifinitura',
-    intro:
-      'GLAMRO ti mette in contatto con barbieri verificati che raggiungono l\'indirizzo che scegli per taglio, barba e rifinitura, nelle città attive.',
-    audience: 'Per chi vuole un taglio o la cura della barba a casa o in ufficio, senza attese.',
-    includes: ['Taglio uomo', 'Regolazione e modellatura barba', 'Rasatura', 'Rifinitura collo e contorni'],
-    conditions: COMMON_CONDITIONS,
-    image: null,
-    faqs: [
-      {
-        question: 'Quanto dura un appuntamento?',
-        answer: 'La durata dipende dal servizio scelto ed è indicata nel profilo del professionista prima della prenotazione.',
       },
     ],
     updatedAt: UPDATED,
@@ -91,25 +72,6 @@ export const SERVICES_IT: ServiceContent[] = [
     updatedAt: UPDATED,
   },
   {
-    slug: 'nails',
-    name: 'Nails',
-    professionalLabel: 'Nail artist',
-    shortDescription: 'Manicure, pedicure e semipermanente',
-    intro:
-      'GLAMRO ti permette di prenotare manicure, pedicure e semipermanente con professioniste verificate che vengono da te, nelle città attive.',
-    audience: 'Per chi vuole mani e piedi curati a casa, con strumenti sterilizzati portati dal professionista.',
-    includes: ['Manicure', 'Pedicure', 'Smalto semipermanente', 'Rimozione e ricostruzione'],
-    conditions: ['Serve un tavolo e una buona illuminazione.', ...COMMON_CONDITIONS],
-    image: null,
-    faqs: [
-      {
-        question: 'Gli strumenti sono sterilizzati?',
-        answer: 'Gli standard igienici richiesti ai professionisti sono descritti nella pagina Fiducia e sicurezza.',
-      },
-    ],
-    updatedAt: UPDATED,
-  },
-  {
     slug: 'estetica',
     name: 'Estetica',
     professionalLabel: 'Estetiste',
@@ -117,7 +79,7 @@ export const SERVICES_IT: ServiceContent[] = [
     intro:
       'Con GLAMRO prenoti un\'estetista verificata per trattamenti viso, corpo e depilazione direttamente a casa tua, nelle città in cui il servizio è attivo.',
     audience: 'Per chi vuole trattamenti estetici senza spostarsi, con prodotti e lettino portati dal professionista quando previsto.',
-    includes: ['Pulizia del viso', 'Trattamenti corpo', 'Depilazione', 'Laminazione ciglia e sopracciglia'],
+    includes: ['Pulizia del viso', 'Trattamenti corpo', 'Linfodrenante', 'Depilazione', 'Laminazione ciglia e sopracciglia'],
     conditions: COMMON_CONDITIONS,
     image: null,
     faqs: [
@@ -136,7 +98,7 @@ export const SERVICES_IT: ServiceContent[] = [
     intro:
       'GLAMRO ti mette in contatto con massaggiatori verificati per massaggi benessere a domicilio, nelle città attive. Non si tratta di prestazioni sanitarie.',
     audience: 'Per chi vuole un massaggio benessere a casa o in hotel, nei tempi che preferisce.',
-    includes: ['Massaggio rilassante', 'Massaggio decontratturante', 'Linfodrenante', 'Massaggio di coppia, se disponibile'],
+    includes: ['Massaggio rilassante', 'Massaggio decontratturante'],
     conditions: ['I massaggi offerti sono trattamenti di benessere, non prestazioni sanitarie.', ...COMMON_CONDITIONS],
     image: null,
     faqs: [
@@ -228,8 +190,8 @@ export const PROFILE_CONDITIONS: Record<Lang, string[]> = {
 
 /** Libellés des types de professionnel de l'API (`professionalTypes`, codes du backend). */
 export const PROFESSIONAL_TYPE_LABELS: Record<Lang, Record<string, string>> = {
-  it: { HAIR_BARBER: 'Parrucchiere / Barbiere', HAIRSTYLIST_EVENTS: 'Acconciatore', BEAUTICIAN: 'Estetista', MAKEUP_ARTIST: 'Make-up artist', MASSAGE: 'Massaggiatore' },
-  en: { HAIR_BARBER: 'Hairdresser / Barber', HAIRSTYLIST_EVENTS: 'Hair stylist', BEAUTICIAN: 'Beautician', MAKEUP_ARTIST: 'Make-up artist', MASSAGE: 'Massage therapist' },
+  it: { HAIR_BARBER: 'Parrucchiere / Barbiere', HAIRSTYLIST_EVENTS: 'Parrucchiere per eventi', BEAUTICIAN: 'Estetista', MAKEUP_ARTIST: 'Make-up artist', MASSAGE: 'Massaggiatore' },
+  en: { HAIR_BARBER: 'Hairdresser / Barber', HAIRSTYLIST_EVENTS: 'Event hairdresser', BEAUTICIAN: 'Beautician', MAKEUP_ARTIST: 'Make-up artist', MASSAGE: 'Massage therapist' },
 };
 
 /* ------------------------------------------------------------------ */

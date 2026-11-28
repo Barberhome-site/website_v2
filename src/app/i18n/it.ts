@@ -233,7 +233,7 @@ export const IT = {
   },
   home: {
     seoDescription:
-      'GLAMRO è il beauty delivery: prenota parrucchieri, barbieri, make-up artist, nail artist, estetiste e massaggiatori verificati, a casa tua o dove preferisci, nelle città attive.',
+      'GLAMRO è il beauty delivery: prenota parrucchieri e barbieri, estetiste, make-up artist e massaggiatori verificati, a casa tua o dove preferisci, nelle città attive.',
     coverage: 'Prenotabile oggi a',
     howTitle: 'Come funziona',
     howAll: 'Tutti i dettagli',
@@ -279,13 +279,13 @@ export const IT = {
   },
   services: {
     title: 'Servizi beauty a domicilio',
-    lead: 'Con GLAMRO prenoti professionisti verificati per capelli, barba, make-up, unghie, estetica e massaggi, a casa tua o dove preferisci. Qui trovi solo i servizi realmente prenotabili oggi.',
+    lead: 'Con GLAMRO prenoti professionisti verificati per capelli (anche barba), make-up, estetica e massaggi, a casa tua o dove preferisci. Qui trovi solo i servizi realmente prenotabili oggi.',
     listTitle: 'Categorie di servizio',
     error: 'I servizi non sono disponibili in questo momento. Riprova più tardi.',
     findCta: 'Trova il servizio nella tua zona',
     howCta: 'Come funziona',
     seoDescription:
-      'Parrucchieri, barbieri, make-up artist, nail artist, estetiste e massaggiatori verificati a domicilio. Scopri i servizi GLAMRO attivi nella tua città.',
+      'Parrucchieri e barbieri, estetiste, make-up artist e massaggiatori verificati a domicilio. Scopri i servizi GLAMRO attivi nella tua città.',
   },
   serviceDetail: {
     title: '{label} a domicilio',
@@ -631,7 +631,7 @@ export const IT = {
       { question: 'Quanto tempo richiede la verifica?', answer: 'Dopo la candidatura ti contattiamo per completare la verifica dei documenti e attivare il profilo.' },
     ],
     seoDescription:
-      'Sei parrucchiere, barbiere, make-up artist, nail artist, estetista o massaggiatore? Scopri requisiti, costi, pagamenti e come candidarti su GLAMRO.',
+      'Sei parrucchiere o barbiere, estetista, make-up artist o massaggiatore? Scopri requisiti, costi, pagamenti e come candidarti su GLAMRO.',
   },
   apply: {
     crumb: 'Candidatura',

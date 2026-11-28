@@ -230,7 +230,7 @@ export const EN: Dict = {
   },
   home: {
     seoDescription:
-      'GLAMRO is beauty delivery: book verified hairdressers, barbers, make-up artists, nail artists, beauticians and massage therapists at home or wherever you like, in the active cities.',
+      'GLAMRO is beauty delivery: book verified hairdressers and barbers, beauticians, make-up artists and massage therapists at home or wherever you like, in the active cities.',
     coverage: 'Bookable today in',
     howTitle: 'How it works',
     howAll: 'All the details',
@@ -276,13 +276,13 @@ export const EN: Dict = {
   },
   services: {
     title: 'Beauty services at home',
-    lead: 'With GLAMRO you book verified professionals for hair, beard, make-up, nails, beauty treatments and massages, at home or wherever you like. Here you only find services that can actually be booked today.',
+    lead: 'With GLAMRO you book verified professionals for hair (beard included), make-up, beauty treatments and massages, at home or wherever you like. Here you only find services that can actually be booked today.',
     listTitle: 'Service categories',
     error: 'Services are not available right now. Please try again later.',
     findCta: 'Find the service in your area',
     howCta: 'How it works',
     seoDescription:
-      'Verified hairdressers, barbers, make-up artists, nail artists, beauticians and massage therapists at home. Discover the GLAMRO services active in your city.',
+      'Verified hairdressers and barbers, beauticians, make-up artists and massage therapists at home. Discover the GLAMRO services active in your city.',
   },
   serviceDetail: {
     title: '{label} at home',
@@ -623,7 +623,7 @@ export const EN: Dict = {
       { question: 'How long does verification take?', answer: 'After you apply, we contact you to complete the document check and activate your profile.' },
     ],
     seoDescription:
-      'Are you a hairdresser, barber, make-up artist, nail artist, beautician or massage therapist? Discover requirements, costs, payments and how to apply to GLAMRO.',
+      'Are you a hairdresser or barber, beautician, make-up artist or massage therapist? Discover requirements, costs, payments and how to apply to GLAMRO.',
   },
   apply: {
     crumb: 'Application',

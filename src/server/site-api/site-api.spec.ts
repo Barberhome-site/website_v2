@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { buildFilters, siteSlugFor } from './catalog';
 import { createSiteApi, handleSiteApi, publicName, romeDate } from './site-api';
 import { UpstreamError, UpstreamGet } from './upstream';
 
@@ -16,7 +17,7 @@ const cat = (cov: Any) => ({ categories: [
 const ALL = { taglio:1, barba:1, mani:1, viso:1, relax:1, base:1, uomo:1 };
 const item = (id: string, first: string, last: string, dist: number, next: string | null, tags: string[]) => ({ id, firstName: first, lastName: last, avatarUrl: `https://cdn.example/${id}.jpg`, distanceKm: dist, nextAvailableAt: next, serviceTags: tags, badges: ['VERIFIED_PRO'], lat: 45.1, lng: 9.1, bio: 'x' });
 const pros: Record<string, Any[]> = {
-  milano: [item(A, 'Giulia', 'Rossi', 2.4, '2026-11-23T08:00:00.000Z', ['Taglio donna', 'Piega']), item(B, 'Luca', 'Bianchi', 5, '2026-11-25T22:30:00.000Z', ['Manicure'])],
+  milano: [item(A, 'Giulia', 'Rossi', 2.4, '2026-11-23T08:00:00.000Z', ['Taglio donna', 'Piega']), item(B, 'Luca', 'Bianchi', 5, '2026-11-25T22:30:00.000Z', ['Pulizia viso'])],
   roma: [item(C, 'Sara', 'Verdi', 1, null, ['Massaggio relax'])],
   bergamo: [item(A, 'Giulia', 'Rossi', 18, '2026-11-23T08:00:00.000Z', ['Taglio donna'])],
 };
@@ -25,7 +26,7 @@ const get = (async (path: string, params: Any = {}) => {
   calls.push(path + JSON.stringify(params));
   if (path === '/services' && params.lat === undefined) return cat(ALL);
   if (path === '/services') {
-    const cov = params.lat > 45.3 && params.lng < 9.5 ? { taglio:1, barba:1, mani:1 } : params.lat < 42 && params.lat > 41.8 ? { relax:1 } : params.lat > 45.6 ? { taglio:1 } : {};
+    const cov = params.lat > 45.3 && params.lng < 9.5 ? { taglio:1, barba:1, mani:1, viso:1 } : params.lat < 42 && params.lat > 41.8 ? { relax:1 } : params.lat > 45.6 ? { taglio:1 } : {};
     return cat(cov);
   }
   if (path === '/discovery/nearby-professionals') {
@@ -33,8 +34,7 @@ const get = (async (path: string, params: Any = {}) => {
     let list = (city && pros[city]) || [];
     if (params.categoryId === 'cap') list = list.filter(p => p.id === A);
     if (params.categoryId === 'mas') list = list.filter(p => p.id === C);
-    if (params.serviceIds === 's2') list = list.filter(p => p.id === A);
-    if (params.serviceIds === 's3') list = list.filter(p => p.id === B);
+    if (params.serviceIds === 's4') list = list.filter(p => p.id === B);
     return { items: list, total: list.length, totalPages: list.length ? 1 : 0, page: params.page, pageSize: params.limit };
   }
   if (path === `/professionals/${A}/profile`) return {
@@ -50,6 +50,18 @@ const get = (async (path: string, params: Any = {}) => {
 }) as UpstreamGet;
 
 
+describe('catalog', () => {
+  it('rattache la barbe aux capelli et laisse les ongles hors du site', () => {
+    expect(siteSlugFor('CAPELLI', 'BARBA')).toBe('capelli');
+    expect(siteSlugFor('ESTETICA', 'VISO')).toBe('estetica');
+    expect(siteSlugFor('ESTETICA', 'MANI')).toBeNull();
+    expect(siteSlugFor('PACCHETTI', 'UOMO')).toBeNull();
+    const filters = buildFilters(cat(ALL));
+    expect(filters.get('capelli')).toEqual({ categoryId: 'cap' });
+    expect(filters.get('estetica')).toEqual({ serviceIds: 's4' });
+  });
+});
+
 describe('site-api', () => {
   it('formate les noms publics et les dates', () => {
     expect(publicName('Giulia', 'rossi')).toBe('Giulia R.');
@@ -62,21 +74,22 @@ describe('site-api', () => {
     const cities = await api.getCities('en');
     const milan = cities.find((c) => c.slug === 'milano')!;
     expect(milan).toMatchObject({ status: 'active', availableCount: 2, name: 'Milan' });
-    expect([...milan.activeServiceSlugs].sort()).toEqual(['barber', 'capelli', 'estetica', 'nails']);
+    expect([...milan.activeServiceSlugs].sort()).toEqual(['capelli', 'estetica']);
     expect(cities.find((c) => c.slug === 'napoli')).toMatchObject({ status: 'waitlist', indexable: false });
 
     const services = await api.getServices('it');
-    expect(services.map((s) => s.slug).sort()).toEqual(['barber', 'capelli', 'estetica', 'massaggi', 'nails']);
+    expect(services.map((s) => s.slug).sort()).toEqual(['capelli', 'estetica', 'massaggi']);
     expect(await api.getService('make-up', 'it')).toBeNull();
 
-    const clusters = await api.getCityClusters('nails', 'en');
+    const clusters = await api.getCityClusters('estetica', 'en');
     expect(clusters.map((c) => [c.citySlug, c.availableCount])).toEqual([['milano', 1]]);
   });
 
   it('liste les professionnels par ville, service et date', async () => {
     const api = createSiteApi(get);
     expect((await api.getProfessionals({ limit: 16 }, 'it')).map((p) => p.displayName)).toEqual(['Giulia R.', 'Sara V.', 'Luca B.']);
-    expect((await api.getProfessionals({ serviceSlug: 'barber' }, 'it')).map((p) => p.professionalId)).toEqual([A]);
+    expect((await api.getProfessionals({ serviceSlug: 'capelli' }, 'it')).map((p) => p.professionalId)).toEqual([A]);
+    expect((await api.getProfessionals({ serviceSlug: 'estetica' }, 'it')).map((p) => p.professionalId)).toEqual([B]);
     expect((await api.getProfessionals({ citySlug: 'milano', date: '2026-11-23' }, 'it')).map((p) => p.professionalId)).toEqual([A]);
   });
 
@@ -97,7 +110,7 @@ describe('site-api', () => {
 
   it('gère CAP, zones non couvertes et pannes', async () => {
     const api = createSiteApi(get);
-    const ok = await api.searchAvailability({ postalCode: '20121', serviceSlug: 'nails' }, 'it');
+    const ok = await api.searchAvailability({ postalCode: '20121', serviceSlug: 'estetica' }, 'it');
     expect(ok.status).toBe('ok');
     const nc = await api.searchAvailability({ citySlug: 'bari' }, 'it');
     expect(nc.status).toBe('not_covered');

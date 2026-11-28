@@ -47,9 +47,7 @@ export const ROUTE_SLUGS: Record<Exclude<Lang, 'it'>, RouteSlugTable> = {
     },
     services: {
       capelli: 'hair',
-      barber: 'barber',
       'make-up': 'make-up',
-      nails: 'nails',
       estetica: 'beauty-treatments',
       massaggi: 'massages',
     },

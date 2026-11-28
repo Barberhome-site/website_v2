@@ -184,10 +184,19 @@ const FIXED: Record<string, string> = {
   '/documents/Disclaimer_igienico_sanitario.pdf': '/termini',
 };
 
-/** Anciennes adresses italiennes encore à moderniser (/legale/…), ou null. */
+/** Catégories supprimées le 28/11/2026 : la barbe passe dans Capelli ; les ongles ne sont plus proposés. */
+const OLD_SERVICES: Record<string, string> = {
+  barber: '/servizi/capelli',
+  nails: '/servizi/estetica',
+};
+
+/** Anciennes adresses italiennes encore à moderniser (/legale/…, catégories supprimées), ou null. */
 function modernizeItalian(segments: string[]): string | null {
   if (segments[0] === 'legale') {
     return OLD_LEGAL_DOCS[segments[1] ?? ''] ?? '/termini';
+  }
+  if (segments[0] === 'servizi' && Object.hasOwn(OLD_SERVICES, segments[1] ?? '')) {
+    return OLD_SERVICES[segments[1]];
   }
   return null;
 }
@@ -211,6 +220,10 @@ export function legacyRedirect(pathname: string): string | null {
     if (segments[1] === 'legal') {
       const oldKey = OLD_EN_LEGAL_SLUGS[segments[2] ?? ''] ?? '';
       return localizePath(OLD_LEGAL_DOCS[oldKey] ?? '/termini', 'en');
+    }
+    // Les anciennes catégories gardaient le même slug en anglais (/en/services/barber, /en/services/nails).
+    if (segments[1] === 'services' && Object.hasOwn(OLD_SERVICES, segments[2] ?? '')) {
+      return localizePath(OLD_SERVICES[segments[2]], 'en');
     }
     return null;
   }
