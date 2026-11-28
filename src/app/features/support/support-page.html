@@ -26,7 +26,7 @@
         <h2 id="canc-title">{{ t.cancelTitle }}</h2>
         <p><strong>{{ t.cancelAnswer }}</strong></p>
         <p [class.placeholder]="t.cancelPlaceholder.startsWith('[')">{{ t.cancelPlaceholder }}</p>
-        <p>{{ t.cancelMore }} <a [routerLink]="'/legale/condizioni-clienti' | lp: lang">{{ t.customerTerms }}</a>.</p>
+        <p>{{ t.cancelMore }} <a [routerLink]="'/termini' | lp: lang">{{ t.customerTerms }}</a>.</p>
       </section>
     </div>
 
@@ -108,7 +108,7 @@
 
         <p class="small muted">
           {{ t.privacy }}
-          <a [routerLink]="'/legale/privacy' | lp: lang">{{ t.privacyLink }}</a>
+          <a [routerLink]="'/privacy' | lp: lang">{{ t.privacyLink }}</a>
         </p>
 
         <button type="submit" class="btn btn--primary btn--block" [disabled]="sending()">

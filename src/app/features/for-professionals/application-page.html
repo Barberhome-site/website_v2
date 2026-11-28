@@ -141,7 +141,7 @@
           <input type="checkbox" formControlName="privacyAck"
                  [attr.aria-invalid]="showError('privacyAck') ? 'true' : null"
                  [attr.aria-describedby]="showError('privacyAck') ? 'ap-priv-err' : null" />
-          <span>{{ t.privacyBefore }}<a [routerLink]="'/legale/privacy' | lp: lang" target="_blank">{{ t.privacyLink }}</a>{{ t.privacyAfter }}</span>
+          <span>{{ t.privacyBefore }}<a [routerLink]="'/privacy' | lp: lang" target="_blank">{{ t.privacyLink }}</a>{{ t.privacyAfter }}</span>
         </label>
         @if (showError('privacyAck')) {
           <p id="ap-priv-err" class="field__error">{{ t.privacyError }}</p>

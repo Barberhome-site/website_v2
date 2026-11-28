@@ -10,7 +10,7 @@
   <div class="cp__body">
     <p class="muted">
       {{ t.prefsIntro }}
-      <a [routerLink]="'/legale/cookie-policy' | lp: i18n.lang()" (click)="consent.closePreferences()">{{ t.prefsIntroLink }}</a>.
+      <a [routerLink]="'/cookie' | lp: i18n.lang()" (click)="consent.closePreferences()">{{ t.prefsIntroLink }}</a>.
     </p>
 
     @for (category of categories; track category) {

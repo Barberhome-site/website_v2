@@ -29,7 +29,6 @@
         <h2 id="f-support" class="footer__title">{{ t.footer.support }}</h2>
         <ul role="list">
           <li><a [routerLink]="'/assistenza' | lp: i18n.lang()">{{ t.footer.helpFaq }}</a></li>
-          <li><a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="cancellazioni">{{ t.footer.cancellations }}</a></li>
           <li>
             <a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="contatti" (click)="trackSupport('contact_page')">{{ t.footer.contacts }}</a>
           </li>
@@ -50,13 +49,11 @@
       <nav class="footer__col" aria-labelledby="f-legal">
         <h2 id="f-legal" class="footer__title">{{ t.footer.legal }}</h2>
         <ul role="list">
-          <li><a [routerLink]="'/legale/privacy' | lp: i18n.lang()">{{ t.footer.privacy }}</a></li>
-          <li><a [routerLink]="'/legale/cookie-policy' | lp: i18n.lang()">{{ t.footer.cookies }}</a></li>
-          <li><a [routerLink]="'/legale/condizioni-clienti' | lp: i18n.lang()">{{ t.footer.customerTerms }}</a></li>
-          <li><a [routerLink]="'/legale/condizioni-professionisti' | lp: i18n.lang()">{{ t.footer.proTerms }}</a></li>
-          <li><a [routerLink]="'/legale/regolamento-piattaforma' | lp: i18n.lang()">{{ t.footer.platformRules }}</a></li>
-          <li><a [routerLink]="'/legale/policy-reclami' | lp: i18n.lang()">{{ t.footer.complaintsPolicy }}</a></li>
-          <li><a [routerLink]="'/legale/disclaimer-igienico-sanitario' | lp: i18n.lang()">{{ t.footer.hygiene }}</a></li>
+          <li><a [routerLink]="'/privacy' | lp: i18n.lang()">{{ t.footer.privacy }}</a></li>
+          <li><a [routerLink]="'/cookie' | lp: i18n.lang()">{{ t.footer.cookies }}</a></li>
+          <li><a [routerLink]="'/termini' | lp: i18n.lang()">{{ t.footer.customerTerms }}</a></li>
+          <li><a [routerLink]="'/termini-professionisti' | lp: i18n.lang()">{{ t.footer.proTerms }}</a></li>
+          <li><a [routerLink]="'/cancellazioni-rimborsi' | lp: i18n.lang()">{{ t.footer.cancellations }}</a></li>
           <li>
             <button type="button" class="footer__linkbtn" (click)="consent.openPreferences()">{{ t.footer.manageCookies }}</button>
           </li>

@@ -24,7 +24,7 @@ import { Icon } from '../../shared/components/icon/icon';
         <h2 id="cb-title" class="cb__title">{{ t.bannerTitle }}</h2>
         <p id="cb-text" class="cb__text">
           {{ t.bannerText }}
-          <a [routerLink]="'/legale/cookie-policy' | lp: i18n.lang()">{{ t.policy }}</a>
+          <a [routerLink]="'/cookie' | lp: i18n.lang()">{{ t.policy }}</a>
         </p>
         <div class="cb__actions">
           <button type="button" class="btn btn--outline" (click)="consent.rejectAll()">{{ t.reject }}</button>

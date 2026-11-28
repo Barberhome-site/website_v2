@@ -3,6 +3,7 @@ import { i18nResolver } from './core/i18n/i18n.resolver';
 import { Lang, PREFIXED_LANGS } from './core/i18n/i18n.config';
 import { routePath } from './core/i18n/route-slugs';
 import { cityResolver, professionalResolver, serviceResolver } from './core/routing/resolvers';
+import { LEGAL_DOC_KEYS } from './features/legal/legal-types';
 
 /**
  * Pages du site (brief §4). Chargées à la demande.
@@ -71,10 +72,12 @@ function pageRoutes(lang: Lang): Routes {
       path: p('chi-siamo'),
       loadComponent: () => import('./features/about/about-page').then((m) => m.AboutPage),
     },
-    {
-      path: p('legale/:doc'),
+    // Pages légales (textes v3) : la clé du document arrive au composant par `data` (input `doc`).
+    ...LEGAL_DOC_KEYS.map((doc) => ({
+      path: p(doc),
+      data: { doc },
       loadComponent: () => import('./features/legal/legal-page').then((m) => m.LegalPage),
-    },
+    })),
     {
       path: '**',
       loadComponent: () => import('./features/not-found/not-found-page').then((m) => m.NotFoundPage),

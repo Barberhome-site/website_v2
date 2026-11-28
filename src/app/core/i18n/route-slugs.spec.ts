@@ -17,8 +17,9 @@ const PATHS = [
   '/per-professionisti',
   '/per-professionisti/candidatura',
   '/chi-siamo',
-  '/legale/privacy',
-  '/legale/condizioni-clienti',
+  '/termini',
+  '/cookie',
+  '/cancellazioni-rimborsi',
 ];
 
 describe('route-slugs', () => {
@@ -55,7 +56,7 @@ describe('route-slugs', () => {
 
   it('retrouve le slug canonique et construit les chemins de routes', () => {
     expect(canonicalSlug('services', 'hair', 'en')).toBe('capelli');
-    expect(canonicalSlug('legal', 'customer-terms', 'en')).toBe('condizioni-clienti');
+    expect(routePath('termini-professionisti', 'en')).toBe('professional-terms');
     expect(canonicalSlug('services', 'inconnu', 'en')).toBe('inconnu');
     expect(routePath('servizi/:slug', 'en')).toBe('services/:slug');
     expect(routePath('per-professionisti/candidatura', 'en')).toBe('for-professionals/apply');

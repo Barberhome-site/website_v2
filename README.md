@@ -53,7 +53,7 @@ src/
     │                            bandeau cookies, panneau « Gestisci cookie »
     ├── shared/components/       Recherche de disponibilité, carrousel, carte, Trustpilot, cartes…
     └── features/                Pages : home, servizi, dove-siamo, disponibilita, professionisti,
-                                 come-funziona, fiducia, assistenza, per-professionisti, chi-siamo, legale
+                                 come-funziona, fiducia, assistenza, per-professionisti, chi-siamo, legal
 ```
 
 ### Pages
@@ -68,8 +68,33 @@ src/
 | `/come-funziona`, `/fiducia`, `/per-professionisti`, `/chi-siamo` | Pages éditoriales | Pré-rendu |
 | `/assistenza` | FAQ, annulations/remboursements, formulaire de contact | SSR |
 | `/per-professionisti/candidatura` | Formulaire de candidature (noindex) | SSR |
-| `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti`, `/regolamento-piattaforma`, `/policy-reclami`, `/disclaimer-igienico-sanitario` | Documents légaux versionnés | Pré-rendu |
-| `/index`, `/privacy`, `/cookie`, `/cookie-policy`, `/terms`, `/termini`, `/termini-professionisti`, `/documents/*.pdf` | Anciennes adresses (site précédent `midnight-welcome`, app) | Redirection 301 vers la nouvelle page |
+| `/termini`, `/termini-professionisti`, `/privacy`, `/cookie`, `/cancellazioni-rimborsi` | Documents légaux v3 (texte en italien, aussi sous `/en/…`) | Pré-rendu |
+| `/legale/…`, `/en/legal/…`, `/terms`, `/termini-clienti`, `/cookie-policy`, `/index`, `/documents/*.pdf`, `/fr/…`, `/es/…`, `/de/…` | Anciennes adresses | Redirection 301 (`src/server/legacy-redirects.ts`) |
+
+## Pages légales
+
+- **Textes** : `content/legal/*.md`, fournis par GLAMRO, **jamais modifiés à la main**. Pour une nouvelle version, on
+  remplace le `.md` et on lance `node tools/build-legal-docs.mjs`, qui régénère `src/app/features/legal/legal-docs.ts`
+  (le script s'arrête sur toute syntaxe qu'il ne connaît pas, pour ne rien perdre en silence).
+- **Brouillon** : tant que l'avocat n'a pas approuvé les textes v3, `LEGAL_DRAFT = true` (`legal-types.ts`) affiche
+  l'avertissement du document en haut de la page. Passer à `false` après l'approbation.
+- **Anglais** : les pages `/en/terms`, `/en/privacy`… affichent le texte italien avec un avertissement ; canonical vers
+  l'italien, en attendant la traduction de courtoisie.
+
+### Adresses garanties (à ne jamais casser)
+
+Utilisées par les apps, le backend (`GET /api/legal/documents`) et des supports imprimés. Chacune doit toujours afficher
+une page ou y rediriger ; le test `src/server/legacy-redirects.spec.ts` le vérifie.
+
+| Adresse | Mène à |
+|---|---|
+| `/terms`, `/termini`, `/termini-clienti` | Termini e Condizioni Clienti |
+| `/termini-professionisti` | Termini e Condizioni Professionisti |
+| `/privacy` | Privacy Policy |
+| `/cookie`, `/cookie-policy` | Cookie Policy |
+| `/cancellazioni-rimborsi` | Cancellazioni, rimborsi e reclami |
+
+Pour en ajouter une : l'ajouter à ce tableau et à `GUARANTEED_LEGAL_LINKS` dans le test.
 
 ## Langues (it, en)
 
@@ -229,9 +254,7 @@ bios viennent de l'API, en italien.
   erreurs textuelles, `autocomplete`, messages de succès, `<dialog>` natif pour les préférences.
 - **Performance** : pages chargées à la demande, carte en `@defer`, polices auto-hébergées (pas de Google Fonts),
   `NgOptimizedImage` (lazy loading, preload de la hero), dimensions fixes contre le CLS.
-- **Légal** : 7 documents avec version, date d'efficacité, date de mise à jour, sommaire, archive des versions.
-  Textes repris des documents en vigueur de GLAMRO S.R.L. (sauf Condizioni Professionisti, encore à fournir) ;
-  dans la cookie policy, la liste des cookies est générée depuis l'inventaire réel du site.
+- **Légal** : 5 documents v3 (voir « Pages légales »), avec version et date, sommaire et gras du texte d'origine.
 
 ## À compléter avant la mise en ligne
 
@@ -241,8 +264,8 @@ Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` 
 - [x] **Données société**, e-mails, URL des stores et réseaux sociaux → `site.config.ts`
 - [x] **Trustpilot** : widget Review Collector configuré (plan gratuit) ; passer à un widget de note (Mini, Micro…)
       quand il y aura des avis → `templateId` et `height` dans `environment.ts`
-- [ ] **Textes légaux** : fournir les **Condizioni Professionisti** et la date de l'informativa privacy ; retirer le
-      lien ODR (plateforme fermée le 20/07/2025) des T&C et de la Policy reclami → `features/legal/legal-docs.ts`
+- [ ] **Textes légaux v3** : approbation de l'avocat (puis `LEGAL_DRAFT = false`) ; la Cookie Policy v3 cite Meta Pixel
+      et Google Ads, que le site n'utilise pas : à aligner après une vraie analyse des cookies
 - [ ] **Règles métier** restantes (documents de vérification, prestataire de paiement, critères de classement P2B,
       horaires du support, commissions, versements, assurance) → textes entre `[crochets]` dans les i18n
 - [ ] **Preuves datées** de la revendication « Il primo beauty delivery in Italia » (brief §2)

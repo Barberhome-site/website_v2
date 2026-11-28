@@ -2,13 +2,13 @@
  * Traduction des segments d'URL.
  *
  * Partout dans le code, les chemins sont écrits en italien (« chemin canonique ») :
- *   '/servizi/capelli', '/legale/privacy', '/per-professionisti/candidatura'…
+ *   '/servizi/capelli', '/termini', '/per-professionisti/candidatura'…
  * Ils sont traduits au moment de produire un lien (pipe `lp`, SEO, sitemap) :
  *   en → /en/services/hair
  *
  * Règles :
  *  - 1er segment : page (groupe `pages`) ;
- *  - 2e segment  : catégorie de service après « servizi », document après « legale »,
+ *  - 2e segment  : catégorie de service après « servizi »,
  *                  sous-page après « per-professionisti » ; sinon inchangé
  *                  (villes et identifiants de professionnels ne sont pas traduits).
  *  - Slugs en minuscules ASCII avec tirets. Dans une même langue et un même groupe,
@@ -20,7 +20,6 @@ import type { Lang } from './i18n.config';
 export interface RouteSlugTable {
   pages: Record<string, string>;
   services: Record<string, string>;
-  legal: Record<string, string>;
   /** Sous-pages de « per-professionisti ». */
   pro: Record<string, string>;
 }
@@ -39,7 +38,12 @@ export const ROUTE_SLUGS: Record<Exclude<Lang, 'it'>, RouteSlugTable> = {
       assistenza: 'help',
       'per-professionisti': 'for-professionals',
       'chi-siamo': 'about-us',
-      legale: 'legal',
+      // Pages légales : adresses de premier niveau (/termini → /en/terms).
+      termini: 'terms',
+      'termini-professionisti': 'professional-terms',
+      privacy: 'privacy',
+      cookie: 'cookies',
+      'cancellazioni-rimborsi': 'cancellations-refunds',
     },
     services: {
       capelli: 'hair',
@@ -49,15 +53,6 @@ export const ROUTE_SLUGS: Record<Exclude<Lang, 'it'>, RouteSlugTable> = {
       estetica: 'beauty-treatments',
       massaggi: 'massages',
     },
-    legal: {
-      privacy: 'privacy',
-      'cookie-policy': 'cookie-policy',
-      'condizioni-clienti': 'customer-terms',
-      'condizioni-professionisti': 'professional-terms',
-      'regolamento-piattaforma': 'platform-rules',
-      'policy-reclami': 'complaints-policy',
-      'disclaimer-igienico-sanitario': 'hygiene-and-safety',
-    },
     pro: { candidatura: 'apply' },
   },
 };
@@ -65,7 +60,6 @@ export const ROUTE_SLUGS: Record<Exclude<Lang, 'it'>, RouteSlugTable> = {
 /** Groupe du 2e segment selon la page (1er segment canonique). */
 const SECOND_SEGMENT_GROUP: Record<string, SlugGroup> = {
   servizi: 'services',
-  legale: 'legal',
   'per-professionisti': 'pro',
 };
 

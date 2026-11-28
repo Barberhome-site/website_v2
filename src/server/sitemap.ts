@@ -54,7 +54,8 @@ export async function buildSitemapXml(): Promise<string> {
       .filter((c) => c.status === 'active' && c.indexable)
       .map((c) => ({ path: `/dove-siamo/${c.slug}`, lastmod: c.updatedAt })),
     ...professionals.filter((p) => p.verified).map((p) => ({ path: p.profileUrl })),
-    ...Object.values(LEGAL_DOCS).map((d) => ({ path: `/legale/${d.key}`, lastmod: d.updatedAt, italianOnly: true })),
+    // Pages légales : texte uniquement en italien, la page anglaise a un canonical vers l'italien.
+    ...Object.values(LEGAL_DOCS).map((d) => ({ path: `/${d.key}`, lastmod: d.effectiveDate, italianOnly: true })),
   ];
 
   const urls: string[] = [];

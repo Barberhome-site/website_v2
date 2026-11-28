@@ -9,6 +9,8 @@
  * les anciennes traductions des segments d'URL (copie de route-slugs.ts avant suppression).
  */
 
+import { localizePath } from '../app/core/i18n/i18n.config';
+
 interface OldSlugTable {
   pages: Record<string, string>;
   services: Record<string, string>;
@@ -141,36 +143,76 @@ function removedLangToItalian(lang: keyof typeof REMOVED_LANG_SLUGS, segments: s
   return '/' + result.join('/');
 }
 
-/** Adresses fixes du site précédent (dépôt midnight-welcome : routes et PDF de public/documents) et de l'app. */
-const FIXED: Record<string, string> = {
-  '/index': '/',
-  '/privacy': '/legale/privacy',
-  '/cookie': '/legale/cookie-policy',
-  '/cookie-policy': '/legale/cookie-policy',
-  '/terms': '/legale/condizioni-clienti',
-  '/termini': '/legale/condizioni-clienti',
-  '/termini-professionisti': '/legale/condizioni-professionisti',
-  '/documents/Informativa_trattamento_dati.pdf': '/legale/privacy',
-  '/documents/Informativa_Cookie.pdf': '/legale/cookie-policy',
-  '/documents/Termini_Condizioni.pdf': '/legale/condizioni-clienti',
-  '/documents/Regolamento_piattaforma.pdf': '/legale/regolamento-piattaforma',
-  '/documents/Policy_Reclami.pdf': '/legale/policy-reclami',
-  '/documents/Disclaimer_igienico_sanitario.pdf': '/legale/disclaimer-igienico-sanitario',
+/** Anciennes pages légales (/legale/…, sept documents) → pages v3 (italien). */
+const OLD_LEGAL_DOCS: Record<string, string> = {
+  privacy: '/privacy',
+  'cookie-policy': '/cookie',
+  'condizioni-clienti': '/termini',
+  'condizioni-professionisti': '/termini-professionisti',
+  // Documents supprimés en v3 : leur contenu est repris dans les Termini ou la page Cancellazioni.
+  'regolamento-piattaforma': '/termini',
+  'policy-reclami': '/cancellazioni-rimborsi',
+  'disclaimer-igienico-sanitario': '/termini',
+};
+
+/** Anciennes adresses anglaises des documents légaux (/en/legal/…) → clé italienne de l'ancien document. */
+const OLD_EN_LEGAL_SLUGS: Record<string, string> = {
+  privacy: 'privacy',
+  'cookie-policy': 'cookie-policy',
+  'customer-terms': 'condizioni-clienti',
+  'professional-terms': 'condizioni-professionisti',
+  'platform-rules': 'regolamento-piattaforma',
+  'complaints-policy': 'policy-reclami',
+  'hygiene-and-safety': 'disclaimer-igienico-sanitario',
 };
 
 /**
+ * Adresses fixes : site précédent (dépôt midnight-welcome : routes et PDF de public/documents),
+ * liens de l'app et du backend (GET /api/legal/documents renvoie /terms, /privacy et /cookie-policy ;
+ * avec LEGAL_DOCS_BASE_URL il construit /termini-clienti).
+ */
+const FIXED: Record<string, string> = {
+  '/index': '/',
+  '/terms': '/termini',
+  '/termini-clienti': '/termini',
+  '/cookie-policy': '/cookie',
+  '/documents/Informativa_trattamento_dati.pdf': '/privacy',
+  '/documents/Informativa_Cookie.pdf': '/cookie',
+  '/documents/Termini_Condizioni.pdf': '/termini',
+  '/documents/Regolamento_piattaforma.pdf': '/termini',
+  '/documents/Policy_Reclami.pdf': '/cancellazioni-rimborsi',
+  '/documents/Disclaimer_igienico_sanitario.pdf': '/termini',
+};
+
+/** Anciennes adresses italiennes encore à moderniser (/legale/…), ou null. */
+function modernizeItalian(segments: string[]): string | null {
+  if (segments[0] === 'legale') {
+    return OLD_LEGAL_DOCS[segments[1] ?? ''] ?? '/termini';
+  }
+  return null;
+}
+
+/**
  * Nouvelle adresse pour une ancienne, ou `null` si l'adresse est toujours valide.
- * `pathname` sans query string.
+ * `pathname` sans query string. Le résultat est toujours une adresse finale (pas de redirections en chaîne).
  */
 export function legacyRedirect(pathname: string): string | null {
   const clean = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
   if (Object.hasOwn(FIXED, clean)) {
     return FIXED[clean];
   }
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = clean.split('/').filter(Boolean);
   const first = segments[0];
   if (first === 'fr' || first === 'es' || first === 'de') {
-    return removedLangToItalian(first, segments.slice(1));
+    const italian = removedLangToItalian(first, segments.slice(1));
+    return modernizeItalian(italian.split('/').filter(Boolean)) ?? italian;
   }
-  return null;
+  if (first === 'en') {
+    if (segments[1] === 'legal') {
+      const oldKey = OLD_EN_LEGAL_SLUGS[segments[2] ?? ''] ?? '';
+      return localizePath(OLD_LEGAL_DOCS[oldKey] ?? '/termini', 'en');
+    }
+    return null;
+  }
+  return modernizeItalian(segments);
 }

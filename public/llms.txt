@@ -15,7 +15,8 @@ Supporto sperimentale per assistenti e motori di risposta. Non sostituisce sitem
 
 ## Documenti legali
 
-- [Privacy](https://www.glamro.it/legale/privacy)
-- [Cookie policy](https://www.glamro.it/legale/cookie-policy)
-- [Condizioni Clienti](https://www.glamro.it/legale/condizioni-clienti)
-- [Condizioni Professionisti](https://www.glamro.it/legale/condizioni-professionisti)
+- [Termini e Condizioni Clienti](https://www.glamro.it/termini)
+- [Termini e Condizioni Professionisti](https://www.glamro.it/termini-professionisti)
+- [Cancellazioni, rimborsi e reclami](https://www.glamro.it/cancellazioni-rimborsi)
+- [Privacy Policy](https://www.glamro.it/privacy)
+- [Cookie Policy](https://www.glamro.it/cookie)
