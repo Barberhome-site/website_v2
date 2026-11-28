@@ -32,7 +32,8 @@ export function organizationLd(slogan: string): object {
       {
         '@type': 'ContactPoint',
         contactType: 'customer support',
-        email: SITE.contact.supportEmail,
+        email: SITE.contact.email,
+        telephone: SITE.contact.phone,
         availableLanguage: ['it', 'en', 'fr', 'es', 'de'],
       },
     ],

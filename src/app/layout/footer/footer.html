@@ -34,7 +34,15 @@
             <a [routerLink]="'/assistenza' | lp: i18n.lang()" fragment="contatti" (click)="trackSupport('contact_page')">{{ t.footer.contacts }}</a>
           </li>
           <li>
-            <a [href]="'mailto:' + site.contact.supportEmail" (click)="trackSupport('email')">{{ site.contact.supportEmail }}</a>
+            <a [href]="'mailto:' + site.contact.email" (click)="trackSupport('email')">{{ site.contact.email }}</a>
+          </li>
+          <li>
+            <a [href]="site.contact.phoneHref" (click)="trackSupport('phone')">{{ t.footer.phone }} {{ site.contact.phone }}</a>
+          </li>
+          <li>
+            <a [href]="site.contact.whatsappUrl" target="_blank" rel="noopener" (click)="trackSupport('whatsapp')"
+              >WhatsApp<span class="visually-hidden"> {{ t.common.newTab }}</span></a
+            >
           </li>
         </ul>
       </nav>
@@ -65,7 +73,7 @@
         }
       </ul>
       <p class="footer__legal">
-        © {{ year }} {{ site.company.legalName }} · {{ site.company.address }} · {{ t.footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }} · {{ site.company.shareCapital }}
+        © {{ year }} {{ site.company.legalName }} · {{ site.company.address }} · {{ t.footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }} · PEC {{ site.company.pec }}
       </p>
     </div>
   </div>

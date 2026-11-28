@@ -218,6 +218,7 @@ export const DE: Dict = {
     manageCookies: 'Cookies verwalten',
     social: 'Offizielle Social-Media-Profile',
     vat: 'USt-IdNr.',
+    phone: 'Tel.',
     clientApp: 'App für Kunden',
     proApp: 'App für Profis',
   },
@@ -504,7 +505,7 @@ export const DE: Dict = {
       answer: 'Du kannst uns vor, während und nach dem Service kontaktieren.',
       text: 'Schreib uns über die App oder die Seite',
       link: 'Hilfe',
-      placeholder: 'Offizielle Kanäle: ein Ticket in der App (Bereich «Assistenza Ordine») oder eine E-Mail an support@glamro.it.',
+      placeholder: 'Offizielle Kanäle: die App, WhatsApp unter +39 392 366 1225 oder eine E-Mail an contact@glamro.it.',
     },
     safety: {
       title: 'Sicherheit',

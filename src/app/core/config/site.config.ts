@@ -14,22 +14,29 @@ export const SITE = {
     { key: 'about', path: '/chi-siamo' },
   ],
 
-  /** Données société (documents légaux GLAMRO S.R.L.). */
+  /**
+   * Données société (brief du 28/11/2026). Identiques partout : on ne les change qu'ici.
+   * Le capital social n'est volontairement pas affiché (ni footer ni « Chi siamo ») :
+   * il figure seulement dans le texte des Termini Clienti (art. 1).
+   */
   company: {
     legalName: 'GLAMRO S.R.L.',
     vatNumber: '03036060428',
-    address: 'Via Matteotti n. 54, 60121 Ancona (AN)',
-    rea: 'REA AN-267591',
-    shareCapital: 'Capitale sociale € 7.000,00 i.v.',
+    address: 'Via Giacomo Matteotti 54, 60121 Ancona (AN)',
+    streetAddress: 'Via Giacomo Matteotti 54',
+    postalCode: '60121',
+    locality: 'Ancona',
+    region: 'AN',
+    rea: 'REA AN-312608',
     pec: 'glamrosrl@ionospec.it',
-    phone: '+39 392 366 1225',
   },
 
+  /** Seuls canaux de contact : une adresse email, un numéro (téléphone et WhatsApp). */
   contact: {
-    /** Canal officiel des réclamations et de l'assistance (Policy reclami). */
-    supportEmail: 'support@glamro.it',
-    /** Contact du titulaire du traitement (Informativa privacy). */
-    privacyEmail: 'contact@glamro.it',
+    email: 'contact@glamro.it',
+    phone: '+39 392 366 1225',
+    phoneHref: 'tel:+393923661225',
+    whatsappUrl: 'https://wa.me/393923661225',
   },
 
   /** Profils officiels. */

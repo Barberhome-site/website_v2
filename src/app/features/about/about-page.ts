@@ -45,11 +45,12 @@ import { Media } from '../../shared/components/media/media';
       <p>
         {{ site.company.legalName }}<br />
         {{ t.address }}: {{ site.company.address }}<br />
-        {{ i18n.d().footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }} · {{ site.company.shareCapital }}<br />
+        {{ i18n.d().footer.vat }} {{ site.company.vatNumber }} · {{ site.company.rea }}<br />
         PEC: {{ site.company.pec }}
       </p>
       <p>
-        {{ t.contacts }}: <a [href]="'mailto:' + site.contact.supportEmail">{{ site.contact.supportEmail }}</a> ·
+        {{ t.contacts }}: <a [href]="'mailto:' + site.contact.email">{{ site.contact.email }}</a> ·
+        <a [href]="site.contact.phoneHref">{{ site.contact.phone }}</a> (WhatsApp) ·
         <a [routerLink]="'/assistenza' | lp: i18n.lang()">{{ i18n.d().support.title }}</a>
       </p>
     </div>

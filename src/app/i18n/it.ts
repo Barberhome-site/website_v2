@@ -221,6 +221,7 @@ export const IT = {
     manageCookies: 'Gestisci cookie',
     social: 'Profili social ufficiali',
     vat: 'P.IVA',
+    phone: 'Tel.',
     clientApp: 'App per clienti',
     proApp: 'App per professionisti',
   },
@@ -510,7 +511,7 @@ export const IT = {
       answer: 'Puoi contattarci prima, durante e dopo il servizio.',
       text: 'Scrivici dall\'app o dalla pagina',
       link: 'Assistenza',
-      placeholder: 'Canali ufficiali: ticket dall\'app (sezione «Assistenza Ordine») o email a support@glamro.it.',
+      placeholder: 'Canali ufficiali: dall\'app, su WhatsApp al +39 392 366 1225 o via email a contact@glamro.it.',
     },
     safety: {
       title: 'Sicurezza',

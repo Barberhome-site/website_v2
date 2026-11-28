@@ -34,7 +34,9 @@
       <h2 id="contact-title" class="h3-like">{{ t.contactTitle }}</h2>
       <p class="muted small">
         {{ t.orWrite }}
-        <a [href]="'mailto:' + site.contact.supportEmail" (click)="trackEmail()">{{ site.contact.supportEmail }}</a>.
+        <a [href]="'mailto:' + site.contact.email" (click)="trackEmail()">{{ site.contact.email }}</a>
+        · <a [href]="site.contact.phoneHref">{{ site.contact.phone }}</a>
+        · <a [href]="site.contact.whatsappUrl" target="_blank" rel="noopener">WhatsApp<span class="visually-hidden"> {{ i18n.d().common.newTab }}</span></a>.
       </p>
 
       <div aria-live="polite">
