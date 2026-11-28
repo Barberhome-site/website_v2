@@ -100,6 +100,12 @@
   border-color: transparent;
 }
 
+// Sans bordure, l'icône est plus grande pour rester bien visible.
+.btn--bare app-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
 .link-arrow {
   display: inline-flex;
   align-items: center;

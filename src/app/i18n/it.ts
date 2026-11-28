@@ -8,6 +8,7 @@ export const IT = {
   brand: {
     promise: 'Il beauty, dove, come e quando vuoi.',
     positioning: 'Il beauty diventa delivery.',
+    subtitle: 'Dove, come e quando vuoi.',
     explanation: 'Ordina parrucchieri, estetiste, make-up artist e massaggiatori a casa tua.',
     tagline: 'Il beauty diventa delivery.',
   },

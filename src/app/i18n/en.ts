@@ -5,6 +5,7 @@ export const EN: Dict = {
   brand: {
     promise: 'Beauty, where, how and when you want.',
     positioning: 'Beauty becomes delivery.',
+    subtitle: 'Where, how and when you want.',
     explanation: 'Order hairdressers, beauticians, make-up artists and massage therapists to your home.',
     tagline: 'Beauty becomes delivery.',
   },
