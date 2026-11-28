@@ -49,8 +49,11 @@ export class LegalPage {
   protected readonly draft = LEGAL_DRAFT;
   protected readonly document = computed(() => (Object.hasOwn(LEGAL_DOCS, this.doc()) ? LEGAL_DOCS[this.doc()] : null));
   protected readonly isItalian = computed(() => this.i18n.lang() === 'it');
-  /** Sommaire seulement pour les documents longs (Cookie et Cancellazioni n'ont que deux sections). */
-  protected readonly hasToc = computed(() => (this.document()?.sections.length ?? 0) > 2);
+  /**
+   * Sommaire dès qu'il y a au moins deux sections, c'est-à-dire pour les cinq documents :
+   * le texte commence ainsi au même endroit sur toutes les pages légales.
+   */
+  protected readonly hasToc = computed(() => (this.document()?.sections.length ?? 0) > 1);
 
   protected readonly crumbs = computed(() => {
     const d = this.document();
