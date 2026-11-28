@@ -13,7 +13,7 @@ import { Media } from '../media/media';
     @let s = service();
     <app-media ratio="4 / 3" [src]="s.image?.src" [alt]="s.image?.alt ?? ''" icon="scissors"
                [placeholderLabel]="i18n.d().placeholders.service | fmt: { label: s.professionalLabel }"
-               sizes="(min-width: 1100px) 300px, (min-width: 640px) 45vw, 90vw" />
+               sizes="(min-width: 1100px) 25vw, (min-width: 640px) 45vw, 90vw" />
     <div class="sc__body">
       <h3 class="sc__title">
         <a [routerLink]="['/servizi', s.slug] | lp: i18n.lang()">{{ s.professionalLabel }}</a>

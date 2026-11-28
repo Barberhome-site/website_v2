@@ -127,7 +127,7 @@
         <li>
           <figure>
             <app-media ratio="4 / 5" [src]="site.images.storytelling[i]" icon="bag" [placeholderLabel]="t.placeholders.story[i]"
-                       sizes="(min-width: 1100px) 290px, (min-width: 640px) 45vw, 90vw" />
+                       sizes="(min-width: 1100px) 25vw, (min-width: 640px) 45vw, 90vw" />
             <figcaption>
               <h3>{{ i + 1 }}. {{ moment.title }}</h3>
               <p>{{ moment.text }}</p>
@@ -170,7 +170,7 @@
   <div class="container">
     <div class="pro">
       <app-media class="pro__media" [src]="site.images.proEntry" icon="user" [placeholderLabel]="t.placeholders.pro"
-                 sizes="(min-width: 960px) 420px, 100vw" />
+                 sizes="(min-width: 960px) 35vw, 100vw" />
       <div class="pro__body">
         <p class="eyebrow">{{ t.home.proEyebrow }}</p>
         <h2 id="pro-title">{{ t.home.proTitle }}</h2>

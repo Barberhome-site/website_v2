@@ -45,6 +45,10 @@ export class Media {
   readonly src = input<string | null | undefined>(null);
   readonly alt = input('');
   readonly priority = input(false);
+  /**
+   * Largeur affichée, pour le srcset automatique de NgOptimizedImage : unités responsives uniquement
+   * (« 50vw », « (min-width: 960px) 40vw, 100vw »). Une valeur en px lève l'erreur NG02952.
+   */
   readonly sizes = input('100vw');
   /** Ex. « 4 / 5 ». Laisser vide si le parent fixe la hauteur. */
   readonly ratio = input<string | null>(null);
