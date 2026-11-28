@@ -1,17 +1,29 @@
 # GLAMRO
 
-> Glamro è una piattaforma di beauty delivery: connette clienti e professionisti beauty e wellness verificati e permette di scegliere servizio, luogo, momento e professionista in base alla disponibilità reale.
+> GLAMRO è una piattaforma italiana di beauty delivery: i clienti prenotano nell'app GLAMRO professionisti beauty verificati, che vanno a casa loro, in ufficio, in hotel o nel luogo di un evento.
 
-Supporto sperimentale per assistenti e motori di risposta. Non sostituisce sitemap, link interni e rendering server side.
+Il beauty diventa delivery. GLAMRO S.R.L., Via Giacomo Matteotti 54, 60121 Ancona (AN), P.IVA 03036060428. Contatti: contact@glamro.it, telefono e WhatsApp +39 392 366 1225.
+
+## Cosa offre
+
+- Categorie: capelli (anche barba), make-up, estetica e massaggi del benessere (non sanitari).
+- I professionisti sono indipendenti, con partita IVA. Parrucchieri ed estetiste operano con un salone o centro con SCIA, proprio o di appoggio.
+- Ogni profilo è verificato prima di diventare prenotabile: identità, partita IVA e documenti richiesti per la categoria, controllati entro 24 ore lavorative.
+- Si prenota e si paga nell'app GLAMRO, con carta di credito o di debito. La carta viene registrata alla prenotazione, l'importo bloccato 24 ore prima e addebitato solo a servizio svolto. Il prezzo che vedi è quello che paghi. Ordine minimo 20 €.
+- I risultati sono ordinati per vicinanza, servizio richiesto e disponibilità. Non ci sono posizioni a pagamento.
+- Le recensioni sui professionisti possono essere lasciate solo da clienti che hanno prenotato e pagato un servizio su GLAMRO.
+- Le città in cui GLAMRO è prenotabile sono elencate nella pagina Dove siamo e si aggiornano in base ai professionisti attivi.
+- Per i professionisti: iscrizione gratuita e app dedicata GLAMRO Pro.
 
 ## Pagine principali
 
-- [Servizi](https://www.glamro.it/servizi): categorie di servizio attive (capelli e barba, make-up, estetica, massaggi)
-- [Come funziona](https://www.glamro.it/come-funziona): ricerca, scelta, prenotazione, arrivo, pagamento, cancellazione e assistenza
+- [Servizi](https://www.glamro.it/servizi): capelli, make-up, estetica, massaggi
+- [Come funziona](https://www.glamro.it/come-funziona): ricerca, scelta del professionista, prenotazione, arrivo, pagamento e assistenza
 - [Dove siamo](https://www.glamro.it/dove-siamo): città in cui il servizio è prenotabile
-- [Fiducia e sicurezza](https://www.glamro.it/fiducia): verifica dei professionisti, pagamenti, recensioni, ordinamento dei risultati
-- [Per professionisti](https://www.glamro.it/per-professionisti): requisiti e candidatura
-- [Assistenza](https://www.glamro.it/assistenza): FAQ, cancellazioni, rimborsi e contatti
+- [Fiducia e sicurezza](https://www.glamro.it/fiducia): verifica dei professionisti, pagamenti, recensioni, ordine dei risultati
+- [Assistenza](https://www.glamro.it/assistenza): domande frequenti e contatti
+- [Per professionisti](https://www.glamro.it/per-professionisti): come entrare su GLAMRO con l'app GLAMRO Pro
+- [Chi siamo](https://www.glamro.it/chi-siamo)
 
 ## Documenti legali
 
@@ -20,3 +32,9 @@ Supporto sperimentale per assistenti e motori di risposta. Non sostituisce sitem
 - [Cancellazioni, rimborsi e reclami](https://www.glamro.it/cancellazioni-rimborsi)
 - [Privacy Policy](https://www.glamro.it/privacy)
 - [Cookie Policy](https://www.glamro.it/cookie)
+
+## In inglese
+
+- [Home](https://www.glamro.it/en)
+- [Services](https://www.glamro.it/en/services)
+- [How it works](https://www.glamro.it/en/how-it-works)

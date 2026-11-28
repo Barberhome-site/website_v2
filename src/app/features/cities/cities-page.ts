@@ -73,7 +73,13 @@ export class CitiesPage {
 
   constructor() {
     const t = this.i18n.d().cities;
-    inject(SeoService).set({ title: t.seoTitle, description: t.seoDescription, path: '/dove-siamo', breadcrumbs: this.crumbs });
+    inject(SeoService).set({
+      title: this.i18n.d().seo.citiesTitle,
+      rawTitle: true,
+      description: t.seoDescription,
+      path: '/dove-siamo',
+      breadcrumbs: this.crumbs,
+    });
   }
 
   protected serviceNames(city: City): string {

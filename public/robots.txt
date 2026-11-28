@@ -1,27 +1,30 @@
-# robots.txt — GLAMRO
-# Brief §11 : OAI-SearchBot autorisé pour apparaître dans la recherche ChatGPT.
-# GPTBot (entraînement) est à évaluer séparément : bloqué par défaut ici.
-# Chemins traduits : voir src/app/core/i18n/route-slugs.ts (à garder synchronisé).
+# robots.txt — GLAMRO (www.glamro.it)
+# Tutti i crawler sono ammessi, compresi quelli di ricerca e di addestramento AI.
+# È esclusa solo la ricerca interna (pagine di risultati, in noindex).
 
 User-agent: *
 Allow: /
-# Résultats de recherche (noindex)
 Disallow: /disponibilita
 Disallow: /en/availability
-Disallow: /fr/disponibilite
-Disallow: /es/disponibilidad
-Disallow: /de/verfuegbarkeit
-# Formulaire de candidature (noindex)
-Disallow: /per-professionisti/candidatura
-Disallow: /en/for-professionals/apply
-Disallow: /fr/pour-les-professionnels/candidature
-Disallow: /es/para-profesionales/solicitud
-Disallow: /de/fuer-profis/bewerbung
 
+# Crawler AI, ammessi esplicitamente
 User-agent: OAI-SearchBot
-Allow: /
-
+User-agent: ChatGPT-User
 User-agent: GPTBot
-Disallow: /
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bingbot
+User-agent: DuckAssistBot
+User-agent: Meta-ExternalAgent
+User-agent: MistralAI-User
+Allow: /
+Disallow: /disponibilita
+Disallow: /en/availability
 
 Sitemap: https://www.glamro.it/sitemap.xml

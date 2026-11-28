@@ -31,6 +31,17 @@ const angularApp = new AngularNodeAppEngine();
  */
 const MEDIA_ORIGINS = process.env['SITE_MEDIA_ORIGINS'] || 'https://glamro.s3.eu-south-1.amazonaws.com';
 
+/**
+ * Domaines de test : aucune indexation sur *.vercel.app, y compris pour les pages rendues par le serveur
+ * et les redirections (vercel.json pose le même en-tête sur les fichiers statiques).
+ */
+app.use((req, res, next) => {
+  if (/\.vercel\.app$/i.test(req.hostname)) {
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  }
+  next();
+});
+
 /** Anciennes adresses (langues supprimées, site précédent, liens de l'app) : redirection 301. */
 app.use((req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') {

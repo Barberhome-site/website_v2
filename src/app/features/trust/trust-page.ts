@@ -102,6 +102,12 @@ export class TrustPage {
 
   constructor() {
     const t = this.i18n.d().trust;
-    inject(SeoService).set({ title: t.title, description: t.seoDescription, path: '/fiducia', breadcrumbs: this.crumbs });
+    inject(SeoService).set({
+      title: this.i18n.d().seo.trustTitle,
+      rawTitle: true,
+      description: t.seoDescription,
+      path: '/fiducia',
+      breadcrumbs: this.crumbs,
+    });
   }
 }

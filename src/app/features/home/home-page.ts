@@ -60,7 +60,7 @@ export class HomePage {
   constructor() {
     const t = this.i18n.d();
     inject(SeoService).set({
-      title: `${SITE.name} — ${t.brand.promise}`,
+      title: t.seo.homeTitle,
       rawTitle: true,
       description: t.home.seoDescription,
       path: '/',

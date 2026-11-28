@@ -206,6 +206,16 @@ export const EN: Dict = {
     clientApp: 'App for clients',
     proApp: 'App for professionals',
   },
+  /** Titres complets des pages (moins de 65 caractères, chacun différent). */
+  seo: {
+    homeTitle: 'Beauty at home: hairdresser, beautician, make-up | GLAMRO',
+    servicesTitle: 'Beauty services at home: hair, make-up, treatments | GLAMRO',
+    howTitle: 'How GLAMRO works: book beauty services at home',
+    citiesTitle: 'Where we are: the cities where GLAMRO is active | GLAMRO',
+    trustTitle: 'Safety on GLAMRO: verified professionals and in-app payments',
+    supportTitle: 'GLAMRO support: WhatsApp, email and frequently asked questions',
+    aboutTitle: 'About us: why GLAMRO exists, the Italian beauty delivery',
+  },
   notFound: {
     eyebrow: 'Error 404',
     title: 'Page not found',
@@ -217,7 +227,7 @@ export const EN: Dict = {
   },
   home: {
     seoDescription:
-      'GLAMRO is beauty delivery: book verified hairdressers and barbers, beauticians, make-up artists and massage therapists at home or wherever you like, in the active cities.',
+      'GLAMRO is beauty delivery: book verified hairdressers, make-up artists, beauticians and massage therapists at home or wherever you like.',
     coverage: 'Bookable today in',
     howTitle: 'How it works',
     howAll: 'All the details',
@@ -424,7 +434,7 @@ export const EN: Dict = {
       },
     ],
     seoDescription:
-      'How to book a beauty service at home with GLAMRO: search, choosing a professional, booking, arrival, payment and support.',
+      'Search your area, choose the professional, book and pay in the app. Here is how GLAMRO works, step by step.',
   },
   trust: {
     title: 'Trust & safety',
@@ -639,7 +649,7 @@ export const EN: Dict = {
     companyTitle: 'Company details',
     address: 'Registered office',
     contacts: 'Contact',
-    seoDescription: 'GLAMRO is the beauty delivery platform connecting clients with verified beauty and wellness professionals in Italy.',
+    seoDescription: 'GLAMRO gives beauty professionals a digital tool to work by the rules, and clients a simple way to book.',
   },
   legal: {
     draft: 'Draft under legal review: the text may still change before it is final.',

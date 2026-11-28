@@ -167,7 +167,8 @@ Fichiers fournis : `vercel.json` et `api/index.mjs` (fonction qui exécute le se
   - `NG_ALLOWED_HOSTS` = `*.vercel.app`
   - `NG_TRUST_PROXY_HEADERS` = `X-FORWARDED-PORT,X-FORWARDED-PATH,X-FORWARDED-FOR,X-FORWARDED-HOST,X-FORWARDED-PROTO`
 - Les pages prérendues sont servies en statique par Vercel ; les autres passent par la fonction.
-- Sur `*.vercel.app` : en-tête `X-Robots-Tag: noindex` (pas d'indexation de l'aperçu) et Google Analytics
+- Sur `*.vercel.app` : en-tête `X-Robots-Tag: noindex` (fichiers statiques via `vercel.json`, pages SSR et
+  redirections via `server.ts`) et Google Analytics
   désactivé (GA ne se charge que sur `glamro.it`).
 - Limite de l'aperçu : les en-têtes de sécurité (CSP…) de `server.ts` ne s'appliquent pas aux pages statiques.
   Pour une mise en production sur Vercel, il faudra les déclarer aussi dans `vercel.json`.
@@ -234,9 +235,12 @@ bios viennent de l'API, en italien.
 - **Messages et CTA** : promesse, positionnement et CTA approuvés ; une CTA primaire « Verifica la disponibilità »,
   entrée séparée « Sei un professionista? » ; aucune roadmap ni promesse future.
 - **SSR/SSG** : contenu, title, description, canonical, robots, Open Graph et JSON-LD dans le HTML initial ;
-  404 réelles (statut HTTP) ; sitemap dynamique ; `robots.txt` avec OAI-SearchBot autorisé ; `llms.txt` valide.
-- **JSON-LD** : Organization + WebSite (home), Service + BreadcrumbList, CollectionPage + ItemList (villes),
-  Person (profils) ; `aggregateRating` seulement si des avis réels existent.
+  404 réelles (statut HTTP) ; sitemap dynamique (it et en) ; `robots.txt` ouvert à tous les crawlers, y compris ceux
+  de recherche et d'entraînement AI (seule la recherche interne est exclue) ; `llms.txt` avec les faits du brief.
+- **Titles** : moins de 65 caractères et différents pour chaque page (dictionnaire `seo`) ; descriptions < 155.
+- **JSON-LD** : Organization complète (adresse, P.IVA, contacts, réseaux sociaux, fiches des apps) et WebSite avec
+  SearchAction (home), FAQPage partout où il y a des questions, Service, CollectionPage (villes), ProfessionalService
+  (profils, nom public, offres « da … »), BreadcrumbList. Jamais d'AggregateRating ni de Review sans avis réels.
 - **Carrousel** : défilement lent, pause visible, flèches, clavier, swipe, `prefers-reduced-motion`, positions
   sponsorisées signalées, aucune note inventée.
 - **Langues** : italien et anglais ; sélecteur dans le header ; hreflang et sitemap bilingues. Les anciennes adresses

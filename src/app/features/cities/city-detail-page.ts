@@ -6,7 +6,7 @@ import { GlamroDataSource } from '../../core/data/glamro-data-source';
 import { FormatPipe, LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
 import { City, ProfessionalSummary, ServiceCategory } from '../../core/models/glamro.models';
-import { cityPageLd } from '../../core/seo/json-ld';
+import { cityPageLd, faqLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { asyncState } from '../../core/utils/async-state';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
@@ -94,7 +94,9 @@ export class CityDetailPage {
         path: `/dove-siamo/${c.slug}`,
         noindex: !active || !c.indexable,
         breadcrumbs: this.crumbs(),
-        jsonLd: active ? [cityPageLd(c, this.cityServices(), this.pros().value, title, this.i18n.lang())] : [],
+        jsonLd: active
+          ? [cityPageLd(c, this.cityServices(), this.pros().value, title, this.i18n.lang()), ...(c.faqs.length ? [faqLd(c.faqs)] : [])]
+          : [],
       });
     });
   }

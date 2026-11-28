@@ -209,6 +209,16 @@ export const IT = {
     clientApp: 'App per clienti',
     proApp: 'App per professionisti',
   },
+  /** Titres complets des pages (moins de 65 caractères, chacun différent). */
+  seo: {
+    homeTitle: 'Beauty a domicilio: parrucchiere, estetista, make-up | GLAMRO',
+    servicesTitle: 'Servizi beauty a domicilio: capelli, make-up, estetica | GLAMRO',
+    howTitle: 'Come funziona GLAMRO: prenota il beauty a domicilio',
+    citiesTitle: 'Dove siamo: le città in cui GLAMRO è attivo | GLAMRO',
+    trustTitle: 'Sicurezza su GLAMRO: professionisti verificati e pagamenti in app',
+    supportTitle: 'Assistenza GLAMRO: WhatsApp, email e domande frequenti',
+    aboutTitle: 'Chi siamo: perché esiste GLAMRO, il beauty delivery italiano',
+  },
   notFound: {
     eyebrow: 'Errore 404',
     title: 'Pagina non trovata',
@@ -220,7 +230,7 @@ export const IT = {
   },
   home: {
     seoDescription:
-      'GLAMRO è il beauty delivery: prenota parrucchieri e barbieri, estetiste, make-up artist e massaggiatori verificati, a casa tua o dove preferisci, nelle città attive.',
+      'GLAMRO è beauty delivery: prenota parrucchieri, make-up artist, estetiste e massaggiatori verificati, a casa tua o dove preferisci.',
     coverage: 'Prenotabile oggi a',
     howTitle: 'Come funziona',
     howAll: 'Tutti i dettagli',
@@ -427,7 +437,7 @@ export const IT = {
       },
     ],
     seoDescription:
-      'Come prenotare un servizio beauty a domicilio con GLAMRO: ricerca, scelta del professionista, prenotazione, arrivo, pagamento e assistenza.',
+      'Cerchi nella tua zona, scegli il professionista, prenoti e paghi nell\'app. Ecco come funziona GLAMRO, passo per passo.',
   },
   trust: {
     title: 'Fiducia e sicurezza',
@@ -645,7 +655,7 @@ export const IT = {
     companyTitle: 'Dati societari',
     address: 'Sede legale',
     contacts: 'Contatti',
-    seoDescription: 'GLAMRO è la piattaforma di beauty delivery che connette clienti e professionisti beauty e wellness verificati in Italia.',
+    seoDescription: 'GLAMRO nasce per dare ai professionisti del beauty uno strumento digitale per lavorare in regola e ai clienti un modo semplice di prenotare.',
   },
   legal: {
     draft: 'Bozza in revisione legale: il testo definitivo sarà pubblicato dopo l\'approvazione del consulente legale.',

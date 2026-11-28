@@ -72,7 +72,8 @@ export class AboutPage {
   constructor() {
     const t = this.i18n.d();
     inject(SeoService).set({
-      title: t.about.title,
+      title: t.seo.aboutTitle,
+      rawTitle: true,
       description: t.about.seoDescription,
       path: '/chi-siamo',
       breadcrumbs: this.crumbs,

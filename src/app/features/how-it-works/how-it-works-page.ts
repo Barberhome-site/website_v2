@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
+import { faqLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { FaqList } from '../../shared/components/faq-list/faq-list';
@@ -84,10 +85,12 @@ export class HowItWorksPage {
   constructor() {
     const t = this.i18n.d();
     inject(SeoService).set({
-      title: t.nav.how,
+      title: t.seo.howTitle,
+      rawTitle: true,
       description: t.how.seoDescription,
       path: '/come-funziona',
       breadcrumbs: this.crumbs,
+      jsonLd: [faqLd(t.how.faqs)],
     });
   }
 }

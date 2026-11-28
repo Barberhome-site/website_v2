@@ -4,6 +4,7 @@ import { AnalyticsService } from '../../core/analytics/analytics.service';
 import { SITE } from '../../core/config/site.config';
 import { LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
+import { faqLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { FaqList } from '../../shared/components/faq-list/faq-list';
@@ -53,7 +54,13 @@ export class ForProfessionalsPage {
 
   constructor() {
     const t = this.i18n.d().pro;
-    inject(SeoService).set({ title: t.title, description: t.seoDescription, path: '/per-professionisti', breadcrumbs: this.crumbs });
+    inject(SeoService).set({
+      title: t.title,
+      description: t.seoDescription,
+      path: '/per-professionisti',
+      breadcrumbs: this.crumbs,
+      jsonLd: [faqLd(t.faqs)],
+    });
   }
 
   protected trackApply(placement: string): void {

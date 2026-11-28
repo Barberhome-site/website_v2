@@ -8,7 +8,7 @@ import { GlamroDataSource } from '../../core/data/glamro-data-source';
 import { FormatPipe, LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
 import { City, ProfessionalSummary, ServiceCategory } from '../../core/models/glamro.models';
-import { serviceLd } from '../../core/seo/json-ld';
+import { faqLd, serviceLd } from '../../core/seo/json-ld';
 import { SeoService } from '../../core/seo/seo.service';
 import { asyncState } from '../../core/utils/async-state';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
@@ -87,7 +87,10 @@ export class ServiceDetailPage {
         description,
         path: `/servizi/${s.slug}`,
         breadcrumbs: this.crumbs(),
-        jsonLd: [serviceLd(s, cities, this.i18n.format(t.title, { label: s.professionalLabel }), this.i18n.lang())],
+        jsonLd: [
+          serviceLd(s, cities, this.i18n.format(t.title, { label: s.professionalLabel }), this.i18n.lang()),
+          ...(s.faqs.length ? [faqLd(s.faqs)] : []),
+        ],
       });
     });
 

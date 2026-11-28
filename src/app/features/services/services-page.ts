@@ -58,6 +58,12 @@ export class ServicesPage {
 
   constructor() {
     const t = this.i18n.d().services;
-    inject(SeoService).set({ title: t.title, description: t.seoDescription, path: '/servizi', breadcrumbs: this.crumbs });
+    inject(SeoService).set({
+      title: this.i18n.d().seo.servicesTitle,
+      rawTitle: true,
+      description: t.seoDescription,
+      path: '/servizi',
+      breadcrumbs: this.crumbs,
+    });
   }
 }
