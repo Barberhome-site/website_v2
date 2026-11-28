@@ -1,14 +1,7 @@
 @let t = i18n.d().legal;
-<!-- Texte en gras (**…**) rendu avec <strong>, sans innerHTML. -->
-<ng-template #richText let-text>
-  @for (seg of text | rich; track $index) {
-    @if (seg.bold) {
-      <strong>{{ seg.text }}</strong>
-    } @else {
-      {{ seg.text }}
-    }
-  }
-</ng-template>
+<!-- Texte en gras (**…**) rendu avec <strong>, sans innerHTML. Sur une seule ligne : sinon les retours
+     à la ligne du template ajoutent des espaces autour du gras (« **nulla** . »). -->
+<ng-template #richText let-text>@for (seg of text | rich; track $index) {@if (seg.bold) {<strong>{{ seg.text }}</strong>} @else {<span>{{ seg.text }}</span>}}</ng-template>
 
 <ng-template #blocks let-list>
   @for (b of list; track $index) {
@@ -84,8 +77,8 @@
     </div>
   </div>
 
-  <div class="container section layout">
-    @if (d.sections.length > 2) {
+  <div class="container section layout" [class.layout--toc]="hasToc()">
+    @if (hasToc()) {
       <nav class="toc" [attr.aria-label]="t.toc">
         <ul lang="it">
           @for (s of d.sections; track s.id) {

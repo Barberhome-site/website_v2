@@ -21,11 +21,15 @@ import { LEGAL_DRAFT } from './legal-types';
   templateUrl: './legal-page.html',
   styles: `
     .notice { margin-top: 1.25rem; }
-    .layout { display: grid; gap: 2.5rem; }
+    /* minmax(0, 1fr) : la colonne ne s'élargit pas à la taille d'un tableau ; le tableau défile dans .table-scroll. */
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
     @media (min-width: 1024px) {
-      .layout { grid-template-columns: 240px minmax(0, 1fr); }
+      .layout--toc { grid-template-columns: 240px minmax(0, 1fr); }
       .toc { position: sticky; top: calc(var(--header-h) + 1.5rem); align-self: start; }
     }
+    /* Adresses email, PEC et URL longues : retour à la ligne au lieu de déborder sur mobile. */
+    .prose { overflow-wrap: break-word; }
+    td { min-width: 9rem; }
     .toc ul { list-style: none; padding-left: 0; margin: 0; font-size: .9375rem; }
     .toc a { display: inline-block; padding: .3rem 0; color: var(--c-muted); }
     .toc a:hover { color: var(--c-accent); }
@@ -45,6 +49,8 @@ export class LegalPage {
   protected readonly draft = LEGAL_DRAFT;
   protected readonly document = computed(() => (Object.hasOwn(LEGAL_DOCS, this.doc()) ? LEGAL_DOCS[this.doc()] : null));
   protected readonly isItalian = computed(() => this.i18n.lang() === 'it');
+  /** Sommaire seulement pour les documents longs (Cookie et Cancellazioni n'ont que deux sections). */
+  protected readonly hasToc = computed(() => (this.document()?.sections.length ?? 0) > 2);
 
   protected readonly crumbs = computed(() => {
     const d = this.document();
