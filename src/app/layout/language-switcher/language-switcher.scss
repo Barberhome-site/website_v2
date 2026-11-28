@@ -7,17 +7,23 @@
 }
 
 .ls__toggle {
+  // Même gabarit que les boutons « btn--outline btn--sm » du header.
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
   min-height: 44px;
-  padding: 0 0.75rem;
-  border: 1px solid var(--c-border);
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--c-border-strong);
   border-radius: var(--radius-pill);
   background: transparent;
-  font-size: 0.875rem;
+  color: var(--c-text);
+  font: inherit;
+  font-size: 0.88rem;
   font-weight: 700;
+  line-height: 1.2;
   letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease);
 
   app-icon {
     width: 1rem;
@@ -26,8 +32,7 @@
 
   &:hover,
   &[aria-expanded='true'] {
-    border-color: var(--c-accent);
-    color: var(--c-accent);
+    border-color: var(--c-text);
   }
 }
 

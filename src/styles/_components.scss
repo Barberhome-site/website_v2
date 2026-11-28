@@ -93,6 +93,13 @@
   }
 }
 
+// Bouton icône sans fond ni bordure (menu, fermeture).
+.btn--bare,
+.btn--bare:hover:not([disabled]) {
+  background: transparent;
+  border-color: transparent;
+}
+
 .link-arrow {
   display: inline-flex;
   align-items: center;

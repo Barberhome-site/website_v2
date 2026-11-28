@@ -20,6 +20,8 @@
   flex: none;
   align-items: center;
   min-height: 44px;
+  // Pousse le menu et les boutons à droite.
+  margin-right: auto;
 
   img {
     display: block;
@@ -31,7 +33,6 @@
 .header__nav {
   display: none;
   align-self: stretch;
-  margin-left: 0.5rem;
 
   ul {
     display: flex;
@@ -71,7 +72,6 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-left: auto;
 }
 
 .header__lang,
@@ -111,12 +111,9 @@
   }
 }
 
-// Bouton du menu (et de fermeture) : contour fin, coins arrondis, comme le mockup.
+// Bouton du menu (et de fermeture) : sans bordure (btn--bare).
 .header__burger {
   flex: none;
-  border-radius: 10px;
-  background: transparent;
-  border-color: var(--c-border-strong);
 }
 
 /* ------------------------------------------------------------------ */
@@ -153,10 +150,6 @@
   gap: 0.75rem;
   min-height: var(--header-h);
   border-bottom: 1px solid var(--c-border);
-}
-
-.mobile-menu__lang {
-  margin-left: auto;
 }
 
 .mobile-menu__nav {

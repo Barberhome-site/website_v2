@@ -1,6 +1,6 @@
 <dialog #dialog class="bd" aria-labelledby="bd-title" aria-describedby="bd-text" (close)="onDialogClose()">
   @if (booking.professional(); as pro) {
-    <button type="button" class="btn btn--icon bd__close" (click)="close()" [attr.aria-label]="i18n.d().common.close">
+    <button type="button" class="btn btn--icon btn--bare bd__close" (click)="close()" [attr.aria-label]="i18n.d().common.close">
       <app-icon name="close" />
     </button>
 

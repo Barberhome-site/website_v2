@@ -2,7 +2,7 @@
 <dialog #dialog class="cp" aria-labelledby="cp-title" (close)="onDialogClose()">
   <div class="cp__head">
     <h2 id="cp-title" class="cp__title">{{ t.prefsTitle }}</h2>
-    <button type="button" class="btn btn--icon" (click)="consent.closePreferences()" [attr.aria-label]="t.closeNoSave">
+    <button type="button" class="btn btn--icon btn--bare" (click)="consent.closePreferences()" [attr.aria-label]="t.closeNoSave">
       <app-icon name="close" />
     </button>
   </div>
