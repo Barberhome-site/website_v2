@@ -25,14 +25,12 @@ describe('route-slugs', () => {
   it('traduit les chemins vers chaque langue', () => {
     expect(localizePath('/servizi/capelli', 'it')).toBe('/servizi/capelli');
     expect(localizePath('/servizi/capelli', 'en')).toBe('/en/services/hair');
-    expect(localizePath('/servizi/capelli', 'fr')).toBe('/fr/services/coiffure');
-    expect(localizePath('/servizi/capelli', 'de')).toBe('/de/leistungen/haare');
-    expect(localizePath('/', 'es')).toBe('/es');
+    expect(localizePath('/', 'en')).toBe('/en');
   });
 
   it('ne traduit ni les villes ni les identifiants de professionnels', () => {
-    expect(localizePath('/dove-siamo/milano', 'fr')).toBe('/fr/ou-sommes-nous/milano');
-    expect(localizePath('/professionisti/giulia-m', 'de')).toBe('/de/profis/giulia-m');
+    expect(localizePath('/dove-siamo/milano', 'en')).toBe('/en/where-we-are/milano');
+    expect(localizePath('/professionisti/giulia-m', 'en')).toBe('/en/professionals/giulia-m');
   });
 
   it('fait l’aller-retour italien → langue → italien sans perte', () => {
@@ -56,10 +54,10 @@ describe('route-slugs', () => {
   });
 
   it('retrouve le slug canonique et construit les chemins de routes', () => {
-    expect(canonicalSlug('services', 'coiffure', 'fr')).toBe('capelli');
-    expect(canonicalSlug('legal', 'datenschutz', 'de')).toBe('privacy');
+    expect(canonicalSlug('services', 'hair', 'en')).toBe('capelli');
+    expect(canonicalSlug('legal', 'customer-terms', 'en')).toBe('condizioni-clienti');
     expect(canonicalSlug('services', 'inconnu', 'en')).toBe('inconnu');
-    expect(routePath('servizi/:slug', 'es')).toBe('servicios/:slug');
+    expect(routePath('servizi/:slug', 'en')).toBe('services/:slug');
     expect(routePath('per-professionisti/candidatura', 'en')).toBe('for-professionals/apply');
   });
 });

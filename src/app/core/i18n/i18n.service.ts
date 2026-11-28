@@ -8,9 +8,6 @@ import { DEFAULT_LANG, LANGS, LANG_INFO, Lang, localizePath, stripLang } from '.
 /** Chargement à la demande : seul le dictionnaire de la langue affichée est téléchargé. */
 const LOADERS: Record<Exclude<Lang, 'it'>, () => Promise<Dict>> = {
   en: () => import('../../i18n/en').then((m) => m.EN),
-  fr: () => import('../../i18n/fr').then((m) => m.FR),
-  es: () => import('../../i18n/es').then((m) => m.ES),
-  de: () => import('../../i18n/de').then((m) => m.DE),
 };
 
 export type FormatParams = Record<string, string | number | null | undefined>;

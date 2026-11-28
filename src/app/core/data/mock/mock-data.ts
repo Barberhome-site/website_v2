@@ -264,7 +264,7 @@ function translateDataset(data: MockDataset, lang: Exclude<Lang, 'it'>): MockDat
         .map((a) => area(a.trim()))
         .join(', '),
       areasServed: p.areasServed.map(area),
-      bio: fill(tx.bio, { name: p.displayName, label: lang === 'de' ? specialtyLabel : specialtyLabel.toLowerCase() }),
+      bio: fill(tx.bio, { name: p.displayName, label: specialtyLabel.toLowerCase() }),
       skills: p.specialties.map(serviceName),
       services: p.services.map((o) => ({ ...o, name: serviceName(o.serviceSlug) })),
       conditions: tx.proConditions,

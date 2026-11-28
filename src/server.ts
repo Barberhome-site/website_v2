@@ -8,6 +8,7 @@ import express from 'express';
 import { join } from 'node:path';
 import { DEFAULT_LANG, localizePath } from './app/core/i18n/i18n.config';
 import { readLangCookie } from './app/core/i18n/lang-cookie';
+import { legacyRedirect } from './server/legacy-redirects';
 import { buildSitemapXml } from './server/sitemap';
 import { handleSiteApi, siteApi } from './server/site-api';
 
@@ -31,28 +32,20 @@ const angularApp = new AngularNodeAppEngine();
  */
 const MEDIA_ORIGINS = process.env['SITE_MEDIA_ORIGINS'] || 'https://glamro.s3.eu-south-1.amazonaws.com';
 
-/**
- * Anciennes adresses : site précédent (dépôt midnight-welcome : routes et PDF de public/documents)
- * et liens de l'app mobile. Redirection permanente vers les nouvelles pages.
- */
-const LEGACY_LEGAL: Record<string, string> = {
-  '/index': '/',
-  '/privacy': '/legale/privacy',
-  '/cookie': '/legale/cookie-policy',
-  '/cookie-policy': '/legale/cookie-policy',
-  '/terms': '/legale/condizioni-clienti',
-  '/termini': '/legale/condizioni-clienti',
-  '/termini-professionisti': '/legale/condizioni-professionisti',
-  '/documents/Informativa_trattamento_dati.pdf': '/legale/privacy',
-  '/documents/Informativa_Cookie.pdf': '/legale/cookie-policy',
-  '/documents/Termini_Condizioni.pdf': '/legale/condizioni-clienti',
-  '/documents/Regolamento_piattaforma.pdf': '/legale/regolamento-piattaforma',
-  '/documents/Policy_Reclami.pdf': '/legale/policy-reclami',
-  '/documents/Disclaimer_igienico_sanitario.pdf': '/legale/disclaimer-igienico-sanitario',
-};
-for (const [from, to] of Object.entries(LEGACY_LEGAL)) {
-  app.get(from, (_req, res) => res.redirect(301, to));
-}
+/** Anciennes adresses (langues supprimées, site précédent, liens de l'app) : redirection 301. */
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    next();
+    return;
+  }
+  const target = legacyRedirect(req.path);
+  if (target && target !== req.path) {
+    const q = req.originalUrl.indexOf('?');
+    res.redirect(301, target + (q >= 0 ? req.originalUrl.slice(q) : ''));
+    return;
+  }
+  next();
+});
 
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');

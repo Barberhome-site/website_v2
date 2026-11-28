@@ -4,7 +4,7 @@
  * Les URL sont produites dans la langue de la page.
  */
 import { SITE } from '../config/site.config';
-import { LANG_INFO, Lang, localizePath } from '../i18n/i18n.config';
+import { LANGS, LANG_INFO, Lang, localizePath } from '../i18n/i18n.config';
 import { City, ProfessionalProfile, ProfessionalSummary, ServiceCategory } from '../models/glamro.models';
 import { absoluteUrl } from './url';
 
@@ -34,7 +34,7 @@ export function organizationLd(slogan: string): object {
         contactType: 'customer support',
         email: SITE.contact.email,
         telephone: SITE.contact.phone,
-        availableLanguage: ['it', 'en', 'fr', 'es', 'de'],
+        availableLanguage: [...LANGS],
       },
     ],
   };

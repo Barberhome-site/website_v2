@@ -4,7 +4,7 @@
  * Partout dans le code, les chemins sont écrits en italien (« chemin canonique ») :
  *   '/servizi/capelli', '/legale/privacy', '/per-professionisti/candidatura'…
  * Ils sont traduits au moment de produire un lien (pipe `lp`, SEO, sitemap) :
- *   en → /en/services/hair    fr → /fr/services/coiffure    de → /de/leistungen/haare
+ *   en → /en/services/hair
  *
  * Règles :
  *  - 1er segment : page (groupe `pages`) ;
@@ -59,102 +59,6 @@ export const ROUTE_SLUGS: Record<Exclude<Lang, 'it'>, RouteSlugTable> = {
       'disclaimer-igienico-sanitario': 'hygiene-and-safety',
     },
     pro: { candidatura: 'apply' },
-  },
-  fr: {
-    pages: {
-      servizi: 'services',
-      'dove-siamo': 'ou-sommes-nous',
-      disponibilita: 'disponibilite',
-      professionisti: 'professionnels',
-      'come-funziona': 'comment-ca-marche',
-      fiducia: 'confiance-et-securite',
-      assistenza: 'aide',
-      'per-professionisti': 'pour-les-professionnels',
-      'chi-siamo': 'qui-sommes-nous',
-      legale: 'mentions-legales',
-    },
-    services: {
-      capelli: 'coiffure',
-      barber: 'barbier',
-      'make-up': 'maquillage',
-      nails: 'ongles',
-      estetica: 'soins-esthetiques',
-      massaggi: 'massages',
-    },
-    legal: {
-      privacy: 'confidentialite',
-      'cookie-policy': 'politique-cookies',
-      'condizioni-clienti': 'conditions-clients',
-      'condizioni-professionisti': 'conditions-professionnels',
-      'regolamento-piattaforma': 'reglement-plateforme',
-      'policy-reclami': 'politique-reclamations',
-      'disclaimer-igienico-sanitario': 'hygiene-et-securite',
-    },
-    pro: { candidatura: 'candidature' },
-  },
-  es: {
-    pages: {
-      servizi: 'servicios',
-      'dove-siamo': 'donde-estamos',
-      disponibilita: 'disponibilidad',
-      professionisti: 'profesionales',
-      'come-funziona': 'como-funciona',
-      fiducia: 'confianza-y-seguridad',
-      assistenza: 'ayuda',
-      'per-professionisti': 'para-profesionales',
-      'chi-siamo': 'quienes-somos',
-      legale: 'legal',
-    },
-    services: {
-      capelli: 'peluqueria',
-      barber: 'barberia',
-      'make-up': 'maquillaje',
-      nails: 'unas',
-      estetica: 'estetica',
-      massaggi: 'masajes',
-    },
-    legal: {
-      privacy: 'privacidad',
-      'cookie-policy': 'politica-de-cookies',
-      'condizioni-clienti': 'condiciones-clientes',
-      'condizioni-professionisti': 'condiciones-profesionales',
-      'regolamento-piattaforma': 'reglamento-plataforma',
-      'policy-reclami': 'politica-reclamaciones',
-      'disclaimer-igienico-sanitario': 'higiene-y-seguridad',
-    },
-    pro: { candidatura: 'solicitud' },
-  },
-  de: {
-    pages: {
-      servizi: 'leistungen',
-      'dove-siamo': 'standorte',
-      disponibilita: 'verfuegbarkeit',
-      professionisti: 'profis',
-      'come-funziona': 'so-funktionierts',
-      fiducia: 'vertrauen-und-sicherheit',
-      assistenza: 'hilfe',
-      'per-professionisti': 'fuer-profis',
-      'chi-siamo': 'ueber-uns',
-      legale: 'rechtliches',
-    },
-    services: {
-      capelli: 'haare',
-      barber: 'barbier',
-      'make-up': 'make-up',
-      nails: 'naegel',
-      estetica: 'kosmetik',
-      massaggi: 'massagen',
-    },
-    legal: {
-      privacy: 'datenschutz',
-      'cookie-policy': 'cookie-richtlinie',
-      'condizioni-clienti': 'kundenbedingungen',
-      'condizioni-professionisti': 'bedingungen-fuer-profis',
-      'regolamento-piattaforma': 'plattformregeln',
-      'policy-reclami': 'beschwerderichtlinie',
-      'disclaimer-igienico-sanitario': 'hygiene-und-sicherheit',
-    },
-    pro: { candidatura: 'bewerbung' },
   },
 };
 

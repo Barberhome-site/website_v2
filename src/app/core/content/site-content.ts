@@ -211,30 +211,6 @@ const CITY_TEXTS: Record<Lang, CityTexts> = {
       { question: 'Are there travel costs in {city}?', answer: 'Any costs are shown on the professional\'s profile and in the summary before you confirm.' },
     ],
   },
-  fr: {
-    intro: 'À {city}, GLAMRO est actif avec des professionnels de la beauté vérifiés qui viennent chez vous, au bureau ou à l\'hôtel.',
-    inactiveIntro: 'GLAMRO n\'est pas encore réservable à {city}.',
-    faqs: [
-      { question: 'Quels quartiers de {city} GLAMRO couvre-t-il ?', answer: 'Chaque professionnel indique la zone qu\'il couvre. Pour une adresse précise, saisissez votre code postal dans la vérification des disponibilités.' },
-      { question: 'Y a-t-il des frais de déplacement à {city} ?', answer: 'Les éventuels frais sont indiqués sur le profil du professionnel et dans le récapitulatif avant la confirmation.' },
-    ],
-  },
-  es: {
-    intro: 'En {city}, GLAMRO está activo con profesionales de belleza verificados que van a tu casa, oficina u hotel.',
-    inactiveIntro: 'GLAMRO todavía no se puede reservar en {city}.',
-    faqs: [
-      { question: '¿Qué zonas de {city} cubre GLAMRO?', answer: 'Cada profesional indica la zona que cubre. Para una dirección concreta, introduce el código postal en la comprobación de disponibilidad.' },
-      { question: '¿Hay gastos de desplazamiento en {city}?', answer: 'Los posibles gastos se indican en el perfil del profesional y en el resumen antes de confirmar.' },
-    ],
-  },
-  de: {
-    intro: 'In {city} ist GLAMRO mit geprüften Beauty-Fachkräften aktiv, die zu dir nach Hause, ins Büro oder ins Hotel kommen.',
-    inactiveIntro: 'GLAMRO ist in {city} noch nicht buchbar.',
-    faqs: [
-      { question: 'Welche Gebiete von {city} deckt GLAMRO ab?', answer: 'Jede Fachkraft gibt das Gebiet an, das sie abdeckt. Für eine genaue Adresse gib deine Postleitzahl in der Verfügbarkeitsprüfung ein.' },
-      { question: 'Gibt es in {city} Anfahrtskosten?', answer: 'Eventuelle Kosten stehen im Profil der Fachkraft und in der Übersicht vor der Bestätigung.' },
-    ],
-  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -248,18 +224,12 @@ export const PROFILE_CONDITIONS: Record<Lang, string[]> = {
     'Eventuali costi di spostamento sono mostrati prima della conferma.',
   ],
   en: CONTENT_TEXTS.en.proConditions,
-  fr: CONTENT_TEXTS.fr.proConditions,
-  es: CONTENT_TEXTS.es.proConditions,
-  de: CONTENT_TEXTS.de.proConditions,
 };
 
 /** Libellés des types de professionnel de l'API (`professionalTypes`, codes du backend). */
 export const PROFESSIONAL_TYPE_LABELS: Record<Lang, Record<string, string>> = {
   it: { HAIR_BARBER: 'Parrucchiere / Barbiere', HAIRSTYLIST_EVENTS: 'Acconciatore', BEAUTICIAN: 'Estetista', MAKEUP_ARTIST: 'Make-up artist', MASSAGE: 'Massaggiatore' },
   en: { HAIR_BARBER: 'Hairdresser / Barber', HAIRSTYLIST_EVENTS: 'Hair stylist', BEAUTICIAN: 'Beautician', MAKEUP_ARTIST: 'Make-up artist', MASSAGE: 'Massage therapist' },
-  fr: { HAIR_BARBER: 'Coiffeur / Barbier', HAIRSTYLIST_EVENTS: 'Coiffeur événementiel', BEAUTICIAN: 'Esthéticienne', MAKEUP_ARTIST: 'Maquilleuse', MASSAGE: 'Masseur' },
-  es: { HAIR_BARBER: 'Peluquero / Barbero', HAIRSTYLIST_EVENTS: 'Estilista de peinados', BEAUTICIAN: 'Esteticista', MAKEUP_ARTIST: 'Maquilladora', MASSAGE: 'Masajista' },
-  de: { HAIR_BARBER: 'Friseur / Barbier', HAIRSTYLIST_EVENTS: 'Hairstylist', BEAUTICIAN: 'Kosmetikerin', MAKEUP_ARTIST: 'Make-up-Artist', MASSAGE: 'Masseur' },
 };
 
 /* ------------------------------------------------------------------ */

@@ -85,7 +85,7 @@ export class CityDetailPage {
           ? this.i18n.format(t.seoDescriptionActive, {
               city: c.name,
               services: this.cityServices()
-                .map((s) => (this.i18n.lang() === 'de' ? s.name : s.name.toLowerCase()))
+                .map((s) => s.name.toLowerCase())
                 .join(', '),
               // Sans liste de quartiers (données réelles), la ville elle-même.
               areas: c.areasServed.join(', ') || c.name,

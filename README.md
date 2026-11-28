@@ -1,7 +1,7 @@
 # GLAMRO — site web (Angular 22, SSR)
 
 Site vitrine et de réservation de GLAMRO, construit à partir du *Master Brief Sito Web GLAMRO 2026* (v. 2 octobre 2026).
-Interface en 5 langues (it, en, fr, es, de), code commenté en français.
+Interface en italien et en anglais (fr, es, de supprimés le 28/11/2026, redirigés en 301), code commenté en français.
 
 ## Démarrer
 
@@ -36,7 +36,7 @@ src/
 ├── styles/                      Système visuel du brief (couleurs, typo, boutons 48 px, focus, formulaires)
 └── app/
     ├── app.routes.ts            Arborescence (slugs italiens), une branche par langue
-    ├── i18n/                    Dictionnaires : it.ts (référence), en.ts, fr.ts, es.ts, de.ts
+    ├── i18n/                    Dictionnaires : it.ts (référence), en.ts
     ├── app.routes.server.ts     Rendu par route : Prerender (pages stables) / Server (données live)
     ├── core/
     │   ├── models/              Modèles du domaine (contrat que l'API devra remplir)
@@ -71,10 +71,11 @@ src/
 | `/legale/privacy`, `/cookie-policy`, `/condizioni-clienti`, `/condizioni-professionisti`, `/regolamento-piattaforma`, `/policy-reclami`, `/disclaimer-igienico-sanitario` | Documents légaux versionnés | Pré-rendu |
 | `/index`, `/privacy`, `/cookie`, `/cookie-policy`, `/terms`, `/termini`, `/termini-professionisti`, `/documents/*.pdf` | Anciennes adresses (site précédent `midnight-welcome`, app) | Redirection 301 vers la nouvelle page |
 
-## Langues (it, en, fr, es, de)
+## Langues (it, en)
 
-- **URL traduites** : l'italien reste à la racine (`/servizi/capelli`), les autres langues ont un préfixe et des
-  segments traduits : `/en/services/hair`, `/fr/services/coiffure`, `/es/servicios/peluqueria`, `/de/leistungen/haare`.
+- **URL traduites** : l'italien reste à la racine (`/servizi/capelli`), l'anglais a un préfixe et des segments
+  traduits : `/en/services/hair`. Les anciennes adresses en français, espagnol et allemand redirigent en 301 vers la
+  page italienne (`src/server/legacy-redirects.ts`, qui garde leurs tables de traduction).
   Sont traduits : les pages, les catégories de service, les documents légaux et `candidatura`. Ne sont pas traduits :
   les villes (noms propres) et les identifiants des professionnels.
 - **Une seule table** : `core/i18n/route-slugs.ts`. Dans le code, les chemins s'écrivent toujours en italien
@@ -84,7 +85,7 @@ src/
 - Chaque langue est rendue côté serveur avec son propre `<html lang>`, ses balises `hreflang`, son canonical et son
   entrée dans la sitemap.
 - **Textes** : `src/app/i18n/it.ts` est la référence. Son type est imposé aux autres fichiers : une clé oubliée ou
-  en trop dans `en.ts`, `fr.ts`, `es.ts` ou `de.ts` **ne compile pas**. Seul le dictionnaire de la langue affichée
+  en trop dans `en.ts` **ne compile pas**. Seul le dictionnaire de la langue affichée
   est téléchargé.
 - **Dans un composant** :
   ```ts
@@ -129,7 +130,7 @@ directement l'app sur le bon écran (ex. le profil d'un professionnel) quand ell
 - Retour sur `/` avec une autre langue enregistrée → page d'accueil de cette langue (302 dans `server.ts`,
   et côté navigateur en secours quand `/` est servie en statique). Les autres URL ne sont jamais redirigées.
 - Sans choix enregistré, si la langue du navigateur est disponible et différente de celle de la page :
-  bandeau « Ce site est disponible en français — Passer en français / Rester en italien » (`layout/lang-suggest`).
+  bandeau « This site is available in English — Switch to English / Stay in Italian » (`layout/lang-suggest`).
   Pas de redirection automatique (déconseillé par Google).
 
 ## Aperçu sur Vercel
@@ -212,7 +213,8 @@ bios viennent de l'API, en italien.
   Person (profils) ; `aggregateRating` seulement si des avis réels existent.
 - **Carrousel** : défilement lent, pause visible, flèches, clavier, swipe, `prefers-reduced-motion`, positions
   sponsorisées signalées, aucune note inventée.
-- **Langues** : italien, anglais, français, espagnol, allemand ; sélecteur dans le header ; hreflang et sitemap multilingue.
+- **Langues** : italien et anglais ; sélecteur dans le header ; hreflang et sitemap bilingues. Les anciennes adresses
+  `/fr/…`, `/es/…`, `/de/…` redirigent en 301 vers la page italienne (`src/server/legacy-redirects.ts`).
 - **Réservation** : bouton « Prenota » → popup vers l'App Store / Google Play selon l'appareil ; icône profil sur chaque carte.
 - **Carte** : clusters par ville (jamais de position précise), liste accessible équivalente toujours présente,
   bottom sheet sur mobile, états chargement / aucun résultat / erreur / zone non couverte / géolocalisation refusée.

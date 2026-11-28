@@ -59,7 +59,7 @@ describe('site-api', () => {
 
   it('calcule villes, services et carte à partir de l\'API', async () => {
     const api = createSiteApi(get);
-    const cities = await api.getCities('fr');
+    const cities = await api.getCities('en');
     const milan = cities.find((c) => c.slug === 'milano')!;
     expect(milan).toMatchObject({ status: 'active', availableCount: 2, name: 'Milan' });
     expect([...milan.activeServiceSlugs].sort()).toEqual(['barber', 'capelli', 'estetica', 'nails']);
