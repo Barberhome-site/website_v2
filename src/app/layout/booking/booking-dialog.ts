@@ -12,6 +12,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { AnalyticsService } from '../../core/analytics/analytics.service';
+import { DevicePlatform, detectPlatform } from '../../core/app-download/device-platform';
 import { BookingService } from '../../core/booking/booking.service';
 import { SITE } from '../../core/config/site.config';
 import { FormatPipe } from '../../core/i18n/i18n.pipes';
@@ -19,25 +20,7 @@ import { I18n } from '../../core/i18n/i18n.service';
 import { Avatar } from '../../shared/components/avatar/avatar';
 import { Icon } from '../../shared/components/icon/icon';
 
-type Platform = 'ios' | 'android' | 'desktop';
-
 const REDIRECT_SECONDS = 3;
-
-/** Détection de la plateforme pour proposer le bon store. */
-function detectPlatform(win: Window | null): Platform {
-  if (!win) {
-    return 'desktop';
-  }
-  const ua = win.navigator.userAgent || '';
-  const iPadOs = /Macintosh/.test(ua) && win.navigator.maxTouchPoints > 1;
-  if (/iPhone|iPad|iPod/i.test(ua) || iPadOs) {
-    return 'ios';
-  }
-  if (/Android/i.test(ua)) {
-    return 'android';
-  }
-  return 'desktop';
-}
 
 /**
  * Popup « Prenota ».
@@ -59,7 +42,7 @@ export class BookingDialog {
   private readonly doc = inject(DOCUMENT);
   private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
 
-  protected readonly platform = signal<Platform>('desktop');
+  protected readonly platform = signal<DevicePlatform>('desktop');
   protected readonly countdown = signal<number | null>(null);
   private timer: ReturnType<typeof setInterval> | null = null;
 

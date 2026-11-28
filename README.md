@@ -33,7 +33,7 @@ src/
 ├── server/sitemap.ts            Sitemap : uniquement URL canoniques publiées, lastmod réel
 ├── server/site-api/             /site-api : appels à l'API GLAMRO, cache, données minimales (voir plus bas)
 ├── environments/                siteUrl, useMockData, apiBaseUrl, balise Google (GTM-…)
-├── styles/                      Système visuel du brief (couleurs, typo, boutons 48 px, focus, formulaires)
+├── styles/                      Système visuel du brief (couleurs, typo, boutons pilule 48 px, focus, formulaires)
 └── app/
     ├── app.routes.ts            Arborescence (slugs italiens), une branche par langue
     ├── i18n/                    Dictionnaires : it.ts (référence), en.ts
@@ -140,6 +140,12 @@ contenu de cette popup : les composants appellent toujours `BookingService.open(
 Deux applications : `apps.client` (réservation) et `apps.pro` (professionnels) dans `site.config.ts`.
 Le composant `<app-store-buttons app="client|pro">` affiche les liens de l'une ou l'autre.
 
+Les boutons « Scarica l'app » (header, menu mobile) passent par `core/app-download/AppDownload` :
+sur iPhone/iPad ou Android, ils mènent directement au store de l'application clients ; sur ordinateur, ils font
+défiler jusqu'au premier élément `[data-app-download]` de la page (une section de la page si elle en a une, sinon
+les badges du footer) et lui donnent le focus. La détection d'appareil (`device-platform.ts`) est commune avec la
+popup de réservation.
+
 Pas de *universal links* pour l'instant : la popup envoie vers la fiche du store. Plus tard, pour ouvrir
 directement l'app sur le bon écran (ex. le profil d'un professionnel) quand elle est installée, il faudra :
 - publier `/.well-known/apple-app-site-association` (iOS) et `/.well-known/assetlinks.json` (Android)
@@ -245,6 +251,9 @@ bios viennent de l'API, en italien.
   sponsorisées signalées, aucune note inventée.
 - **Langues** : italien et anglais ; sélecteur dans le header ; hreflang et sitemap bilingues. Les anciennes adresses
   `/fr/…`, `/es/…`, `/de/…` redirigent en 301 vers la page italienne (`src/server/legacy-redirects.ts`).
+- **Header** : noir, menu Servizi · Come funziona · Sicurezza · Assistenza · Chi siamo (navigation dans
+  `site.config.ts`, colonne du footer dans `footerNav`), puis « Per professionisti » et « Scarica l'app ». « Dove siamo »
+  reste accessible par les boutons « Verifica la disponibilità » et le footer. Menu plein écran sous 1120 px.
 - **Réservation** : bouton « Prenota » → popup vers l'App Store / Google Play selon l'appareil ; icône profil sur chaque carte.
 - **Carte** : clusters par ville (jamais de position précise), liste accessible équivalente toujours présente,
   bottom sheet sur mobile, états chargement / aucun résultat / erreur / zone non couverte / géolocalisation refusée.

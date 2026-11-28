@@ -1,8 +1,9 @@
+// Header noir du mockup : fond quasi opaque, entrée active soulignée en jaune.
 .header {
   position: sticky;
   top: 0;
   z-index: 800;
-  background: rgba(10, 10, 10, 0.92);
+  background: rgba(10, 10, 10, 0.94);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--c-border);
 }
@@ -16,54 +17,89 @@
 
 .header__logo {
   display: inline-flex;
+  flex: none;
   align-items: center;
   min-height: 44px;
-  margin-right: auto;
 
   img {
-    height: 34px;
+    display: block;
+    height: 28px;
     width: auto;
   }
 }
 
 .header__nav {
   display: none;
+  align-self: stretch;
+  margin-left: 0.5rem;
 
   ul {
     display: flex;
-    gap: 0.25rem;
+    gap: clamp(1rem, 0.2rem + 1.2vw, 1.6rem);
+    height: 100%;
   }
 
   a {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
-    padding: 0 0.8rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
+    height: 100%;
+    // Le trait jaune touche le bas du header (il recouvre sa bordure).
+    margin-bottom: -1px;
+    border-bottom: 3px solid transparent;
+    padding-top: 3px;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
     text-decoration: none;
-    border-radius: var(--radius-s);
+    white-space: nowrap;
+    transition:
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+
+    &:hover {
+      color: var(--c-text);
+    }
 
     &.is-active {
-      color: var(--c-accent);
+      color: var(--c-text);
+      border-bottom-color: var(--c-accent);
     }
   }
 }
 
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
 .header__lang,
-.header__cta {
+.header__pro {
   display: none;
 }
 
-.header__cta {
-  font-size: 0.8125rem;
-  padding-inline: 1.1rem;
+.header__pro,
+.header__download {
+  white-space: nowrap;
 }
 
-@media (min-width: 1200px) {
-  .header__nav,
-  .header__cta {
+// Très petits écrans : logo + menu seulement (la barre du bas propose l'app).
+@media (max-width: 379px) {
+  .header__download {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .header__pro {
     display: inline-flex;
+  }
+}
+
+@media (min-width: 1120px) {
+  .header__nav {
+    display: block;
   }
 
   .header__lang {
@@ -73,6 +109,14 @@
   .header__burger {
     display: none !important;
   }
+}
+
+// Bouton du menu (et de fermeture) : contour fin, coins arrondis, comme le mockup.
+.header__burger {
+  flex: none;
+  border-radius: 10px;
+  background: transparent;
+  border-color: var(--c-border-strong);
 }
 
 /* ------------------------------------------------------------------ */
@@ -109,6 +153,10 @@
   gap: 0.75rem;
   min-height: var(--header-h);
   border-bottom: 1px solid var(--c-border);
+}
+
+.mobile-menu__lang {
+  margin-left: auto;
 }
 
 .mobile-menu__nav {

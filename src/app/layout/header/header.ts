@@ -5,13 +5,16 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  computed,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs';
+import { AnalyticsService } from '../../core/analytics/analytics.service';
+import { AppDownload } from '../../core/app-download/app-download.service';
 import { SITE } from '../../core/config/site.config';
 import { LocalizePathPipe } from '../../core/i18n/i18n.pipes';
 import { I18n } from '../../core/i18n/i18n.service';
@@ -19,10 +22,14 @@ import { Icon } from '../../shared/components/icon/icon';
 import { LanguageSwitcher } from '../language-switcher/language-switcher';
 
 /** Largeur à partir de laquelle la navigation complète s'affiche (pas de burger). */
-const DESKTOP_QUERY = '(min-width: 1200px)';
+const DESKTOP_QUERY = '(min-width: 1120px)';
 
 /**
- * Header compact : logo officiel, 5 entrées de navigation max, langue, CTA principale (brief §4-5).
+ * Header noir du mockup : logo, 5 entrées (Servizi, Come funziona, Sicurezza, Assistenza, Chi siamo),
+ * puis langue, « Per professionisti » et le bouton jaune « Scarica l'app ».
+ *
+ * « Scarica l'app » : store de l'application clients sur téléphone, défilement jusqu'aux badges sur
+ * ordinateur (voir AppDownload). Sans JavaScript, le lien mène aux badges du footer de la page.
  *
  * Sur mobile, le menu est un <dialog> natif plein écran :
  *  - il couvre toute la page (top layer, indépendant du header) ;
@@ -39,13 +46,30 @@ const DESKTOP_QUERY = '(min-width: 1200px)';
 export class Header {
   protected readonly site = SITE;
   protected readonly i18n = inject(I18n);
+  protected readonly download = inject(AppDownload);
   protected readonly menuOpen = signal(false);
+  private readonly analytics = inject(AnalyticsService);
   private readonly doc = inject(DOCUMENT);
+  private readonly router = inject(Router);
+
+  /** Adresse de la page courante, sans fragment. */
+  private readonly currentUrl = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((e) => e.urlAfterRedirects),
+    ),
+    { initialValue: this.router.url },
+  );
+
+  /** Store sur téléphone ; sinon ancre vers les badges de la page courante (`<base href="/">` oblige à garder le chemin). */
+  protected readonly downloadHref = computed(
+    () => this.download.storeUrl() ?? `${this.currentUrl().split('#')[0]}#scarica-app`,
+  );
   private readonly menu = viewChild<ElementRef<HTMLDialogElement>>('menu');
 
   constructor() {
-    inject(Router)
-      .events.pipe(
+    this.router.events
+      .pipe(
         filter((e) => e instanceof NavigationEnd),
         takeUntilDestroyed(),
       )
@@ -76,6 +100,17 @@ export class Header {
     if (dialog?.open) {
       dialog.close(); // déclenche (close) → onMenuClosed()
     }
+  }
+
+  protected trackPro(placement: string): void {
+    this.analytics.track('pro_cta_click', { placement });
+  }
+
+  /** Depuis le menu mobile : on ferme d'abord le menu, puis on suit le lien ou on fait défiler. */
+  protected onMenuDownload(event: MouseEvent): void {
+    this.closeMenu();
+    this.onMenuClosed(); // l'événement (close) arrive après : on libère le défilement tout de suite
+    this.download.handleClick(event, 'mobile_menu');
   }
 
   /** Appelé pour toute fermeture : bouton, Échap, navigation. */

@@ -7,7 +7,7 @@
           <img [src]="site.logo.src" alt="" [width]="site.logo.width" [height]="site.logo.height" loading="lazy" />
         </a>
         <p class="footer__tagline">{{ t.brand.tagline }}</p>
-        <div class="footer__apps">
+        <div id="scarica-app" class="footer__apps" data-app-download tabindex="-1">
           <p class="footer__apps-title">{{ t.footer.clientApp }}</p>
           <app-store-buttons app="client" size="small" placement="footer" />
           <p class="footer__apps-title">{{ t.footer.proApp }}</p>
@@ -18,10 +18,9 @@
       <nav class="footer__col" aria-labelledby="f-nav">
         <h2 id="f-nav" class="footer__title">GLAMRO</h2>
         <ul role="list">
-          @for (item of site.nav; track item.path) {
+          @for (item of site.footerNav; track item.path) {
             <li><a [routerLink]="item.path | lp: i18n.lang()">{{ t.nav[item.key] }}</a></li>
           }
-          <li><a [routerLink]="'/fiducia' | lp: i18n.lang()">{{ t.nav.trust }}</a></li>
         </ul>
       </nav>
 

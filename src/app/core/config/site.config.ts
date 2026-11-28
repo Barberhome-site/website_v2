@@ -6,12 +6,23 @@ export const SITE = {
   name: 'GLAMRO',
 
   /** Navigation principale (5 entrées max, brief §4). Libellés : dictionnaire `nav`. */
+  /** Menu du header (mockup) : « Dove siamo » reste accessible par les boutons « Verifica la disponibilità » et le footer. */
   nav: [
+    { key: 'services', path: '/servizi' },
+    { key: 'how', path: '/come-funziona' },
+    { key: 'safety', path: '/fiducia' },
+    { key: 'support', path: '/assistenza' },
+    { key: 'about', path: '/chi-siamo' },
+  ],
+
+  /** Colonne « GLAMRO » du footer. */
+  footerNav: [
     { key: 'services', path: '/servizi' },
     { key: 'how', path: '/come-funziona' },
     { key: 'where', path: '/dove-siamo' },
     { key: 'pros', path: '/per-professionisti' },
     { key: 'about', path: '/chi-siamo' },
+    { key: 'trust', path: '/fiducia' },
   ],
 
   /**
@@ -87,6 +98,6 @@ export const SITE = {
   defaultOgImage: '/brand/og-default.jpg',
 } as const;
 
-export type NavKey = (typeof SITE.nav)[number]['key'];
+export type NavKey = (typeof SITE.nav | typeof SITE.footerNav)[number]['key'];
 
 export type AppKind = keyof typeof SITE.apps;

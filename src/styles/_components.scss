@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------
-// Boutons : hauteur min. 48 px (brief §8)
+// Boutons du mockup : pilule, gras, sans majuscules ; hauteur min. 48 px (brief §8)
 // ------------------------------------------------------------------
 .btn {
   display: inline-flex;
@@ -8,11 +8,10 @@
   gap: 0.6rem;
   min-height: 48px;
   padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-s);
-  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid transparent;
   font-weight: 700;
   font-size: 0.95rem;
-  letter-spacing: 0.02em;
   line-height: 1.2;
   text-decoration: none;
   text-align: center;
@@ -20,7 +19,12 @@
   transition:
     background-color var(--dur) var(--ease),
     color var(--dur) var(--ease),
-    border-color var(--dur) var(--ease);
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+
+  &:hover:not([disabled]) {
+    transform: translateY(-1px);
+  }
 
   app-icon {
     width: 1.15em;
@@ -36,7 +40,6 @@
 .btn--primary {
   background: var(--c-accent);
   color: var(--c-on-accent);
-  text-transform: uppercase;
 
   &:hover:not([disabled]) {
     background: var(--c-accent-hover);
@@ -50,8 +53,8 @@
   color: var(--c-text);
 
   &:hover:not([disabled]) {
-    border-color: var(--c-accent);
-    color: var(--c-accent);
+    border-color: var(--c-text);
+    color: var(--c-text);
   }
 }
 
@@ -68,8 +71,8 @@
 
 .btn--sm {
   min-height: 44px;
-  padding: 0.5rem 1rem;
-  font-size: 0.8125rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.88rem;
 }
 
 .btn--block {

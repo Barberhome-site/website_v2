@@ -15,21 +15,29 @@
       </ul>
     </nav>
 
-    <!-- Sélecteur de langue : bureau uniquement (sur mobile, il est dans le menu) -->
-    <app-language-switcher class="header__lang" />
+    <div class="header__actions">
+      <!-- Sélecteur de langue : bureau uniquement (sur mobile, il est dans le menu) -->
+      <app-language-switcher class="header__lang" />
 
-    <a [routerLink]="'/disponibilita' | lp: i18n.lang()" class="btn btn--primary header__cta">{{ t.cta.primary }}</a>
+      <a [routerLink]="'/per-professionisti' | lp: i18n.lang()" class="btn btn--outline btn--sm header__pro" (click)="trackPro('header')">
+        {{ t.nav.pros }}
+      </a>
 
-    <button
-      type="button"
-      class="btn btn--icon header__burger"
-      [attr.aria-expanded]="menuOpen()"
-      aria-controls="mobile-menu"
-      [attr.aria-label]="t.nav.openMenu"
-      (click)="openMenu()"
-    >
-      <app-icon name="menu" />
-    </button>
+      <a [href]="downloadHref()" class="btn btn--primary btn--sm header__download" rel="noopener" (click)="download.handleClick($event, 'header')">
+        {{ t.nav.download }}
+      </a>
+
+      <button
+        type="button"
+        class="btn btn--icon header__burger"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-menu"
+        [attr.aria-label]="t.nav.openMenu"
+        (click)="openMenu()"
+      >
+        <app-icon name="menu" />
+      </button>
+    </div>
   </div>
 </header>
 
@@ -40,7 +48,7 @@
       <img [src]="site.logo.src" alt="" [width]="site.logo.width" [height]="site.logo.height" />
     </a>
     <app-language-switcher class="mobile-menu__lang" />
-    <button type="button" class="btn btn--icon" [attr.aria-label]="t.nav.closeMenu" (click)="closeMenu()">
+    <button type="button" class="btn btn--icon header__burger" [attr.aria-label]="t.nav.closeMenu" (click)="closeMenu()">
       <app-icon name="close" />
     </button>
   </div>
@@ -59,7 +67,7 @@
   </nav>
 
   <div class="mobile-menu__ctas">
-    <a [routerLink]="'/disponibilita' | lp: i18n.lang()" class="btn btn--primary btn--block">{{ t.cta.primary }}</a>
-    <a [routerLink]="'/per-professionisti' | lp: i18n.lang()" class="btn btn--outline btn--block">{{ t.cta.pro }}</a>
+    <a [href]="downloadHref()" class="btn btn--primary btn--block" rel="noopener" (click)="onMenuDownload($event)">{{ t.nav.download }}</a>
+    <a [routerLink]="'/per-professionisti' | lp: i18n.lang()" class="btn btn--outline btn--block" (click)="trackPro('mobile_menu')">{{ t.nav.pros }}</a>
   </div>
 </dialog>
