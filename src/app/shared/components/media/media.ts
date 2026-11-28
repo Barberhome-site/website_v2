@@ -12,7 +12,7 @@ import { Icon, IconName } from '../icon/icon';
   imports: [NgOptimizedImage, Icon],
   template: `
     @if (src(); as source) {
-      <img [ngSrc]="source" [alt]="alt()" fill [priority]="priority()" [sizes]="sizes()" />
+      <img [ngSrc]="source" [alt]="alt()" fill [priority]="priority()" [sizes]="sizes()" [style.object-position]="position()" />
     } @else {
       <div class="ph" [class.ph--corner]="placeholderAlign() === 'corner'" [attr.role]="alt() ? 'img' : null" [attr.aria-label]="alt() || null"
            [attr.aria-hidden]="alt() ? null : 'true'">
@@ -45,6 +45,8 @@ export class Media {
   readonly src = input<string | null | undefined>(null);
   readonly alt = input('');
   readonly priority = input(false);
+  /** Point de cadrage de la photo (object-position) : le sujet reste dans le recadrage. */
+  readonly position = input<string | null | undefined>(null);
   /**
    * Largeur affichée, pour le srcset automatique de NgOptimizedImage : unités responsives uniquement
    * (« 50vw », « (min-width: 960px) 40vw, 100vw »). Une valeur en px lève l'erreur NG02952.

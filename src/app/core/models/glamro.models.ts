@@ -14,6 +14,8 @@
 export interface ImageRef {
   src: string;
   alt: string;
+  /** Point de cadrage (object-position), pour garder le sujet dans le recadrage : '66% 40%'. */
+  position?: string;
   width?: number;
   height?: number;
 }

@@ -3,8 +3,8 @@
 
 <!-- 2. HERO : promesse, positionnement, delivery, couverture vérifiable, CTA primaire -->
 <section class="hero" aria-labelledby="hero-title">
-  <app-media class="hero__bg" [src]="site.images.hero" [priority]="true" icon="bike" placeholderAlign="corner"
-             [placeholderLabel]="t.placeholders.hero" />
+  <app-media class="hero__bg" [src]="site.images.hero.src" [position]="site.images.hero.position" [alt]="t.photos.hero"
+             [priority]="true" icon="bike" placeholderAlign="corner" />
   <div class="hero__shade" aria-hidden="true"></div>
 
   <div class="container hero__inner">
@@ -126,7 +126,8 @@
       @for (moment of t.home.story; track $index; let i = $index) {
         <li>
           <figure>
-            <app-media ratio="4 / 5" [src]="site.images.storytelling[i]" icon="bag" [placeholderLabel]="t.placeholders.story[i]"
+            <app-media ratio="4 / 5" [src]="site.images.storytelling[i].src" [position]="site.images.storytelling[i].position"
+                       [alt]="t.photos.story[i]" icon="bag"
                        sizes="(min-width: 1100px) 25vw, (min-width: 640px) 45vw, 90vw" />
             <figcaption>
               <h3>{{ i + 1 }}. {{ moment.title }}</h3>
@@ -157,7 +158,8 @@
 <section class="section" aria-labelledby="pro-title">
   <div class="container">
     <div class="pro">
-      <app-media class="pro__media" [src]="site.images.proEntry" icon="user" [placeholderLabel]="t.placeholders.pro"
+      <app-media class="pro__media" [src]="site.images.proHome.src" [position]="site.images.proHome.position"
+                 [alt]="t.photos.proHome" icon="user"
                  sizes="(min-width: 960px) 35vw, 100vw" />
       <div class="pro__body">
         <p class="eyebrow">{{ t.home.proEyebrow }}</p>

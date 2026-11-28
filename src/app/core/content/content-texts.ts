@@ -16,6 +16,8 @@ export interface ServiceText {
   includes: string[];
   conditions: string[];
   faqs: Faq[];
+  /** Texte alternatif de la photo du service. */
+  imageAlt: string;
 }
 
 export interface ContentTexts {
@@ -49,6 +51,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         audience: 'For anyone who wants a cut, blow-dry, colour or beard care without travelling, including before an event or on busy days.',
         includes: ['Women\'s and men\'s cuts', 'Blow-dry and styling', 'Colour and root touch-ups', 'Beard and finishing'],
         conditions: ['You need a space with a chair and a power socket nearby.'],
+        imageAlt: 'A GLAMRO hairdresser blow-dries a client\'s hair in her living room',
         faqs: [
           { question: 'Do I need products or tools at home?', answer: 'No. The professional brings products and tools. You only need a space with a chair and a power socket.' },
           { question: 'Can I book a colour at home?', answer: 'Yes, if the professional offers it on their profile. Duration and price are shown before you confirm.' },
@@ -62,6 +65,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         audience: 'For events, ceremonies, photo shoots or simply a polished look before going out.',
         includes: ['Day and evening make-up', 'Ceremony make-up', 'Make-up for photo and video', 'Make-up trial'],
         conditions: [],
+        imageAlt: 'A make-up artist does a client\'s make-up at home, next to her make-up case',
         faqs: [{ question: 'Can I book for several people?', answer: 'It depends on the professional\'s availability. Enter the number of people when booking in the app.' }],
       },
       estetica: {
@@ -72,6 +76,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         audience: 'For anyone who wants beauty treatments without travelling, with products and table brought by the professional when needed.',
         includes: ['Facial cleansing', 'Body treatments', 'Lymphatic drainage', 'Hair removal', 'Lash and brow lamination'],
         conditions: [],
+        imageAlt: 'A GLAMRO beautician with a client at the table at home',
         faqs: [{ question: 'Does the professional bring a treatment table?', answer: 'If the treatment requires it, this is stated in the service details on the profile.' }],
       },
       massaggi: {
@@ -82,6 +87,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         audience: 'For anyone who wants a wellness massage at home or in a hotel, whenever suits them.',
         includes: ['Relaxing massage', 'Deep-tissue massage'],
         conditions: ['The massages offered are wellness treatments, not medical services.'],
+        imageAlt: 'A massage therapist gives a back massage on a table in a living room',
         faqs: [{ question: 'Do I need a massage table at home?', answer: 'No, if the professional states on their profile that they bring one. You only need a free space of about 2 × 3 metres.' }],
       },
     },

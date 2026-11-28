@@ -22,7 +22,7 @@ import { Media } from '../../shared/components/media/media';
     </div>
 
     <div class="container section">
-      <app-media ratio="16 / 7" [src]="site.images.about" icon="bike" [placeholderLabel]="i18n.d().placeholders.about" />
+      <app-media ratio="21 / 9" [src]="site.images.about.src" [position]="site.images.about.position" [alt]="i18n.d().photos.about" icon="bike" />
     </div>
 
     <div class="container section section--tight prose">

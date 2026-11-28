@@ -259,7 +259,8 @@ bios viennent de l'API, en italien.
 
 Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` dans l'interface.
 
-- [ ] **Photos** (hero rider, storytelling ×4, bloc pro, chi siamo) → `site.config.ts`, voir `public/images/LEGGIMI.md`
+- [ ] **Photos** : les 12 photos sont en place (`public/images/LEGGIMI.md`) ; remplacer 02, 03, 04, 07 et 12 par des
+      versions sans marques d'autres sociétés
 - [x] **Données société**, e-mails, URL des stores et réseaux sociaux → `site.config.ts`
 - [ ] **Textes légaux v3** : approbation de l'avocat (puis `LEGAL_DRAFT = false`) ; la Cookie Policy v3 cite Meta Pixel
       et Google Ads, que le site n'utilise pas : à aligner après une vraie analyse des cookies

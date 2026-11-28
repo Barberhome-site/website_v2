@@ -54,12 +54,15 @@ export const EN: Dict = {
     googlePlayBadge: 'Get it on Google Play',
   },
   placeholders: {
-    hero: 'Photo: GLAMRO professional on a scooter',
-    story: ['Photo: getting ready', 'Photo: on the way to you', 'Photo: at your place', 'Photo: enjoy your moment'],
-    pro: 'Photo: GLAMRO professional',
-    proWork: 'Photo: GLAMRO professional at work',
-    about: 'Photo: the GLAMRO team or campaign',
     service: 'Photo: {label} at work',
+  },
+  /** Textes alternatifs des photos (décrire ce que l'on voit ; jamais « rider » ni « kit »). */
+  photos: {
+    hero: 'GLAMRO professional riding a scooter through the city with the GLAMRO backpack',
+    story: ['A professional packs her equipment into the GLAMRO bag', 'A GLAMRO professional arrives by scooter in front of a building', 'A client opens her front door to the GLAMRO professional', 'A client relaxes on the sofa while the professional styles her hair'],
+    proHome: 'GLAMRO professional with the GLAMRO backpack in a courtyard',
+    proPage: 'A professional lays out tools and brushes next to the GLAMRO backpack',
+    about: 'GLAMRO professional on a scooter in a square at sunset',
   },
   card: {
     verified: 'Verified profile',

@@ -57,12 +57,15 @@ export const IT = {
     googlePlayBadge: 'Disponibile su Google Play',
   },
   placeholders: {
-    hero: 'Foto: professionista GLAMRO in scooter',
-    story: ['Foto: si prepara', 'Foto: arriva da te', 'Foto: a casa tua', 'Foto: vivi il tuo momento'],
-    pro: 'Foto: professionista GLAMRO',
-    proWork: 'Foto: professionista GLAMRO al lavoro',
-    about: 'Foto: il team o la campagna GLAMRO',
     service: 'Foto: {label} al lavoro',
+  },
+  /** Textes alternatifs des photos (décrire ce que l'on voit ; jamais « rider » ni « kit »). */
+  photos: {
+    hero: 'Professionista GLAMRO in scooter per le vie della città, con lo zaino GLAMRO',
+    story: ['Una professionista prepara la sua attrezzatura nella borsa GLAMRO', 'Una professionista GLAMRO arriva in scooter davanti a un palazzo', 'Una cliente apre la porta di casa alla professionista GLAMRO', 'Una cliente si rilassa sul divano mentre la professionista le sistema i capelli'],
+    proHome: 'Professionista GLAMRO con lo zaino GLAMRO in un cortile',
+    proPage: 'Una professionista prepara strumenti e pennelli accanto allo zaino GLAMRO',
+    about: 'Professionista GLAMRO in scooter in una piazza al tramonto',
   },
   card: {
     verified: 'Profilo verificato',

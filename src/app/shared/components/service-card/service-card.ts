@@ -11,7 +11,7 @@ import { Media } from '../media/media';
   imports: [RouterLink, Media, LocalizePathPipe, FormatPipe],
   template: `
     @let s = service();
-    <app-media ratio="4 / 3" [src]="s.image?.src" [alt]="s.image?.alt ?? ''" icon="scissors"
+    <app-media ratio="4 / 3" [src]="s.image?.src" [alt]="s.image?.alt ?? ''" [position]="s.image?.position" icon="scissors"
                [placeholderLabel]="i18n.d().placeholders.service | fmt: { label: s.professionalLabel }"
                sizes="(min-width: 1100px) 25vw, (min-width: 640px) 45vw, 90vw" />
     <div class="sc__body">

@@ -61,12 +61,22 @@ export const SITE = {
     },
   },
 
-  /** Images du site (voir public/images/LEGGIMI.md). `null` = emplacement neutre. */
+    /**
+   * Photos choisies par Andrea (brief du 28/11/2026), en WebP dans public/images.
+   * `position` = point de cadrage (object-position). Textes alternatifs : dictionnaire `photos`.
+   * Les photos 02, 03, 04, 07 et 12 montrent des marques d'autres sociétés : à remplacer avant la mise en ligne.
+   */
   images: {
-    hero: null as string | null,
-    storytelling: [null, null, null, null] as (string | null)[],
-    proEntry: null as string | null,
-    about: null as string | null,
+    hero: { src: '/images/home-apertura.webp', position: '72% center' },
+    storytelling: [
+      { src: '/images/storia-1-si-prepara.webp', position: '50% 50%' },
+      { src: '/images/storia-2-arriva-da-te.webp', position: '50% 60%' },
+      { src: '/images/storia-3-a-casa-tua.webp', position: '50% 50%' },
+      { src: '/images/storia-4-vivi-il-tuo-momento.webp', position: '50% 50%' },
+    ],
+    proHome: { src: '/images/home-professionisti.webp', position: '50% 22%' },
+    proPage: { src: '/images/per-professionisti.webp', position: '50% 40%' },
+    about: { src: '/images/chi-siamo.webp', position: '50% 60%' },
   },
 
   logo: {

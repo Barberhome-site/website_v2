@@ -33,7 +33,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per chi vuole taglio, piega, colore o la cura della barba senza spostarsi, anche prima di un evento o in giornate piene.',
     includes: ['Taglio donna e uomo', 'Piega e styling', 'Colore e ritocco radici', 'Barba e rifinitura'],
     conditions: ['Serve uno spazio con una sedia e una presa elettrica vicina.'],
-    image: null,
+    image: { src: '/images/servizi/capelli.webp', alt: 'Una parrucchiera GLAMRO asciuga i capelli di una cliente nel suo salotto', position: '66% 40%' },
     faqs: [
       {
         question: 'Devo avere prodotti o strumenti a casa?',
@@ -56,7 +56,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per eventi, cerimonie, servizi fotografici o semplicemente per un trucco curato prima di uscire.',
     includes: ['Trucco giorno e sera', 'Trucco per cerimonie', 'Trucco per foto e video', 'Prova trucco'],
     conditions: [],
-    image: null,
+    image: { src: '/images/servizi/make-up.webp', alt: 'Una make-up artist trucca una cliente a casa, accanto alla valigetta dei trucchi', position: '34% 40%' },
     faqs: [
       {
         question: 'Si può prenotare per più persone?',
@@ -75,7 +75,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per chi vuole trattamenti estetici senza spostarsi, con prodotti e lettino portati dal professionista quando previsto.',
     includes: ['Pulizia del viso', 'Trattamenti corpo', 'Linfodrenante', 'Depilazione', 'Laminazione ciglia e sopracciglia'],
     conditions: [],
-    image: null,
+    image: { src: '/images/servizi/estetica.webp', alt: 'Un\'estetista GLAMRO con una cliente al tavolo di casa', position: '56% 45%' },
     faqs: [
       {
         question: 'Il professionista porta il lettino?',
@@ -94,7 +94,7 @@ export const SERVICES_IT: ServiceContent[] = [
     audience: 'Per chi vuole un massaggio benessere a casa o in hotel, nei tempi che preferisce.',
     includes: ['Massaggio rilassante', 'Massaggio decontratturante'],
     conditions: ['I massaggi offerti sono trattamenti di benessere, non prestazioni sanitarie.'],
-    image: null,
+    image: { src: '/images/servizi/massaggi.webp', alt: 'Una massaggiatrice esegue un massaggio alla schiena su un lettino in soggiorno', position: '52% 45%' },
     faqs: [
       {
         question: 'Serve avere un lettino a casa?',
@@ -194,7 +194,13 @@ const fill = (template: string, params: Record<string, string>) =>
 
 /** Catégories traduites dans la langue demandée. */
 export function servicesContent(lang: Lang): ServiceContent[] {
-  return lang === 'it' ? SERVICES_IT : SERVICES_IT.map((s) => ({ ...s, ...CONTENT_TEXTS[lang].services[s.slug] }));
+  if (lang === 'it') {
+    return SERVICES_IT;
+  }
+  return SERVICES_IT.map((s) => {
+    const { imageAlt, ...text } = CONTENT_TEXTS[lang].services[s.slug];
+    return { ...s, ...text, image: s.image ? { ...s.image, alt: imageAlt } : s.image };
+  });
 }
 
 export function cityName(slug: string, lang: Lang): string {
