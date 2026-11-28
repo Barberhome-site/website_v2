@@ -9,7 +9,7 @@ import { Icon, IconName } from '../../shared/components/icon/icon';
 import { StoreButtons } from '../../shared/components/store-buttons/store-buttons';
 
 /** Ancres et icônes (identiques dans toutes les langues), textes dans le dictionnaire `how.stages`. */
-const STAGE_IDS = ['ricerca', 'scelta', 'prenotazione', 'arrivo', 'pagamento', 'cancellazione', 'assistenza'];
+const STAGE_IDS = ['ricerca', 'scelta', 'prenotazione', 'arrivo', 'pagamento', 'assistenza'];
 const STAGE_ICONS: IconName[] = ['search', 'user', 'calendar', 'bike', 'card', 'clock', 'headset'];
 
 @Component({

@@ -33,19 +33,17 @@
           <p>{{ s.audience }}</p>
         </section>
 
-        <section aria-labelledby="cond-title">
-          <h2 id="cond-title">{{ t.conditions }}</h2>
-          <ul class="check-list">
-            @for (item of s.conditions; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
-          <p class="small muted">
-            {{ t.cancelNote }}
-            <a [routerLink]="'/termini' | lp: lang">{{ t.customerTerms }}</a>.
-            <a [routerLink]="'/assistenza' | lp: lang" fragment="cancellazioni">{{ t.cancelHow }}</a>
-          </p>
-        </section>
+        <!-- Seulement les conditions propres au service (chaise et prise, massages de bien-être). -->
+        @if (s.conditions.length) {
+          <section aria-labelledby="cond-title">
+            <h2 id="cond-title">{{ t.conditions }}</h2>
+            <ul class="check-list">
+              @for (item of s.conditions; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </section>
+        }
       </div>
 
       <aside class="card" aria-labelledby="cities-title">

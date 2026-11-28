@@ -37,14 +37,6 @@ export interface ContentTexts {
 
 type Translated = Exclude<Lang, 'it'>;
 
-const common = {
-  en: [
-    'Price, duration and cancellation terms are shown on the profile before you confirm.',
-    'The professional brings the products and tools needed for the service.',
-    'Payment is made in the GLAMRO app with secure payment methods.',
-  ],
-};
-
 export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
   /* ================================================================ EN */
   en: {
@@ -56,7 +48,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         intro: 'With GLAMRO you book a verified hairdresser or barber who comes to your home, office or hotel, in the cities where the service is active. Choose the service, date and professional based on real availability.',
         audience: 'For anyone who wants a cut, blow-dry, colour or beard care without travelling, including before an event or on busy days.',
         includes: ['Women\'s and men\'s cuts', 'Blow-dry and styling', 'Colour and root touch-ups', 'Beard and finishing'],
-        conditions: ['You need a space with a chair and a power socket nearby.', ...common.en],
+        conditions: ['You need a space with a chair and a power socket nearby.'],
         faqs: [
           { question: 'Do I need products or tools at home?', answer: 'No. The professional brings products and tools. You only need a space with a chair and a power socket.' },
           { question: 'Can I book a colour at home?', answer: 'Yes, if the professional offers it on their profile. Duration and price are shown before you confirm.' },
@@ -69,7 +61,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         intro: 'With GLAMRO you book a verified make-up artist who comes to where you get ready: home, hotel or event venue, in the cities where the service is active.',
         audience: 'For events, ceremonies, photo shoots or simply a polished look before going out.',
         includes: ['Day and evening make-up', 'Ceremony make-up', 'Make-up for photo and video', 'Make-up trial'],
-        conditions: common.en,
+        conditions: [],
         faqs: [{ question: 'Can I book for several people?', answer: 'It depends on the professional\'s availability. Enter the number of people when booking in the app.' }],
       },
       estetica: {
@@ -79,7 +71,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         intro: 'With GLAMRO you book a verified beautician for face, body and hair removal treatments right at home, in the cities where the service is active.',
         audience: 'For anyone who wants beauty treatments without travelling, with products and table brought by the professional when needed.',
         includes: ['Facial cleansing', 'Body treatments', 'Lymphatic drainage', 'Hair removal', 'Lash and brow lamination'],
-        conditions: common.en,
+        conditions: [],
         faqs: [{ question: 'Does the professional bring a treatment table?', answer: 'If the treatment requires it, this is stated in the service details on the profile.' }],
       },
       massaggi: {
@@ -89,7 +81,7 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
         intro: 'GLAMRO connects you with verified massage therapists for wellness massages at home, in the active cities. These are not medical treatments.',
         audience: 'For anyone who wants a wellness massage at home or in a hotel, whenever suits them.',
         includes: ['Relaxing massage', 'Deep-tissue massage'],
-        conditions: ['The massages offered are wellness treatments, not medical services.', ...common.en],
+        conditions: ['The massages offered are wellness treatments, not medical services.'],
         faqs: [{ question: 'Do I need a massage table at home?', answer: 'No, if the professional states on their profile that they bring one. You only need a free space of about 2 × 3 metres.' }],
       },
     },
@@ -109,11 +101,8 @@ export const CONTENT_TEXTS: Record<Translated, ContentTexts> = {
       'Make-up artist': 'Make-up artist',
       Massaggiatore: 'Massage therapist',
     },
-    bio: '{name} works as a {label} and travels to the listed areas with their own work kit. (Sample text.)',
-    proConditions: [
-      'Cancellations and changes follow the Customer Terms and the rules shown when booking.',
-      'Any travel costs are shown before you confirm.',
-    ],
+    bio: '{name} works as a {label} and travels to the listed areas with their own products and tools. (Sample text.)',
+    proConditions: ['The price you see is the price you pay.', 'You book and pay in the GLAMRO app, only once the service is done.'],
     languages: ['Italian'],
   },
 

@@ -28,8 +28,8 @@ const cityFaqs = (name: string): Faq[] => [
     answer: `Le zone coperte sono elencate in questa pagina e aggiornate in base ai professionisti attivi. Per un indirizzo preciso, inserisci il CAP nella verifica disponibilità.`,
   },
   {
-    question: `Ci sono costi di spostamento a ${name}?`,
-    answer: 'Eventuali costi sono indicati nel profilo del professionista e nel riepilogo prima della conferma.',
+    question: `Ci sono costi di trasferta a ${name}?`,
+    answer: 'No. Il prezzo che vedi nel profilo del professionista è quello che paghi.',
   },
 ];
 
@@ -184,7 +184,7 @@ export function buildMockDataset(today: string = todayIso(), lang: Lang = 'it'):
     nextAvailability: addDaysIso(today, availableInDays),
     profileUrl: `/professionisti/${p.professionalId}`,
     profileImage: null,
-    bio: `${p.displayName} lavora come ${p.specialtyLabel.toLowerCase()} e si sposta nelle zone indicate con il proprio kit di lavoro. (Testo di esempio.)`,
+    bio: `${p.displayName} lavora come ${p.specialtyLabel.toLowerCase()} e si sposta nelle zone indicate con prodotti e strumenti. (Testo di esempio.)`,
     skills: p.specialties.map((s) => serviceName.get(s) ?? s),
     services: p.specialties.map((s) => ({
       serviceSlug: s,
@@ -195,10 +195,7 @@ export function buildMockDataset(today: string = todayIso(), lang: Lang = 'it'):
     })),
     areasServed: p.serviceArea.split(',').map((a) => a.trim()),
     verification: { identity: true, qualifications: true, verifiedSince: '2026-09-15' },
-    conditions: [
-      'Cancellazione e modifiche secondo le Condizioni Clienti e le regole indicate al momento della prenotazione.',
-      'Eventuali costi di spostamento sono mostrati prima della conferma.',
-    ],
+    conditions: ['Il prezzo che vedi è quello che paghi.', 'Prenoti e paghi nell\'app GLAMRO, solo a servizio svolto.'],
     languages: ['Italiano'],
     reviewSummary: null,
     reviews: [],

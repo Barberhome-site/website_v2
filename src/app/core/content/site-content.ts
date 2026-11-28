@@ -21,12 +21,6 @@ const UPDATED = '2026-11-02';
 /** Contenu éditorial d'une catégorie (sans les villes actives, calculées à partir des données). */
 export type ServiceContent = Omit<ServiceCategory, 'activeCitySlugs'>;
 
-const COMMON_CONDITIONS = [
-  'Prezzo, durata e condizioni di cancellazione sono indicati nel profilo prima della conferma.',
-  'Il professionista porta prodotti e strumenti necessari al servizio.',
-  'Il pagamento avviene nell\'app GLAMRO con metodi di pagamento protetti.',
-];
-
 /** Catégories du site, en italien (traductions : content-texts.ts). Brief : pas d'ongles, la barbe est dans Capelli. */
 export const SERVICES_IT: ServiceContent[] = [
   {
@@ -38,7 +32,7 @@ export const SERVICES_IT: ServiceContent[] = [
       'Con GLAMRO prenoti un parrucchiere o un barbiere verificato che viene a casa tua, in ufficio o in hotel, nelle città in cui il servizio è attivo. Scegli servizio, data e professionista in base alla disponibilità reale.',
     audience: 'Per chi vuole taglio, piega, colore o la cura della barba senza spostarsi, anche prima di un evento o in giornate piene.',
     includes: ['Taglio donna e uomo', 'Piega e styling', 'Colore e ritocco radici', 'Barba e rifinitura'],
-    conditions: ['Serve uno spazio con una sedia e una presa elettrica vicina.', ...COMMON_CONDITIONS],
+    conditions: ['Serve uno spazio con una sedia e una presa elettrica vicina.'],
     image: null,
     faqs: [
       {
@@ -61,7 +55,7 @@ export const SERVICES_IT: ServiceContent[] = [
       'Con GLAMRO prenoti una make-up artist verificata che arriva dove ti prepari: casa, hotel o location dell\'evento, nelle città in cui il servizio è attivo.',
     audience: 'Per eventi, cerimonie, servizi fotografici o semplicemente per un trucco curato prima di uscire.',
     includes: ['Trucco giorno e sera', 'Trucco per cerimonie', 'Trucco per foto e video', 'Prova trucco'],
-    conditions: COMMON_CONDITIONS,
+    conditions: [],
     image: null,
     faqs: [
       {
@@ -80,7 +74,7 @@ export const SERVICES_IT: ServiceContent[] = [
       'Con GLAMRO prenoti un\'estetista verificata per trattamenti viso, corpo e depilazione direttamente a casa tua, nelle città in cui il servizio è attivo.',
     audience: 'Per chi vuole trattamenti estetici senza spostarsi, con prodotti e lettino portati dal professionista quando previsto.',
     includes: ['Pulizia del viso', 'Trattamenti corpo', 'Linfodrenante', 'Depilazione', 'Laminazione ciglia e sopracciglia'],
-    conditions: COMMON_CONDITIONS,
+    conditions: [],
     image: null,
     faqs: [
       {
@@ -99,7 +93,7 @@ export const SERVICES_IT: ServiceContent[] = [
       'GLAMRO ti mette in contatto con massaggiatori verificati per massaggi benessere a domicilio, nelle città attive. Non si tratta di prestazioni sanitarie.',
     audience: 'Per chi vuole un massaggio benessere a casa o in hotel, nei tempi che preferisce.',
     includes: ['Massaggio rilassante', 'Massaggio decontratturante'],
-    conditions: ['I massaggi offerti sono trattamenti di benessere, non prestazioni sanitarie.', ...COMMON_CONDITIONS],
+    conditions: ['I massaggi offerti sono trattamenti di benessere, non prestazioni sanitarie.'],
     image: null,
     faqs: [
       {
@@ -162,7 +156,7 @@ const CITY_TEXTS: Record<Lang, CityTexts> = {
     inactiveIntro: 'GLAMRO non è ancora prenotabile a {city}.',
     faqs: [
       { question: 'In quali zone di {city} è disponibile GLAMRO?', answer: 'Ogni professionista indica la zona che copre. Per un indirizzo preciso, inserisci il CAP nella verifica disponibilità.' },
-      { question: 'Ci sono costi di spostamento a {city}?', answer: 'Eventuali costi sono indicati nel profilo del professionista e nel riepilogo prima della conferma.' },
+      { question: 'Ci sono costi di trasferta a {city}?', answer: 'No. Il prezzo che vedi nel profilo del professionista è quello che paghi.' },
     ],
   },
   en: {
@@ -170,7 +164,7 @@ const CITY_TEXTS: Record<Lang, CityTexts> = {
     inactiveIntro: 'GLAMRO cannot yet be booked in {city}.',
     faqs: [
       { question: 'Which areas of {city} does GLAMRO cover?', answer: 'Each professional sets the area they cover. For a specific address, enter your postcode in the availability check.' },
-      { question: 'Are there travel costs in {city}?', answer: 'Any costs are shown on the professional\'s profile and in the summary before you confirm.' },
+      { question: 'Are there travel costs in {city}?', answer: 'No. The price you see on the professional\'s profile is the price you pay.' },
     ],
   },
 };
@@ -181,10 +175,7 @@ const CITY_TEXTS: Record<Lang, CityTexts> = {
 
 /** Conditions génériques affichées sur un profil. */
 export const PROFILE_CONDITIONS: Record<Lang, string[]> = {
-  it: [
-    'Cancellazione e modifiche secondo le Condizioni Clienti e le regole indicate al momento della prenotazione.',
-    'Eventuali costi di spostamento sono mostrati prima della conferma.',
-  ],
+  it: ['Il prezzo che vedi è quello che paghi.', 'Prenoti e paghi nell\'app GLAMRO, solo a servizio svolto.'],
   en: CONTENT_TEXTS.en.proConditions,
 };
 
