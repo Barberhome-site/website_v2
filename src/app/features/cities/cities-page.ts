@@ -33,7 +33,7 @@ import { Icon } from '../../shared/components/icon/icon';
           @for (city of activeCities(); track city.slug) {
             <li class="card city">
               <h3><a [routerLink]="['/dove-siamo', city.slug] | lp: i18n.lang()">{{ city.name }}</a></h3>
-              <p class="muted small">{{ t.cityMeta | fmt: { region: city.region, count: city.availableCount } }}</p>
+              <p class="muted small">{{ city.region }}</p>
               <p class="small">{{ serviceNames(city) }}</p>
             </li>
           }

@@ -52,16 +52,14 @@
   cursor: pointer;
   font: inherit;
 
-  .glamro-cluster__count {
-    display: grid;
-    place-items: center;
+  .glamro-cluster__dot {
+    display: block;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--c-accent);
-    color: var(--c-on-accent);
-    font-weight: 800;
-    font-size: 0.95rem;
+    /* Zone couverte, indicative : cercle translucide sans nombre. */
+    background: rgba(239, 210, 75, 0.32);
+    border: 2px solid var(--c-accent);
     box-shadow: 0 0 0 6px rgba(239, 210, 75, 0.22);
     transition: transform var(--dur) var(--ease);
   }
@@ -82,7 +80,7 @@
     z-index: 2;
   }
 
-  &.is-selected .glamro-cluster__count {
+  &.is-selected .glamro-cluster__dot {
     transform: scale(1.15);
     box-shadow: 0 0 0 6px rgba(239, 210, 75, 0.22), 0 0 0 10px rgba(255, 255, 255, 0.85);
   }
@@ -90,7 +88,7 @@
   &:focus-visible {
     outline: none;
 
-    .glamro-cluster__count {
+    .glamro-cluster__dot {
       box-shadow: var(--focus-ring);
     }
   }

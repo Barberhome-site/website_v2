@@ -171,11 +171,12 @@ export class ItalyMap {
     this.markers = [];
 
     for (const c of clusters) {
-      const label = this.i18n.format(this.i18n.d().map.markerLabel, { city: c.cityName, count: c.availableCount });
+      const label = this.i18n.format(this.i18n.d().map.markerLabel, { city: c.cityName });
       const el = this.doc.createElement('button');
       el.type = 'button';
       el.className = `glamro-cluster${c.citySlug === selected ? ' is-selected' : ''}`;
-      el.innerHTML = `<span class="glamro-cluster__count" aria-hidden="true">${c.availableCount}</span><span class="glamro-cluster__label" aria-hidden="true">${escapeHtml(c.cityName)}</span>`;
+      // Zone couverte (indicative) : un cercle sans nombre, jamais la position d'un professionnel.
+      el.innerHTML = `<span class="glamro-cluster__dot" aria-hidden="true"></span><span class="glamro-cluster__label" aria-hidden="true">${escapeHtml(c.cityName)}</span>`;
       el.title = label;
       el.addEventListener('click', (ev) => {
         ev.stopPropagation();

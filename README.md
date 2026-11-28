@@ -32,7 +32,7 @@ src/
 ├── server.ts                    Serveur Express SSR + en-têtes de sécurité (CSP) + /sitemap.xml
 ├── server/sitemap.ts            Sitemap : uniquement URL canoniques publiées, lastmod réel
 ├── server/site-api/             /site-api : appels à l'API GLAMRO, cache, données minimales (voir plus bas)
-├── environments/                siteUrl, useMockData, apiBaseUrl, balise Google (GTM-…), Trustpilot
+├── environments/                siteUrl, useMockData, apiBaseUrl, balise Google (GTM-…)
 ├── styles/                      Système visuel du brief (couleurs, typo, boutons 48 px, focus, formulaires)
 └── app/
     ├── app.routes.ts            Arborescence (slugs italiens), une branche par langue
@@ -51,7 +51,7 @@ src/
     │   └── routing/             Résolveurs (données avant affichage) + statut HTTP 404 en SSR
     ├── layout/                  Header, footer, sélecteur de langue, popup de réservation,
     │                            bandeau cookies, panneau « Gestisci cookie »
-    ├── shared/components/       Recherche de disponibilité, carrousel, carte, Trustpilot, cartes…
+    ├── shared/components/       Recherche de disponibilité, carrousel, carte, cartes…
     └── features/                Pages : home, servizi, dove-siamo, disponibilita, professionisti,
                                  come-funziona, fiducia, assistenza, per-professionisti, chi-siamo, legal
 ```
@@ -245,8 +245,6 @@ bios viennent de l'API, en italien.
 - **Carte** : clusters par ville (jamais de position précise), liste accessible équivalente toujours présente,
   bottom sheet sur mobile, états chargement / aucun résultat / erreur / zone non couverte / géolocalisation refusée.
   MapLibre est chargé à la demande, et le fond de carte (service tiers) seulement avec consentement ou clic.
-- **Trustpilot** : TrustBox officiel chargé après consentement ; sinon lien neutre vers le profil ;
-  distinction avis GLAMRO / avis des professionnels.
 - **Cookies (P0)** : rien d'autre que le nécessaire avant le choix ; Accetta / Rifiuta / Personalizza au même
   niveau ; X = refus ; preuve (version, date, choix) stockée et envoyée à l'API ; « Gestisci cookie » dans le footer ;
   GA4 (Consent Mode v2, conteneur `GTM-M625CVRL`) chargé seulement après consentement, sans données personnelles ;
@@ -263,8 +261,6 @@ Les valeurs à fournir sont marquées `TODO` dans le code ou entre `[crochets]` 
 
 - [ ] **Photos** (hero rider, storytelling ×4, bloc pro, chi siamo) → `site.config.ts`, voir `public/images/LEGGIMI.md`
 - [x] **Données société**, e-mails, URL des stores et réseaux sociaux → `site.config.ts`
-- [x] **Trustpilot** : widget Review Collector configuré (plan gratuit) ; passer à un widget de note (Mini, Micro…)
-      quand il y aura des avis → `templateId` et `height` dans `environment.ts`
 - [ ] **Textes légaux v3** : approbation de l'avocat (puis `LEGAL_DRAFT = false`) ; la Cookie Policy v3 cite Meta Pixel
       et Google Ads, que le site n'utilise pas : à aligner après une vraie analyse des cookies
 - [ ] **Règles métier** restantes (documents de vérification, prestataire de paiement, critères de classement P2B,

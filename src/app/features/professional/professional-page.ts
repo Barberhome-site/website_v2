@@ -16,7 +16,7 @@ import { StoreButtons } from '../../shared/components/store-buttons/store-button
 
 /**
  * Profil professionnel : compétences, services, zones, vérification, disponibilité,
- * conditions et avis authentiques recueillis par la plateforme (distincts de Trustpilot).
+ * conditions et avis authentiques recueillis par la plateforme.
  */
 @Component({
   selector: 'app-professional-page',

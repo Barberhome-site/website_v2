@@ -67,7 +67,6 @@ export const IT = {
   card: {
     verified: 'Profilo verificato',
     verifiedHint: 'Questo professionista ha completato la verifica del profilo GLAMRO.',
-    sponsored: 'Sponsorizzato',
     availableToday: 'Disponibile da oggi',
     availableTomorrow: 'Disponibile da domani',
     availableFrom: 'Disponibile dal {date}',
@@ -109,9 +108,7 @@ export const IT = {
     citiesTitle: 'Città attive',
     updateError: 'Non è stato possibile aggiornare l\'elenco.',
     noCities: 'Nessuna città attiva per questo servizio al momento.',
-    available: '{count} disponibili',
     showPros: 'Mostra i professionisti di {city}',
-    availableCount: '({count} professionisti disponibili)',
     closePanel: 'Chiudi e torna all\'elenco delle città',
     loadingPros: 'Caricamento dei professionisti',
     prosError: 'Non è stato possibile caricare i professionisti.',
@@ -131,15 +128,7 @@ export const IT = {
     listHint: 'L\'elenco delle città contiene le stesse informazioni.',
     loadingMap: 'Caricamento della mappa',
     mapError: 'La mappa non è disponibile in questo momento. Usa l\'elenco delle città.',
-    markerLabel: '{city}: {count} professionisti disponibili',
-  },
-  trustpilot: {
-    title: 'Recensioni su GLAMRO',
-    invite: 'Hai prenotato con GLAMRO? Raccontaci com\'è andata con una recensione su Trustpilot.',
-    text: 'Le recensioni dei clienti su GLAMRO sono pubblicate sul profilo ufficiale Trustpilot.',
-    link: 'Leggi le recensioni su Trustpilot',
-    consent: 'Per vedere qui il widget ufficiale, attiva i contenuti di terze parti.',
-    manage: 'Gestisci cookie',
+    markerLabel: '{city}: zona coperta',
   },
   pillars: [
     { title: 'Professionisti verificati', text: 'Identità e requisiti controllati prima della pubblicazione del profilo.' },
@@ -149,7 +138,7 @@ export const IT = {
   consent: {
     bannerTitle: 'La tua privacy',
     bannerText:
-      'Usiamo cookie tecnici necessari al funzionamento del sito. Con il tuo consenso usiamo anche statistiche (Google Analytics) e contenuti di terze parti (widget Trustpilot e mappa). Chiudendo questo avviso restano attivi solo i cookie necessari. Puoi cambiare idea in qualsiasi momento da «Gestisci cookie» nel footer.',
+      'Usiamo cookie tecnici necessari al funzionamento del sito. Con il tuo consenso usiamo anche statistiche (Google Analytics) e contenuti di terze parti (la mappa). Chiudendo questo avviso restano attivi solo i cookie necessari. Puoi cambiare idea in qualsiasi momento da «Gestisci cookie» nel footer.',
     policy: 'Cookie policy',
     reject: 'Rifiuta',
     customize: 'Personalizza',
@@ -173,7 +162,7 @@ export const IT = {
       },
       functional: {
         label: 'Contenuti di terze parti',
-        description: 'Widget ufficiale delle recensioni Trustpilot e sfondo della mappa interattiva (OpenFreeMap / OpenStreetMap).',
+        description: 'Sfondo della mappa interattiva (OpenFreeMap / OpenStreetMap).',
       },
       analytics: {
         label: 'Statistiche',
@@ -198,7 +187,6 @@ export const IT = {
       duration: '2 anni',
       transfers: 'Possibile trasferimento negli USA (EU-US Data Privacy Framework) — da verificare',
     },
-    trustpilot: { purpose: 'Mostra il widget ufficiale Trustpilot di GLAMRO per lasciare una recensione.', duration: 'Da verificare con la scansione', transfers: 'Da verificare' },
     basemap: {
       purpose: 'Carica lo sfondo cartografico della mappa (OpenFreeMap). Non imposta cookie; riceve l\'indirizzo IP. Le tessere possono restare nella cache del browser.',
       duration: 'Nessun cookie',
@@ -263,9 +251,6 @@ export const IT = {
     whereTitle: 'Dove siamo',
     whereSubtitle: 'Professionisti verificati nelle città in cui il servizio è prenotabile.',
     whereAll: 'Tutte le città',
-    trustTitle: 'Dicono di noi',
-    trustNote:
-      'Le recensioni su Trustpilot riguardano GLAMRO come piattaforma. Le recensioni dei singoli professionisti, raccolte da GLAMRO dopo ogni servizio, sono nei loro profili.',
     proEyebrow: 'Entra nella community',
     proTitle: 'Per professionisti',
     proLead: 'Lavora con clienti nella tua zona, nei giorni e negli orari che scegli tu.',
@@ -306,7 +291,6 @@ export const IT = {
     lead: 'GLAMRO è prenotabile nelle città elencate qui sotto, nelle zone coperte dai professionisti attivi. L\'elenco si aggiorna in base alla disponibilità reale.',
     activeTitle: 'Città attive',
     error: 'L\'elenco delle città non è disponibile in questo momento.',
-    cityMeta: '{region} · {count} professionisti disponibili',
     notListed: 'La tua città non è nell\'elenco?',
     checkCap: 'Verifica il tuo CAP',
     notListedAfter: ': ti diciamo se la tua zona è coperta.',
@@ -350,8 +334,7 @@ export const IT = {
     notCoveredTitle: 'La tua zona non è ancora coperta',
     notCoveredText: 'Al momento non ci sono professionisti GLAMRO verificati attivi in questa zona.',
     tryCities: 'Puoi cercare in una delle città attive:',
-    countOne: '{count} professionista disponibile a {city}',
-    countOther: '{count} professionisti disponibili a {city}',
+    resultsIn: 'Professionisti disponibili a {city}',
     serviceLabel: 'Servizio: {name}',
     fromDate: 'Dal {date}',
     ranking: 'Ordinati in base alla vicinanza, al servizio richiesto e alla disponibilità. Oggi non ci sono posizioni a pagamento.',
@@ -378,7 +361,7 @@ export const IT = {
     conditionsSee: 'Vedi le',
     customerTerms: 'Condizioni Clienti',
     reviews: 'Recensioni',
-    reviewsNote: 'Recensioni lasciate da clienti che hanno prenotato tramite GLAMRO. Non sono le recensioni di GLAMRO su Trustpilot.',
+    reviewsNote: 'Recensioni lasciate da clienti che hanno prenotato e pagato un servizio tramite GLAMRO.',
     reviewsSummary: '{average} su 5 · {count} recensioni',
     noReviews: 'Non ci sono ancora recensioni per questo profilo.',
     areas: 'Zone servite',
@@ -464,11 +447,8 @@ export const IT = {
     },
     reviews: {
       title: 'Recensioni',
-      answer: 'Distinguiamo due tipi di recensioni.',
-      items: [
-        { label: 'Recensioni su GLAMRO', text: 'pubblicate sul profilo ufficiale Trustpilot e mostrate tramite il widget ufficiale.' },
-        { label: 'Recensioni sui professionisti', text: 'raccolte da GLAMRO solo dopo un servizio prenotato e pagato sulla piattaforma, e mostrate nel profilo del professionista.' },
-      ],
+      answer: 'Su GLAMRO le recensioni le possono scrivere solo i clienti.',
+      items: [{ label: 'Recensioni sui professionisti', text: 'raccolte solo dopo un servizio prenotato e pagato su GLAMRO e mostrate nel profilo del professionista.' }],
       noFake: 'Non pubblichiamo recensioni scritte da noi né punteggi inventati.',
       placeholder: 'Le recensioni devono essere veritiere e coerenti con il servizio ricevuto. GLAMRO rimuove le recensioni ingiuriose, offensive o false.',
     },

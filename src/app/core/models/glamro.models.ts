@@ -106,8 +106,6 @@ export interface ProfessionalSummary {
   nextAvailability?: string | null;
   /** Chemin interne du profil, ex. /professionisti/giulia-m. */
   profileUrl: string;
-  /** Position sponsorisée : doit être signalée à l'utilisateur (brief §7, P2B). */
-  sponsored?: boolean;
 }
 
 export interface ProfessionalServiceOffer {
@@ -118,7 +116,7 @@ export interface ProfessionalServiceOffer {
   currency?: string;
 }
 
-/** Avis recueilli par la plateforme sur un professionnel (distinct de Trustpilot). */
+/** Avis recueilli par la plateforme sur un professionnel, après un service payé. */
 export interface ProfessionalReview {
   id: string;
   rating: number;

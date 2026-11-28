@@ -118,7 +118,7 @@ export class MockGlamroDataSource extends GlamroDataSource {
     return undefined;
   }
 
-  /** Tri : non sponsorisés et sponsorisés mélangés par disponibilité, sponsorisés signalés dans l'UI. */
+  /** Tri par disponibilité (pas de positions payantes). */
   private filterPros(filter: ProfessionalFilter): ProfessionalProfile[] {
     return this.data.professionals
       .filter((p) => p.verified)
@@ -142,6 +142,5 @@ function toSummary(p: ProfessionalProfile): ProfessionalSummary {
     cityName: p.cityName,
     nextAvailability: p.nextAvailability,
     profileUrl: p.profileUrl,
-    sponsored: p.sponsored,
   };
 }

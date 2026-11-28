@@ -277,7 +277,6 @@ export function createSiteApi(get: UpstreamGet, cache = new TtlCache()): SiteApi
       cityName: cityName(city.slug, lang),
       nextAvailability: romeDate(item.nextAvailableAt),
       profileUrl: `/professionisti/${encodeURIComponent(item.id)}`,
-      sponsored: false,
     };
   }
 

@@ -66,7 +66,6 @@
                     <button type="button" class="cm__city" [class.is-selected]="c.citySlug === selectedSlug()"
                             (click)="selectCity(c.citySlug)">
                       <span class="cm__city-name">{{ c.cityName }}</span>
-                      <span class="cm__count">{{ t.available | fmt: { count: c.availableCount } }}</span>
                       <span class="cm__chevron" aria-hidden="true"><app-icon name="chevron-right" /></span>
                     </button>
                   </li>
@@ -82,7 +81,6 @@
           <header class="cm__panel-head">
             <h3 id="cm-panel-title" #panelHeading tabindex="-1">
               {{ city.cityName }}
-              <span class="muted">{{ t.availableCount | fmt: { count: city.availableCount } }}</span>
             </h3>
             <button type="button" class="btn btn--icon" (click)="closePanel()" [attr.aria-label]="t.closePanel">
               <app-icon name="close" />

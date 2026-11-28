@@ -145,7 +145,7 @@ const RAW_PROS: RawPro[] = [
   { professionalId: 'giulia-m', displayName: 'Giulia M.', specialties: ['capelli'], specialtyLabel: 'Parrucchiera', verified: true, serviceArea: 'Centro storico, Porta Romana', citySlug: 'milano', availableInDays: 1 },
   { professionalId: 'luca-r', displayName: 'Luca R.', specialties: ['capelli'], specialtyLabel: 'Barbiere', verified: true, serviceArea: 'Isola, Porta Nuova', citySlug: 'milano', availableInDays: 0 },
   { professionalId: 'sara-p', displayName: 'Sara P.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'Città Studi', citySlug: 'milano', availableInDays: 2 },
-  { professionalId: 'chiara-s', displayName: 'Chiara S.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'Navigli', citySlug: 'milano', availableInDays: 1, sponsored: true },
+  { professionalId: 'chiara-s', displayName: 'Chiara S.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'Navigli', citySlug: 'milano', availableInDays: 1 },
   { professionalId: 'alessia-t', displayName: 'Alessia T.', specialties: ['capelli'], specialtyLabel: 'Parrucchiera', verified: true, serviceArea: 'Prati, Centro storico', citySlug: 'roma', availableInDays: 0 },
   { professionalId: 'lorenzo-b', displayName: 'Lorenzo B.', specialties: ['make-up'], specialtyLabel: 'Make-up artist', verified: true, serviceArea: 'Parioli', citySlug: 'roma', availableInDays: 3 },
   { professionalId: 'martina-c', displayName: 'Martina C.', specialties: ['estetica'], specialtyLabel: 'Estetista', verified: true, serviceArea: 'San Giovanni', citySlug: 'roma', availableInDays: 1 },

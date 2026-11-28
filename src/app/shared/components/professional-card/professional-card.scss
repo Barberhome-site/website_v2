@@ -46,39 +46,6 @@
   z-index: 2;
 }
 
-/* Bandeau diagonal « Sponsorizzato » dans le coin supérieur gauche.
-   Le conteneur découpe le bandeau et épouse l'arrondi intérieur de la carte. */
-.pc__ribbon-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 120px;
-  height: 120px;
-  max-height: 100%; // variante ligne : ne déborde pas sous une carte basse
-  overflow: hidden;
-  border-top-left-radius: calc(var(--radius-m) - 1px);
-  pointer-events: none;
-}
-
-.pc__ribbon {
-  position: absolute;
-  // Centre du bandeau sur la diagonale, à ~60 px du coin : assez long pour « Sponsorizzato ».
-  top: 31px;
-  left: -34px;
-  width: 160px;
-  padding: 0.3rem 0;
-  transform: rotate(-45deg);
-  background: var(--c-accent);
-  color: var(--c-on-accent);
-  font-size: 0.7rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
-}
-
 .pc__title {
   display: flex;
   align-items: center;
@@ -265,29 +232,11 @@
   }
 }
 
-/* Variante ligne (panneau de la carte).
-   Marge gauche identique pour toutes les cartes (sponsorisées ou non) : le bandeau a sa place
-   dans le coin sans jamais décaler le contenu d'une carte par rapport aux autres. */
-// Carte basse : bandeau fin, au plus près du coin (~40 px).
-:host(.pc--row) {
-  .pc__ribbon-wrap {
-    width: 84px;
-    height: 84px;
-  }
-
-  .pc__ribbon {
-    top: 20px;
-    left: -29px;
-    width: 116px;
-    padding: 0.15rem 0;
-    font-size: 0.5625rem;
-  }
-}
-
+/* Variante ligne (panneau de la carte). */
 :host(.pc--row) {
   align-items: center;
   gap: 0.9rem;
-  padding: 0.85rem 0.85rem 0.85rem 2.25rem;
+  padding: 0.85rem;
 
   .pc__body {
     flex: 1;

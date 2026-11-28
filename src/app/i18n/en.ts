@@ -64,7 +64,6 @@ export const EN: Dict = {
   card: {
     verified: 'Verified profile',
     verifiedHint: 'This professional has completed GLAMRO profile verification.',
-    sponsored: 'Sponsored',
     availableToday: 'Available from today',
     availableTomorrow: 'Available from tomorrow',
     availableFrom: 'Available from {date}',
@@ -106,9 +105,7 @@ export const EN: Dict = {
     citiesTitle: 'Active cities',
     updateError: 'The list could not be updated.',
     noCities: 'No active city for this service at the moment.',
-    available: '{count} available',
     showPros: 'Show professionals in {city}',
-    availableCount: '({count} professionals available)',
     closePanel: 'Close and return to the list of cities',
     loadingPros: 'Loading professionals',
     prosError: 'Professionals could not be loaded.',
@@ -128,15 +125,7 @@ export const EN: Dict = {
     listHint: 'The list of cities contains the same information.',
     loadingMap: 'Loading the map',
     mapError: 'The map is not available right now. Use the list of cities.',
-    markerLabel: '{city}: {count} professionals available',
-  },
-  trustpilot: {
-    title: 'Reviews of GLAMRO',
-    invite: 'Booked with GLAMRO? Tell us how it went with a review on Trustpilot.',
-    text: 'Customer reviews of GLAMRO are published on the official Trustpilot profile.',
-    link: 'Read the reviews on Trustpilot',
-    consent: 'To see the official widget here, enable third-party content.',
-    manage: 'Manage cookies',
+    markerLabel: '{city}: covered area',
   },
   pillars: [
     { title: 'Verified professionals', text: 'Identity and requirements checked before the profile is published.' },
@@ -146,7 +135,7 @@ export const EN: Dict = {
   consent: {
     bannerTitle: 'Your privacy',
     bannerText:
-      'We use technical cookies needed for the site to work. With your consent we also use statistics (Google Analytics) and third-party content (Trustpilot widget and map). If you close this notice, only necessary cookies stay active. You can change your mind at any time via "Manage cookies" in the footer.',
+      'We use technical cookies needed for the site to work. With your consent we also use statistics (Google Analytics) and third-party content (the map). If you close this notice, only necessary cookies stay active. You can change your mind at any time via "Manage cookies" in the footer.',
     policy: 'Cookie policy',
     reject: 'Reject',
     customize: 'Customise',
@@ -170,7 +159,7 @@ export const EN: Dict = {
       },
       functional: {
         label: 'Third-party content',
-        description: 'Official Trustpilot reviews widget and the interactive map background (OpenFreeMap / OpenStreetMap).',
+        description: 'Interactive map background (OpenFreeMap / OpenStreetMap).',
       },
       analytics: {
         label: 'Statistics',
@@ -195,7 +184,6 @@ export const EN: Dict = {
       duration: '2 years',
       transfers: 'Possible transfer to the USA (EU-US Data Privacy Framework) — to be verified',
     },
-    trustpilot: { purpose: 'Shows GLAMRO\'s official Trustpilot widget for leaving a review.', duration: 'To be verified by scan', transfers: 'To be verified' },
     basemap: {
       purpose: 'Loads the map background (OpenFreeMap). Sets no cookies; receives the IP address. Map tiles may be kept in the browser cache.',
       duration: 'No cookies',
@@ -260,9 +248,6 @@ export const EN: Dict = {
     whereTitle: 'Where we are',
     whereSubtitle: 'Verified professionals in the cities where the service can be booked.',
     whereAll: 'All cities',
-    trustTitle: 'What people say',
-    trustNote:
-      'Trustpilot reviews are about GLAMRO as a platform. Reviews of individual professionals, collected by GLAMRO after each service, are on their profiles.',
     proEyebrow: 'Join the community',
     proTitle: 'For professionals',
     proLead: 'Work with clients in your area, on the days and at the times you choose.',
@@ -303,7 +288,6 @@ export const EN: Dict = {
     lead: 'GLAMRO can be booked in the cities listed below, in the areas covered by active professionals. The list is updated based on real availability.',
     activeTitle: 'Active cities',
     error: 'The list of cities is not available right now.',
-    cityMeta: '{region} · {count} professionals available',
     notListed: 'Your city isn\'t listed?',
     checkCap: 'Check your postcode',
     notListedAfter: ': we\'ll tell you whether your area is covered.',
@@ -347,8 +331,7 @@ export const EN: Dict = {
     notCoveredTitle: 'Your area is not covered yet',
     notCoveredText: 'There are currently no verified GLAMRO professionals active in this area.',
     tryCities: 'You can search in one of the active cities:',
-    countOne: '{count} professional available in {city}',
-    countOther: '{count} professionals available in {city}',
+    resultsIn: 'Professionals available in {city}',
     serviceLabel: 'Service: {name}',
     fromDate: 'From {date}',
     ranking: 'Sorted by distance, requested service and availability. There are no paid positions today.',
@@ -375,7 +358,7 @@ export const EN: Dict = {
     conditionsSee: 'See the',
     customerTerms: 'Customer Terms',
     reviews: 'Reviews',
-    reviewsNote: 'Reviews left by clients who booked through GLAMRO. These are not GLAMRO\'s Trustpilot reviews.',
+    reviewsNote: 'Reviews left by clients who booked and paid for a service through GLAMRO.',
     reviewsSummary: '{average} out of 5 · {count} reviews',
     noReviews: 'There are no reviews for this profile yet.',
     areas: 'Areas served',
@@ -461,11 +444,8 @@ export const EN: Dict = {
     },
     reviews: {
       title: 'Reviews',
-      answer: 'We distinguish two types of reviews.',
-      items: [
-        { label: 'Reviews of GLAMRO', text: 'published on the official Trustpilot profile and shown via the official widget.' },
-        { label: 'Reviews of professionals', text: 'collected by GLAMRO only after a service booked and paid on the platform, and shown on the professional\'s profile.' },
-      ],
+      answer: 'On GLAMRO, only clients can write reviews.',
+      items: [{ label: 'Reviews of professionals', text: 'collected only after a service booked and paid for on GLAMRO, and shown on the professional\'s profile.' }],
       noFake: 'We do not publish reviews written by us or made-up scores.',
       placeholder: 'Reviews must be truthful and consistent with the service received. GLAMRO removes abusive, offensive or false reviews.',
     },

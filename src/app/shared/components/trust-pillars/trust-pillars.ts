@@ -4,7 +4,7 @@ import { LocalizePathPipe } from '../../../core/i18n/i18n.pipes';
 import { I18n } from '../../../core/i18n/i18n.service';
 import { Icon, IconName } from '../icon/icon';
 
-/** Les trois preuves contrôlables qui accompagnent Trustpilot (brief §7). Textes : dictionnaire `pillars`. */
+/** Trois preuves contrôlables (vérification, paiement, assistance). Textes : dictionnaire `pillars`. */
 @Component({
   selector: 'app-trust-pillars',
   imports: [RouterLink, Icon, LocalizePathPipe],

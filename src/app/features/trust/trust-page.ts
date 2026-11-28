@@ -5,7 +5,6 @@ import { I18n } from '../../core/i18n/i18n.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { Breadcrumbs } from '../../shared/components/breadcrumbs/breadcrumbs';
 import { LastUpdated } from '../../shared/components/last-updated/last-updated';
-import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trustpilot-widget';
 
 /**
  * Page « Fiducia » (brief §4 et §9) : critères de vérification, paiements, avis,
@@ -14,7 +13,7 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
  */
 @Component({
   selector: 'app-trust-page',
-  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, LastUpdated, TrustpilotWidget],
+  imports: [RouterLink, LocalizePathPipe, Breadcrumbs, LastUpdated],
   template: `
     @let t = i18n.d().trust;
     <div class="page-head">
@@ -55,7 +54,6 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
         </ul>
         <p>{{ t.reviews.noFake }}</p>
         <p [class.placeholder]="t.reviews.placeholder.startsWith('[')">{{ t.reviews.placeholder }}</p>
-        <div class="card"><app-trustpilot-widget /></div>
       </section>
 
       <section id="ordinamento" aria-labelledby="t-ordinamento">

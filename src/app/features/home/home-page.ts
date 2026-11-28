@@ -15,8 +15,6 @@ import { Icon, IconName } from '../../shared/components/icon/icon';
 import { Media } from '../../shared/components/media/media';
 import { ProsCarousel } from '../../shared/components/pros-carousel/pros-carousel';
 import { ServiceCard } from '../../shared/components/service-card/service-card';
-import { TrustPillars } from '../../shared/components/trust-pillars/trust-pillars';
-import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trustpilot-widget';
 
 @Component({
   selector: 'app-home-page',
@@ -29,8 +27,6 @@ import { TrustpilotWidget } from '../../shared/components/trustpilot-widget/trus
     Media,
     ProsCarousel,
     ServiceCard,
-    TrustPillars,
-    TrustpilotWidget,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',

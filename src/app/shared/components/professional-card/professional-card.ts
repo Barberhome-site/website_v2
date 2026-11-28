@@ -35,7 +35,6 @@ const GAP = 8;
   styleUrl: './professional-card.scss',
   host: {
     '[class]': '"pc pc--" + variant()',
-    '[class.pc--sponsored]': 'pro().sponsored',
     '(keydown.escape)': 'hideTip(true)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
